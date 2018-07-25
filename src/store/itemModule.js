@@ -12,10 +12,7 @@ export default {
                 "title": "bagPack",
                 "description": "grate back pack 80L Osprey",
                 "ranking": 4,
-<<<<<<< HEAD
                 "price": 20,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "trip",
@@ -42,16 +39,13 @@ export default {
                 "description": "Full Body Dive Wetsuit Sports Skins Lycra Rash Guard for Men Women, UV Protection Long Sleeve One Piece Swimwear for Snorkeling Surfing Scuba Diving Swimming Kayaking Sailing Canoeing",
                 "ranking": 4,
                 "dateCreated": "Date.now()",
-<<<<<<< HEAD
-                "price": 60,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
                 "keyWords": [
                     "travel",
                     "dive",
                     "suit",
                     "scuba"
                 ],
+                "price": 80,
                 "ownerId": "B1",
                 "occupiedDates": [
                     "2.2.2018",
@@ -71,10 +65,7 @@ export default {
                 "title": "Charcoal Grill",
                 "description": "The Outdoor Gourmet™ 14 Charcoal Grill features a 4.4 lb. lightweight design, making it an ideal choice for portable grilling. An adjustable vent offers enhanced temperature control over the 151 sq. in. grilling area. Steel construction ensures durability, and heat-resistant handles help protect your hands",
                 "ranking": 4,
-<<<<<<< HEAD
-                "price": 35,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
+                "price": 15,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "kitchen",
@@ -100,10 +91,7 @@ export default {
                 "title": "bread machine",
                 "description": "Oster Expressbake Bread Machine",
                 "ranking": 4,
-<<<<<<< HEAD
-                "price": 50,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
+                "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "kitchen",
@@ -128,10 +116,7 @@ export default {
                 "title": "City Bike",
                 "description": "1 year old city-bike , comes with battery, to move easily around the city",
                 "ranking": 5,
-<<<<<<< HEAD
-                "price": 12,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
+                "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "bike",
@@ -156,10 +141,7 @@ export default {
                 "title": "Inflatable Pool",
                 "description": "Big pool to enjoy the summer with your family anywhere",
                 "ranking": 4,
-<<<<<<< HEAD
-                "price": 45,
-=======
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
+                "price": 25,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "trip",
@@ -178,12 +160,7 @@ export default {
                 "condition": "new"
             }
         ],
-<<<<<<< HEAD
-
-        filterByText: '', 
-=======
         filterByText: '', //for start, later on become object by price, text, location
->>>>>>> a03036a85f870ceecc6ac9784e36a5282018157e
         selectedItem: {}
     },
 
@@ -224,12 +201,12 @@ export default {
         }
     },
     actions: {
-        loaditems(context, payload) {
-            return itemsService.getAllItems(context.state.filterBy)
-                .then(items => {
-                    context.commit({ type: 'setItems', items })
-                    return items;
-                })
+        loadItems(context, payload) {
+            // return itemsService.getAllItems(context.state.filterBy)
+            // .then(items => {
+            //     context.commit({ type: 'setItems', items })
+            return context.state.items
+
         },
 
         loadItemById(context, { itemId }) {

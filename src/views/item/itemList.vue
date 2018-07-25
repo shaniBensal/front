@@ -1,72 +1,54 @@
 <template>
 
 <section>
-<div class="filter">
-  Search your toy
-  <input type="text" placeholder="search by name..." @input="setFilter($event)">
  
-</div>
-  <ul class="toys-list">
+
+  <ul class="items-list">
               
-        <li v-for="toy in toysForDisplay" :key="toy._id">
-                  <toys-preview :toy="toy"></toys-preview>
-                  <div class="btns">
-                       <button @click="$emit('deleted' ,toy._id)" title="Delete">X</button>
-                       <button> <router-link :to="'/toy/'+toy._id" title="More details">...</router-link></button>
-                       <button><router-link :to="'/toy/edit/'+toy._id" title="Edit/Add">✎</router-link></button>
-                  </div>
+        <li v-for="item in itemsForDisplay" :key="item.id">
+              <item-preview :item="item"></item-preview>
+                <div class="btns">   
+                  <button> <router-link :to="'/item/'+item._id" title="More details">...</router-link></button>
+                </div>
              </li>
         </ul>
 </section>
 </template>
 
 <script>
-import toysPreview from "../components/toy-preview-cmp.vue";
+import itemPreview from "../../components/item/itemPreview.vue";
 
 export default {
-  name: "ToysList",
+  name: "ItemList",
 
   data() {
     return {};
   },
 
   created() {
-    this.loadToys();
+    this.loadItems();
   },
   mounted() {},
   methods: {
-    loadToys() {
-      this.$store.dispatch({ type: "loadToys" });
+    loadItems() {
+      this.$store.dispatch({ type: "loadItems" });
     },
 
-    toggleUpdateForm() {
-      this.showUpdateForm = !this.showUpdateForm;
-    },
-
-    setFilter(ev) {
-      this.$store.commit({
-        type: "setFilter",
-        filterBy: { txt: ev.target.value }
-      });
-    }
   },
   computed: {
-    toysForDisplay() {
-      return this.$store.getters.toysForDisplay;
+    itemsForDisplay() {
+      return this.$store.getters.itemsForDisplay;
     }
 
-    // toysAreLoading() {
-    //   return this.$store.state.todoModule.toysLoading;
-    // }
   },
   components: {
-    toysPreview
+    itemPreview
   }
 };
 </script>
 
 
-<style scoped lang="scss">
+<style scoped>
 h3 {
   margin: 0;
   padding: 5px;
@@ -120,11 +102,11 @@ button:hover {
 .btns {
 }
 
-.filter{
+.filter {
   margin: 10px;
 }
 
-input{
+input {
   padding: 5px;
 }
 </style>

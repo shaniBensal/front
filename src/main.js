@@ -3,8 +3,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import '../public/scss/main.css'
+import axios from 'axios'
 import './registerServiceWorker';
-
+axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 
 new Vue({

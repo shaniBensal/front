@@ -12,6 +12,7 @@ export default {
                 "title": "bagPack",
                 "description": "grate back pack 80L Osprey",
                 "ranking": 4,
+                "price": 20,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "trip",
@@ -44,6 +45,7 @@ export default {
                     "suit",
                     "scuba"
                 ],
+                "price": 80,
                 "ownerId": "B1",
                 "occupiedDates": [
                     "2.2.2018",
@@ -63,6 +65,7 @@ export default {
                 "title": "Charcoal Grill",
                 "description": "The Outdoor Gourmet™ 14 Charcoal Grill features a 4.4 lb. lightweight design, making it an ideal choice for portable grilling. An adjustable vent offers enhanced temperature control over the 151 sq. in. grilling area. Steel construction ensures durability, and heat-resistant handles help protect your hands",
                 "ranking": 4,
+                "price": 15,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "kitchen",
@@ -88,6 +91,7 @@ export default {
                 "title": "bread machine",
                 "description": "Oster Expressbake Bread Machine",
                 "ranking": 4,
+                "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "kitchen",
@@ -112,6 +116,7 @@ export default {
                 "title": "City Bike",
                 "description": "1 year old city-bike , comes with battery, to move easily around the city",
                 "ranking": 5,
+                "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "bike",
@@ -136,6 +141,7 @@ export default {
                 "title": "Inflatable Pool",
                 "description": "Big pool to enjoy the summer with your family anywhere",
                 "ranking": 4,
+                "price": 25,
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "trip",
@@ -195,12 +201,12 @@ export default {
         }
     },
     actions: {
-        loaditems(context, payload) {
-            return itemsService.getAllItems(context.state.filterBy)
-                .then(items => {
-                    context.commit({ type: 'setItems', items })
-                    return items;
-                })
+        loadItems(context, payload) {
+            // return itemsService.getAllItems(context.state.filterBy)
+            // .then(items => {
+            //     context.commit({ type: 'setItems', items })
+            return context.state.items
+
         },
 
         loadItemById(context, { itemId }) {

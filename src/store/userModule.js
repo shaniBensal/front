@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userService from '../service/userService.js'
+import userService from '../services/userService.js'
 import { stat } from 'fs';
 
 export default {
@@ -29,7 +29,7 @@ export default {
     },
     getters: {
         isAdmin(state) {
-            return state.user.isAdmin
+            return state.user? state.user.isAdmin : false;
         },
         loggedinUser(state){
             return state.user

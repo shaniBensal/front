@@ -162,18 +162,18 @@ const ITEM_URL = (process.env.NODE_ENV !== 'development')
     }
 ]
 
-// function getAllItems(filterBy = '') {
-//     return axios.get(`${ITEM_URL}`, {
-//         params: {
-//             filterBy
-//         }
-//     })
-//         .then(res => res.data)
-// }
-
 function getAllItems(filterBy = '') {
-    return Promise.resolve(items);
+    return axios.get(`${ITEM_URL}`, {
+        params: {
+            filterBy
+        }
+    })
+        .then(res => res.data)
 }
+
+// function getAllItems(filterBy = '') {
+//     return Promise.resolve(items);
+// }
 
 // function getItemById(itemId) {
 //     return axios.get(`${ITEM_URL}/${itemId}`)

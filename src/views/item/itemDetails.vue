@@ -9,25 +9,25 @@
                 </v-carousel>
             </div>
             <div class="item-details d-inline-flex">
-                <h1> {{itemForDisplay.title}}</h1>
-
-                <div>
-                    Price: {{itemForDisplay.price}}
-                    <span> pick up from: Tel Aviv (2Km from you)</span>
-                    {{itemForDisplay.ownerId}}
-                </div>
-               Description: <p>{{itemForDisplay.description}}</p>
-
+                <h1> {{itemForDisplay.title}} ⭐⭐⭐⭐</h1>
+                <div class="owner-pic"></div>
+                <label>{{itemForDisplay.ownerId}}</label>
+                <span>Price: {{itemForDisplay.price}} </span>
+                <div>pick up from: Tel Aviv (2Km from you)</div> 
+                Description:
+                <p>{{itemForDisplay.description}}</p>
                 <div class="text-xs-center">
                     <v-btn class="btn-book" small>Book Now</v-btn>
                 </div>
-
             </div>
         </div>
+        <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker>
+        {{itemForDisplay.occupiedDates}}
         reviews:
     </section>
 </template>
 <script>
+import datePicker from "../../components/datePicker.vue";
 export default {
   name: "itemDetails",
   data() {
@@ -51,27 +51,35 @@ export default {
     }
   },
 
-  components: {}
+  components: {
+    datePicker
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .main-container {
   width: 100%;
   margin: 20px;
-  // font-size: 2em;
-  // font-family: 'Roboto Slab';
+  font-family: "Roboto Slab";
 }
 .carousel {
   margin: 0px 10px;
-  width: 50%;
+  width: 10%;
 }
 
 .item-details {
+  padding: 35px;
   flex-direction: column;
-  padding-left: 5px;
+  // padding-left: 5px;
   align-items: end;
+}
+.owner-pic {
+  width: 50px;
+  border-radius: 20px;
+  background-image: url("../../assets/img/logo.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .btn-book {

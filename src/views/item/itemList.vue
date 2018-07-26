@@ -38,9 +38,6 @@ export default {
     itemsForDisplay() {
       return this.$store.getters.itemsForDisplay;
     },
-
-  
-
   },
   components: {
     itemPreview
@@ -100,9 +97,6 @@ button {
 
 button:hover {
   background-color: #caa830;
-}
-
-.btns {
 }
 
 .filter {

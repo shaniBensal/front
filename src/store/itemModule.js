@@ -212,22 +212,22 @@ export default {
     },
     actions: {
         loadItems(context, payload) {
-            // return itemsService.getAllItems(context.state.filterBy)
-            // .then(items => {
-            //     context.commit({ type: 'setItems', items })
-            return context.state.items
-
+            return itemsService.getAllItems(context.state.filterBy)
+            .then(items => {
+                context.commit({ type: 'setItems', items })
+            })
+            // return context.state.items
         },
 
         loadItemById(context, { itemId }) {
-            var filterd = context.state.items.filter(item => item.id === itemId);
-            filterd = filterd[0]
-            context.commit({ type: 'setSelctedItem', filterd })
-            // return itemsService.getItemById(itemId)
-            //     .then(item => {
-            //         context.commit({ type: 'setSelctedItem', item })
-            //         return item;
-            //     })
+            // var filterd = context.state.items.filter(item => item.id === itemId);
+            // filterd = filterd[0]
+            // context.commit({ type: 'setSelctedItem', filterd })
+            return itemsService.getItemById(itemId)
+                .then(item => {
+                    context.commit({ type: 'setSelctedItem', item })
+                    return item;
+                })
         },
 
         deleteItem(context, { itemId }) {

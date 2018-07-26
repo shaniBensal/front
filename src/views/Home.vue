@@ -320,9 +320,9 @@ export default {
 };
 </script>
 
+
+
 <style>
-
-
 .outer-container {
   margin: 0 auto;
   max-width: 1080px;
@@ -348,23 +348,19 @@ font-size: 2.5em;
   height: 440px;
 }
 
-.title {
-  /* height: 500px; */
-}
-
-.pic3 {
-  min-height: 240px;
-    background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg");
-  background-size: cover;
-  cursor: pointer;
-}
-
 .pic2 {
   height: 180px;
     background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg");
   background-size: cover;
   background-position-y: 82%;
   margin-bottom: 380px;
+  cursor: pointer;
+}
+
+.pic3 {
+  min-height: 240px;
+    background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg");
+  background-size: cover;
   cursor: pointer;
 }
 
@@ -411,5 +407,4 @@ cursor: pointer;
   filter: brightness(1.15);
   transition: 0.3s
 }
-
 </style>

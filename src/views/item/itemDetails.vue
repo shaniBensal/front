@@ -34,7 +34,7 @@ export default {
     return {};
   },
   created() {
-    this.loadItem(this.$route.params.id);
+    // this.loadItem(this.$route.params._id);
   },
   computed: {
     itemForDisplay() {
@@ -46,7 +46,7 @@ export default {
       this.$store.dispatch({ type: "loadItemById", itemId });
     },
     goBackToList() {
-      this.$router.push("/app");
+      this.$router.push("/item");
       this.$store.commit({ type: "unSetItem" });
     }
   },

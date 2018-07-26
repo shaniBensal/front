@@ -2,7 +2,7 @@
   
   <div class="item-preview"> 
     
-      <v-card  :to="'/item/'+item.id">
+      <v-card  :to="'/item/'+item._id">
         <v-card-media
           class="white--text"
           height="200px"

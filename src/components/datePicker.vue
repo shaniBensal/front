@@ -29,7 +29,7 @@ export default {
       this.date = result;
     },
     allowedDates(dateStr) {
-      return !this.unavailableDates.includes(dateStr);
+      // return !this.unavailableDates.includes(dateStr);
     }
   }
 };

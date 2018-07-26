@@ -31,10 +31,15 @@ export default new Router({
       name: 'itemDetails',
       component: ItemDetails,
     },
-    // {
-    //   path: '/item/:id?',
-    //   name: 'itemEdit',
-    //   component: ItemEdit,
-    // },
+    {
+      path: '/item/:id?',
+      name: 'itemEdit',
+      component: ItemEdit,
+    },
+    {
+      path: '/user/:id',
+      name: 'userDetails',
+      component: UserDetails,
+    },
   ],
 });

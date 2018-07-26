@@ -23,6 +23,7 @@
         </div>
         <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker>
         {{itemForDisplay.occupiedDates}}
+        <!-- ***************************Add ranking possibility and calculate AVG! -->
         reviews:
     </section>
 </template>
@@ -65,7 +66,7 @@ export default {
 }
 .carousel {
   margin: 0px 10px;
-  width: 10%;
+  width: 60%;
 }
 
 .item-details {

@@ -60,7 +60,7 @@ h3 {
   flex-wrap: wrap; 
 }
 li {
-     width: 30%;
+     width: 25%;
     
 
   /* cursor: pointer;

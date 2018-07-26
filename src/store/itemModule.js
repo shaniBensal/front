@@ -52,7 +52,7 @@ export default {
                     "3.3.2018"
                 ],
                 "images": [
-                    "https://images-na.ssl-images-amazon.com/images/I/61MgJslPL7L._SL1001_.jpg"
+                    "https://images.pexels.com/photos/37530/divers-scuba-divers-diving-underwater-37530.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"
                 ],
                 "condition": "new"
             },
@@ -198,7 +198,17 @@ export default {
         },
         selectedItem(state) {
             return state.selectedItem;
+        },
+        getStarsByRank() {
+            return item => {
+                if (item.ranking === 1) return '⭐'
+                if (item.ranking === 2) return '⭐⭐'
+                if (item.ranking === 3) return '⭐⭐⭐'
+                if (item.ranking === 4) return '⭐⭐⭐⭐'
+                if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
+            }
         }
+
     },
     actions: {
         loadItems(context, payload) {
@@ -239,6 +249,14 @@ export default {
                 .then((item) => {
                     return context.commit({ type: 'updateItem', item })
                 })
+        },
+
+        setStarsByRank(context, { item }) {
+            if (item.ranking === 1) return '⭐'
+            if (item.ranking === 2) return '⭐⭐'
+            if (item.ranking === 3) return '⭐⭐⭐'
+            if (item.ranking === 4) return '⭐⭐⭐⭐'
+            if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
         }
     }
 }

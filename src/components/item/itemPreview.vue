@@ -28,14 +28,16 @@
           <div>
             <span>{{shortDescription}}</span><br>
             <h4 class="price">{{item.price}}$ per day</h4>
+                                        
           </div>
+
         </v-card-title>
         <v-card-actions>
           <!-- <v-btn flat color="#8ACB88">Find out more</v-btn> -->
-
-          
+        <div>{{itemRank}}</div>
+       
         </v-card-actions>
-        <p>⭐⭐⭐⭐</p>
+         <div class="location">Tel Aviv, 0.8 km from you</div>
       </v-card>
 
     
@@ -47,23 +49,26 @@
 export default {
   name: "ItemPreview",
   props: ["item"],
-    methods:{
-        addToFavorites(){
-            console.log('added to favorites');
-        }
-    },
+  methods: {
+    addToFavorites() {
+      console.log("added to favorites");
+    }
+  },
   computed: {
     shortDescription() {
       if (this.item.description.length > 50)
-        return this.item.description.substring(0, 50) + '...'
-        else return this.item.description
+        return this.item.description.substring(0, 50) + "...";
+      else return this.item.description;
+    },
+    itemRank() {
+      return this.$store.getters.getStarsByRank(this.item);
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 .v-card {
   height: 355px;
   margin: 20px;
@@ -75,28 +80,26 @@ img {
   width: 100px;
 }
 
-.v-card__media__background{
-    height: 120%;
+.v-card__media__background {
+  height: 120%;
 }
 
-.v-card__title{
-    color: black;
-    text-align: left;
+.v-card__title {
+  color: black;
+  text-align: left;
 }
 
-.v-card__actions{
-    justify-content: center;
+.v-card__actions {
+  justify-content: center;
 }
 
-.price{
-
-    margin-top: 10px;
-    color: #42b983;
-    text-align: center;
-
+.price {
+  margin-top: 10px;
+  color: #42b983;
+  text-align: center;
 }
 
-
-
-
+.location{
+  color: black;
+}
 </style>

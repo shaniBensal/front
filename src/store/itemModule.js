@@ -251,12 +251,5 @@ export default {
                 })
         },
 
-        setStarsByRank(context, { item }) {
-            if (item.ranking === 1) return '⭐'
-            if (item.ranking === 2) return '⭐⭐'
-            if (item.ranking === 3) return '⭐⭐⭐'
-            if (item.ranking === 4) return '⭐⭐⭐⭐'
-            if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
-        }
     }
 }

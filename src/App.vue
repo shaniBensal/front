@@ -25,6 +25,7 @@ components:{
 }
 </script>
 <style lang="scss">
+
 #app {
 font-family: 'Roboto Slab', serif;
   -webkit-font-smoothing: antialiased;

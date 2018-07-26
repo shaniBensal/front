@@ -22,8 +22,8 @@ export default {
                 ],
                 "ownerId": "A1",
                 "occupiedDates": [
-                    "2.2.2018",
-                    "3.3.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": [
                     "http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png"
@@ -48,11 +48,11 @@ export default {
                 "price": 80,
                 "ownerId": "B1",
                 "occupiedDates": [
-                    "2.2.2018",
-                    "3.3.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": [
-                    "https://images-na.ssl-images-amazon.com/images/I/61MgJslPL7L._SL1001_.jpg"
+                    "https://images.pexels.com/photos/37530/divers-scuba-divers-diving-underwater-37530.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"
                 ],
                 "condition": "new"
             },
@@ -75,8 +75,8 @@ export default {
                 ],
                 "ownerId": "C1",
                 "occupiedDates": [
-                    "2.2.2018",
-                    "3.3.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": [
                     "https://assets.academy.com/mgen/83/10157883.jpg"
@@ -100,8 +100,8 @@ export default {
                 ],
                 "ownerId": "C1",
                 "occupiedDates": [
-                    "2.2.2018",
-                    "3.3.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": [
                     "https://images-na.ssl-images-amazon.com/images/I/814etiBMveL._SL1500_.jpg"
@@ -126,8 +126,8 @@ export default {
                 ],
                 "ownerId": "njcnwe7",
                 "occupiedDates": [
-                    "20.8.2018",
-                    "27.8.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": ["https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"],
                 "condition": "used"
@@ -153,8 +153,8 @@ export default {
                 ],
                 "ownerId": "112AAmk",
                 "occupiedDates": [
-                    "30.9.2018",
-                    "2.10.2018"
+                    "2018-08-14",
+                    "2018-08-05",
                 ],
                 "images": ["https://p1.akcdn.net/full/392557540.bestway-57313-syros-puhafalu-medence-szett-457x84cm-ffa-153.jpg"],
                 "condition": "new"
@@ -198,7 +198,17 @@ export default {
         },
         selectedItem(state) {
             return state.selectedItem;
+        },
+        getStarsByRank() {
+            return item => {
+                if (item.ranking === 1) return '⭐'
+                if (item.ranking === 2) return '⭐⭐'
+                if (item.ranking === 3) return '⭐⭐⭐'
+                if (item.ranking === 4) return '⭐⭐⭐⭐'
+                if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
+            }
         }
+
     },
     actions: {
         loadItems(context, payload) {
@@ -239,6 +249,14 @@ export default {
                 .then((item) => {
                     return context.commit({ type: 'updateItem', item })
                 })
+        },
+
+        setStarsByRank(context, { item }) {
+            if (item.ranking === 1) return '⭐'
+            if (item.ranking === 2) return '⭐⭐'
+            if (item.ranking === 3) return '⭐⭐⭐'
+            if (item.ranking === 4) return '⭐⭐⭐⭐'
+            if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
         }
     }
 }

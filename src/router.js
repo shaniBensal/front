@@ -22,7 +22,7 @@ export default new Router({
       component: About,
     },
     {
-      path: '/item/keyword',
+      path: '/item',
       name: 'itemList',
       component: ItemList,
     },

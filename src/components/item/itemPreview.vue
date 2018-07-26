@@ -2,9 +2,42 @@
   
   <div class="item-preview"> 
     
-        <img :src="item.images[0]">
-        <h3>{{item.name}}</h3>
-        <p>{{item.price}}$</p>
+      <v-card  :to="'/item/'+item.id">
+        <v-card-media
+          class="white--text"
+          height="200px"
+          :src="item.images[0]"
+        >
+          
+          <div class="text-xs-center">
+           <v-btn @click.prevent="addToFavorites" flat icon color="pink">
+              <v-icon >favorite</v-icon>
+            </v-btn>
+          </div>
+          
+          <v-container fill-height fluid>
+            <v-layout fill-height>
+              <v-flex xs12 align-end flexbox>
+                
+                <span class="headline">{{item.name}}</span>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+        <v-card-title>
+          <div>
+            <span>{{shortDescription}}</span><br>
+            <h4 class="price">{{item.price}}$ per day</h4>
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <!-- <v-btn flat color="#8ACB88">Find out more</v-btn> -->
+
+          
+        </v-card-actions>
+        <p>⭐⭐⭐⭐</p>
+      </v-card>
+
     
   </div> 
                  
@@ -13,16 +46,57 @@
 <script>
 export default {
   name: "ItemPreview",
-  props: ["item"]
+  props: ["item"],
+    methods:{
+        addToFavorites(){
+            console.log('added to favorites');
+        }
+    },
+  computed: {
+    shortDescription() {
+      if (this.item.description.length > 50)
+        return this.item.description.substring(0, 50) + '...'
+        else return this.item.description
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.v-card {
+  height: 355px;
+  margin: 20px;
+}
 a {
   color: #42b983;
 }
-img{
-    width: 100px;
+img {
+  width: 100px;
 }
+
+.v-card__media__background{
+    height: 120%;
+}
+
+.v-card__title{
+    color: black;
+    text-align: left;
+}
+
+.v-card__actions{
+    justify-content: center;
+}
+
+.price{
+
+    margin-top: 10px;
+    color: #42b983;
+    text-align: center;
+
+}
+
+
+
+
 </style>

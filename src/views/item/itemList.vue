@@ -1,17 +1,14 @@
-<<<<<<< HEAD
-=======
 <template>
 
 <section>
  
-
   <ul class="items-list">
               
         <li v-for="item in itemsForDisplay" :key="item.id">
               <item-preview :item="item"></item-preview>
-                <div class="btns">   
+                <!-- <div class="btns">   
                   <button> <router-link :to="'/item/'+item._id" title="More details">...</router-link></button>
-                </div>
+                </div> -->
              </li>
         </ul>
 </section>
@@ -40,7 +37,9 @@ export default {
   computed: {
     itemsForDisplay() {
       return this.$store.getters.itemsForDisplay;
-    }
+    },
+
+  
 
   },
   components: {
@@ -55,14 +54,16 @@ h3 {
   margin: 0;
   padding: 5px;
 }
-ul {
+ ul {
   list-style-type: none;
-  padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
 }
 li {
-  cursor: pointer;
+     width: 30%;
+    
+
+  /* cursor: pointer;
   margin: 10px 10px;
   width: 200px;
   height: 200px;
@@ -74,8 +75,8 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-family: "Montserrat", sans-serif;
-}
+  font-family: "Montserrat", sans-serif; */
+} 
 li:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.445);
 }
@@ -112,4 +113,3 @@ input {
   padding: 5px;
 }
 </style>
->>>>>>> ad72af3d74ce4c7d3cfbe6c9de4bd7ae15abf73a

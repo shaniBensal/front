@@ -1,0 +1,8 @@
+
+  @font-face {
+    font-family: 'Roboto Slab';
+    src: url('../../src/assets/fonts/roboto/RobotoSlab-Bold.ttf') format('ttf');
+    /* font-weight: normal; */
+    font-style: normal;
+  }
+

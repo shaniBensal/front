@@ -211,7 +211,6 @@ export default {
 
         loadItemById(context, { itemId }) {
             var filterd = context.state.items.filter(item => item.id === itemId);
-            console.log(filterd)
             filterd = filterd[0]
             context.commit({ type: 'setSelctedItem', filterd })
             // return itemsService.getItemById(itemId)

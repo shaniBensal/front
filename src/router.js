@@ -32,7 +32,11 @@ export default new Router({
       component: ItemDetails,
     },
     {
+<<<<<<< HEAD
       path: '/item/:id?',
+=======
+      path: '/item/edit/id?',
+>>>>>>> 50179c5fee16b7242d90996dcf22cd30d3e055a2
       name: 'itemEdit',
       component: ItemEdit,
     },
@@ -41,5 +45,13 @@ export default new Router({
       name: 'userDetails',
       component: UserDetails,
     },
+<<<<<<< HEAD
+=======
+    {
+      path: '/user/edit/:id',
+      name: 'userEdit',
+      component: UserEdit,
+    },
+>>>>>>> 50179c5fee16b7242d90996dcf22cd30d3e055a2
   ],
 });

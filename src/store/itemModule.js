@@ -208,10 +208,19 @@ export default {
                 if (item.ranking === 4) return '⭐⭐⭐⭐'
                 if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
             }
+           
         }
 
     },
     actions: {
+        // loadItems(context, payload) {
+        //     // return itemsService.getAllItems(context.state.filterBy)
+        //     // .then(items => {
+        //     //     context.commit({ type: 'setItems', items })
+        //     return context.state.items
+
+        // },
+
         loadItems(context, payload) {
             return itemsService.getAllItems(context.state.filterBy)
             .then(items => {

@@ -6,6 +6,7 @@ import About from './views/About.vue';
 import ItemList from './views/item/itemList.vue';
 import ItemEdit from './views/item/itemEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
+import UserDetails from './views/user/userDetails.vue';
 
 Vue.use(Router);
 

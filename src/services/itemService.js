@@ -9,7 +9,7 @@ function getAllItems(filterBy = '') {
         params: {
             filterBy
         }
-    })
+    }) 
         .then(res => res.data)
 }
 

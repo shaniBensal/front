@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <template>
 
 <section>
@@ -112,4 +110,3 @@ input {
   padding: 5px;
 }
 </style>
->>>>>>> ad72af3d74ce4c7d3cfbe6c9de4bd7ae15abf73a

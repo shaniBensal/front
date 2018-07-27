@@ -1,6 +1,7 @@
 <template>
     <section v-if="itemForDisplay">
-        <!-- <button @click="goBackToList">back</button> -->
+
+      {{itemForDisplay.ranking}}
         <div class="main-container d-inline-flex">
             <div class="carousel">
                 <v-carousel>
@@ -22,17 +23,21 @@
             </div>
         </div>
         <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker>
-        {{itemForDisplay.occupiedDates}}
+        Rank our product: <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
         <!-- ***************************Add ranking possibility and calculate AVG! -->
         reviews:
     </section>
 </template>
 <script>
 import datePicker from "../../components/datePicker.vue";
+import StarRating from "vue-star-rating";
+
 export default {
   name: "itemDetails",
   data() {
-    return {};
+    return {
+      rating: 4
+    };
   },
   created() {
     this.loadItem(this.$route.params.id);
@@ -49,6 +54,12 @@ export default {
     goBackToList() {
       this.$router.push("/app");
       this.$store.commit({ type: "unSetItem" });
+    },
+    setRating(rating) {
+      this.$store.commit({ type: "updateItemRank", rating });
+      this.$store.dispatch({ type: "updateItem" });
+      this.$store.commit({ type: "unSetSelctedItem" });
+      this.loadItem(this.$route.params.id);
     }
   },
 
@@ -66,13 +77,13 @@ export default {
 }
 .carousel {
   margin: 0px 10px;
-  width: 60%;
+  width: 50%;
 }
 
 .item-details {
   padding: 35px;
   flex-direction: column;
-  // padding-left: 5px;
+  width: 50%;
   align-items: end;
 }
 .owner-pic {

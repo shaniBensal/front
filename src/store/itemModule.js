@@ -11,7 +11,7 @@ export default {
                 ],
                 "title": "bagPack",
                 "description": "grate back pack 80L Osprey",
-                "ranking": 4,
+                "ranking": { avg: 4, count: 1 },
                 "price": 20,
                 "dateCreated": "Date.now()",
                 "keyWords": [
@@ -37,7 +37,7 @@ export default {
                 ],
                 "title": "Diving suit",
                 "description": "Full Body Dive Wetsuit Sports Skins Lycra Rash Guard for Men Women, UV Protection Long Sleeve One Piece Swimwear for Snorkeling Surfing Scuba Diving Swimming Kayaking Sailing Canoeing",
-                "ranking": 4,
+                "ranking": { avg: 4, count: 1 },
                 "dateCreated": "Date.now()",
                 "keyWords": [
                     "travel",
@@ -64,7 +64,7 @@ export default {
                 ],
                 "title": "Charcoal Grill",
                 "description": "The Outdoor Gourmet™ 14 Charcoal Grill features a 4.4 lb. lightweight design, making it an ideal choice for portable grilling. An adjustable vent offers enhanced temperature control over the 151 sq. in. grilling area. Steel construction ensures durability, and heat-resistant handles help protect your hands",
-                "ranking": 4,
+                "ranking": { avg: 4, count: 1 },
                 "price": 15,
                 "dateCreated": "Date.now()",
                 "keyWords": [
@@ -90,7 +90,7 @@ export default {
                 ],
                 "title": "bread machine",
                 "description": "Oster Expressbake Bread Machine",
-                "ranking": 4,
+                "ranking": { avg: 4, count: 1 },
                 "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
@@ -115,7 +115,7 @@ export default {
                 ],
                 "title": "City Bike",
                 "description": "1 year old city-bike , comes with battery, to move easily around the city",
-                "ranking": 5,
+                "ranking": { avg: 5, count: 1 },
                 "price": 10,
                 "dateCreated": "Date.now()",
                 "keyWords": [
@@ -140,7 +140,7 @@ export default {
                 ],
                 "title": "Inflatable Pool",
                 "description": "Big pool to enjoy the summer with your family anywhere",
-                "ranking": 4,
+                "ranking": { avg: 4, count: 1 },
                 "price": 25,
                 "dateCreated": "Date.now()",
                 "keyWords": [
@@ -187,6 +187,12 @@ export default {
         setFilter(state, payload) {
             state.filterByText = payload.filterBy;
         },
+        updateItemRank(state, { rating }) {
+            state.selectedItem.ranking.count = state.selectedItem.ranking.count + 1;
+            state.selectedItem.ranking.avg =
+                (state.selectedItem.ranking.avg + rating) /
+                state.selectedItem.ranking.count;
+        }
     },
     getters: {
         itemsForDisplay(state) {
@@ -245,10 +251,12 @@ export default {
         },
 
         updateItem(context, { item }) {
-            return itemsService.updateItem(item)
-                .then((item) => {
-                    return context.commit({ type: 'updateItem', item })
-                })
+            if (!item) item = context.state.selectedItem;
+            return context.commit({ type: 'updateItem', item })
+            // return itemsService.updateItem(item)
+            //     .then((item) => {
+            //         return context.commit({ type: 'updateItem', item })
+            //     })
         },
 
     }

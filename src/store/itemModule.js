@@ -13,17 +13,17 @@ export default {
             state.items.unshift(payload.item);
         },
         deleteItem(state, { itemId }) {
-            state.items = state.items.filter(item => item.id !== itemId);
+            state.items = state.items.filter(item => item._id !== itemId);
         },
         setItems(state, { items }) {
             state.items = items;
         },
-        updateItem(state, { item }) {
-            var selectedItemIndex = state.items.findIndex(currItem => item.id === currItem.id);
+        updateItemO(state, { item }) {
+            var selectedItemIndex = state.items.findIndex(currItem => item._id === currItem._id);
             state.items.splice(selectedItemIndex, 1, item);
         },
-        setSelctedItem(state, { filterd }) {
-            state.selectedItem = filterd;
+        setSelctedItem(state, { item }) {
+            state.selectedItem = item;
         },
         unSetSelctedItem(state) {
             state.selectedItem = {};
@@ -57,32 +57,19 @@ export default {
                 if (item.ranking === 4) return '⭐⭐⭐⭐'
                 if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
             }
-           
         }
 
     },
     actions: {
-        // loadItems(context, payload) {
-        //     // return itemsService.getAllItems(context.state.filterBy)
-        //     // .then(items => {
-        //     //     context.commit({ type: 'setItems', items })
-        //     return context.state.items
-
-        // },
-
         loadItems(context, payload) {
             return itemsService.getAllItems(context.state.filterBy)
-            .then(items => {
-                context.commit({ type: 'setItems', items })
-            // return context.state.items
-        })
-    },
-        
+                .then(items => {
+                    context.commit({ type: 'setItems', items })
+                    return context.state.items
+                })
+        },
 
         loadItemById(context, { itemId }) {
-            // var filterd = context.state.items.filter(item => item.id === itemId);
-            // filterd = filterd[0]
-            // context.commit({ type: 'setSelctedItem', filterd })
             return itemsService.getItemById(itemId)
                 .then(item => {
                     context.commit({ type: 'setSelctedItem', item })
@@ -105,12 +92,11 @@ export default {
         },
 
         updateItem(context, { item }) {
-            if (!item) item = context.state.selectedItem;
-            return context.commit({ type: 'updateItem', item })
-            // return itemsService.updateItem(item)
-            //     .then((item) => {
-            //         return context.commit({ type: 'updateItem', item })
-            //     })
+            if (!item ) item = context.state.selectedItem;            
+            return itemsService.updateItem(item)
+                .then((item) => {
+                    return context.commit({ type: 'updateItemO', item })
+                })
         },
 
     }

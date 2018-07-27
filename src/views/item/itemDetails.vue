@@ -1,6 +1,5 @@
 <template>
     <section v-if="itemForDisplay">
-
       {{itemForDisplay.ranking}}
         <div class="main-container d-inline-flex">
             <div class="carousel">
@@ -55,11 +54,9 @@ export default {
       this.$router.push("/app");
       this.$store.commit({ type: "unSetItem" });
     },
-    setRating(rating) {
+    setRating(rating) {      
       this.$store.commit({ type: "updateItemRank", rating });
       this.$store.dispatch({ type: "updateItem" });
-      this.$store.commit({ type: "unSetSelctedItem" });
-      this.loadItem(this.$route.params.id);
     }
   },
 

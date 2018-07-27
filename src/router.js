@@ -37,11 +37,11 @@ export default new Router({
       name: 'itemEdit',
       component: ItemEdit,
     },
-    // {
-    //   path: '/user/:id',
-    //   name: 'userDetails',
-    //   component: UserDetails,
-    // },
+    {
+      path: '/user/:id',
+      name: 'userDetails',
+      component: UserDetails,
+    },
     // {
     //   path: '/user/edit/:id',
     //   name: 'userEdit',

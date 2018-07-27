@@ -9,10 +9,11 @@
               <v-avatar size="125px">
                 <img
                   class="img-circle elevation-7 mb-1"
-                  src="https://raw.githubusercontent.com/vuetifyjs/docs/dev/static/doc-images/lists/1.jpg"
+                  :src = user.image
                 >
               </v-avatar>
-              <div class="headline">{{loggedInUser.name}}</div>
+                       
+              <div class="headline">{{user.name}}</div>
               <div class="subheading text-xs-center grey--text pt-1 pb-3">Lorem ipsum dolor sit amet</div>
               <!-- <v-layout justify-space-between>
                 <a href="javascript:;" class="body-2">Home</a>
@@ -23,38 +24,16 @@
             </div>
           </v-flex>
           <v-flex xs12 md5 offset-md2>
-            <div v-for="post in posts" :key="post.title">
-              <v-card class="my-3" hover>
-                <v-card-media
-                  class="white--text"
-                  height="170px"
-                  :src="post.imgUrl"
+              items You rented:
+            <div v-for="rentedItem in rentedItems" :key="rentedItem._id">
+                <!-- <img :src="rentedItem.images[0]"> -->
+                 <v-avatar size="120px">
+                <img
+                  class="img-circle elevation-7 mb-1"
+                  :src = "rentedItem.images[0]"
                 >
-                  <v-container fill-height fluid>
-                    <v-layout>
-                      <v-flex xs12 align-end d-flex>
-                        <span class="headline">{{user.name}}</span>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-media>
-                <v-card-text>
-                  {{ post.content }}
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn icon class="red--text">
-                    <v-icon medium>fa-reddit</v-icon>
-                  </v-btn>
-                  <v-btn icon class="light-blue--text">
-                    <v-icon medium>fa-twitter</v-icon>
-                  </v-btn>
-                  <v-btn icon class="blue--text text--darken-4">
-                    <v-icon medium>fa-facebook</v-icon>
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn flat class="blue--text">Read More</v-btn>
-                </v-card-actions>
-              </v-card>
+              </v-avatar>
+
             </div>
           </v-flex>
         </v-layout>
@@ -71,9 +50,7 @@
 <script>
 export default {
   data() {
-    return {
-       
-    };
+    return {};
   },
 
   created() {
@@ -83,17 +60,26 @@ export default {
 
   methods: {
     loadUser(userId) {
-      this.$store.dispatch({ type: "loadUserById", userId: userId })
+      this.$store
+        .dispatch({ type: "loadUserById", userId: userId })
+        .then(user => {
+          this.loadRentedItems(user.rentedItems);
+        });
+    },
+    loadRentedItems(items){
+        console.log('items user rented: ' , items)
+         this.$store
+        .dispatch({ type: "loadRentedItems", items:items })
     }
   },
 
   computed: {
-      user(){
-        return this.$store.getters.loggedinUser
-      },
-        itemsForRent(){
-            this.$store.getters.itemsForRentByUser
-        }
+    user() {
+      return this.$store.getters.loggedinUser;
+    },
+    rentedItems() {
+      return this.$store.getters.rentedItemsByUser;
+    }
   }
 };
 </script>

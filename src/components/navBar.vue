@@ -1,5 +1,6 @@
 <template>
     <header>
+      
         <div id="nav">
             <div class="logo">
                 <h1 class="logo">WeRent</h1>
@@ -7,7 +8,7 @@
             <label v-if="user">{{user.name}}</label>
             <div class="links">
                 <a v-if="user" @click="logOut">log Out</a> |
-                  <a  v-if="!user" href="#register" @click.prevent= "open">Register</a>
+                  <a  v-if="!user" href="#register" @click.prevent= "open">Sign in | </a>
                 <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
                 <router-link to="/">Home</router-link> |
                 <router-link to="/about">About</router-link> |
@@ -16,7 +17,7 @@
         </div>
         <div>
           <sign-in v-bind:class="{ active: isActive }" @close="closeModal"></sign-in>
-    </div>
+             </div>
     </header>
 </template>
 
@@ -43,7 +44,8 @@ export default {
       this.isActive = true;
     },
     closeModal(){
-      this.isActive = false;
+      if(this.isActive) this.isActive = false;
+      else return;
     }
   },
   components: {

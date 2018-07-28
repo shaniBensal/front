@@ -1,18 +1,27 @@
 <template>
-    <div class="user-modal-container" id="login-modal" @click="close">
+    <div class="user-modal-container">
         <div class="user-modal">
-            <!-- <div class="form-register">
-                <input type="text" name="name" placeholder="Name" v-model="registerName" @keyup="submit('register', $event)">
-                <input type="email" name="email" placeholder="Email" v-model="registerEmail" @keyup="submit('register', $event)">
-                <input type="password" name="password" placeholder="Password" v-model="registerPassword" @keyup=" submit('register', $event)">
-                <input type="submit" @click="submit('register', $event)" v-model="registerSubmit" id="registerSubmit">
-            </div> -->
-            <div class="form-login">
-                <input type="text" name="user" placeholder="Email or Username" v-model="loginUser" @keyup="submit('login', $event)">
-                <input type="password" name="password" placeholder="Password" v-model="loginPassword" @keyup="submit('login', $event)">
-                <input type="submit" @click="submit('login', $event)" v-model="loginSubmit" id="loginSubmit">
-                <div class="links">
-                </div>
+            <ul class="form-switcher">
+                <li @click.prevent="flip(true)">
+                    <a v-bind:class="{ active: log }">Login</a>
+                </li>
+                <li @click.prevent="flip(false)">
+                    <a v-bind:class="{ active: !log }">signUp</a>
+                </li>
+            </ul>
+            <div class="form-login" v-if="log">
+                <input type="text" placeholder="username" v-model="login.name">
+                <input type="password" placeholder="Password" v-model="login.password">
+                <button class="btn" @click.prevent="submitLogin">Submit</button>
+                <button class="btn" @click.prevent="close">Cancel</button>
+            </div>
+            <div class="form-sign-up" v-if="!log">
+                <input type="text" placeholder="Name" v-model="signUp.name">
+                <input type="email" placeholder="Email" v-model="signUp.email">
+                <input type="password" placeholder="Password" v-model="signUp.password">
+                <input type="text" placeholder="Adress" v-model="signUp.adress">
+                <button class="btn" @click.prevent="submitSignUp">Submit</button>
+                <button class="btn" @click.prevent="close">Cancel</button>
             </div>
         </div>
     </div>
@@ -22,29 +31,65 @@ export default {
   name: "signIn",
   data() {
     return {
-      active:null,
-      // registerName:'',
-      // registerEmail:'',
-      // registerPassword:'',
-      // registerSubmit:'',
-      loginUser:'',
-      loginPassword:'',
-      loginSubmit:''
+      log: true,
+      login: {
+        name: "",
+        password: ""
+      },
+      signUp: {
+        name: "",
+        password: "",
+        adress: "",
+        email: ""
+      }
     };
   },
   methods: {
-    close() {
+    close(event) {
       this.$emit("close");
+    },
+    flip(status) {
+      this.log = status;
+    },
+
+    submitSignUp() {
+      this.$store
+        .dispatch({ type: "addUser", user: this.signUp })
+        .then(res => {
+          this.$emit("close");
+          this.signUp = {
+            name: "",
+            password: "",
+            adress: "",
+            email: ""
+          };
+        })
+        .catch(err => console.log(err));
+    },
+
+    submitLogin() {
+      this.$store
+        .dispatch({ type: "login", user: this.login })
+        .then(res => {
+          if (res) {
+            this.$emit("close");
+            this.login = {
+              name: "",
+              password: ""
+            };
+            this.log = true;
+          } else return;
+        })
+        .catch(err => console.log(err));
     }
   }
 };
 </script>
 
-
-
 <style  scoped lang="scss">
 .user-modal-container {
   position: fixed;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   top: 0;
@@ -54,7 +99,6 @@ export default {
   cursor: pointer;
   overflow-y: auto;
   z-index: 3;
-  font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
   font-size: 14px;
   background-color: rgba(17, 17, 17, 0.9);
   -webkit-transition: all 0.25s linear;
@@ -69,7 +113,7 @@ export default {
   visibility: visible;
 }
 
-.user-modal-container .user-modal {
+.user-modal {
   position: relative;
   margin: 50px auto;
   width: 90%;
@@ -78,15 +122,43 @@ export default {
   cursor: initial;
 }
 
+.user-modal-container ul.form-switcher {
+  margin: 0;
+  padding: 0;
+}
+
+.user-modal-container ul.form-switcher li {
+  list-style: none;
+  display: inline-block;
+  width: 50%;
+  float: left;
+  margin: 0;
+}
+
+.user-modal-container ul.form-switcher li a {
+  width: 100%;
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  color: #666666;
+  background-color: #dddddd;
+  text-align: center;
+}
+
+.user-modal-container ul.form-switcher li a.active {
+  color: #000000;
+  background-color: #f6f6f6;
+}
+
 .user-modal-container .form-login,
-.user-modal-container .form-register,
+.user-modal-container .form-sign-up,
 .user-modal-container .form-password {
   padding: 75px 25px 25px;
-  display: none;
 }
 
 .user-modal-container .form-login.active,
-.user-modal-container .form-register.active,
+.user-modal-container .form-sign-up.active,
 .user-modal-container .form-password.active {
   display: block;
 }
@@ -98,28 +170,18 @@ export default {
   border: 1px solid #eeeeee;
 }
 
-.user-modal-container input[type="submit"] {
+.user-modal-container .btn {
+  width: 100%;
+  height: 3em;
+  font-size: 1.2em;
   color: #f6f6f6;
   border: 0;
-  margin-bottom: 0;
+  margin: 5px 0px;
   background-color: #3fb67b;
   cursor: pointer;
 }
 
-.user-modal-container input[type="submit"]:hover {
+.btn:hover {
   background-color: #3aa771;
-}
-
-.user-modal-container input[type="submit"]:active {
-  background-color: #379d6b;
-}
-
-.user-modal-container .links {
-  text-align: center;
-  padding-top: 25px;
-}
-
-.user-modal-container .links a {
-  color: #3fb67b;
 }
 </style>

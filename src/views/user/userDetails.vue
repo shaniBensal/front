@@ -112,7 +112,7 @@ export default {
   },
 
   created() {
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
     this.loadUser(this.$route.params.id);
   },
 

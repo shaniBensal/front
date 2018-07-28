@@ -1,6 +1,5 @@
 <template>
     <section v-if="itemForDisplay">
-      {{itemForDisplay.ranking}}
         <div class="main-container d-inline-flex">
             <div class="carousel">
                 <v-carousel>
@@ -11,18 +10,20 @@
             <div class="item-details d-inline-flex">
                 <h1> {{itemForDisplay.title}} ⭐⭐⭐⭐</h1>
                 <div class="owner-pic"></div>
-                <label>{{itemForDisplay.ownerId}}</label>
+                <label v-if="owner">{{owner.name}}</label>
                 <span>Price: {{itemForDisplay.price}} </span>
-                <div>pick up from: Tel Aviv (2Km from you)</div> 
+                <div>pick up from: Tel Aviv (2Km from you)</div>
                 Description:
                 <p>{{itemForDisplay.description}}</p>
                 <div class="text-xs-center">
-                    <v-btn class="btn-book" small>Book Now</v-btn>
                 </div>
+                <sign-up-modal></sign-up-modal>
             </div>
+            
         </div>
-        <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker>
-        Rank our product: <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
+        <!-- <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker> -->
+        Rank our product:
+        <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
         <!-- ***************************Add ranking possibility and calculate AVG! -->
         reviews:
     </section>
@@ -30,12 +31,15 @@
 <script>
 import datePicker from "../../components/datePicker.vue";
 import StarRating from "vue-star-rating";
+import signUpModal from "../../components/signUpModal.vue";
 
 export default {
   name: "itemDetails",
   data() {
     return {
-      rating: 4
+      rating: 4,
+      dialog: false,
+      owner: {}
     };
   },
   created() {
@@ -48,20 +52,28 @@ export default {
   },
   methods: {
     loadItem(itemId) {
-      this.$store.dispatch({ type: "loadItemById", itemId });
+      this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
+        this.loadOwner(item.ownerId);
+      });
     },
     goBackToList() {
       this.$router.push("/app");
       this.$store.commit({ type: "unSetItem" });
     },
-    setRating(rating) {      
+    setRating(rating) {
       this.$store.commit({ type: "updateItemRank", rating });
       this.$store.dispatch({ type: "updateItem" });
+    },
+    loadOwner(ownerId) {
+      this.$store
+        .dispatch({ type: "loadOwnerById", ownerId })
+        .then(owner => (this.owner = owner));
     }
   },
 
   components: {
-    datePicker
+    datePicker,
+    signUpModal
   }
 };
 </script>
@@ -89,10 +101,6 @@ export default {
   background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
   background-size: 100%;
-}
-
-.btn-book {
-  background-color: #f56400;
 }
 </style>
 

@@ -22,7 +22,6 @@ export default {
         setItemsForRent(state, { items }) {
             state.itemsForRent = items
         }
-
     },
     actions: {
         loadUserById(context, { userId }) {
@@ -34,6 +33,10 @@ export default {
                     // context.commit({type: 'setRentedItems' , user})
                     return user;
                 })
+        },
+
+        loadOwnerById(context, { ownerId }) {            
+            return userService.getUserById(ownerId)
         },
 
         loadRentedItems(context, { items }) {
@@ -60,11 +63,17 @@ export default {
                     return context.commit({ type: 'setUser', user })
                 })
         },
-        logout(context) {
-            return userService.logout()
+        logOut(context) {
+            return userService.logOut()
             then(() => {
                 return context.commit({ type: 'setUser', user: null })
             })
+        },
+        addUser(context, { user }) {
+            return userService.signup({ user })
+                .then((user) => {
+                    return context.commit({ type: 'setUser', user })
+                })
         }
     },
     getters: {

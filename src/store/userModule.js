@@ -6,40 +6,43 @@ import { stat } from 'fs';
 
 export default {
     state: {
-        
-        // user: userService.getLoggedInUser()
-        user: null,
+
+        user: userService.getLoggedInUser(),
+        // user: null,
         rentedItems: []
     },
     mutations: {
-        setUser(state, { user }) {            
+        setUser(state, { user }) {
             state.user = user
         },
-        setRentedItems(state, {item}){
-          state.rentedItems.push(item)
+        setRentedItems(state, { item }) {
+            state.rentedItems.push(item)
         }
-
     },
     actions: {
         loadUserById(context, { userId }) {
-            console.log('user module,' , userId)
+            // console.log('user module,' , userId)
             return userService.getUserById(userId)
                 .then(user => {
-                    console.log('!!!!' , user)
+                    // console.log('!!!!' , user)
                     context.commit({ type: 'setUser', user })
                     // context.commit({type: 'setRentedItems' , user})
                     return user;
                 })
         },
 
-        loadRentedItems(context, {items}){
+        loadOwnerById(context, { ownerId }) {            
+            return userService.getUserById(ownerId)
+        },
+
+        loadRentedItems(context, { items }) {
             items.forEach(itemId => {
                 return itemService.getItemById(itemId)
-                .then(item =>{
-                    console.log('you rented' , item)
-                    context.commit({type: 'setRentedItems' , item})
-                })
-                
+                    .then(item => {
+                        // console.log('you rented' , item)
+                        context.commit({ type: 'setRentedItems', item })
+                    })
+
             });
 
         },
@@ -50,11 +53,17 @@ export default {
                     return context.commit({ type: 'setUser', user })
                 })
         },
-        logout(context) {
-            return userService.logout()
+        logOut(context) {
+            return userService.logOut()
             then(() => {
                 return context.commit({ type: 'setUser', user: null })
             })
+        },
+        addUser(context, { user }) {
+            return userService.signup({ user })
+                .then((user) => {
+                    return context.commit({ type: 'setUser', user })
+                })
         }
     },
     getters: {
@@ -69,7 +78,7 @@ export default {
             //     user: {...state.user},
             //     items: state.rentedItems
             // }
-            console.log('state.rnteditems',state.rentedItems)
+            // console.log('state.rnteditems',state.rentedItems)
             return state.rentedItems;
         }
 

@@ -51,7 +51,7 @@ export default {
   props: ["item"],
   methods: {
     addToFavorites() {
-      console.log("added to favorites");
+      // console.log("added to favorites");
     }
   },
   computed: {

@@ -281,7 +281,7 @@
         <v-layout row wrap align-center>
           <v-flex xs12>
             <div class="white--text ml-3 headline-1">
-              Sponsered by Coding Academy&#8482
+              <!-- Sponsered by Coding Academy&#8482 -->
               <!-- <v-icon class="red--text">favorite</v-icon> -->
               <!-- by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a> -->
               <!-- and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a> -->
@@ -348,9 +348,9 @@ font-size: 2.5em;
   height: 440px;
 }
 
-.title {
+/* .title { */
   /* height: 500px; */
-}
+/* } */
 
 .pic3 {
   min-height: 240px;

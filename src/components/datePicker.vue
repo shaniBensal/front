@@ -11,9 +11,12 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    date: null
-  }),
+  name: "DatePicker",
+  data() {
+    return {
+      date: null
+    };
+  },
   props: ["unavailableDates"],
   created() {
     this.today();

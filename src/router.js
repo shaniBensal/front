@@ -7,6 +7,8 @@ import ItemList from './views/item/itemList.vue';
 import ItemEdit from './views/item/itemEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
 import UserDetails from './views/user/userDetails.vue';
+// import SignIn from './views/user/signIn.vue';
+
 
 Vue.use(Router);
 
@@ -22,6 +24,11 @@ export default new Router({
       name: 'about',
       component: About,
     },
+    // {
+    //   path:'/signIn',
+    //   name: 'signIn',
+    //   component: SignIn
+    // },
     {
       path: '/item',
       name: 'itemList',

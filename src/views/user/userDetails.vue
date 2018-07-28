@@ -54,7 +54,7 @@ export default {
   },
 
   created() {
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
     this.loadUser(this.$route.params.id);
   },
 
@@ -67,7 +67,7 @@ export default {
         });
     },
     loadRentedItems(items){
-        console.log('items user rented: ' , items)
+        // console.log('items user rented: ' , items)
          this.$store
         .dispatch({ type: "loadRentedItems", items:items })
     }

@@ -82,7 +82,7 @@ export default {
 .user-modal-container .form-register,
 .user-modal-container .form-password {
   padding: 75px 25px 25px;
-  display: none;
+  // display: none;
 }
 
 .user-modal-container .form-login.active,

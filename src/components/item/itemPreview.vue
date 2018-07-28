@@ -65,21 +65,21 @@ export default {
         return this.item.description.substring(0, 50) + "...";
       else return this.item.description;
     },
-    avgRank(){
-      return this.item.ranking.avg.toFixed(1)
+    avgRank() {
+      return this.item.ranking.avg.toFixed(1);
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.rank{
+.rank {
   display: flex;
-
 }
 .v-card {
   height: 355px;
-  margin: 20px;
+  margin: 20px 10px 10px 10px;
+  max-width: 250px;
 }
 
 .v-btn--icon {
@@ -102,6 +102,7 @@ a {
 .v-card__title {
   color: black;
   text-align: left;
+  padding: 10px 10px 0 10px;
 }
 
 .v-card__actions {

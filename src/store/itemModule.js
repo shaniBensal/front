@@ -5,7 +5,9 @@ export default {
     state: {
         items: [],
         filterByText: '', //for start, later on become object by price, text, location
-        selectedItem: {}
+        selectedItem: {},
+        categories: ['travel' , 'kitchen' , 'transportation' , 'kids' , 'events' , 'hardware']
+        
     },
 
     mutations: {
@@ -57,6 +59,10 @@ export default {
                 if (item.ranking === 4) return '⭐⭐⭐⭐'
                 if (item.ranking === 5) return '⭐⭐⭐⭐⭐'
             }
+        },
+
+        categories(state){
+            return state.categories
         }
 
     },

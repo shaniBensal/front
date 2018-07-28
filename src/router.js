@@ -35,15 +35,16 @@ export default new Router({
       component: ItemList,
     },
     {
+      path: '/item/edit/:id?',
+      name: 'itemEdit',
+      component: ItemEdit,
+    },
+    {
       path: '/item/:id',
       name: 'itemDetails',
       component: ItemDetails,
     },
-    {
-      path: '/item/edit/id?',
-      name: 'itemEdit',
-      component: ItemEdit,
-    },
+   
     {
       path: '/user/:id',
       name: 'userDetails',

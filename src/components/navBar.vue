@@ -7,7 +7,7 @@
             <label v-if="user">{{user.name}}</label>
             <div class="links">
                 <a v-if="user" @click="logOut">log Out</a> |
-                  <a  v-if="!user" href="#register" @click.prevent= "open">Register</a>
+                  <a  v-if="!user" href="#register" @click.prevent= "open">Register</a> |
                 <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
                 <router-link to="/">Home</router-link> |
                 <router-link to="/about">About</router-link> |

@@ -9,8 +9,13 @@
 
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
-
+                   <button class="add">
+                      <router-link to="/item/edit" title="Add"> 
+                        Add item <v-icon dark>add</v-icon>
+                      </router-link> 
+                    </button>
         </div>
+                   
 
         <div class="user-items-details">
             <!-- <h2>Items You Rented</h2>
@@ -60,11 +65,14 @@
                                   </v-subheader>  
                                 <v-card-actions class="justify-center">
                                     <div class="text-xs-center">
+                                       
                                      <v-btn fab dark small color="cyan">
+                                         <router-link :to="'/item/edit/'+item._id" title="Edit">
                                          <v-icon dark>edit</v-icon>
+                                         </router-link>
                                      </v-btn>
-                                     
-                                     <v-btn color="red" fab dark small>
+                                  
+                                     <v-btn color="red" fab dark small @click="removeItem(item._id)">
                                         <v-icon dark>remove</v-icon>
                                      </v-btn>
                                     </div>
@@ -135,6 +143,11 @@ export default {
     },
     loadItemsForRent(userId) {
       this.$store.dispatch({ type: "loadItemsForRent", userId: userId });
+    },
+    removeItem(itemId) {
+      console.log("removing...", itemId);
+      this.$store.dispatch({ type: "deleteItem", itemId: itemId })
+        .then(() => this.loadUser(this.$route.params.id))
     }
   },
 
@@ -154,9 +167,11 @@ export default {
 
 
 <style scoped>
-
+a {
+  text-decoration-style: none;
+}
 .material-icons {
-    display: flex
+  display: flex;
 }
 .user-details {
   display: flex;
@@ -195,5 +210,10 @@ export default {
 
 .user-items-details img {
   width: 150px;
+}
+
+.add{
+    width: 100%;
+    background-color: #00d8ae;
 }
 </style>

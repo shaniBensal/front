@@ -9,17 +9,18 @@ const URL = (process.env.NODE_ENV !== 'development')
     ? '/user'
     : '//localhost:3000/user';
 
-var loggedinUser = storageService.loadFromStorage(STORAGE_KEY) ||null;
+var loggedinUser = storageService.loadFromStorage(STORAGE_KEY) || null;
 
-function login({ username }) {
-    return axios.post(URL + '/setUser', { username })
+function login({ user }) {        
+    return axios.post(`${URL}/checkLogin`, { user })
         .then(res => {
             _setLoggedinUser(res.data)
             return (res.data)
         })
 }
 
-function signup(userDetails) {    
+function signup(userDetails) {
+    console.log('user in store', userDetails);
     return axios.post(`${URL}/signup`, userDetails.user)
         .then(res => res.data)
         .catch(err => err)
@@ -36,7 +37,7 @@ function getUserById(userId) {
 
 function logOut() {
     loggedinUser = null;
-    storageService.clearStorage(STORAGE_KEY)
+    storageService.clearStorage(STORAGE_KEY);
 }
 
 function getLoggedInUser() {
@@ -53,6 +54,6 @@ export default {
     login,
     getLoggedInUser,
     logOut,
-    getUserById, 
+    getUserById,
     signup
 }

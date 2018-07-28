@@ -35,7 +35,7 @@ export default {
                 })
         },
 
-        loadOwnerById(context, { ownerId }) {            
+        loadOwnerById(context, { ownerId }) {
             return userService.getUserById(ownerId)
         },
 
@@ -52,24 +52,27 @@ export default {
         loadItemsForRent(context, { userId }) {
             return itemService.getItemByOwnerId(userId)
                 .then(items => {
-                    console.log('1111' , items)
+                    console.log('1111', items)
                     context.commit({ type: 'setItemsForRent', items })
                 })
         },
 
-        login(context, { username }) {
-            return userService.login({ username })
+        login(context, { user }) {
+            return userService.login({ user })
                 .then((user) => {
-                    return context.commit({ type: 'setUser', user })
+                    context.commit({ type: 'setUser', user })
+                    return user;
                 })
         },
+
         logOut(context) {
-            return userService.logOut()
-            then(() => {
-                return context.commit({ type: 'setUser', user: null })
-            })
+            userService.logOut()
+            return context.commit({ type: 'setUser', user: null })
         },
+
         addUser(context, { user }) {
+            console.log('user in store', user);
+            
             return userService.signup({ user })
                 .then((user) => {
                     return context.commit({ type: 'setUser', user })
@@ -92,8 +95,8 @@ export default {
             return state.rentedItems;
         },
 
-        itemsForRent(state){
-           return state.itemsForRent
+        itemsForRent(state) {
+            return state.itemsForRent
         }
 
     }

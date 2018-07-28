@@ -1,56 +1,114 @@
 <template>
-    <div>
-        <v-app light>
-    <v-content>
-      <v-container>
-        <v-layout row wrap align-center>
-          <v-flex xs12 md4>
-            <div class="text-xs-center">
-              <v-avatar size="125px">
-                <img
-                  class="img-circle elevation-7 mb-1"
-                  :src = user.image
-                >
-              </v-avatar>
-                       
-              <div class="headline">{{user.name}}</div>
-              <div class="subheading text-xs-center grey--text pt-1 pb-3">Lorem ipsum dolor sit amet</div>
-              <!-- <v-layout justify-space-between>
-                <a href="javascript:;" class="body-2">Home</a>
-                <a href="javascript:;" class="body-2">About</a>
-                <a href="javascript:;" class="body-2">Github</a>
-                <a href="javascript:;" class="body-2">Other</a>
-              </v-layout> -->
-            </div>
-          </v-flex>
-          <v-flex xs12 md5 offset-md2>
-              items You rented:
-            <div v-for="rentedItem in rentedItems" :key="rentedItem._id">
-                <!-- <img :src="rentedItem.images[0]"> -->
-                 <v-avatar size="120px">
-                <img
-                  class="img-circle elevation-7 mb-1"
-                  :src = "rentedItem.images[0]"
-                >
-              </v-avatar>
 
-            </div>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-    <v-footer class="secondary" app>
-      <v-layout row wrap align-center>
-      </v-layout>
-    </v-footer>
-  </v-app>
+    <div class="user-details" v-if="userToShow">
+
+        <div class="user-contact-details">
+            <v-avatar size="125px" color="grey lighten-4">
+                <img :src="user.image" alt="avatar">
+            </v-avatar>
+
+            <h2>{{user.name}}</h2>
+            <h4>{{user.email}}</h4>
+
+        </div>
+
+        <div class="user-items-details">
+            <!-- <h2>Items You Rented</h2>
+            <ul>
+                <li v-for="item in rentedItems" :key="item._id" v-if="rentedItems">
+                   <img :src="item.images[0]">
+                </li>
+                <h4 v-else>You haven't rent anything yet</h4>
+            </ul>
+            
+        </div> -->
+            <v-card flat tile>
+
+                <v-container fluid grid-list-md grey lighten-4>
+                    <v-subheader>Items you rented</v-subheader>
+
+                    <v-layout row wrap>
+                        <v-spacer></v-spacer>
+                        <v-flex v-for="item in rentedItems" :key="item._id" v-if="rentedItems" xs12 sm6 md>
+                            <v-card width="100px">
+                                <v-card-media :src="item.images[0]" height="100px">
+                                </v-card-media>
+
+                                <v-card-actions class="white justify-center">
+                                   <!-- <v-btn fab dark large color="cyan">
+                                         <v-icon dark>edit</v-icon>
+                                     </v-btn> -->
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-card>
+            <v-card flat tile>
+
+                <v-container fluid grid-list-md grey lighten-4>
+                    <v-subheader>Items you are renting out
+                    </v-subheader>
+
+                    <v-layout row wrap>
+                        <v-spacer></v-spacer>
+                        <v-flex v-for="item in itemsForRent" :key="item._id" v-if="itemsForRent" xs12 sm6 md>
+                            <v-card width="120px">
+                                <v-card-media :src="item.images[0]" height="100px">
+                                </v-card-media>
+                                 <v-subheader>{{item.title}}
+                                  </v-subheader>  
+                                <v-card-actions class="justify-center">
+                                    <div class="text-xs-center">
+                                     <v-btn fab dark small color="cyan">
+                                         <v-icon dark>edit</v-icon>
+                                     </v-btn>
+                                     
+                                     <v-btn color="red" fab dark small>
+                                        <v-icon dark>remove</v-icon>
+                                     </v-btn>
+                                    </div>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-card>
+
+            <v-card flat tile>
+
+                <v-container fluid grid-list-md grey lighten-4>
+                    <v-subheader>Items you liked
+                        <v-spacer></v-spacer>
+                        <v-icon>fas fa-heart</v-icon>
+                    </v-subheader>
+
+                    <v-layout row wrap>
+                        <v-spacer></v-spacer>
+                        <v-flex v-for="item in rentedItems" :key="item._id" v-if="rentedItems" xs12 sm6 md>
+                            <v-card width="100px">
+                                <v-card-media :src="item.images[0]" height="100px">
+                                </v-card-media>
+
+                                <v-card-actions class="white justify-center">
+                                    <v-btn class="white--text" fab icon small>...
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-card>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      userToShow: false
+    };
   },
 
   created() {
@@ -63,13 +121,20 @@ export default {
       this.$store
         .dispatch({ type: "loadUserById", userId: userId })
         .then(user => {
-          this.loadRentedItems(user.rentedItems);
+          if (!user) return;
+          else {
+            this.userToShow = true;
+            this.loadRentedItems(user.rentedItems);
+            this.loadItemsForRent(userId);
+          }
         });
     },
-    loadRentedItems(items){
-        console.log('items user rented: ' , items)
-         this.$store
-        .dispatch({ type: "loadRentedItems", items:items })
+    loadRentedItems(items) {
+      console.log("items user rented: ", items);
+      this.$store.dispatch({ type: "loadRentedItems", items: items });
+    },
+    loadItemsForRent(userId) {
+      this.$store.dispatch({ type: "loadItemsForRent", userId: userId });
     }
   },
 
@@ -79,11 +144,56 @@ export default {
     },
     rentedItems() {
       return this.$store.getters.rentedItemsByUser;
+    },
+    itemsForRent() {
+      return this.$store.getters.itemsForRent;
     }
   }
 };
 </script>
 
 
-<style>
+<style scoped>
+
+.material-icons {
+    display: flex
+}
+.user-details {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-contact-details {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 50px;
+}
+
+.v-avatar {
+  align-self: center;
+}
+
+.v-card {
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.v-card__media {
+  cursor: pointer;
+}
+.user-items-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-items-details ul {
+  display: flex;
+  list-style: none;
+  width: 50%;
+}
+
+.user-items-details img {
+  width: 150px;
+}
 </style>

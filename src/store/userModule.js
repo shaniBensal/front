@@ -6,42 +6,52 @@ import { stat } from 'fs';
 
 export default {
     state: {
-        
+
         // user: userService.getLoggedInUser()
         user: null,
-        rentedItems: []
+        rentedItems: [],
+        itemsForRent: null
     },
     mutations: {
-        setUser(state, { user }) {            
+        setUser(state, { user }) {
             state.user = user
         },
-        setRentedItems(state, {item}){
-          state.rentedItems.push(item)
+        setRentedItems(state, { item }) {
+            state.rentedItems.push(item)
+        },
+        setItemsForRent(state, { items }) {
+            state.itemsForRent = items
         }
 
     },
     actions: {
         loadUserById(context, { userId }) {
-            console.log('user module,' , userId)
+            // console.log('user module,', userId)
             return userService.getUserById(userId)
                 .then(user => {
-                    console.log('!!!!' , user)
+                    // console.log('!!!!', user)
                     context.commit({ type: 'setUser', user })
                     // context.commit({type: 'setRentedItems' , user})
                     return user;
                 })
         },
 
-        loadRentedItems(context, {items}){
+        loadRentedItems(context, { items }) {
             items.forEach(itemId => {
                 return itemService.getItemById(itemId)
-                .then(item =>{
-                    console.log('you rented' , item)
-                    context.commit({type: 'setRentedItems' , item})
-                })
-                
+                    .then(item => {
+                        // console.log('you rented', item)
+                        context.commit({ type: 'setRentedItems', item })
+                    })
             });
+        },
 
+        loadItemsForRent(context, { userId }) {
+            return itemService.getItemByOwnerId(userId)
+                .then(items => {
+                    console.log('1111' , items)
+                    context.commit({ type: 'setItemsForRent', items })
+                })
         },
 
         login(context, { username }) {
@@ -69,8 +79,12 @@ export default {
             //     user: {...state.user},
             //     items: state.rentedItems
             // }
-            console.log('state.rnteditems',state.rentedItems)
+            // console.log('state.rnteditems', state.rentedItems)
             return state.rentedItems;
+        },
+
+        itemsForRent(state){
+           return state.itemsForRent
         }
 
     }

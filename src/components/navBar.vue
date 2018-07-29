@@ -1,23 +1,28 @@
 <template>
     <header>
-      
+
         <div id="nav">
             <div class="logo">
                 <h1 class="logo">WeRent</h1>
             </div>
-            <label v-if="user">{{user.name}}</label>
+            <div class="profile">
+            <label v-if="user">{{user.name}} |</label> 
+            <router-link :to="'/user/'+user._id" v-if="user">My profile</router-link>
+            </div>
             <div class="links">
-                <a v-if="user" @click="logOut">log Out</a> |
-                  <a  v-if="!user" href="#register" @click.prevent= "open">Sign in | </a>
+                <a v-if="user" @click="logOut">log Out</a>
+                |
+                <a v-if="!user" href="#register" @click.prevent="open">Sign in | </a>
                 <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
                 <router-link to="/">Home</router-link> |
                 <router-link to="/about">About</router-link> |
-                <router-link to="/item">items</router-link> 
+                <router-link to="/item">items</router-link>
+
             </div>
         </div>
         <div>
-          <sign-in v-bind:class="{ active: isActive }" @close="closeModal"></sign-in>
-             </div>
+            <sign-in v-bind:class="{ active: isActive }" @close="closeModal"></sign-in>
+        </div>
     </header>
 </template>
 
@@ -87,6 +92,10 @@ export default {
   .links {
     align-self: center;
     padding: 0 10px;
+  }
+
+  .profile{
+
   }
 }
 </style>

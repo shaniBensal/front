@@ -1,6 +1,7 @@
 <template>
   
   <div class="item-preview"> 
+    <!-- <sign-up-modal v-if="isUserLoggedIn"></sign-up-modal> -->
     
       <v-card  :to="'/item/' + item._id">
         <v-card-media
@@ -34,7 +35,7 @@
         </v-card-title>
         <v-card-actions>
           <!-- <v-btn flat color="#8ACB88">Find out more</v-btn> -->
-        <div class="rank">
+        <div class="rank" v-if="item">
           ⭐
           {{avgRank}}
           ({{item.ranking.count}})
@@ -51,14 +52,37 @@
 </template>
 
 <script>
+import signIn from '../signIn.vue'
 export default {
   name: "ItemPreview",
   props: ["item"],
-  methods: {
-    addToFavorites() {
-      // console.log("added to favorites");
+  data(){
+    return{
+      isUserLoggedIn: false
     }
   },
+  methods: {
+    addToFavorites() {
+      console.log("added to favorites" ,this.item);
+      var currUser = this.$store.getters.loggedinUser
+      if(currUser){
+        this.isUserLoggedIn = true
+        this.$store.dispatch({type: 'addItemToFavorites' , item: this.item , user: currUser})
+      }
+      else this.showSignIn()
+      this.isUserLoggedIn = false
+    },
+
+    showSignIn(){
+      this.isUserLoggedIn = false
+      alert('please sign in')
+    }
+  },
+
+  created(){
+  
+  },
+
   computed: {
     shortDescription() {
       if (this.item.description.length > 50)
@@ -68,6 +92,10 @@ export default {
     avgRank() {
       return this.item.ranking.avg.toFixed(1);
     }
+
+  },
+  components:{
+    signIn
   }
 };
 </script>

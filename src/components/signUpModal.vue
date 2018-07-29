@@ -1,7 +1,7 @@
 <template>
     <v-layout row justify-center>
         <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-btn class="btn-book" slot="activator">Book Now!</v-btn>
+            <v-btn v-if="favorites" class="btn-book" slot="activator">Book Now!</v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline"> In order to book this item please sign up:
@@ -20,7 +20,7 @@
                                 <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <v-text-field v-model="user.address" label="Adress" required></v-text-field>
+                                <v-text-field v-model="user.adress" label="Adress" required></v-text-field>
                             </v-flex>
                             <!-- <v-flex xs12 sm6>
                                 <v-text-field v-model="user.image" label="image URL" required></v-text-field>
@@ -41,6 +41,7 @@
 <script>
 export default {
       name: "SignUpModal",
+   
   data() {
     return {
       dialog: false,
@@ -50,7 +51,8 @@ export default {
         password: "",
         adress: ""
         // image:''
-      }
+      },
+    
     };
   },
 

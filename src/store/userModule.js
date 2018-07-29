@@ -72,12 +72,22 @@ export default {
 
         addUser(context, { user }) {
             console.log('user in store', user);
-            
+
             return userService.signup({ user })
                 .then((user) => {
                     return context.commit({ type: 'setUser', user })
                 })
-        }
+        },
+        addItemToFavorites(context, payload) {
+            console.log(payload.item, payload.user)
+            var user = payload.user;
+            var favoriteItem = payload.item
+            userService.addFavorites(user, favoriteItem)
+                .then((user) => {
+                    console.log('user', user)
+                    return context.commit({ type: 'setUser', user })
+                })
+        },
     },
     getters: {
         isAdmin(state) {
@@ -97,7 +107,13 @@ export default {
 
         itemsForRent(state) {
             return state.itemsForRent
+        },
+
+        favoriteItems(state){
+            return state.user.favoriteItems
         }
+
+
 
     }
 }

@@ -78,7 +78,7 @@ export default {
           });
       } else {
         this.$store
-          .dispatch({ type: "addItem", item: this.itemToUpdate })
+          .dispatch({ type: "addNewItem", item: this.itemToUpdate })
           .then(item => {
             // this.$emit("updated", this.todoToUpdate);
             this.itemToUpdate = this.getEmptyItem;

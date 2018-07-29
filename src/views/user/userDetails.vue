@@ -9,15 +9,16 @@
 
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
-                   <button class="add">
-                      <router-link to="/item/edit" title="Add"> 
-                        Add item <v-icon dark>add</v-icon>
-                      </router-link> 
-                    </button>
+                   
         </div>
                    
 
         <div class="user-items-details">
+            <button class="add">
+                      <router-link to="/item/edit" title="Add"> 
+                        Add item <v-icon dark>add</v-icon>
+                      </router-link> 
+                    </button>
             <!-- <h2>Items You Rented</h2>
             <ul>
                 <li v-for="item in rentedItems" :key="item._id" v-if="rentedItems">
@@ -93,7 +94,7 @@
 
                     <v-layout row wrap>
                         <v-spacer></v-spacer>
-                        <v-flex v-for="item in rentedItems" :key="item._id" v-if="rentedItems" xs12 sm6 md>
+                        <v-flex v-for="item in favorites" :key="item._id" v-if="favorites" xs12 sm6 md>
                             <v-card width="100px">
                                 <v-card-media :src="item.images[0]" height="100px">
                                 </v-card-media>
@@ -146,8 +147,9 @@ export default {
     },
     removeItem(itemId) {
       console.log("removing...", itemId);
-      this.$store.dispatch({ type: "deleteItem", itemId: itemId })
-        .then(() => this.loadUser(this.$route.params.id))
+      this.$store
+        .dispatch({ type: "deleteItem", itemId: itemId })
+        .then(() => this.loadUser(this.$route.params.id));
     }
   },
 
@@ -160,6 +162,9 @@ export default {
     },
     itemsForRent() {
       return this.$store.getters.itemsForRent;
+    },
+    favorites(){
+        return this.$store.getters.favoriteItems
     }
   }
 };
@@ -167,9 +172,25 @@ export default {
 
 
 <style scoped>
-a {
-  text-decoration-style: none;
+.router-link :active {
+  color: #162044;
 }
+
+a:active {
+  color: #162044;
+}
+
+.v-btn__content a {
+  text-decoration-line: none;
+}
+
+button a {
+  text-decoration-line: none;
+}
+.v-icon {
+  text-decoration-line: none;
+}
+
 .material-icons {
   display: flex;
 }
@@ -212,8 +233,10 @@ a {
   width: 150px;
 }
 
-.add{
-    width: 100%;
-    background-color: #00d8ae;
+.add {
+  width: 100%;
+  background-color: #00d8ae;
+  margin: 20px 0;
+  max-width: 470px;
 }
 </style>

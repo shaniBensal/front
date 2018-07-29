@@ -3,6 +3,7 @@ import EventBusService from '../services/EventBusService.js'
 import storageService from './storageService.js'
 const STORAGE_KEY = 'loggedinUser';
 import axios from 'axios'
+import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
 // const axios = require('axios')
 const URL = (process.env.NODE_ENV !== 'development')
@@ -11,7 +12,7 @@ const URL = (process.env.NODE_ENV !== 'development')
 
 var loggedinUser = storageService.loadFromStorage(STORAGE_KEY) || null;
 
-function login({ user }) {        
+function login({ user }) {
     return axios.post(`${URL}/checkLogin`, { user })
         .then(res => {
             _setLoggedinUser(res.data)
@@ -50,10 +51,19 @@ function _setLoggedinUser(user) {
     EventBusService.$emit('succesful-login')
 }
 
+function addFavorites(user, item) {
+    return axios.post(`${URL}/favorites/${item._id}`, user)
+        .then(res => {
+          return res.data  
+        })
+
+}
+
 export default {
     login,
     getLoggedInUser,
     logOut,
     getUserById,
-    signup
+    signup,
+    addFavorites
 }

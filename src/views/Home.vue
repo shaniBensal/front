@@ -3,7 +3,7 @@
 <div class="outer-container">
    <v-app light>
     <v-toolbar class="white">
-      <v-toolbar-title>SHIran-Shani</v-toolbar-title>
+      <v-toolbar-title></v-toolbar-title>
     </v-toolbar>
     <v-content>
       <section>
@@ -204,6 +204,26 @@
   </v-container>
 
 
+<div class="opinions-container">
+  <div class="top-left">George Orwell, 36, Tel Aviv: "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."</div>
+</div>
+  <v-carousel class="opinions" hide-controls hide-delimiters interval=2500 transition="fade">
+     <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+      reverse-transition="fade"
+      transition="fade"
+    ></v-carousel-item>
+  </v-carousel>
+
+
+
+
+
+<br>
+<br>
+<br>
 
       <section>
         <v-parallax src="img/ski.jpg" height="380">
@@ -221,6 +241,8 @@
           </v-layout>
         </v-parallax>
       </section>
+
+
 
       <section>
         <v-container grid-list-xl>
@@ -295,6 +317,8 @@
 
 
 
+
+
 </div>
 </template>
 
@@ -303,36 +327,50 @@
 
 
 <script>
-    // <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
+// <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
 
-
-
 export default {
-      data: () => ({
-        lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`
-      }),
+  data: () => ({
+    lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
+    items: [
+      {
+        src:
+          'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800'
+      },
+      {
+        src:
+          'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800'
+      },
+      {
+        src:
+          'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750'
+      },
+      {
+        src:
+          'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800'
+      }
+    ]
+  }),
   name: 'home',
   components: {
-    HelloWorld,
-  },
+    HelloWorld
+  }
 };
 </script>
 
 <style>
-
-
 .outer-container {
   margin: 0 auto;
   max-width: 1080px;
 }
 
 .main-title {
-height: 80px;
-padding: 0;
-margin: 0;
-font-size: 2.5em;
+  height: 80px;
+  padding: 0;
+  margin: 0;
+  font-size: 2.5em;
 }
 
 .descrip {
@@ -341,7 +379,7 @@ font-size: 2.5em;
 
 .testing {
   height: 100%;
-  background-image: url("https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg");
+  background-image: url('https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg');
 }
 
 .test1 {
@@ -354,62 +392,106 @@ font-size: 2.5em;
 
 .pic3 {
   min-height: 240px;
-    background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg");
+  background-image: url('https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg');
   background-size: cover;
   cursor: pointer;
 }
 
 .pic2 {
   height: 180px;
-    background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg");
+  background-image: url('http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg');
   background-size: cover;
   background-position-y: 82%;
-  margin-bottom: 380px;
+  margin-bottom: 150px;
   cursor: pointer;
 }
 
 .pic1 {
   height: 220px;
-  background-image: url("http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg");
- background-size: cover;
+  background-image: url('http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg');
+  background-size: cover;
   background-position-x: 45%;
   cursor: pointer;
 }
 
 .pic1b {
   height: 220px;
-  background-image: url("http://www.photographeprofessionnel.ovh/wp-content/uploads/2014/12/z100b-600x465.jpg");
- background-size: cover;
- background-position-x: 65%;
-cursor: pointer;
+  background-image: url('http://www.photographeprofessionnel.ovh/wp-content/uploads/2014/12/z100b-600x465.jpg');
+  background-size: cover;
+  background-position-x: 65%;
+  cursor: pointer;
 }
 
 .pic0 {
   height: 200px;
-  background-image: url("http://www.blakeruns.com/wp-content/uploads/2016/08/2016-Middlefork-Trail-Hot-Springs_Full-crew-1200x800.jpg");
+  background-image: url('http://www.blakeruns.com/wp-content/uploads/2016/08/2016-Middlefork-Trail-Hot-Springs_Full-crew-1200x800.jpg');
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;
-
 }
 
-.highlighted-products{
+.highlighted-products {
   margin-bottom: 100px;
 }
 
-.card-test1, .card-test2, .card-test3 {
+.card-test1,
+.card-test2,
+.card-test3 {
   cursor: pointer;
 }
 
-.card-test1:hover, .card-test2:hover, .card-test3:hover {
+.card-test1:hover,
+.card-test2:hover,
+.card-test3:hover {
   filter: brightness(1.12);
   background-color: #cacaca !important;
   transition: 0.2s;
 }
 
-.pic2:hover, .pic1:hover, .pic1b:hover, .pic0:hover, .pic3:hover {
+.pic2:hover,
+.pic1:hover,
+.pic1b:hover,
+.pic0:hover,
+.pic3:hover {
   filter: brightness(1.15);
-  transition: 0.3s
+  transition: 0.3s;
 }
 
+.opinions {
+  margin-bottom: 150px;
+}
+
+opinions.container {
+  width: 120px;
+  height: 60px;
+}
+
+.top-left {
+  left: 12px;
+  top: 10px;
+    font-size: 1.3em;
+    line-height: 1.6em;
+    text-align: left;
+    width: 250px;
+    height: 0px;
+    position: relative;
+    z-index: 10;
+    background-color: rgba(190,240,0,0.6);
+}
+
+</style>
+
+<style lang="stylus">
+.fade {
+  &-enter-active, &-leave-active, &-leave-to {
+    transition: 1.1s linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-enter, &-leave, &-leave-to {
+    opacity: 0;
+  }
+}
 </style>

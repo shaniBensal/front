@@ -7,7 +7,7 @@ import { stat } from 'fs';
 export default {
     state: {
 
-        // user: userService.getLoggedInUser()
+        // user: userService.getLoggedInUser(),
         user: null,
         rentedItems: [],
         itemsForRent: null
@@ -70,9 +70,7 @@ export default {
             return context.commit({ type: 'setUser', user: null })
         },
 
-        addUser(context, { user }) {
-            console.log('user in store', user);
-            
+        addUser(context, { user }) {            
             return userService.signup({ user })
                 .then((user) => {
                     return context.commit({ type: 'setUser', user })

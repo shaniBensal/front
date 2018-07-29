@@ -19,14 +19,16 @@
                 </div>
                 <sign-up-modal></sign-up-modal>
             </div>
-            
+            {{itemForDisplay.occupiedDates}}
         </div>
-        <!-- <date-picker :unavailableDates="itemForDisplay.occupiedDates"></date-picker> -->
+        <date-picker></date-picker>
         Rank our product:
         <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
         <!-- ***************************Add ranking possibility and calculate AVG! -->
         reviews:
     </section>
+    <!-- :unavailableDates="itemForDisplay.occupiedDates" -->
+    <!-- v-bind:unavailableDates="itemForDisplay.occupiedDates" -->
 </template>
 <script>
 import datePicker from "../../components/datePicker.vue";

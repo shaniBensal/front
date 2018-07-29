@@ -19,8 +19,14 @@ function getItemById(itemId) {
         .then(res => res.data)
 }
 
+function getItemByOwnerId(ownerId){
+    return axios.get(`${ITEM_URL}/query/${ownerId}`)
+    .then(res => res.data)
+}
+
 function deleteItem(itemId) {
     return axios.delete(`${ITEM_URL}/${itemId}`)
+    
 }
 
 function addItem(item) {
@@ -38,7 +44,8 @@ export default {
     getItemById,
     deleteItem,
     addItem,
-    updateItem
+    updateItem,
+    getItemByOwnerId
 }
 
 // var  items = [

@@ -1,104 +1,93 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userService from '../services/userService.js'
+import itemService from '../services/itemService.js'
 import { stat } from 'fs';
 
 export default {
     state: {
-        users: [
-            {
-                "id": "A",
-                "name": "Shani Bensal",
-                "email": "shaniSd@gmail.com",
-                "address": "Ein Ha Mifratz 3",
-                "image": "https://atmag-static-timeout.netdna-ssl.com/media/2017/10/sizes/Untitled-design-13_wo_680_382.jpg",
-                "itemsForRent": [],
-                "favoriteItems": []
-            },
-            {
-                "id": "AA",
-                "name": "Shiran Z",
-                "email": "shanibensal@gmail.com",
-                "address": "Sdemot Debora 3",
-                "image": "https://www.etonline.com/sites/default/files/styles/max_970x546/public/images/2018-03/beyonce_643008856.jpg?itok=xFHaVRB5&h=35887d92",
-                "itemsForRent": ["A"],
-                "favoriteItems": []
-            },
-            {
-                "id": "AAA",
-                "name": "Tomer B",
-                "email": "shanibensal@gmail.com",
-                "address": "Hanita 3",
-                "image": "https://i.ytimg.com/vi/KNHP8NRbCmI/hqdefault.jpg",
-                "itemsForRent": [],
-                "favoriteItems": []
-            },
-            {
-                "id": "AAAA",
-                "name": "Puki Muki",
-                "email": "shanibensal@gmail.com",
-                "address": "Ha Bonim 4",
-                "image": "https://i.pinimg.com/originals/1e/01/a5/1e01a56f428895669c48d27c917f5673.jpg",
-                "itemsForRent": ["C"],
-                "favoriteItems": []
-            },
-            {
-                "id": "1njvfvnr",
-                "name":"moshe balbua",
-                "email":"moshe@gmail.com",
-                "address":"ben yehuda 6, tel aviv ",
-                "image":"http://www.yosmusic.com/wp-content/uploads/2016/05/%D7%92%D7%A1%D7%98%D7%99%D7%9F-%D7%98%D7%99%D7%9E%D7%91%D7%A8%D7%9C%D7%99%D7%99%D7%A7-2.jpg",
-                "itemsForRent":["D" , "12WHSDE"],
-                "favoriteItems":[]
-            },
-        
-            {
-                "id": "75hgrnw",
-                "name":"tomer press",
-                "email":"tomer@gmail.com",
-                "address":"dizingoff 127 , haifa, israel ",
-                "image":"https://www.biography.com/.image/t_share/MTQ4MDU5NDU0MzgwNzEzNDk0/lionel_messi_photo_josep_lago_afp_getty_images_664928892_resizedjpg.jpg",
-                "itemsForRent":["A7r4hfw"],
-                "favoriteItems":[]
-            },
-            {
-                "id": "2g7frn1",
-                "name":"ron zilber",
-                "email":"ron@gmail.com",
-                "address":"moshe dayan 80, jerusalem, israel ",
-                "image":"https://www.hamartzim.co.il/wp-content/uploads/2017/08/300-450-114.jpg",
-                "itemsForRent":[],
-                "favoriteItems":[]
-            }
-        ],
-        // user: userService.getLoggedInUser()
+
+        // user: userService.getLoggedInUser(),
         user: null,
+        rentedItems: [],
+        itemsForRent: null
     },
     mutations: {
-        setUser(state, { user }) {            
+        setUser(state, { user }) {
             state.user = user
         },
-
+        setRentedItems(state, { item }) {
+            state.rentedItems.push(item)
+        },
+        setItemsForRent(state, { items }) {
+            state.itemsForRent = items
+        }
     },
     actions: {
         loadUserById(context, { userId }) {
-            var filterd = context.state.users.filter(user => user.id === userId);
-            filterd = filterd[0]
-            return context.commit({ type: 'setUser', user:filterd })
+            // console.log('user module,', userId)
+            return userService.getUserById(userId)
+                .then(user => {
+                    // console.log('!!!!', user)
+                    context.commit({ type: 'setUser', user })
+                    // context.commit({type: 'setRentedItems' , user})
+                    return user;
+                })
         },
 
-        login(context, { username }) {
-            return userService.login({ username })
+        loadOwnerById(context, { ownerId }) {
+            return userService.getUserById(ownerId)
+        },
+
+        loadRentedItems(context, { items }) {
+            items.forEach(itemId => {
+                return itemService.getItemById(itemId)
+                    .then(item => {
+                        // console.log('you rented', item)
+                        context.commit({ type: 'setRentedItems', item })
+                    })
+            });
+        },
+
+        loadItemsForRent(context, { userId }) {
+            return itemService.getItemByOwnerId(userId)
+                .then(items => {
+                    console.log('1111', items)
+                    context.commit({ type: 'setItemsForRent', items })
+                })
+        },
+
+        login(context, { user }) {
+            return userService.login({ user })
+                .then((user) => {
+                    context.commit({ type: 'setUser', user })
+                    return user;
+                })
+        },
+
+        logOut(context) {
+            userService.logOut()
+            return context.commit({ type: 'setUser', user: null })
+        },
+
+        addUser(context, { user }) {
+            console.log('user in store', user);
+
+            return userService.signup({ user })
                 .then((user) => {
                     return context.commit({ type: 'setUser', user })
                 })
         },
-        logout(context) {
-            return userService.logout()
-            then(() => {
-                return context.commit({ type: 'setUser', user: null })
-            })
-        }
+        addItemToFavorites(context, payload) {
+            console.log(payload.item, payload.user)
+            var user = payload.user;
+            var favoriteItem = payload.item
+            userService.addFavorites(user, favoriteItem)
+                .then((user) => {
+                    console.log('user', user)
+                    return context.commit({ type: 'setUser', user })
+                })
+        },
     },
     getters: {
         isAdmin(state) {
@@ -107,13 +96,24 @@ export default {
         loggedinUser(state) {
             return state.user
         },
-        userWithItems(state) {
-            var userWithItems = {
-                ...user,
-                items: state.userItems
-            }
-            return userWithItems;
+        rentedItemsByUser(state) {
+            // var rentedItems = {
+            //     user: {...state.user},
+            //     items: state.rentedItems
+            // }
+            // console.log('state.rnteditems', state.rentedItems)
+            return state.rentedItems;
+        },
+
+        itemsForRent(state) {
+            return state.itemsForRent
+        },
+
+        favoriteItems(state){
+            return state.user.favoriteItems
         }
+
+
 
     }
 }

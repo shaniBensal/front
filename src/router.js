@@ -7,6 +7,8 @@ import ItemList from './views/item/itemList.vue';
 import ItemEdit from './views/item/itemEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
 import UserDetails from './views/user/userDetails.vue';
+// import SignIn from './views/user/signIn.vue';
+
 
 Vue.use(Router);
 
@@ -22,26 +24,32 @@ export default new Router({
       name: 'about',
       component: About,
     },
+    // {
+    //   path:'/signIn',
+    //   name: 'signIn',
+    //   component: SignIn
+    // },
     {
       path: '/item',
       name: 'itemList',
       component: ItemList,
     },
     {
+      path: '/item/edit/:id?',
+      name: 'itemEdit',
+      component: ItemEdit,
+    },
+    {
       path: '/item/:id',
       name: 'itemDetails',
       component: ItemDetails,
     },
+   
     {
-      path: '/item/edit/id?',
-      name: 'itemEdit',
-      component: ItemEdit,
+      path: '/user/:id',
+      name: 'userDetails',
+      component: UserDetails,
     },
-    // {
-    //   path: '/user/:id',
-    //   name: 'userDetails',
-    //   component: UserDetails,
-    // },
     // {
     //   path: '/user/edit/:id',
     //   name: 'userEdit',

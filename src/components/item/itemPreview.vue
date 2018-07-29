@@ -1,11 +1,12 @@
 <template>
   
   <div class="item-preview"> 
+    <!-- <sign-up-modal v-if="isUserLoggedIn"></sign-up-modal> -->
     
       <v-card  :to="'/item/' + item._id">
         <v-card-media
           class="white--text"
-          height="200px"
+          height="60%"
           :src="item.images[0]"
         >
           
@@ -34,7 +35,12 @@
         </v-card-title>
         <v-card-actions>
           <!-- <v-btn flat color="#8ACB88">Find out more</v-btn> -->
-        <div>{{itemRank}}</div>
+        <div class="rank" v-if="item">
+          ⭐
+          {{avgRank}}
+          ({{item.ranking.count}})
+          
+          </div>
        
         </v-card-actions>
          <div class="location">Tel Aviv, 0.8 km from you</div>
@@ -46,47 +52,85 @@
 </template>
 
 <script>
+import signIn from '../signIn.vue'
 export default {
   name: "ItemPreview",
   props: ["item"],
-  methods: {
-    addToFavorites() {
-      console.log("added to favorites");
+  data(){
+    return{
+      isUserLoggedIn: false
     }
   },
+  methods: {
+    addToFavorites() {
+      console.log("added to favorites" ,this.item);
+      var currUser = this.$store.getters.loggedinUser
+      if(currUser){
+        this.isUserLoggedIn = true
+        this.$store.dispatch({type: 'addItemToFavorites' , item: this.item , user: currUser})
+      }
+      else this.showSignIn()
+      this.isUserLoggedIn = false
+    },
+
+    showSignIn(){
+      this.isUserLoggedIn = false
+      alert('please sign in')
+    }
+  },
+
+  created(){
+  
+  },
+
   computed: {
     shortDescription() {
       if (this.item.description.length > 50)
         return this.item.description.substring(0, 50) + "...";
       else return this.item.description;
     },
-    itemRank() {
-      return this.$store.getters.getStarsByRank(this.item);
+    avgRank() {
+      return this.item.ranking.avg.toFixed(1);
     }
+
+  },
+  components:{
+    signIn
   }
 };
 </script>
 
 <style scoped lang="scss">
-
+.rank {
+  display: flex;
+}
 .v-card {
   height: 355px;
-  margin: 20px;
+  margin: 20px 10px 10px 10px;
+  max-width: 250px;
+}
+
+.v-btn--icon {
+  right: 10px;
 }
 a {
   color: #42b983;
 }
-img {
-  width: 100px;
+.v-card__media {
+  height: 60%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .v-card__media__background {
   height: 120%;
+  top: 15px;
 }
 
 .v-card__title {
   color: black;
   text-align: left;
+  padding: 10px 10px 0 10px;
 }
 
 .v-card__actions {
@@ -99,7 +143,7 @@ img {
   text-align: center;
 }
 
-.location{
+.location {
   color: black;
 }
 </style>

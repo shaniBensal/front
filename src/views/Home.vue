@@ -14,7 +14,7 @@
             justify-end
           >
             <!-- <img src="../../../front/best-price.png" alt="Vuetify.js" height="200"> -->
-            <h1 class="layout-test1 white--text display-3 mb-2 text-xs-center">We Rent!</h1>
+            <h1 class="layout-test1 white--text display-3 mb-2 text-xs-center ">Rent anything, anywhere, anytime.</h1>
             <div class="subheading mb-3 text-xs-center">A Coding Academy Subsidiary</div>
             <!-- <v-btn
               class="blue lighten-2 mt-5"
@@ -68,9 +68,9 @@
         >
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
-              <h2 class="headline">Rent anything, anywere, anytime.</h2>
+              <h2 class="headline">We Rent.</h2>
               <span class="subheading">
-                Cras facilisis mi vitae nunc 
+                It's that simple
               </span>
             </div>
           </v-flex>
@@ -88,9 +88,10 @@
                       <br>
                                   <img src="http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png" alt="Vuetify.js" height="200">
                     <v-card-text>
-                      A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      <!-- A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
                       Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      Search the item you wish for. it can be anything
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -103,12 +104,14 @@
                     </v-card-title>
                       <div class="headline">2. Choose Where</div>
                       <br>
-                                  <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200">
+                                  <!-- <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200"> -->
+                                  <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200">
 
                     <v-card-text>
-                      A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
                       Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      It doesn't metter where you are, just choose the location of pick-up 
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -121,12 +124,15 @@
                     </v-card-title>
                       <div class="headline text-xs-center">3. Choose When</div>
                       <br>
-                                  <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200">
+                                  <!-- <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200"> -->
+                                   <img src="https://ohiovalley.nfty.org/wp-content/uploads/sites/43/2017/04/calendar.png" alt="Vuetify.js" height="200">
 
                     <v-card-text>
-                      A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      <!-- A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
                       Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      Last step, choose date - we will show you the availability of each item.
+                      <!-- that's it , you are ready to ba a part of We Rent community. -->
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -226,7 +232,8 @@
 <br>
 
       <section>
-        <v-parallax src="img/ski.jpg" height="380">
+        <!-- <v-parallax src="img/ski.jpg" height="380"> -->
+        <v-parallax src="https://images.pexels.com/photos/848594/pexels-photo-848594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="380">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-3 text-xs-center">Renting things has never been easier</div>
             <em>Kick-start your fun today</em>
@@ -303,7 +310,7 @@
         <v-layout row wrap align-center>
           <v-flex xs12>
             <div class="white--text ml-3 headline-1">
-              Sponsered by Coding Academy&#8482
+              <!-- Sponsered by Coding Academy&#8482 -->
               <!-- <v-icon class="red--text">favorite</v-icon> -->
               <!-- by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a> -->
               <!-- and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a> -->
@@ -386,13 +393,14 @@ export default {
   height: 440px;
 }
 
-.title {
+/* .title { */
   /* height: 500px; */
-}
+/* } */
 
 .pic3 {
   min-height: 240px;
-  background-image: url('https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg');
+    /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
+   background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
   cursor: pointer;
 }

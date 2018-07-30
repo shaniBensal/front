@@ -110,6 +110,7 @@ export default {
         },
 
         favoriteItems(state){
+            if (!state.user) return null;
             return state.user.favoriteItems
         }
 

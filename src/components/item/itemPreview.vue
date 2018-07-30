@@ -1,6 +1,6 @@
 <template>
   
-  <div class="item-preview"> 
+  <div class="item-preview" v-if="item"> 
     <!-- <sign-up-modal v-if="isUserLoggedIn"></sign-up-modal> -->
     
       <v-card  :to="'/item/' + item._id">
@@ -11,7 +11,10 @@
         >
           
           <div class="text-xs-center">
-           <v-btn @click.prevent="addToFavorites" flat icon color="pink">
+           <v-btn @click.prevent="addToFavorites" flat icon color="pink"  :disabled="dialog"
+          :loading="dialog"
+           class="white--text"
+           @click.stop="dialog = true">
               <v-icon >favorite</v-icon>
             </v-btn>
           </div>
@@ -52,36 +55,40 @@
 </template>
 
 <script>
-import signIn from '../signIn.vue'
+import signIn from "../signIn.vue";
 export default {
   name: "ItemPreview",
   props: ["item"],
-  data(){
-    return{
-      isUserLoggedIn: false
-    }
+  data() {
+    return {
+      isUserLoggedIn: false,
+      dialog: false
+    };
   },
   methods: {
     addToFavorites() {
-      console.log("added to favorites" ,this.item);
-      var currUser = this.$store.getters.loggedinUser
-      if(currUser){
-        this.isUserLoggedIn = true
-        this.$store.dispatch({type: 'addItemToFavorites' , item: this.item , user: currUser})
-      }
-      else this.showSignIn()
-      this.isUserLoggedIn = false
+      console.log("added to favorites", this.item);
+      var currUser = this.$store.getters.loggedinUser;
+      if (currUser) {
+        this.isUserLoggedIn = true;
+        this.$store
+          .dispatch({
+            type: "addItemToFavorites",
+            item: this.item,
+            user: currUser
+          })
+          .then(() => {});
+      } else this.showSignIn();
+      this.isUserLoggedIn = false;
     },
 
-    showSignIn(){
-      this.isUserLoggedIn = false
-      alert('please sign in')
+    showSignIn() {
+      this.isUserLoggedIn = false;
+      alert("please sign in");
     }
   },
 
-  created(){
-  
-  },
+  created() {},
 
   computed: {
     shortDescription() {
@@ -92,9 +99,16 @@ export default {
     avgRank() {
       return this.item.ranking.avg.toFixed(1);
     }
-
   },
-  components:{
+
+  watch: {
+    dialog(val) {
+      if (!val) return;
+
+      setTimeout(() => (this.dialog = false), 2000);
+    }
+  },
+  components: {
     signIn
   }
 };

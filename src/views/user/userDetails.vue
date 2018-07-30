@@ -1,7 +1,6 @@
 <template>
 
     <div class="user-details" v-if="userToShow">
-
         <div class="user-contact-details">
             <v-avatar size="125px" color="grey lighten-4">
                 <img :src="user.image" alt="avatar">
@@ -94,10 +93,13 @@
 
                     <v-layout row wrap>
                         <v-spacer></v-spacer>
-                        <v-flex v-for="item in favorites" :key="item._id" v-if="favorites" xs12 sm6 md>
+                        <v-flex v-for="item in favoriteItems" :key="item._id" v-if="favoriteItems" xs12 sm6 md>
                             <v-card width="100px">
                                 <v-card-media :src="item.images[0]" height="100px">
                                 </v-card-media>
+                                 <v-subheader>{{item.title}}
+                                   {{item.price}}$
+                                  </v-subheader>  
 
                                 <v-card-actions class="white justify-center">
                                     <v-btn class="white--text" fab icon small>...
@@ -128,29 +130,28 @@ export default {
   methods: {
     loadUser(userId) {
       this.$store
-        .dispatch({ type: "loadUserById", userId: userId })
-        .then(user => {
-          if (!user) return;
-          else {
+        .dispatch({ type: "getUserWithItems", userId: userId })
+        .then(() => {
             this.userToShow = true;
-            this.loadRentedItems(user.rentedItems);
-            this.loadItemsForRent(userId);
+            // this.loadRentedItems(user.rentedItems);
+            // this.loadItemsForRent(userId);
           }
-        });
+        );
     },
-    loadRentedItems(items) {
-      console.log("items user rented: ", items);
-      this.$store.dispatch({ type: "loadRentedItems", items: items });
-    },
-    loadItemsForRent(userId) {
-      this.$store.dispatch({ type: "loadItemsForRent", userId: userId });
-    },
+    // loadRentedItems(items) {
+    //   console.log("items user rented: ", items);
+    //   this.$store.dispatch({ type: "loadRentedItems", items: items });
+    // },
+    // loadItemsForRent(userId) {
+    //   this.$store.dispatch({ type: "loadItemsForRent", userId: userId });
+    // },
     removeItem(itemId) {
       console.log("removing...", itemId);
       this.$store
         .dispatch({ type: "deleteItem", itemId: itemId })
         .then(() => this.loadUser(this.$route.params.id));
-    }
+    },
+ 
   },
 
   computed: {
@@ -163,7 +164,7 @@ export default {
     itemsForRent() {
       return this.$store.getters.itemsForRent;
     },
-    favorites(){
+    favoriteItems(){
         return this.$store.getters.favoriteItems
     }
   }

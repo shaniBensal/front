@@ -54,9 +54,16 @@ function _setLoggedinUser(user) {
 function addFavorites(user, item) {
     return axios.post(`${URL}/favorites/${item._id}`, user)
         .then(res => {
-          return res.data  
+            return res.data
         })
 
+}
+
+function getAllItemsByUser(userId) {
+    return axios.get(`${URL}/item/${userId}`)
+        .then(res => {
+            return res.data
+        })
 }
 
 export default {
@@ -65,5 +72,6 @@ export default {
     logOut,
     getUserById,
     signup,
-    addFavorites
+    addFavorites,
+    getAllItemsByUser
 }

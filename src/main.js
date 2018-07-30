@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 import axios from 'axios'
 import Vuetify from 'vuetify'
-
+// import cloudinary from "cloudinary";
 
 
 import './registerServiceWorker';

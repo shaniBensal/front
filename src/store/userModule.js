@@ -6,9 +6,7 @@ import { stat } from 'fs';
 
 export default {
     state: {
-
-        // user: userService.getLoggedInUser(),
-        user: null,
+        user: userService.getLoggedInUser() || null,
         rentedItems: [],
         itemsForRent: null
     },
@@ -109,7 +107,7 @@ export default {
             return state.itemsForRent
         },
 
-        favoriteItems(state){
+        favoriteItems(state) {
             return state.user.favoriteItems
         }
 

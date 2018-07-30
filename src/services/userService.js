@@ -21,7 +21,6 @@ function login({ user }) {
 }
 
 function signup(userDetails) {
-    console.log('user in store', userDetails);
     return axios.post(`${URL}/signup`, userDetails.user)
         .then(res => res.data)
         .catch(err => err)
@@ -48,7 +47,6 @@ function getLoggedInUser() {
 function _setLoggedinUser(user) {
     loggedinUser = user;
     storageService.saveToStorage(STORAGE_KEY, loggedinUser)
-    EventBusService.$emit('succesful-login')
 }
 
 function addFavorites(user, item) {

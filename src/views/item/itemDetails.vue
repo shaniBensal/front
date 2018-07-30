@@ -1,5 +1,7 @@
 <template>
     <section v-if="itemForDisplay">
+      <book-item v-if="book" :selectedDate="selectedDate||Date.now()"></book-item>
+      <div v-else>
         <div class="main-container d-inline-flex">
             <div class="carousel">
                 <v-carousel>
@@ -17,21 +19,22 @@
                 <p>{{itemForDisplay.description}}</p>
                 <div class="text-xs-center">
                 </div>
-                <sign-up-modal></sign-up-modal>
+                <sign-up-modal v-if="!user"></sign-up-modal>
+                <button v-else @click="bookNow">Book Now</button>
+                <!-- <book-item-modal v-else :selectedDate="selectedDate"></book-item-modal> -->
+                {{selectedDate}}
             </div>
-            {{itemForDisplay.occupiedDates}}
         </div>
-        <date-picker></date-picker>
+        <date-picker @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
         Rank our product:
         <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
-        <!-- ***************************Add ranking possibility and calculate AVG! -->
         reviews:
+</div>
     </section>
-    <!-- :unavailableDates="itemForDisplay.occupiedDates" -->
-    <!-- v-bind:unavailableDates="itemForDisplay.occupiedDates" -->
 </template>
 <script>
 import datePicker from "../../components/datePicker.vue";
+import bookItem from "../../components/bookItem.vue";
 import StarRating from "vue-star-rating";
 import signUpModal from "../../components/signUpModal.vue";
 
@@ -39,9 +42,11 @@ export default {
   name: "itemDetails",
   data() {
     return {
+      book: false,
       rating: 4,
       dialog: false,
-      owner: {}
+      owner: {},
+      selectedDate: ""
     };
   },
   created() {
@@ -50,6 +55,9 @@ export default {
   computed: {
     itemForDisplay() {
       return this.$store.getters.selectedItem;
+    },
+    user() {
+      return this.$store.getters.loggedinUser;
     }
   },
   methods: {
@@ -62,6 +70,9 @@ export default {
       this.$router.push("/app");
       this.$store.commit({ type: "unSetItem" });
     },
+    selectDate(date) {
+      this.selectedDate = date;
+    },
     setRating(rating) {
       this.$store.commit({ type: "updateItemRank", rating });
       this.$store.dispatch({ type: "updateItem" });
@@ -70,12 +81,16 @@ export default {
       this.$store
         .dispatch({ type: "loadOwnerById", ownerId })
         .then(owner => (this.owner = owner));
+    },
+    bookNow() {
+      this.book = true;
     }
   },
 
   components: {
     datePicker,
-    signUpModal
+    signUpModal,
+    bookItem
   }
 };
 </script>

@@ -1,40 +1,55 @@
 <template>
-    <v-layout row class="mb-2">
-        <v-flex>
-            <v-date-picker v-model="date" header-color="red" class="mt-3" color="red lighten-1"></v-date-picker>
-            {{date}}
-        </v-flex>
-    </v-layout>
-
+    <div v-if="unAvailableDates">
+        <v-date-picker header-color="blue" v-model="date" @input="sendDate" :allowed-dates="allowedDates" :min="today" class="mt-3"></v-date-picker>
+    </div>
 </template>
 <script>
 export default {
   name: "DatePicker",
   data() {
     return {
-      date: new Date(),
+      date: "",
+      today: ""
     };
   },
-  // :allowed-dates="allowedDates"
-  // prop: ['unavailableDates'],
+  props: ["unAvailableDates"],
   created() {
-    // this.today();
+    this.todayDate();
   },
   mounted() {},
-  computed: {},
+  computed: {
 
+  },
   methods: {
-    // today() {
-    //   var result = "";
-    //   var d = new Date();
-    //   result += d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    //   this.date = result;
-    // },
-    // allowedDates(dateStr) {
-    //   return !this.unavailableDates.includes(dateStr);
-    // }
+    todayDate() {
+      var result = "";
+      var month = "";
+      var d = new Date();
+      if (d.getMonth() + 1 < 10) {
+        month = "0" + (d.getMonth() + 1);
+      } else {
+        month = d.getMonth() + 1;
+      }
+      result += d.getFullYear() + "-" + month + "-" + d.getDate();
+      this.date = result;
+      this.today = result;
+    },
+
+    allowedDates(dateStr) {
+      return !this.unAvailableDates.includes(dateStr);
+    },
+    sendDate(){
+      this.$emit('selected-date', this.date);
+    }
   }
 };
 </script>
 <style>
+.v-btn.v-btn--active {
+  background: blue;
+}
+
+.v-btn.v-btn--disabled {
+  color: grey;
+}
 </style>

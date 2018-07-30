@@ -24,11 +24,6 @@ export default new Router({
       name: 'about',
       component: About,
     },
-    // {
-    //   path:'/signIn',
-    //   name: 'signIn',
-    //   component: SignIn
-    // },
     {
       path: '/item',
       name: 'itemList',
@@ -44,16 +39,11 @@ export default new Router({
       name: 'itemDetails',
       component: ItemDetails,
     },
-   
+
     {
       path: '/user/:id',
       name: 'userDetails',
       component: UserDetails,
-    },
-    // {
-    //   path: '/user/edit/:id',
-    //   name: 'userEdit',
-    //   component: UserEdit,
-    // },
+    }
   ],
 });

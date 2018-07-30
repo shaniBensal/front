@@ -12,26 +12,25 @@
             <textarea v-model="itemToUpdate.description"></textarea>
             <label>Select item category:
                 <select v-model="itemToUpdate.category">
-                    <option v-for="(category,idx) in categories" value=idx :key="idx">{{categories[idx]}}</option>
+                    <option v-for="(category,idx) in categories" :key="idx">{{categories[idx]}}</option>
                 </select>
             </label>
-            <!-- <v-flex xs12 sm6 d-flex>
-               <v-select
-                  :items="categories"
-                     solo
-                     value="itemToUpdate.category"
-                     label="category"
-                ></v-select>
-                    </v-flex> -->
 
+            <div class="upload">
+              <img :src="itemToUpdate.images[0]" >
+              <input type="file" @change="handleFileUpload($event)" >
 
+            </div>
+            
             <button>Save</button>
         </form>
 
-        <img :src="itemToUpdate.images[0]">
+        <!-- <img :src="itemToUpdate.images[0]"> -->
     </div>
 </template>
 <script>
+
+import cloudinary from '../../services/cloudinaryService.js'
 export default {
   name: "edit",
 
@@ -39,24 +38,28 @@ export default {
     return {
       itemToUpdate: {
         _id: null,
+        category: [],
         title: "",
-        category: "",
         description: "",
+        ranking: {
+          count: 1.0,
+          avg: 4.0
+        },
         price: "",
+        dateCreated: "",
+        keyWords: [],
+        ownerId: "",
+        occupiedDates: [],
         images: []
       },
-      categories: ["a", "b"],
-      user: {
-        _id: null,
-        name: ""
-      }
+
+      imgUrl: "",
+      fileUpload: ""
     };
   },
 
   created() {
     const itemId = this.$route.params.id;
-    console.log(itemId);
-    this.getLoggedInUser();
     this.getCategories();
     if (itemId) {
       this.loadItem(itemId);
@@ -80,40 +83,59 @@ export default {
         this.$store
           .dispatch({ type: "addNewItem", item: this.itemToUpdate })
           .then(item => {
-            // this.$emit("updated", this.todoToUpdate);
-            this.itemToUpdate = this.getEmptyItem;
+            this.itemToUpdate = this.getEmptyItem();
             this.$router.push("/user/" + this.user._id);
           });
       }
     },
 
+    handleFileUpload(ev) {
+      console.log("event", ev);
+      this.fileUpload = ev.target.files[0].baseURI;
+      console.log(this.fileUpload);
+
+      cloudinary.cloudinary.uploader.upload(
+        this.fileUpload,
+        { crop: "limit", tags: "samples", width: 3000, height: 2000 },
+        function(result) {
+          console.log(result);
+        }
+      );
+    },
+
     loadItem(itemId) {
-      console.log("aaaaaaaa", itemId);
       this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
         this.itemToUpdate = { ...item };
       });
     },
-    getLoggedInUser() {
-      this.user = this.$store.getters.loggedinUser;
-      console.log("logged in as", this.user);
-    },
 
     getEmptyItem() {
-      return (itemToUpdate = {
+      return {
         _id: null,
+        category: [],
         title: "",
-        category: "",
         description: "",
+        ranking: {
+          count: 1.0,
+          avg: 4.0
+        },
         price: "",
+        dateCreated: "",
+        keyWords: [],
+        ownerId: "",
+        occupiedDates: [],
         images: []
-      });
+      };
     },
     getCategories() {
       this.categories = this.$store.getters.categories;
-      console.log("categories:", this.categories);
     }
   },
-  computed: {}
+  computed: {
+    user() {
+      return this.$store.getters.loggedinUser;
+    }
+  }
 };
 </script>
 
@@ -136,7 +158,7 @@ select {
   padding: 5px;
 }
 
-.select-category{
-    display: flex;
+.select-category {
+  display: flex;
 }
 </style>

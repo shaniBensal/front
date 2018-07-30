@@ -7,55 +7,59 @@ import { stat } from 'fs';
 export default {
     state: {
 
-        // user: userService.getLoggedInUser(),
-        user: null,
-        rentedItems: [],
-        itemsForRent: null
+       
+        user:  userService.getLoggedInUser(),
+        userWithItems: null
     },
     mutations: {
         setUser(state, { user }) {
             state.user = user
         },
-        setRentedItems(state, { item }) {
-            state.rentedItems.push(item)
-        },
-        setItemsForRent(state, { items }) {
-            state.itemsForRent = items
+        // setRentedItems(state, { item }) {
+        //     state.rentedItems.push(item)
+        // },
+        // setItemsForRent(state, { items }) {
+        //     state.itemsForRent = items
+        // },
+
+        // setFavoriteItems(state, { item }) {
+        //     state.favoriteItems.push(item)
+        // },
+
+        setUserWithItems(state, { user }) {
+            state.userWithItems = user
         }
     },
     actions: {
         loadUserById(context, { userId }) {
-            // console.log('user module,', userId)
             return userService.getUserById(userId)
                 .then(user => {
-                    // console.log('!!!!', user)
                     context.commit({ type: 'setUser', user })
-                    // context.commit({type: 'setRentedItems' , user})
                     return user;
                 })
         },
 
-        loadOwnerById(context, { ownerId }) {
-            return userService.getUserById(ownerId)
-        },
+        // loadOwnerById(context, { ownerId }) {
+        //     return userService.getUserById(ownerId)
+        // },
 
-        loadRentedItems(context, { items }) {
-            items.forEach(itemId => {
-                return itemService.getItemById(itemId)
-                    .then(item => {
-                        // console.log('you rented', item)
-                        context.commit({ type: 'setRentedItems', item })
-                    })
-            });
-        },
+        // loadRentedItems(context, { items }) {
+        //     items.forEach(itemId => {
+        //         return itemService.getItemById(itemId)
+        //             .then(item => {
+        //                 // console.log('you rented', item)
+        //                 context.commit({ type: 'setRentedItems', item })
+        //             })
+        //     });
+        // },
 
-        loadItemsForRent(context, { userId }) {
-            return itemService.getItemByOwnerId(userId)
-                .then(items => {
-                    console.log('1111', items)
-                    context.commit({ type: 'setItemsForRent', items })
-                })
-        },
+        // loadItemsForRent(context, { userId }) {
+        //     return itemService.getItemByOwnerId(userId)
+        //         .then(items => {
+        //             // console.log('1111', items)
+        //             context.commit({ type: 'setItemsForRent', items })
+        //         })
+        // },
 
         login(context, { user }) {
             return userService.login({ user })
@@ -84,10 +88,23 @@ export default {
             var favoriteItem = payload.item
             userService.addFavorites(user, favoriteItem)
                 .then((user) => {
-                    console.log('user', user)
-                    return context.commit({ type: 'setUser', user })
+                    console.log('bbbb', user)
+                    for (var i = 0; i < user.favoriteItems.length; i++) {
+                        itemService.getItemById(user.favoriteItems[i])
+                            // .then(item => {
+                            //     console.log('you liked', item)
+                                // context.commit({ type: 'setFavoriteItems', item })
+                            // })
+                    }
                 })
         },
+
+        getUserWithItems(context, { userId }) {
+            return userService.getAllItemsByUser(userId)
+                .then((user) =>
+                    context.commit({ type: "setUserWithItems", user })
+                )
+        }
     },
     getters: {
         isAdmin(state) {
@@ -97,21 +114,16 @@ export default {
             return state.user
         },
         rentedItemsByUser(state) {
-            // var rentedItems = {
-            //     user: {...state.user},
-            //     items: state.rentedItems
-            // }
-            // console.log('state.rnteditems', state.rentedItems)
-            return state.rentedItems;
+
+            return state.userWithItems ? state.userWithItems.rentedItems : [];
         },
 
         itemsForRent(state) {
-            return state.itemsForRent
+            return state.userWithItems ? state.userWithItems.owendItems : [];
         },
 
-        favoriteItems(state){
-            if (!state.user) return null;
-            return state.user.favoriteItems
+        favoriteItems(state) {
+            return state.userWithItems ? state.userWithItems.favoriteItems : [];
         }
 
 

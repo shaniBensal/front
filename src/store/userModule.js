@@ -7,12 +7,9 @@ import { stat } from 'fs';
 export default {
     state: {
 
-        // user: userService.getLoggedInUser(),
-        user: null,
+       
+        user:  userService.getLoggedInUser(),
         userWithItems: null
-        // rentedItems: [],
-        // itemsForRent: null,
-        // favoriteItems: []
     },
     mutations: {
         setUser(state, { user }) {

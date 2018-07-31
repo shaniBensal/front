@@ -27,10 +27,8 @@ function signup(userDetails) {
 }
 
 function getUserById(userId) {
-    // console.log('service front' , userId)
     return axios.get(`${URL}/${userId}`)
         .then(res => {
-            // console.log('got back from route',res.data)
             return res.data
         })
 }

@@ -94,8 +94,8 @@ export default {
     padding: 0 10px;
   }
 
-  .profile{
+  // .profile{
 
-  }
+  // }
 }
 </style>

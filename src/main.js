@@ -16,6 +16,7 @@ import StarRating from 'vue-star-rating'
 
 Vue.component('star-rating', StarRating);
 Vue.use(Vuetify)
+Vue.use(require('vue-moment'));
 
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;

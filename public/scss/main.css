@@ -5,3 +5,6 @@
     font-style: normal;
   }
 
+  .v-dialog.date-picker{
+    width: min-content;
+  }

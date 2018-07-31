@@ -72,7 +72,7 @@ export default {
     updateItem() {
       const itemId = this.$route.params.id;
       if (itemId) {
-        console.log("updating item", this.itemToUpdate);
+        // console.log("updating item", this.itemToUpdate);
         this.$store
           .dispatch({ type: "updateItem", item: this.itemToUpdate })
           .then(item => {
@@ -90,15 +90,15 @@ export default {
     },
 
     handleFileUpload(ev) {
-      console.log("event", ev);
+      // console.log("event", ev);
       this.fileUpload = ev.target.files[0].baseURI;
-      console.log(this.fileUpload);
+      // console.log(this.fileUpload);
 
       cloudinary.cloudinary.uploader.upload(
         this.fileUpload,
         { crop: "limit", tags: "samples", width: 3000, height: 2000 },
         function(result) {
-          console.log(result);
+          // console.log(result);
         }
       );
     },

@@ -125,13 +125,13 @@ export default {
       this.$store.dispatch({ type: 'loadItems' });
     },
     loadCategories() {
-      console.log('** itemList->mehods->loadCategories **');
+      // console.log('** itemList->mehods->loadCategories **');
       this.categories = this.$store.getters.categories;
-      console.log('** this.categories =', this.categories);
+      // console.log('** this.categories =', this.categories);
     },
     setSelectedCategory(categoryIdx) {
       this.$store.commit('setFilterByCategory' , {idx: categoryIdx})
-    console.log('button', categoryIdx);
+    // console.log('button', categoryIdx);
          
       // var filterByCategory = this.$store.getters.filteredItems  // the getter returns here a function
       // var res = filterByCategory(categoryIdx);

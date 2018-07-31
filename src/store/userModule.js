@@ -6,10 +6,9 @@ import { stat } from 'fs';
 
 export default {
     state: {
-
-       
-        user:  userService.getLoggedInUser(),
-        userWithItems: null
+        user: userService.getLoggedInUser(),
+        userWithItems: null,
+        owner: {}
     },
     mutations: {
         setUser(state, { user }) {
@@ -25,23 +24,33 @@ export default {
         // setFavoriteItems(state, { item }) {
         //     state.favoriteItems.push(item)
         // },
+        setOwner(state, { user }) {
+            state.owner = user;
+        },
 
         setUserWithItems(state, { user }) {
             state.userWithItems = user
         }
     },
     actions: {
-        loadUserById(context, { userId }) {
-            return userService.getUserById(userId)
+        loadUserById(context, { ownerId }) {
+            return userService.getUserById(ownerId)
                 .then(user => {
-                    context.commit({ type: 'setUser', user })
+                    context.commit({ type: 'setOwner', user })                    
                     return user;
                 })
         },
 
-        // loadOwnerById(context, { ownerId }) {
-        //     return userService.getUserById(ownerId)
+        // loadOwnerById(context, { owner }) {
+        //     console.log('owner from store', owner);
+
+        //     return userService.getUserById(owner)
+        //         .then(owner =>
+        //             context.commit({ type: 'setOwner', owner })
+        //         )
+        //     return owner;
         // },
+
 
         // loadRentedItems(context, { items }) {
         //     items.forEach(itemId => {
@@ -75,26 +84,23 @@ export default {
         },
 
         addUser(context, { user }) {
-            console.log('user in store', user);
-
             return userService.signup({ user })
                 .then((user) => {
                     return context.commit({ type: 'setUser', user })
                 })
         },
         addItemToFavorites(context, payload) {
-            console.log(payload.item, payload.user)
+            // console.log(payload.item, payload.user)
             var user = payload.user;
             var favoriteItem = payload.item
             userService.addFavorites(user, favoriteItem)
                 .then((user) => {
-                    console.log('bbbb', user)
                     for (var i = 0; i < user.favoriteItems.length; i++) {
                         itemService.getItemById(user.favoriteItems[i])
-                            // .then(item => {
-                            //     console.log('you liked', item)
-                                // context.commit({ type: 'setFavoriteItems', item })
-                            // })
+                        // .then(item => {
+                        //     console.log('you liked', item)
+                        // context.commit({ type: 'setFavoriteItems', item })
+                        // })
                     }
                 })
         },
@@ -124,9 +130,10 @@ export default {
 
         favoriteItems(state) {
             return state.userWithItems ? state.userWithItems.favoriteItems : [];
+        },
+
+        itemOwner(state) {
+            return state.owner
         }
-
-
-
     }
 }

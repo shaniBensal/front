@@ -1,6 +1,12 @@
 
   @font-face {
     font-family: 'Roboto Slab';
+    src: url('../../src/assets/fonts/roboto/RobotoSlab-Light.ttf');
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Roboto Slab-bold';
     src: url('../../src/assets/fonts/roboto/RobotoSlab-Bold.ttf');
     font-style: normal;
   }
@@ -8,3 +14,7 @@
   .v-dialog.date-picker{
     width: min-content;
   }
+
+  .bold-font{
+    font-family: 'Roboto Slab-bold', serif;
+    }

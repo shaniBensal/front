@@ -96,6 +96,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.bold-font{
+font-family: 'Roboto Slab-bold', serif;
+}
+
 .main-container {
   width: 100%;
   margin: 20px;
@@ -107,8 +112,9 @@ export default {
 }
 
 .item-details {
-  padding: 35px;
+  padding: 20px 35px;
   flex-direction: column;
+  text-align: left;
   width: 50%;
   align-items: end;
 }

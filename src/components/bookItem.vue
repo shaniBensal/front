@@ -102,9 +102,10 @@ export default {
       var firstDay = this.dealDetails.firstDay || this.today;
       var date = new Date(firstDay).getTime() / 1000;
       this.firstDateTimeStamp = date;
+      daysCount();
     },
     daysCount() {
-      var last = this.dealDetails.lastDay || this.today;
+      var last = this.dealDetails.lastDay || this.dealDetails.firstDay;
       var date = new Date(last).getTime() / 1000;
       this.dealDetails.daysToRent = (date - this.firstDateTimeStamp)/86400;
     }

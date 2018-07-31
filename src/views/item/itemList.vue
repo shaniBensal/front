@@ -124,6 +124,7 @@
                 <item-preview :item="item"></item-preview>
             </li>
         </ul>
+        </div>
     </section>
 </keep-alive>
 </template>

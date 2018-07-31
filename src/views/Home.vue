@@ -25,7 +25,7 @@
               Get Started
             </v-btn> -->
 
-
+<v-form @submit="onSearch">
   <v-card
     class="pa-3"
     color="transparent"
@@ -37,14 +37,15 @@
       inverted-scroll
       scroll-off-screen
     >
-      <v-text-field
+      <v-text-field 
+        v-model="searchStr"
         autofocus
         hide-details
         prepend-icon="search"
         single-line
       ></v-text-field>
 
-      <v-btn icon>
+      <v-btn icon @click="onSearch">
         <v-icon>my_location</v-icon>
       </v-btn>
 
@@ -53,6 +54,7 @@
       </v-btn>
     </v-toolbar>
   </v-card>
+  </v-form>
 
 
           </v-layout>
@@ -362,6 +364,7 @@ import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
   data: () => ({
+    searchStr : '',
     lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
     
     slides: [
@@ -387,6 +390,7 @@ export default {
         text: 'BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
       }
     ]
+  }),
     
     // items: [
     //   {
@@ -406,10 +410,17 @@ export default {
     //       'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800'
     //   }
     // ]
-  }),
+
   name: 'home',
   components: {
     HelloWorld
+  },
+
+  methods : {
+    onSearch() {
+      console.log('query for search:',this.searchStr);
+      this.$router.push(`/item/?search=${this.searchStr}`)
+    },
   }
 };
 </script>

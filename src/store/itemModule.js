@@ -6,10 +6,10 @@ export default {
     items: [],
     filterByText: '', //for start, later on become object by price, text, location
     selectedItem: {},
-    itemsToShow: [],
-    filters : {
-        byTitle : '',
-        byCategory : ''
+    // itemsToShow: [],
+    filters: {
+      byTitle: '',
+      byCategory: ''
     },
     categories: [
       'travel',
@@ -18,8 +18,7 @@ export default {
       'kids',
       'events',
       'hardware'
-    ],
-    owner:{}
+    ]
   },
 
   mutations: {
@@ -30,7 +29,7 @@ export default {
       state.items = state.items.filter(item => item._id !== itemId);
     },
     setItems(state, { items }) {
-      // console.log('mutations / setItems got items:',items);
+      console.log('mutations / setItems got items:', items);
       state.items = items;
     },
     updateItemO(state, { item }) {
@@ -57,38 +56,99 @@ export default {
         state.selectedItem.ranking.count;
     },
 
-    setFilterByCategory(state, {idx}) {
-        state.filters.byCategory = state.categories[idx];
-        var res1 = state.items.filter(item => {
-            return item.title.includes(state.filters.byTitle)
-        })
-        state.itemsToShow = res1;
+    setFilterByCategory(state,  payload) {
+      state.filters.byCategory = payload.category;
+      // var res1 = state.items.sfilter(item => {
+      //   return item.title.toLowerCase().includes(state.filters.byTitle.toLowerCase()) ||
+      //           item.description.toLowerCase().includes(state.filters.byTitle.toLowerCase())
+      // });
+      // state.itemsToShow = res1;
 
-        var res2 = state.itemsToShow.filter(item => {
-            return item.category.includes(state.filters.byCategory)
-        })
-        state.itemsToShow = res2;
+      // var res2 = state.itemsToShow.filter(item => {
+      //   return item.category.some(category =>
+      //     category.toLowerCase().includes(state.filters.byCategory.toLowerCase()));
+      // });
+      // state.itemsToShow = res2;
     },
 
-    refreshItems(state) {
-      // state.itemsToShow = [];
-      state.itemsToShow= state.items;
-    }
+    setFiltersByTitle(state, { txt }) {
+      state.filters.byTitle = txt;
+      // var res = state.itemsToShow.filter(item => {
+      //   return item.title
+      //     .toLowerCase()
+      //     .includes(state.filters.byTitle.toLowerCase());
+      // });
+      // state.itemsToShow = res;
+    },
+
+    // refreshItems(state) {
+    //   state.itemsToShow = state.items;
+    // },
+
+    // filterItemsToShow(state) {
+    //   console.log(' %%%%  ff 333 STATE.FILTERS %%%% ', state.filters);
+    //   console.log(' %%%%  ff 333 STATE.ItemsToShow %%%% ', state.itemsToShow);
+    //   var res1 = state.items;
+    //   if (state.filters.byTitle) {
+    //     res1 = state.items.filter(item => {
+    //       return item.title
+    //         .toLowerCase()
+    //         .includes(state.filters.byTitle.toLowerCase());
+    //     });
+    //   }
+    //   state.itemsToShow = res1;
+
+    //   console.log(' %%%%  ff 333 STATE.FILTERS %%%% ', state.filters);
+    //   console.log(' %%%%  ff 333 STATE.ItemsToShow %%%% ', state.itemsToShow);
+
+    //   var res2;
+    //   if (state.filters.byCategory) {
+    //     res2 = state.itemsToShow.filter(item => {
+    //       return item.category
+    //         .toLowerCase()
+    //         .includes(state.filters.byCategory.toLowerCase());
+    //     });
+    //     state.itemsToShow = res2;
+    //   }
+
+  //     console.log(' %%%%  ff 333 STATE.FILTERS %%%% ', state.filters);
+  //     console.log(' %%%%  ff 333 STATE.ItemsToShow %%%% ', state.itemsToShow);
+  //   }
   },
-  
+
   getters: {
-    itemsForDisplay(state){
-      return state.itemsToShow;
+    itemsForDisplay(state) {
+      
+      var items = state.items;
+      if (state.filters.byTitle) {
+        items = items.filter(item => {
+          return item.title
+            .toLowerCase()
+            .includes(state.filters.byTitle.toLowerCase());
+        });
+      }
+
+      if (state.filters.byCategory) {
+        items = items.filter(item => {
+          return item.category.some(category => {
+            return category
+              .toLowerCase()
+              .includes(state.filters.byCategory.toLowerCase());
+          });
+        });
+      }
+      
+      return items;
     },
 
-    filteredItems(state, getters) {
-      return categoryIdx => {
-        var categoryStr = state.categories[categoryIdx];
-        return state.items.filter(it => {
-          return it.category[0].toLowerCase() === categoryStr.toLowerCase();
-        });
-      };
-    },
+    // filteredItems(state, getters) {
+    //   return categoryIdx => {
+    //     var categoryStr = state.categories[categoryIdx];
+    //     return state.items.filter(it => {
+    //       return it.category[0].toLowerCase() === categoryStr.toLowerCase();
+    //     });
+    //   };
+    // },
 
     // itemsForDisplay(state) {
     // //   return state.items; //for start without filtering
@@ -97,7 +157,7 @@ export default {
     //       return item.title.contains(state.filters.byTitle)    //  udes('a');  //.find('machine')
     //   })
     //   console.log('res1= *********  ',res1);
-      
+
     //   var res2 = res1.filter(item => {
     //     console.log(' 222222222222 ', item.title);
 
@@ -129,9 +189,9 @@ export default {
   actions: {
     loadItems(context, payload) {
       return itemsService.getAllItems(context.state.filterBy).then(items => {
-        // console.log(' ACTIONS got items:',items);
+        console.log(' ACTIONS got items:', items);
         context.commit({ type: 'setItems', items });
-        context.commit({type: 'refreshItems'});
+        // context.commit({ type: 'filterItemsToShow' });
         return context.state.items;
       });
     },
@@ -139,12 +199,10 @@ export default {
     loadItemById(context, { itemId }) {
       return itemsService.getItemById(itemId).then(item => {
         context.commit({ type: 'setSelctedItem', item });
-        // console.log(item);
         return item;
       });
     },
 
-    
     deleteItem(context, { itemId }) {
       return itemsService.deleteItem(itemId).then(() => {
         context.commit({ type: 'deleteItem', itemId });

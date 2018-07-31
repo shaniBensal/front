@@ -91,7 +91,44 @@
         </ul>
         </div>
 </section>
+<keep-alive>
+    <section>
+        <v-toolbar>
+            <template>
+            </template>
+
+            <v-form @submit="onSearch">
+                <v-card class="pa-3" color="transparent" flat>
+                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
+                        <v-btn icon @click="onSearch">
+                            <v-icon>search</v-icon>
+                        </v-btn>
+                      <v-icon>search</v-icon>
+                    </v-text-field>
+                </v-card>
+            </v-form>
+
+      <div class="spacer"></div>
+
+            <v-btn-toggle v-model="toggle_exclusive" class="transparent">
+                <div v-for="(category, idx) in categories" :key="idx">
+                    <v-btn :value="idx" flat @click="setSelectedCategory(idx)">
+                        <div>{{category}}</div>
+                    </v-btn>
+                </div>
+            </v-btn-toggle>
+        </v-toolbar>
+
+        <ul class="items-list">
+            <li v-for="item in itemsForDisplay" :key="item._id">
+                <item-preview :item="item"></item-preview>
+            </li>
+        </ul>
+    </section>
+</keep-alive>
 </template>
+
+
 
 <script>
 import itemPreview from '../../components/item/itemPreview.vue';
@@ -101,47 +138,56 @@ export default {
 
   data() {
     return {
+      searchStr: null,
       categories: [],
-        dropdown_edit: [
-          { text: '100%' },
-          { text: '75%' },
-          { text: '50%' },
-          { text: '25%' },
-          { text: '0%' }
-        ],
-        toggle_exclusive: 2,
-        toggle_multiple: [1, 2, 3]
+      toggle_exclusive: [],
+      toggle_multiple: null // [1, 2, 3]
     };
   },
 
   created() {
-    },
-
-  mounted() {
+    var vars = [];
+    var hash;
+    var urlStr = window.location.href;
+    var searchParamsIndex = urlStr.indexOf('=');
+    var searchQuery = '';
+    if (searchParamsIndex > -1) {
+      searchQuery = urlStr.slice(searchParamsIndex + 1);
+    }
+    this.setFiltersByTitle(searchQuery);
     this.loadCategories();
-    itemsForDisplay = this.loadItems();
-      this.$store.commit({type : 'refreshItems'});
+    this.loadItems();
   },
 
   methods: {
+    onSearch() {
+      this.$router.push(`/item/?search=${this.searchStr}`);
+      var urlStr = window.location.href;
+      var searchParamsIndex = urlStr.indexOf('=');
+      var searchQuery = '';
+      if (searchParamsIndex > -1) {
+        searchQuery = urlStr.slice(searchParamsIndex + 1);
+      }
+      this.setFiltersByTitle(searchQuery);
+    },
     loadItems() {
       this.$store.dispatch({ type: 'loadItems' });
     },
     loadCategories() {
-      // console.log('** itemList->mehods->loadCategories **');
       this.categories = this.$store.getters.categories;
-      // console.log('** this.categories =', this.categories);
     },
     setSelectedCategory(categoryIdx) {
-      this.$store.commit('setFilterByCategory' , {idx: categoryIdx})
-    // console.log('button', categoryIdx);
-         
-      // var filterByCategory = this.$store.getters.filteredItems  // the getter returns here a function
-      // var res = filterByCategory(categoryIdx);
-      // console.log('items array is: ', res);
-      // this.$store.commit({type="itemsForDisplay" , res })
+      console.log('ttttttttt',this.categories, categoryIdx);
+      
+      this.$store.commit('setFilterByCategory', {
+        category: this.categories[categoryIdx]
+      });
+     // this.$router.push((this.$route.fullPath) + `&category=${this.categories[categoryIdx]}`)
+    },
 
-    },  
+    setFiltersByTitle(txt) {
+      this.$store.commit('setFiltersByTitle', { txt: txt });
+    }
   },
 
   computed: {
@@ -155,6 +201,7 @@ export default {
   }
 };
 </script>
+
 
 
 <style scoped>
@@ -174,22 +221,7 @@ ul {
 }
 li {
   width: 25%;
-
-  /* cursor: pointer;
-  margin: 10px 10px;
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: #d2952ebf;
-  transition: 0.3s;
-  border-radius: 5px;
-  border: 1px solid bisque;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  font-family: "Montserrat", sans-serif; */
 }
-
 
 a {
   text-decoration: none;

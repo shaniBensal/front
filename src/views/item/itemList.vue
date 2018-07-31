@@ -1,96 +1,4 @@
 <template>
-<section>
- 
-<div class = "container">
-  <v-toolbar dense>
-    <!-- <v-overflow-btn
-      :items="dropdown_font"
-      label="Select font"
-      hide-details
-    ></v-overflow-btn> -->
-
-    <!-- <v-divider vertical></v-divider> -->
-
-
-
-<template>
-  <v-layout row wrap>
-    <v-flex
-      v-for="(bar, i) in bars"
-      :key="i"
-      xs12
-      sm12
-      md6
-      class="my-3"
-    >
-      <v-card color="grey lighten-4" flat height="200px">
-        <v-toolbar :color="bar.class" :dark="bar.dark">
-          <v-toolbar-side-icon></v-toolbar-side-icon>
-          <v-toolbar-title>Title</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>favorite</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-        </v-toolbar>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</template>
-    <v-overflow-btn
-      :items="input" 
-      editable
-      label="Select size"
-      hide-details
-      overflow
-    ></v-overflow-btn>
-
-    <v-divider
-      class="mr-2"
-      vertical
-    ></v-divider>
-
-
-
-<!--
-    <v-divider
-      class="mx-4"
-      vertical
-    ></v-divider>
--->
-
-    <v-btn-toggle v-model="toggle_exclusive" class="transparent" >
-      <div v-for="(category, idx) in categories" :key="idx" >
-        <v-btn :value="idx" flat @click="setSelectedCategory(idx)">
-          <div>{{category}}</div>
-        </v-btn>
-      </div>
-    </v-btn-toggle>
-
-  </v-toolbar>
-
-<br>
-<br>
-<br>
-<br>
-
-
-
-  <ul class="items-list">
-        <li v-for="item in itemsForDisplay" :key="item.id">
-              <item-preview :item="item"></item-preview>
-                <!-- <div class="btns">   
-                  <button> <router-link :to="'/item/'+item._id" title="More details">...</router-link></button>
-                </div> -->
-             </li>
-        </ul>
-        </div>
-</section>
 <keep-alive>
     <section>
         <v-toolbar>
@@ -124,7 +32,6 @@
                 <item-preview :item="item"></item-preview>
             </li>
         </ul>
-        </div>
     </section>
 </keep-alive>
 </template>
@@ -224,6 +131,9 @@ li {
   width: 25%;
 }
 
+li:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.445);
+}
 a {
   text-decoration: none;
   color: #273e74;

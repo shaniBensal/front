@@ -2,20 +2,21 @@
 
 <div class="outer-container">
    <v-app light>
-    <v-toolbar class="white">
+    <!-- <v-toolbar class="white">
       <v-toolbar-title></v-toolbar-title>
-    </v-toolbar>
+    </v-toolbar> -->
     <v-content>
       <section>
-        <v-parallax class="top-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg"  height="500">
+        <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"  height="500">
+          <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg"  height="500"> -->
           <v-layout  
             column
             align-center
             justify-end
           >
             <!-- <img src="../../../front/best-price.png" alt="Vuetify.js" height="200"> -->
-            <h1 class="layout-test1 white--text display-3 mb-2 text-xs-center ">Rent anything, anywhere, anytime.</h1>
-            <div class="subheading mb-3 text-xs-center">A Coding Academy Subsidiary</div>
+            <h1 class="layout-test1 display-3 mb-2 text-xs-center color:#162044 ">Rent anything, anywhere, anytime.</h1>
+            <div class="subheading mb-3 text-xs-center"></div>
             <!-- <v-btn
               class="blue lighten-2 mt-5"
               dark
@@ -80,7 +81,7 @@
                 <v-flex xs12 md4>
                   <v-card class="card-test1 elevation-0 transparent">
                     <v-card-text @click="$router.push('/item')" class="text-xs-center">
-                      <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon> -->
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                     </v-card-title>
@@ -98,7 +99,7 @@
                 <v-flex xs12 md4>
                   <v-card class="card-test2 elevation-0 transparent">
                     <v-card-text class="text-xs-center">
-                      <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon> -->
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                     </v-card-title>
@@ -118,7 +119,7 @@
                 <v-flex xs12 md4>
                   <v-card class="card-test3 elevation-0 transparent">
                     <v-card-text class="text-xs-center">
-                      <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">build</v-icon> -->
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
                     </v-card-title>
@@ -149,7 +150,8 @@
         <v-layout column>
           <v-flex d-flex>
             <v-card class="pic2" color="blue-grey" dark tile flat hover>
-              <v-card-text>{{ "Pool Equipment" }}</v-card-text>
+              <v-card-text></v-card-text>
+              <h1>Kids and games </h1>
             </v-card>
           </v-flex>
           <!-- <v-flex d-flex>
@@ -163,21 +165,25 @@
         <v-layout row wrap>
           <v-flex d-flex>
             <v-card class="pic0" color="indigo lighten-2" dark tile flat hover>
-              <v-card-text>{{ lorem.slice(0, 70) }}</v-card-text>
+              <h1>Travel Equipment</h1>
             </v-card>
           </v-flex>
+            
           <v-flex d-flex>
             <v-layout row>
               <v-flex
                 d-flex
               >
+            
                 <v-card class="pic1"
-                  color="amber lighten-2"
+                  color="indigo lighten-2"
                   tile
                   flat
                   hover
                 >
-                  <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text>
+               
+                  <!-- <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text> -->
+                    <h1>Transportation</h1>
                 </v-card>
               </v-flex>
                <v-flex
@@ -189,7 +195,8 @@
                   flat
                   hover
                 >
-                  <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text>
+                  <!-- <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text> -->
+                  <h1>Electricity, home and kitchen</h1>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -198,7 +205,8 @@
       </v-flex>
       <v-flex d-flex xs12 sm5 child-flex>
         <v-card class="pic3" color="orange lighten-2" tile flat hover>
-          <v-card-text>{{ lorem.slice(0, 90) }}</v-card-text>
+          <!-- <v-card-text>{{ lorem.slice(0, 90) }}</v-card-text> -->
+            <h1>Events and weddings</h1>
         </v-card>
       </v-flex>
       <!-- <v-flex d-flex xs12 sm3>
@@ -420,6 +428,10 @@ export default {
   max-width: 1080px;
 }
 
+.v-toolbar__content, .v-toolbar__extension{
+  width: 70vw;
+}
+
 .main-title {
   height: 80px;
   padding: 0;
@@ -438,6 +450,10 @@ export default {
 
 .test1 {
   height: 440px;
+}
+
+h1{
+  color: white;
 }
 
 /* .title { */
@@ -471,7 +487,7 @@ export default {
 
 .pic1b {
   height: 220px;
-  background-image: url('http://www.photographeprofessionnel.ovh/wp-content/uploads/2014/12/z100b-600x465.jpg');
+  background-image: url('https://vgsisrael-vgs.netdna-ssl.com/wp-content/uploads/2017/01/ps4-slim-500-glacier-white2.jpg');
   background-size: cover;
   background-position-x: 65%;
   cursor: pointer;
@@ -479,7 +495,7 @@ export default {
 
 .pic0 {
   height: 200px;
-  background-image: url('http://www.blakeruns.com/wp-content/uploads/2016/08/2016-Middlefork-Trail-Hot-Springs_Full-crew-1200x800.jpg');
+  background-image: url('https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570');
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;

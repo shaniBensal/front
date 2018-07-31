@@ -4,7 +4,9 @@ import router from './router';
 import store from './store';
 import axios from 'axios'
 import Vuetify from 'vuetify'
-// import cloudinary from "cloudinary";
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+
 
 
 import './registerServiceWorker';
@@ -15,6 +17,13 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import StarRating from 'vue-star-rating'
 
 Vue.component('star-rating', StarRating);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAT6kgeeG5OSYsEuffWJVuFeRPhnOa0Di0',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+  },
+
+})
 Vue.use(Vuetify)
 
 axios.defaults.withCredentials = true;

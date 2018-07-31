@@ -1,16 +1,28 @@
 var cloudinary = require('cloudinary');
 
-console.log('cloudinary' , cloudinary)
+const CLOUD_NAME = "cloudsts"
+const PRESET = 'ruv7elcf'
+const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
 
-const CLOUDINARY_API = "649787242853369";
-const CLOUDINARY_SECRET = "fgYkK7KCXK2YdXDsUsI4KYF86do";
+function doUploadImg(file) {
 
-cloudinary.config({
-  cloud_name: "cloudsts",
-  api_key: CLOUDINARY_API,
-  api_secret: CLOUDINARY_SECRET
-});
+  var formData = new FormData();
+  formData.append('file', file)
+  formData.append('upload_preset', PRESET);
+
+  return fetch(UPLOAD_URL, {
+    method: 'POST',
+    body: formData
+  })
+    .then(function (response) {
+      return response.json()
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+}
+
 
 export default {
-  cloudinary
+  doUploadImg
 }

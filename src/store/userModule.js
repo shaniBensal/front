@@ -39,9 +39,9 @@ export default {
                 })
         },
 
-        // loadOwnerById(context, { ownerId }) {
-        //     return userService.getUserById(ownerId)
-        // },
+        loadOwnerById(context, { ownerId }) {
+            return userService.getUserById(ownerId)
+        },
 
         // loadRentedItems(context, { items }) {
         //     items.forEach(itemId => {

@@ -1,6 +1,6 @@
 <template>
     <section v-if="itemForDisplay">
-      <book-item v-if="book" :selectedDate="selectedDate||Date.now()"></book-item>
+      <book-item v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
       <div v-else>
         <div class="main-container d-inline-flex">
             <div class="carousel">
@@ -10,22 +10,43 @@
                 </v-carousel>
             </div>
             <div class="item-details d-inline-flex">
-                <h1> {{itemForDisplay.title}} ⭐⭐⭐⭐</h1>
+                <h1> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking.count}}</h1>
                 <div class="owner-pic"></div>
                 <label v-if="owner">{{owner.name}}</label>
-                <span>Price: {{itemForDisplay.price}} </span>
+                <span>Price: {{itemForDisplay.price}}$ per day </span>
                 <div>pick up from: Tel Aviv (2Km from you)</div>
                 Description:
                 <p>{{itemForDisplay.description}}</p>
                 <div class="text-xs-center">
                 </div>
                 <sign-up-modal v-if="!user"></sign-up-modal>
-                <button v-else @click="bookNow">Book Now</button>
+                <div v-else><v-btn class="btn-book" @click="bookNow">Book Now</v-btn></div>
                 <!-- <book-item-modal v-else :selectedDate="selectedDate"></book-item-modal> -->
                 {{selectedDate}}
             </div>
         </div>
+        Availability:
         <date-picker @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
+        Pick up from:
+        <div class="show-map">
+   <GmapMap
+   ref="mapRef" 
+  :center="{lat:10, lng:10}"
+  :zoom="7"
+  map-type-id="terrain"
+  style="width: 300px; height: 200px"
+>
+
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in markers"
+    :position="google"
+    :clickable="true"
+    :draggable="true"
+    @click="center=m.position"
+  />
+</GmapMap>
+</div>
         Rank our product:
         <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
         reviews:
@@ -37,16 +58,18 @@ import datePicker from "../../components/datePicker.vue";
 import bookItem from "../../components/bookItem.vue";
 import StarRating from "vue-star-rating";
 import signUpModal from "../../components/signUpModal.vue";
+import { gmapApi } from "vue2-google-maps";
 
 export default {
   name: "itemDetails",
   data() {
     return {
-      book: false,
+      isBooked: false,
       rating: 4,
       dialog: false,
       owner: {},
-      selectedDate: ""
+      selectedDate: "",
+      markers: []
     };
   },
   created() {
@@ -58,8 +81,22 @@ export default {
     },
     user() {
       return this.$store.getters.loggedinUser;
+    },
+    google() {
+      return gmapApi;
     }
   },
+  mounted() {
+          console.log('mappp', this.$refs)
+          console.log('refs',this.$refs.mapRef)
+
+    // this.$refs.mapRef.$mapPromise.then(map => {
+    //   map.panTo({ lat: 1.66, lng: 103.8 });
+    //   console.log('1111',map)
+
+    // });
+  },
+
   methods: {
     loadItem(itemId) {
       this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
@@ -79,23 +116,28 @@ export default {
     },
     loadOwner(ownerId) {
       this.$store
-        .dispatch({ type: "loadOwnerById", ownerId })
+        .dispatch({ type: "loadUserById", ownerId })
         .then(owner => (this.owner = owner));
     },
     bookNow() {
-      this.book = true;
+      this.isBooked = true;
     }
   },
 
   components: {
     datePicker,
     signUpModal,
-    bookItem
+    bookItem,
+    
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
+h1{
+  color: black;
+}
 .main-container {
   width: 100%;
   margin: 20px;
@@ -111,6 +153,7 @@ export default {
   flex-direction: column;
   width: 50%;
   align-items: end;
+  color: black;
 }
 .owner-pic {
   width: 50px;
@@ -118,6 +161,15 @@ export default {
   background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+.show-map {
+  display: flex;
+  justify-content: center;
+} 
+
+.btn-book {
+  background-color: #f56400;
 }
 </style>
 

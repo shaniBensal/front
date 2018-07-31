@@ -1,11 +1,11 @@
 <template>
-    <div class="user-modal-container">
-        <div class="user-modal">
+    <div @click="close" class="user-modal-container">
+        <div @click.stop class="user-modal">
             <ul class="form-switcher">
-                <li @click.prevent="flip(true)">
+                <li @click.stop="flip(true)">
                     <a v-bind:class="{ active: log }">Login</a>
                 </li>
-                <li @click.prevent="flip(false)">
+                <li @click.stop="flip(false)">
                     <a v-bind:class="{ active: !log }">signUp</a>
                 </li>
             </ul>

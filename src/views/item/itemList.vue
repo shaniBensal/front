@@ -85,10 +85,12 @@ export default {
       this.categories = this.$store.getters.categories;
     },
     setSelectedCategory(categoryIdx) {
+      console.log('ttttttttt',this.categories, categoryIdx);
+      
       this.$store.commit('setFilterByCategory', {
         category: this.categories[categoryIdx]
       });
-      this.$router.push((this.$route.fullPath) + `&category=${this.categories[categoryIdx]}`)
+     // this.$router.push((this.$route.fullPath) + `&category=${this.categories[categoryIdx]}`)
     },
 
     setFiltersByTitle(txt) {

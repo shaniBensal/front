@@ -3,6 +3,7 @@ var cloudinary = require('cloudinary');
 const CLOUD_NAME = "cloudsts"
 const PRESET = 'ruv7elcf'
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+// console.log('cloudinary' , cloudinary)
 
 function doUploadImg(file) {
 

@@ -25,6 +25,7 @@ Vue.use(VueGoogleMaps, {
 
 })
 Vue.use(Vuetify)
+Vue.use(require('vue-moment'));
 
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;

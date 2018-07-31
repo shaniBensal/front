@@ -18,7 +18,8 @@ export default {
       'kids',
       'events',
       'hardware'
-    ]
+    ],
+    owner:{}
   },
 
   mutations: {
@@ -29,8 +30,7 @@ export default {
       state.items = state.items.filter(item => item._id !== itemId);
     },
     setItems(state, { items }) {
-      console.log('mutations / setItems got items:',items);
-      
+      // console.log('mutations / setItems got items:',items);
       state.items = items;
     },
     updateItemO(state, { item }) {
@@ -77,7 +77,6 @@ export default {
   },
   
   getters: {
-
     itemsForDisplay(state){
       return state.itemsToShow;
     },
@@ -130,7 +129,7 @@ export default {
   actions: {
     loadItems(context, payload) {
       return itemsService.getAllItems(context.state.filterBy).then(items => {
-        console.log(' ACTIONS got items:',items);
+        // console.log(' ACTIONS got items:',items);
         context.commit({ type: 'setItems', items });
         context.commit({type: 'refreshItems'});
         return context.state.items;
@@ -140,10 +139,12 @@ export default {
     loadItemById(context, { itemId }) {
       return itemsService.getItemById(itemId).then(item => {
         context.commit({ type: 'setSelctedItem', item });
+        // console.log(item);
         return item;
       });
     },
 
+    
     deleteItem(context, { itemId }) {
       return itemsService.deleteItem(itemId).then(() => {
         context.commit({ type: 'deleteItem', itemId });

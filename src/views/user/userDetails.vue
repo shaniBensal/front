@@ -146,7 +146,7 @@ export default {
     //   this.$store.dispatch({ type: "loadItemsForRent", userId: userId });
     // },
     removeItem(itemId) {
-      console.log("removing...", itemId);
+      // console.log("removing...", itemId);
       this.$store
         .dispatch({ type: "deleteItem", itemId: itemId })
         .then(() => this.loadUser(this.$route.params.id));

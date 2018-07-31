@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     addToFavorites() {
-      console.log("added to favorites", this.item);
+      // console.log("added to favorites", this.item);
       var currUser = this.$store.getters.loggedinUser;
       if (currUser) {
         this.isUserLoggedIn = true;

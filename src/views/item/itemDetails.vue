@@ -1,6 +1,6 @@
 <template>
     <section v-if="itemForDisplay">
-      <book-item v-if="book" :selectedDate="selectedDate||Date.now()"></book-item>
+      <book-item v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
       <div v-else>
         <div class="main-container d-inline-flex">
             <div class="carousel">
@@ -20,7 +20,7 @@
                 <div class="text-xs-center">
                 </div>
                 <sign-up-modal v-if="!user"></sign-up-modal>
-                <button v-else @click="bookNow">Book Now</button>
+                <div v-else><v-btn class="btn-book" @click="bookNow">Book Now</v-btn></div>
                 <!-- <book-item-modal v-else :selectedDate="selectedDate"></book-item-modal> -->
                 {{selectedDate}}
             </div>
@@ -64,7 +64,7 @@ export default {
   name: "itemDetails",
   data() {
     return {
-      book: false,
+      isBooked: false,
       rating: 4,
       dialog: false,
       owner: {},
@@ -116,11 +116,11 @@ export default {
     },
     loadOwner(ownerId) {
       this.$store
-        .dispatch({ type: "loadOwnerById", ownerId })
+        .dispatch({ type: "loadUserById", ownerId })
         .then(owner => (this.owner = owner));
     },
     bookNow() {
-      this.book = true;
+      this.isBooked = true;
     }
   },
 
@@ -166,6 +166,10 @@ h1{
 .show-map {
   display: flex;
   justify-content: center;
+} 
+
+.btn-book {
+  background-color: #f56400;
 }
 </style>
 

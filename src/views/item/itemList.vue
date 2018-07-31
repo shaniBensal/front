@@ -1,7 +1,7 @@
 <template>
 <section>
  
-
+<div class = "container">
   <v-toolbar dense>
     <!-- <v-overflow-btn
       :items="dropdown_font"
@@ -79,6 +79,8 @@
 <br>
 <br>
 
+
+
   <ul class="items-list">
         <li v-for="item in itemsForDisplay" :key="item.id">
               <item-preview :item="item"></item-preview>
@@ -87,6 +89,7 @@
                 </div> -->
              </li>
         </ul>
+        </div>
 </section>
 </template>
 
@@ -155,6 +158,11 @@ export default {
 
 
 <style scoped>
+
+.container{
+  max-width: 980px;
+  padding: 0 20px;
+}
 h3 {
   margin: 0;
   padding: 5px;
@@ -181,9 +189,8 @@ li {
   justify-content: space-around;
   font-family: "Montserrat", sans-serif; */
 }
-li:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.445);
-}
+
+
 a {
   text-decoration: none;
   color: #273e74;

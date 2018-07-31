@@ -88,7 +88,7 @@ export default {
   },
   mounted() {
           console.log('mappp', this.$refs)
-          console.log('refs',this.$refs.mapRef)
+          setTimeout(() =>console.log('refs',this.$refs.mapRef), 2000)
 
     // this.$refs.mapRef.$mapPromise.then(map => {
     //   map.panTo({ lat: 1.66, lng: 103.8 });

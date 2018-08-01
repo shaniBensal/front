@@ -6,16 +6,21 @@
       <v-toolbar-title></v-toolbar-title>
     </v-toolbar> -->
     <v-content>
+        <!-- <div class="pic-cover"></div> -->
       <section>
-        <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"  height="500">
+        <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg">
           <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg"  height="500"> -->
-          <v-layout  
+          <v-layout 
+            class="opaque-background" 
             column
             align-center
             justify-end
           >
             <!-- <img src="../../../front/best-price.png" alt="Vuetify.js" height="200"> -->
-            <h1 class="layout-test1 display-3 mb-2 text-xs-center color:#162044 ">Rent anything, anywhere, anytime.</h1>
+            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime.</h1>
+            <div class="subheading mb-3 text-xs-center"></div>
+            <div class="subheading mb-3 text-xs-center"></div>
+            <div class="subheading mb-3 text-xs-center"></div>
             <div class="subheading mb-3 text-xs-center"></div>
             <!-- <v-btn
               class="blue lighten-2 mt-5"
@@ -26,7 +31,7 @@
               Get Started
             </v-btn> -->
 
-<v-form @submit="onSearch">
+<v-form @submit="onSearch" class="header-search-bar">
   <v-card
     class="pa-3"
     color="transparent"
@@ -148,10 +153,10 @@
 
   <v-container class="highlighted-products" fluid grid-list-lg>
     <v-layout row wrap>
-      <v-flex d-flex xs12 order-xs5>
+      <v-flex  d-flex xs12 order-xs5>
         <v-layout column>
-          <v-flex d-flex>
-            <v-card class="pic2" color="blue-grey" dark tile flat hover>
+          <v-flex @click="onCategory('kids')" d-flex>
+            <v-card class="pic2"  color="blue-grey" dark tile flat hover>
               <v-card-text></v-card-text>
               <h1>Kids and games </h1>
             </v-card>
@@ -165,7 +170,7 @@
       </v-flex>
       <v-flex d-flex xs12 sm7>
         <v-layout row wrap>
-          <v-flex d-flex>
+          <v-flex @click="onCategory('travel')" d-flex>
             <v-card class="pic0" color="indigo lighten-2" dark tile flat hover>
               <h1>Travel Equipment</h1>
             </v-card>
@@ -173,7 +178,7 @@
             
           <v-flex d-flex>
             <v-layout row>
-              <v-flex
+              <v-flex @click="onCategory('transportation')"
                 d-flex
               >
             
@@ -188,7 +193,7 @@
                     <h1>Transportation</h1>
                 </v-card>
               </v-flex>
-               <v-flex
+               <v-flex @click="onCategory('kitchen')"
                 d-flex
               >
                 <v-card class="pic1b"
@@ -205,7 +210,7 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex d-flex xs12 sm5 child-flex>
+      <v-flex @click="onCategory('events')" d-flex xs12 sm5 child-flex>
         <v-card class="pic3" color="orange lighten-2" tile flat hover>
           <!-- <v-card-text>{{ lorem.slice(0, 90) }}</v-card-text> -->
             <h1>Events and weddings</h1>
@@ -235,6 +240,9 @@
   </v-carousel>
 Comment -->
 
+    <div class="opinions-container">
+      <div>Customers Recommend:</div>
+    </div>
 
    <div id="header-carousel">
       <v-carousel class="opinions" hide-controls hide-delimiters interval=2500 transition="fade">
@@ -263,23 +271,7 @@ Comment -->
 <br>
 <br>
 
-      <section>
-        <!-- <v-parallax src="img/ski.jpg" height="380"> -->
-        <v-parallax src="https://images.pexels.com/photos/848594/pexels-photo-848594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="380">
-          <v-layout column align-center justify-center>
-            <div class="headline white--text mb-3 text-xs-center">Renting things has never been easier</div>
-            <em>Kick-start your fun today</em>
-            <v-btn
-              class="blue lighten-2 mt-5"
-              dark
-              large
-              href="/pre-made-themes"
-            >
-              Get Started
-            </v-btn>
-          </v-layout>
-        </v-parallax>
-      </section>
+
 
 
 
@@ -429,17 +421,31 @@ export default {
       console.log('query for search:',this.searchStr);
       this.$router.push(`/item/?search=${this.searchStr}`)
     },
-  }
-};
-</script>
 
-<style lang="scss" scoped>
-.outer-container {
-  margin: 0 auto;
-  max-width: 1080px;
+    onCategory(category){
+          this.$router.push(`/item/?category=${category}`);
+    },
+  }
 }
 
-.v-toolbar__content, .v-toolbar__extension{
+</script>
+
+<style scoped>
+
+* {
+  box-sizing: border-box;
+}
+
+.top-pic {
+  /* height: 500px; */
+}
+
+.outer-container {
+  margin: 0 auto;
+}
+
+.v-toolbar__content,
+.v-toolbar__extension {
   width: 70vw;
 }
 
@@ -459,22 +465,23 @@ export default {
   background-image: url('https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg');
 }
 
-.test1 {
+/* .test1 {
   height: 440px;
-}
+} */
 
-h1{
+h1 {
   color: white;
+  z-index: 20;
 }
 
 /* .title { */
-  /* height: 500px; */
+/* height: 500px; */
 /* } */
 
 .pic3 {
   min-height: 240px;
-    /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
-   background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
+  background-image: url('https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
   background-size: cover;
   cursor: pointer;
 }
@@ -522,20 +529,20 @@ h1{
   cursor: pointer;
 }
 
-.card-test1:hover,
+/* .card-test1:hover,
 .card-test2:hover,
 .card-test3:hover {
   filter: brightness(1.12);
   background-color: #cacaca !important;
   transition: 0.2s;
-}
+} */
 
 .pic2:hover,
 .pic1:hover,
 .pic1b:hover,
 .pic0:hover,
 .pic3:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.11);
   transition: 0.3s;
 }
 
@@ -551,19 +558,94 @@ opinions.container {
 .top-left {
   left: 12px;
   top: 10px;
-    font-size: 1.3em;
-    line-height: 1.6em;
-    text-align: left;
-    width: 250px;
-    height: 0px;
-    position: relative;
-    z-index: 10;
-    background-color: rgba(190,240,0,0.6);
+  font-size: 1.3em;
+  line-height: 1.6em;
+  text-align: left;
+  width: 250px;
+  height: 0px;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(190, 240, 0, 0.6);
+}
+
+
+/* .pic-cover {
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  z-index: 10;
+  top: 10%;
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(#fff,#000);
+  opacity: 0.7;
+} */
+
+.opaque-background {
+    /* content: ''; */
+    background: linear-gradient( rgba(30,30,60,0) ,rgba(30,30,60,0.0), rgba(30,30,60,0), rgba(0,0,0,0.4), rgba(0,0,0,0.4),rgba(30,30,60,0.1));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    /* opacity: 0.95; */
+}
+
+.header-search-bar {
+  z-index: 1;
+}
+
+.layout-test1 {
+  text-shadow: 0 0 2px black;
+  position: absolute;
+  bottom: 28%;
+}
+
+.opinions-container{
+  font-size: 2em;
+  margin-bottom: 50px;
+}
+
+/* .opinions v-jumbotron {
+  position: absolute;
+} */
+
+#header-carousel {
+  text-shadow : 0 0 2px grey;
+  text-align : left;
+}
+
+.v-jumbotron {
+  /* position: absolute; */
+  /* z-index: 22; */
+  /* height: 150px; */
+  background: linear-gradient( 90deg, rgba(255,255,255,1), rgba(0,0,0,0.5), rgba(255,255,255,0), rgba(0,0,0,0), rgba(0,0,0,0));
+}
+
+#header-carousel h3  {
+ width: 280px;
+}
+
+#header-carousel .subheading {
+  width : 220px;
+  display: inline-block;
+  /* position: absolute;
+  left: 150px; */
+}
+
+/* .v-jumbotron {
+  text-shadow : 0 0 2px grey;
+  text-align : left;
+  width: 100px;
+} */
+
+.v-card h1 {
+  text-shadow : 0 0 4px black;
 }
 
 </style>
 
-<style lang="stylus">
+<style scoped lang="stylus">
 .fade {
   &-enter-active, &-leave-active, &-leave-to {
     transition: 1.1s linear;

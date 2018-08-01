@@ -56,8 +56,8 @@ export default {
         state.selectedItem.ranking.count;
     },
 
-    setFilterByCategory(state,  payload) {
-      state.filters.byCategory = payload.category;
+    setFiltersByCategory(state,  {category}) {
+      state.filters.byCategory = category;
       // var res1 = state.items.sfilter(item => {
       //   return item.title.toLowerCase().includes(state.filters.byTitle.toLowerCase()) ||
       //           item.description.toLowerCase().includes(state.filters.byTitle.toLowerCase())
@@ -124,7 +124,10 @@ export default {
         items = items.filter(item => {
           return item.title
             .toLowerCase()
-            .includes(state.filters.byTitle.toLowerCase());
+            .includes(state.filters.byTitle.toLowerCase()) ||
+            item.description
+            .toLowerCase()
+            .includes(state.filters.byTitle.toLowerCase())
         });
       }
 

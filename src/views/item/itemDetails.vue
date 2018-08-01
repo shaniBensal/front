@@ -13,8 +13,9 @@
                         <label v-if="owner">{{owner.name}} </label>
                         <a class="bold-font">Contat seller</a>
                     </div>
-                    <div class="spacer-paragrph">
-                        <i class="fas fa-map-marker-alt"></i> Pick up from: Tel Aviv (2Km from you)
+                    <div class="spacer-paragrph" v-if="distance">
+                        <i class="fas fa-map-marker-alt"></i> Pick up from: <br>
+                        {{owner.address}} ( {{distance}} Km from you) 
                     </div>
                     <p>Description: {{itemForDisplay.description}}</p>
                     <div class="d-flex flex-column" v-if="itemForDisplay.images">
@@ -28,8 +29,8 @@
                         <div class="spacer-paragrph">
                             Pick up from:
                             <div class="show-map">
-                                <GmapMap ref="mapRef" :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 300px; height: 200px">
-                                    <GmapMarker :key="index" v-for="(m, index) in markers" :position="google" :clickable="true" :draggable="true" @click="center=m.position"
+                                <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="15" map-type-id="roadmap" style="width: 300px; height: 200px">
+                                    <GmapMarker  v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true" 
                                     />
                                 </GmapMap>
                             </div>
@@ -75,6 +76,7 @@ import bookItem from "../../components/bookItem.vue";
 import StarRating from "vue-star-rating";
 import signUpModal from "../../components/signUpModal.vue";
 import { gmapApi } from "vue2-google-maps";
+import mapService from "../../services/mapService.js";
 
 export default {
   name: "itemDetails",
@@ -86,13 +88,21 @@ export default {
       owner: {},
       selectedDate: "",
       // selectedEndDate:"",
+      distance: null,
       images: [],
       mainImage: "",
-      markers: []
+      currentLocation: { lat: 0, lng: 0 },
+      markers: [{ position: { lat: 0, lng: 0 } }]
     };
   },
   created() {
-    this.loadItem(this.$route.params.id);
+    this.loadItem(this.$route.params.id)
+      .then(() => {
+        var userLocPrm = this.geolocation();
+        var itemLocPrm = this.getItemLocation(this.owner.address);
+        return Promise.all([userLocPrm, itemLocPrm])
+      })
+      .then(this.calcDistance);
   },
   computed: {
     itemForDisplay() {
@@ -101,26 +111,21 @@ export default {
     user() {
       return this.$store.getters.loggedinUser;
     },
-    google() {
-      return gmapApi;
-    }
+    google: gmapApi
   },
   mounted() {
-    // console.log('mappp', this.$refs)
-    // console.log('refs',this.$refs.mapRef)
-    // this.$refs.mapRef.$mapPromise.then(map => {
-    //   map.panTo({ lat: 1.66, lng: 103.8 });
-    //   console.log('1111',map)
-    // });
+
   },
 
   methods: {
     loadItem(itemId) {
-      this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
-        this.images = item.images;
-        this.mainImage = item.images[0];
-        this.loadOwner(item.ownerId);
-      });
+      return this.$store
+        .dispatch({ type: "loadItemById", itemId })
+        .then(item => {
+          this.images = item.images;
+          this.mainImage = item.images[0];
+          return this.loadOwner(item.ownerId);
+        });
     },
     switchMainImg(idx) {
       this.mainImage = this.images[idx];
@@ -140,15 +145,51 @@ export default {
       this.$store.dispatch({ type: "updateItem" });
     },
     loadOwner(ownerId) {
-      this.$store
+      return this.$store
         .dispatch({ type: "loadUserById", ownerId })
-        .then(owner => (this.owner = owner));
+        .then(owner => {
+          this.owner = owner
+        });
     },
     bookNow() {
       this.isBooked = true;
     },
     selectDate(date) {
       this.selectedDate = date;
+    },
+
+    geolocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => {
+          // console.log('position is' , position)
+          this.currentLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          this.markers[0].position = this.currentLocation;
+          resolve();
+        });
+      });
+    },
+
+    getItemLocation(ownerAddress) {
+      return mapService.getUserLatLng(ownerAddress).then(itemLocation => {
+        this.markers.push({ position: itemLocation });
+      });
+    },
+
+    calcDistance() {
+      var coords = {
+        lat1: this.markers[0].position.lat,
+        lng1: this.markers[0].position.lng,
+        lat2: this.markers[1].position.lat,
+        lng2: this.markers[1].position.lng
+      };
+
+      var distance = mapService.calcDistanceFromLatLngInKm(coords);
+      this.distance = distance.toFixed(2)
+      console.log("distance between coords:", coords, "is:", distance, "km");
+
     }
   },
 

@@ -65,7 +65,7 @@ export default {
       this.$store
         .dispatch({ type: "getUserWithItems", userId: userId })
         .then(currUser => {
-          console.log(currUser);
+          // console.log(currUser);
           this.user = currUser.user;
           this.userAndItems = currUser;
           this.itemsToShow = currUser.owendItems;

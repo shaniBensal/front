@@ -20,7 +20,7 @@
 
             <v-btn-toggle v-model="toggle_exclusive" class="transparent">
                 <div v-for="(category, idx) in categories" :key="idx">
-                    <v-btn :value="idx" flat @click="setSelectedCategory(idx)">
+                    <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
                         <div>{{category}}</div>
                     </v-btn>
                 </div>
@@ -54,29 +54,34 @@ export default {
   },
 
   created() {
-    var vars = [];
-    var hash;
-    var urlStr = window.location.href;
-    var searchParamsIndex = urlStr.indexOf('=');
-    var searchQuery = '';
-    if (searchParamsIndex > -1) {
-      searchQuery = urlStr.slice(searchParamsIndex + 1);
-    }
-    this.setFiltersByTitle(searchQuery);
+    var queryString = window.location.href.replace(/.*\?/, '');
+    var uParams = new URLSearchParams(queryString);
+    var textParam = uParams.get('search');
+    var categoryParam = uParams.get('category');
+    if (textParam) this.setFiltersByTitle(textParam);
+    if (categoryParam) this.setFiltersByCategory(categoryParam);
+
     this.loadCategories();
     this.loadItems();
   },
 
   methods: {
     onSearch() {
-      this.$router.push(`/item/?search=${this.searchStr}`);
-      var urlStr = window.location.href;
-      var searchParamsIndex = urlStr.indexOf('=');
-      var searchQuery = '';
-      if (searchParamsIndex > -1) {
-        searchQuery = urlStr.slice(searchParamsIndex + 1);
+      var query = 'search=' + this.searchStr;
+      var category = this.$route.query.category;
+      if (category) {
+        query += '&category=' + category;
       }
-      this.setFiltersByTitle(searchQuery);
+      this.$router.push(`${this.$route.path}?${query}`);
+
+      // this.$router.push(`/item/?search=${this.searchStr}`);
+      var urlStr = window.location.href;
+      // var searchParamsIndex = urlStr.indexOf('=');
+      // var searchQuery = '';
+      // if (searchParamsIndex > -1) {
+      //   searchQuery = urlStr.slice(searchParamsIndex + 1);
+      // }
+      this.setFiltersByTitle(this.searchStr);
     },
     loadItems() {
       this.$store.dispatch({ type: 'loadItems' });
@@ -84,13 +89,16 @@ export default {
     loadCategories() {
       this.categories = this.$store.getters.categories;
     },
-    setSelectedCategory(categoryIdx) {
-      console.log('ttttttttt',this.categories, categoryIdx);
-      
-      this.$store.commit('setFilterByCategory', {
-        category: this.categories[categoryIdx]
+    setFiltersByCategory(category) {
+      this.$store.commit('setFiltersByCategory', {
+        category: category
       });
-     // this.$router.push((this.$route.fullPath) + `&category=${this.categories[categoryIdx]}`)
+      var query = 'category=' + category;
+      var search = this.$route.query.search;
+      if (search) {
+        query += '&search=' + search;
+      }
+      this.$router.push(`${this.$route.path}?${query}`);
     },
 
     setFiltersByTitle(txt) {
@@ -162,4 +170,29 @@ input {
 v-toolbar {
   margin-bottom: 100px;
 }
+
+.v-btn.v-btn {
+  background-color: white;
+  color: rgb(4, 4, 73);
+  opacity: 1;
+  border: none;
+}
+
+.v-btn.v-btn--active {
+  background-color: white;
+  color: rgb(33, 111, 42);
+  text-shadow: 0 0 3px rgb(156, 247, 138);
+  opacity: 1;
+  border-bottom: 1px rgb(33, 111, 42) solid;
+}
+
+.v-btn.v-btn--active::before {
+  background-color: white;
+  /* color: rgb(10, 117, 73); */
+  opacity: 1;
+}
+
+
+
+
 </style>

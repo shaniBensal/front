@@ -21,7 +21,7 @@
             </button>
         </div>
 
-        <div class="tabs">
+        <div class="tabs bold-font">
             <ul>
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab2" @click="showItemsRented">Items rented by me</button> |

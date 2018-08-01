@@ -28,12 +28,6 @@
             </v-btn-toggle>
         </v-toolbar>
 
-        <ul class="items-list-random">
-            <li v-for="item in itemsForDisplay" :key="item._id">
-                <item-random :item="item"></item-random>
-            </li>
-        </ul>
-
         <ul class="items-list">
             <li v-for="item in itemsForDisplay" :key="item._id">
                 <item-preview :item="item"></item-preview>

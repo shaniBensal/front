@@ -172,4 +172,8 @@ a {
   padding: 10px 10px 0 10px;
 }
 
+div.v-card__title {
+  min-height: 126px !important;
+}
+
 </style>

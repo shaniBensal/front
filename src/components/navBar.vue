@@ -1,20 +1,21 @@
 <template>
-    <header>
+    <header class="bold-font">
 
         <div id="nav">
             <div class="logo">
-                <h1 class="logo">WeRent</h1>
+                <router-link :to="'/'">
+                    <h1 class="logo">WeRent</h1>
+                </router-link>
             </div>
             <div class="profile">
-            <label v-if="user">{{user.name}} |</label> 
-            <router-link :to="'/user/'+user._id" v-if="user">My profile</router-link>
+                <label v-if="user">{{user.name}} |</label>
+                <router-link :to="'/user/'+user._id" v-if="user">My profile</router-link>
             </div>
             <div class="links">
                 <a v-if="user" @click="logOut">log Out</a>
                 |
                 <a v-if="!user" href="#register" @click.prevent="open">Sign in | </a>
                 <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
-                <router-link to="/">Home</router-link> |
                 <router-link to="/about">About</router-link> |
                 <router-link to="/item">items</router-link>
 
@@ -44,12 +45,13 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch({ type: "logOut" });
+      this.$router.push("/");
     },
     open() {
       this.isActive = true;
     },
-    closeModal(){
-      if(this.isActive) this.isActive = false;
+    closeModal() {
+      if (this.isActive) this.isActive = false;
       else return;
     }
   },
@@ -66,6 +68,7 @@ export default {
   display: flex;
   color: #00d8ae;
   justify-content: space-between;
+  align-items: center;
   //   box-shadow: inset 0 -6px 0 #1e1e1e;
 
   a {

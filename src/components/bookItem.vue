@@ -1,26 +1,35 @@
 <template>
     <div class="book-page">
-        <h1>Hi {{dealDetails.userName}}!</h1>
+      <div class="d-inline-flex">
+        <div>
+          <img class="main-image" :src="item.images[0]">
+        </div>
+        <div>
+        <h1>Hi {{dealDetails.userName}}!</h1> <br />
         You chose to rent {{dealDetails.itemName}}
         <p>From {{owner.name}} </p>
         <p> pickup adress is {{owner.address}}</p>
         <!-- {{item}} -->
         <p>
-            Start Date: {{dealDetails.firstDay}} <br />
-            Last Date: {{dealDetails.lastDay}} <br />
-            Days Count: {{dealDetails.daysToRent}} <br />
+            <!-- Start Date: {{dealDetails.firstDay}} <br />
+            Last Date: {{dealDetails.lastDay}} <br /> -->
+            <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
+            In date: {{selectedDateRent}} <br />
             Price For Day: {{item.price}}$ <br />
-            Total Price: {{totalCost}}$
-
+            <!-- Price: {{totalCost}}$ -->
         </p>
-        <v-flex class="d-inline-flex">
+        <!-- <v-flex class="d-inline-flex">
             <div class="date-picker-schedual table-container">
                 <v-date-picker header-color="blue" @input="calculateFirstDate" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
             </div>
             <div class="date-picker-schedual table-container">
                 <v-date-picker header-color="blue" @input="daysCount" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
             </div>
-        </v-flex>
+        </v-flex> -->
+        </div>
+        </div>
+        <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
+        <button class="btn bold-font" @click.prevent="cancel">Back</button>
     </div>
 
 </template>
@@ -48,7 +57,7 @@ export default {
   created() {
     this.loadItem(this.$route.params.id);
     this.todayDate();
-    this.allowedDates();
+    // this.allowedDates();
   },
   methods: {
     loadItem(itemId) {
@@ -61,6 +70,13 @@ export default {
           });
         })
         .then(() => this.loadFirstData());
+    },
+    approveDeal(){
+      console.log('hi');
+      
+    },
+    cancel(){
+      this.$emit("cancel-deal");
     },
     loadFirstData() {
       this.dealDetails.itemName = this.$store.getters.selectedItem.title;
@@ -80,34 +96,35 @@ export default {
       }
       result += d.getFullYear() + "-" + month + "-" + d.getDate();
       this.today = result;
-    },
-    exitFirst() {
-      this.modal1 = false;
-      this.firstDay = "";
-    },
-    exitSec() {
-      this.modal2 = false;
-      this.lastDay = "";
-    },
+    }
+    // exitFirst() {
+    //   this.modal1 = false;
+    //   this.firstDay = "";
+    // },
+    // exitSec() {
+    //   this.modal2 = false;
+    //   this.lastDay = "";
+    // },
     // allowedDates(dateStr) {
     //   // console.log(this.unAvailableDates);
 
     //   return !this.unAvailableDates.includes(dateStr);
     // },
 
-    allowedDates(dateStr) {
-      return !this.$store.getters.selectedItem.occupiedDates.includes(dateStr);
-    },
-    calculateFirstDate() {
-      var firstDay = this.dealDetails.firstDay || this.today;
-      var date = new Date(firstDay).getTime() / 1000;
-      this.firstDateTimeStamp = date;
-    },
-    daysCount() {
-      var last = this.dealDetails.lastDay || this.today;
-      var date = new Date(last).getTime() / 1000;
-      this.dealDetails.daysToRent = (date - this.firstDateTimeStamp)/86400;
-    }
+    // allowedDates(dateStr) {
+    //   return !this.$store.getters.selectedItem.occupiedDates.includes(dateStr);
+    // },
+    // calculateFirstDate() {
+    //   var firstDay = this.dealDetails.firstDay || this.today;
+    //   var date = new Date(firstDay).getTime() / 1000;
+    //   this.firstDateTimeStamp = date;
+    //   daysCount();
+    // },
+    // daysCount() {
+    //   var last = this.dealDetails.lastDay || this.dealDetails.firstDay;
+    //   var date = new Date(last).getTime() / 1000;
+    //   this.dealDetails.daysToRent = (date - this.firstDateTimeStamp)/86400;
+    // }
   },
   computed: {
     owner() {
@@ -116,14 +133,17 @@ export default {
     item() {
       return this.$store.getters.selectedItem;
     },
-    totalCost() {
-      return (
-        this.$store.getters.selectedItem.price * this.dealDetails.daysToRent
-      );
+    selectedDateRent() {
+      return this.selectedDate || this.today;
     }
+    // totalCost() {
+    //   return (
+    //     this.$store.getters.selectedItem.price * this.dealDetails.daysToRent
+    //   );
+    // }
   },
   components: {
-    datePicker
+    // datePicker
   }
 };
 </script>
@@ -131,7 +151,24 @@ export default {
 <style lang="scss" scoped>
 .book-page {
   text-align: left;
-  margin: 5px 20px;
+  // margin: 5px 20px;
+  margin: 10px 35px;
+}
+
+.main-image {
+  max-width: 300px;
+  margin: 10px 0px;
+}
+
+.btn{
+  width: 60%;
+  height: 3em;
+  font-size: 1.2em;
+  color: #f6f6f6;
+  border: 0;
+  margin: 5px 0px;
+  background-color: #3fb67b;
+  cursor: pointer;
 }
 
 .btn-book {

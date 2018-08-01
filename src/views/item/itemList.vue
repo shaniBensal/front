@@ -1,10 +1,11 @@
 <template>
 <keep-alive>
     <section>
+      <div class="container">
         <v-toolbar>
             <template>
             </template>
-
+  
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
                     <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
@@ -27,11 +28,18 @@
             </v-btn-toggle>
         </v-toolbar>
 
+        <ul class="items-list-random">
+            <li v-for="item in itemsForDisplay" :key="item._id">
+                <item-random :item="item"></item-random>
+            </li>
+        </ul>
+
         <ul class="items-list">
             <li v-for="item in itemsForDisplay" :key="item._id">
                 <item-preview :item="item"></item-preview>
             </li>
         </ul>
+    </div>
     </section>
 </keep-alive>
 </template>
@@ -39,10 +47,11 @@
 
 
 <script>
-import itemPreview from '../../components/item/itemPreview.vue';
+import itemPreview from "../../components/item/itemPreview.vue";
+// import itemRandom from "./itemRandom.vue";
 
 export default {
-  name: 'ItemList',
+  name: "ItemList",
 
   data() {
     return {
@@ -84,7 +93,7 @@ export default {
       this.setFiltersByTitle(this.searchStr);
     },
     loadItems() {
-      this.$store.dispatch({ type: 'loadItems' });
+      this.$store.dispatch({ type: "loadItems" });
     },
     loadCategories() {
       this.categories = this.$store.getters.categories;
@@ -102,7 +111,7 @@ export default {
     },
 
     setFiltersByTitle(txt) {
-      this.$store.commit('setFiltersByTitle', { txt: txt });
+      this.$store.commit("setFiltersByTitle", { txt: txt });
     }
   },
 
@@ -113,7 +122,8 @@ export default {
   },
 
   components: {
-    itemPreview
+    itemPreview,
+    // itemRandom
   }
 };
 </script>
@@ -121,22 +131,27 @@ export default {
 
 
 <style scoped>
+.container {
+  max-width: 980px;
+  padding: 0 20px;
+}
+
 h3 {
   margin: 0;
   padding: 5px;
 }
 ul {
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-}
-li {
-  width: 25%;
+  /* display: flex;
+  flex-wrap: wrap; */
+  padding: 0;
+  /* justify-content: center; */
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 200px);
 }
 
-li:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.445);
-}
 a {
   text-decoration: none;
   color: #273e74;

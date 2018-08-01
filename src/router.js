@@ -6,7 +6,7 @@ import About from './views/About.vue';
 import ItemList from './views/item/itemList.vue';
 import ItemEdit from './views/item/itemEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
-import UserDetails from './views/user/userDetails.vue';
+import UserProfile from './views/user/userProfile.vue';
 // import SignIn from './views/user/signIn.vue';
 
 
@@ -42,8 +42,8 @@ export default new Router({
 
     {
       path: '/user/:id',
-      name: 'userDetails',
-      component: UserDetails,
+      name: 'userProfile',
+      component: UserProfile,
     }
   ],
 });

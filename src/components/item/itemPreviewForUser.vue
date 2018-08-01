@@ -1,51 +1,49 @@
 <template>
 
     <div class="item-preview" v-if="item">
-        <!-- <sign-up-modal v-if="isUserLoggedIn"></sign-up-modal> -->
 
         <v-card :to="'/item/' + item._id">
-            <v-card-media  height="10em" :src="item.images[0]">
-
-                <div class="text-xs-center">
-                    <v-btn @click.prevent="addToFavorites" flat icon color="pink" :disabled="dialog" :loading="dialog" class="white--text" @click.stop="dialog = true">
-                        <v-icon>favorite</v-icon>
-                    </v-btn>
-                </div>
-
-                <v-container fill-height fluid>
-                    <v-layout fill-height>
-                        <v-flex xs12 align-end flexbox>
-
-
-                        </v-flex>
-                    </v-layout>
-                </v-container>
+            <v-card-media height="10em" :src="item.images[0]">
             </v-card-media>
             <v-card-title>
-              <div>
+                <div>
                     <h4>{{item.title}}</h4>
                     <p>{{shortDescription}}</p>
-                    </div>
-                    <div class="flex location">
-                        <v-icon small light>fas fa-map-marker-alt</v-icon>
-                        <p>Tel Aviv, {{location}} km from you</p>
-                    </div>
-                    <br>
+                </div>
 
-                    <div class="flex card-bottom">
-                        <p class="price bold-font">{{item.price}}$ per day</p>
-                        <div v-if="item">
+                <div class="flex card-bottom">
+                    <p class="price bold-font">{{item.price}}$ per day</p>
+                    <div v-if="item">
 
-                             <v-icon small light color="yellow">fas fa-star</v-icon>
-                            {{avgRank}} ({{item.ranking.count}})
-                        </div>
+                        <v-icon small light color="yellow">fas fa-star</v-icon>
+                        {{avgRank}} ({{item.ranking.count}})
                     </div>
+                </div>
 
             </v-card-title>
+            <v-card-actions v-if="isEdit" class="justify-center">
+                <div class="text-xs-center">
 
+                    <v-btn fab dark small color="teal lighten-3">
+                        <router-link :to="'/item/edit/'+item._id" title="Edit">
+                            <v-icon dark>edit</v-icon>
+                        </router-link>
+                    </v-btn>
+
+                    <v-btn color="red lighten-3" fab dark small @click="removeItem(item._id)">
+                        <v-icon dark>fas fa-trash-alt</v-icon>
+                    </v-btn>
+                </div>
+            </v-card-actions>
         </v-card>
 
-
+        <ul v-if="isEdit">
+          dates occupied:
+          <li  v-for="(date,idx) in item.occupiedDates" :key="idx" v-if="date">{{date}} ({{date | moment("from")}})
+            <p> </p>
+             </li>
+          
+        </ul>
     </div>
 
 </template>
@@ -53,7 +51,7 @@
 import signIn from "../signIn.vue";
 export default {
   name: "ItemPreview",
-  props: ["item"],
+  props: ["item", "isEdit"],
   data() {
     return {
       isUserLoggedIn: false,
@@ -95,8 +93,9 @@ export default {
       return this.item.ranking.avg.toFixed(1);
     },
 
-    location() {
-      return (Math.random() * (70 - 0) + 0).toFixed(1);
+    occupiedDates(){
+      return new Date(this.item.occupiedDates).getTime() / 1000;
+
     }
   },
 
@@ -118,10 +117,6 @@ export default {
   display: flex;
 }
 
-.location {
-  padding: 10px 0;
-}
-
 .card-bottom {
   border-top: 1px solid rgba(0, 0, 0, 0.226);
   justify-content: space-between;
@@ -132,12 +127,25 @@ p {
   font-size: 12px;
 }
 
+ul{
+  list-style: none;
+}
+
+.v-btn__content{
+  height: 0;
+  color: #fff;
+}
+
+.v-btn .v-btn__content .v-icon{
+  color: #fff;
+}
 .price {
   color: #42b983;
 }
 .v-card {
-  // margin: 20px 10px 10px 10px;
+  margin: 20px;
   max-width: 200px;
+  background-color: white;
   transition: all 0.8s;
 }
 .v-card:hover {
@@ -171,5 +179,4 @@ a {
   text-align: left;
   padding: 10px 10px 0 10px;
 }
-
 </style>

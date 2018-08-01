@@ -10,7 +10,7 @@
                 </v-carousel>
             </div>
             <div class="item-details d-inline-flex">
-                <h1> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking.count}}</h1>
+                <h1> {{itemForDisplay.title}} ⭐({{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}})</h1>
                 <div class="owner-pic"></div>
                 <label v-if="owner">{{owner.name}}</label>
                 <span>Price: {{itemForDisplay.price}}$ per day </span>

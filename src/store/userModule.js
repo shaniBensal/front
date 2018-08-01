@@ -36,7 +36,7 @@ export default {
         loadUserById(context, { ownerId }) {
             return userService.getUserById(ownerId)
                 .then(user => {
-                    context.commit({ type: 'setOwner', user })                    
+                    context.commit({ type: 'setOwner', user })
                     return user;
                 })
         },
@@ -111,9 +111,10 @@ export default {
 
         getUserWithItems(context, { userId }) {
             return userService.getAllItemsByUser(userId)
-                .then((user) =>
+                .then((user) => {
                     context.commit({ type: "setUserWithItems", user })
-                )
+                    return user
+                })
         }
     },
     getters: {

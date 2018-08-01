@@ -169,6 +169,12 @@ form {
   margin: 20px 0;
 }
 
+.v-menu > .v-menu__content {
+  top: 0 !important;
+  left: 0 !important;
+  background-color: lightgray;
+}
+
 .v-label.v-label--active {
   color: #00d8ae;
 }
@@ -186,7 +192,7 @@ form {
   top: 0;
 }
 
-.actions{
+.actions {
   display: flex;
   margin: 10px 0;
 }
@@ -218,11 +224,11 @@ select {
   overflow: hidden;
 }
 
-.file-input>* {
+.file-input > * {
   pointer-events: none;
 }
 
-.file-input>input[type="file"] {
+.file-input > input[type="file"] {
   position: absolute;
   top: 0;
   right: 0;
@@ -234,7 +240,6 @@ select {
   height: 100%;
   width: 100%;
 }
-
 
 img {
   width: 160px;

@@ -6,7 +6,7 @@
       <v-card  :to="'/item/' + item._id">
         <v-card-media
           class="white--text"
-          height="60%"
+          height="16em"
           :src="item.images[0]"
         >
           
@@ -22,31 +22,34 @@
           <v-container fill-height fluid>
             <v-layout fill-height>
               <v-flex xs12 align-end flexbox>
+                 
                 
-                <span class="headline">{{item.name}}</span>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card-media>
         <v-card-title>
           <div>
-            <span>{{shortDescription}}</span><br>
+                <h3>{{item.title}}</h3>
+            <p>{{shortDescription}}</p><br>
             <h4 class="price">{{item.price}}$ per day</h4>
+            <div class="location">Tel Aviv, 0.8 km from you</div>
+              <div class="rank" v-if="item">
+          ⭐
+          {{avgRank}}
+          ({{item.ranking.count}})
+          
+          </div>
                                         
           </div>
 
         </v-card-title>
         <v-card-actions>
           <!-- <v-btn flat color="#8ACB88">Find out more</v-btn> -->
-        <div class="rank" v-if="item">
-          ⭐
-          {{avgRank}}
-          ({{item.ranking.count}})
-          
-          </div>
+      
        
         </v-card-actions>
-         <div class="location">Tel Aviv, 0.8 km from you</div>
+         
       </v-card>
 
     
@@ -114,12 +117,20 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .rank {
   display: flex;
 }
+
+h3{
+  color: #162044;
+  text-align: center;
+}
+
+p{
+  margin: 0;
+}
 .v-card {
-  height: 355px;
   margin: 20px 10px 10px 10px;
   max-width: 250px;
 }
@@ -131,7 +142,7 @@ a {
   color: #42b983;
 }
 .v-card__media {
-  height: 60%;
+  height: 16em;
   width: 100%;
   margin: 0 auto;
 }

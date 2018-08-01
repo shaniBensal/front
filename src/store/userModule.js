@@ -41,6 +41,10 @@ export default {
                 })
         },
 
+        // loadOwnerById(context, { ownerId }) {
+        //     return userService.getUserById(ownerId)
+        // },
+
         // loadOwnerById(context, { owner }) {
         //     console.log('owner from store', owner);
 

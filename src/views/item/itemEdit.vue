@@ -1,6 +1,25 @@
 <template>
-
-    <div class="edit-item">
+    <v-form ref="form">
+        <v-text-field v-model="itemToUpdate.title" label="item name"></v-text-field>
+        <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
+        <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
+        <div>
+        <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
+             </div>
+              <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
+              <div class="file-input custom">
+                <span>Select image</span>
+              <input type="file" @change="handleFileUpload($event)" >
+              </div>
+              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
+    <div class="actions">
+        <v-btn @click="updateItem">
+            submit
+        </v-btn>
+        <v-btn @click="clear">clear</v-btn>
+        </div>
+    </v-form>
+    <!-- <div class="edit-item">
         <form @submit.prevent="updateItem">
             <label>Item name:
                 <input type="text" v-model="itemToUpdate.title" placeholder="add item name..">
@@ -17,20 +36,20 @@
             </label>
 
             <div class="upload">
-              <img :src="itemToUpdate.images[0]" >
+              <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
+              <img :src ="imgUrl" v-if="imgUrl">
               <input type="file" @change="handleFileUpload($event)" >
+              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
 
             </div>
+
             
             <button>Save</button>
         </form>
-
-        <!-- <img :src="itemToUpdate.images[0]"> -->
-    </div>
+    </div> -->
 </template>
 <script>
-
-import cloudinary from '../../services/cloudinaryService.js'
+import cloudinaryService from "../../services/cloudinaryService.js";
 export default {
   name: "edit",
 
@@ -52,7 +71,7 @@ export default {
         occupiedDates: [],
         images: []
       },
-
+      categories: [],
       imgUrl: "",
       fileUpload: ""
     };
@@ -72,41 +91,46 @@ export default {
     updateItem() {
       const itemId = this.$route.params.id;
       if (itemId) {
-        // console.log("updating item", this.itemToUpdate);
-        this.$store
-          .dispatch({ type: "updateItem", item: this.itemToUpdate })
-          .then(item => {
-            this.itemToUpdate = this.getEmptyItem;
-            this.$router.push("/user/" + this.user._id);
-          });
+        console.log("updating item", this.itemToUpdate);
+        this.$store.dispatch({ type: "updateItem", item: this.itemToUpdate });
+        // .then(item => {
+        //   this.itemToUpdate = this.getEmptyItem;
+        //   // this.$router.push("/user/" + this.user._id);
+        // });
       } else {
-        this.$store
-          .dispatch({ type: "addNewItem", item: this.itemToUpdate })
-          .then(item => {
-            this.itemToUpdate = this.getEmptyItem();
-            this.$router.push("/user/" + this.user._id);
-          });
+        this.$store.dispatch({ type: "addNewItem", item: this.itemToUpdate });
+        // .then(item => {
+        //   this.itemToUpdate = this.getEmptyItem();
+        //   // this.$router.push("/user/" + this.user._id);
+        // });
       }
+      this.itemToUpdate = this.getEmptyItem;
+      this.imgUrl = "";
+      this.$router.push("/user/" + this.user._id);
     },
 
     handleFileUpload(ev) {
-      // console.log("event", ev);
-      this.fileUpload = ev.target.files[0].baseURI;
-      // console.log(this.fileUpload);
+      console.log("event", ev);
+      this.fileUpload = ev.target.files[0];
+      console.log(this.fileUpload);
 
-      cloudinary.cloudinary.uploader.upload(
-        this.fileUpload,
-        { crop: "limit", tags: "samples", width: 3000, height: 2000 },
-        function(result) {
-          // console.log(result);
-        }
-      );
+      cloudinaryService.doUploadImg(this.fileUpload).then(img => {
+        this.imgUrl = img.url;
+        console.log("img url is", this.imgUrl);
+        let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.images));
+        newArr.push(this.imgUrl);
+        this.itemToUpdate.images = newArr;
+      });
     },
 
     loadItem(itemId) {
       this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
         this.itemToUpdate = { ...item };
       });
+    },
+
+    clear() {
+      this.$refs.form.reset();
     },
 
     getEmptyItem() {
@@ -141,8 +165,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.edit-item {
+form {
+  margin: 20px 0;
+}
+
+.v-label.v-label--active {
+  color: #00d8ae;
+}
+.v-input {
   width: 50vw;
+  outline: #00d8ae;
+  margin: 20px 0;
+}
+.v-menu__content {
+  top: 0;
+  left: 0;
+}
+
+.v-list {
+  top: 0;
+}
+
+.actions{
+  display: flex;
+  margin: 10px 0;
 }
 
 form {
@@ -153,9 +199,48 @@ form {
 
 input,
 select {
-  border: 1px solid black;
-  margin: 10px;
+  border-bottom: 1px solid black;
+  width: 50%;
   padding: 5px;
+}
+
+.file-input.custom {
+  /*your custom styles*/
+  background: #00d8ae;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.file-input {
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-input>* {
+  pointer-events: none;
+}
+
+.file-input>input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: all;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+
+img {
+  width: 160px;
+  height: 160px;
+  margin: 10px 10px;
+  border: 1px solid;
 }
 
 .select-category {

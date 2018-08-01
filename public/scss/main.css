@@ -1,4 +1,6 @@
-
+* {
+  box-sizing: border-box;
+}
   @font-face {
     font-family: 'Roboto Slab';
     src: url('../../src/assets/fonts/roboto/RobotoSlab-Light.ttf');
@@ -17,4 +19,16 @@
 
   .bold-font{
     font-family: 'Roboto Slab-bold', serif;
+    }
+
+    a{
+      cursor: pointer;
+    }
+
+    .v-btn{
+      min-width: 200px;
+    }
+
+    .flex-column{
+      flex-direction: column;
     }

@@ -1,7 +1,7 @@
 <template>
     <v-layout row justify-center>
         <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-btn class="btn-book" slot="activator">Book Now!</v-btn>
+            <v-btn class="btn-book bold-font" slot="activator">Book Now!</v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline"> In order to book this item please sign up:

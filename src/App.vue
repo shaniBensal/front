@@ -12,15 +12,18 @@
     </div> -->
     <nav-bar></nav-bar>
     <router-view/>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 
 import navBar from './components/navBar.vue'
+import appFooter from './components/footer.vue'
 export default {
 components:{
-  navBar
+  navBar,
+  appFooter
  }
 }
 </script>

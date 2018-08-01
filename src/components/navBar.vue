@@ -82,7 +82,7 @@ export default {
       color: #00d8ae;
     }
   }
-  a:hover {
+  a:hover, .logo:hover {
     color: #ccc;
   }
   // background-color: #ccc;

@@ -360,78 +360,82 @@ Comment -->
 <script>
 // <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   data: () => ({
-    searchStr : '',
+    searchStr: "",
     lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
-    
+
     slides: [
       {
         src:
-          'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title : 'Dana Loremovich, 28, New York City',
-        text : 'Amazing products, amazing price. great website by the way.'
+          "https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Dana Loremovich, 28, New York City",
+        text: "Amazing products, amazing price. great website by the way."
       },
       {
-        src: 'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800',
-        title: 'George Orwell, 36, Tel Aviv',
-        text: 'What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800",
+        title: "George Orwell, 36, Tel Aviv",
+        text:
+          "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       },
       {
-        src: 'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750',
-        title: 'Yonit Jhonson, 44, Monaco',
-        text: 'I thought it is a waste of time and money but I was surprised it was actually great!'
+        src:
+          "https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750",
+        title: "Yonit Jhonson, 44, Monaco",
+        text:
+          "I thought it is a waste of time and money but I was surprised it was actually great!"
       },
       {
-        src: 'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title: 'Ofir Yakito, 22, Bogota',
-        text: 'BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Ofir Yakito, 22, Bogota",
+        text:
+          "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
     ]
   }),
-    
-    // items: [
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800'
-    //   }
-    // ]
 
-  name: 'home',
+  // items: [
+  //   {
+  //     src:
+  //       'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800'
+  //   },
+  //   {
+  //     src:
+  //       'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800'
+  //   },
+  //   {
+  //     src:
+  //       'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750'
+  //   },
+  //   {
+  //     src:
+  //       'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800'
+  //   }
+  // ]
+
+  name: "home",
   components: {
     HelloWorld
   },
 
-  methods : {
+  methods: {
     onSearch() {
-      console.log('query for search:',this.searchStr);
-      this.$router.push(`/item/?search=${this.searchStr}`)
+      // console.log('query for search:',this.searchStr);
+      this.$router.push(`/item/?search=${this.searchStr}`);
     },
 
-    onCategory(category){
-          this.$router.push(`/item/?category=${category}`);
-    },
+    onCategory(category) {
+      this.$router.push(`/item/?category=${category}`);
+    }
   }
-}
-
+};
 </script>
 
 <style scoped>
-
 * {
   box-sizing: border-box;
 }
@@ -462,7 +466,7 @@ export default {
 
 .testing {
   height: 100%;
-  background-image: url('https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg');
+  background-image: url("https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg");
 }
 
 /* .test1 {
@@ -481,14 +485,14 @@ h1 {
 .pic3 {
   min-height: 240px;
   /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
-  background-image: url('https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
   cursor: pointer;
 }
 
 .pic2 {
   height: 180px;
-  background-image: url('http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg');
+  background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg");
   background-size: cover;
   background-position-y: 82%;
   margin-bottom: 150px;
@@ -497,7 +501,7 @@ h1 {
 
 .pic1 {
   height: 220px;
-  background-image: url('http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg');
+  background-image: url("http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg");
   background-size: cover;
   background-position-x: 45%;
   cursor: pointer;
@@ -505,7 +509,7 @@ h1 {
 
 .pic1b {
   height: 220px;
-  background-image: url('https://vgsisrael-vgs.netdna-ssl.com/wp-content/uploads/2017/01/ps4-slim-500-glacier-white2.jpg');
+  background-image: url("https://vgsisrael-vgs.netdna-ssl.com/wp-content/uploads/2017/01/ps4-slim-500-glacier-white2.jpg");
   background-size: cover;
   background-position-x: 65%;
   cursor: pointer;
@@ -513,7 +517,7 @@ h1 {
 
 .pic0 {
   height: 200px;
-  background-image: url('https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570');
+  background-image: url("https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570");
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;
@@ -568,7 +572,6 @@ opinions.container {
   background-color: rgba(190, 240, 0, 0.6);
 }
 
-
 /* .pic-cover {
   margin: 0 auto;
   padding: 0;
@@ -582,13 +585,20 @@ opinions.container {
 } */
 
 .opaque-background {
-    /* content: ''; */
-    background: linear-gradient( rgba(30,30,60,0) ,rgba(30,30,60,0.0), rgba(30,30,60,0), rgba(0,0,0,0.4), rgba(0,0,0,0.4),rgba(30,30,60,0.1));
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    /* opacity: 0.95; */
+  /* content: ''; */
+  background: linear-gradient(
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4),
+    rgba(30, 30, 60, 0.1)
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  /* opacity: 0.95; */
 }
 
 .header-search-bar {
@@ -601,7 +611,7 @@ opinions.container {
   bottom: 28%;
 }
 
-.opinions-container{
+.opinions-container {
   font-size: 2em;
   margin-bottom: 50px;
 }
@@ -611,23 +621,30 @@ opinions.container {
 } */
 
 #header-carousel {
-  text-shadow : 0 0 2px grey;
-  text-align : left;
+  text-shadow: 0 0 2px grey;
+  text-align: left;
 }
 
 .v-jumbotron {
   /* position: absolute; */
   /* z-index: 22; */
   /* height: 150px; */
-  background: linear-gradient( 90deg, rgba(255,255,255,1), rgba(0,0,0,0.5), rgba(255,255,255,0), rgba(0,0,0,0), rgba(0,0,0,0));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1),
+    rgba(0, 0, 0, 0.5),
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0)
+  );
 }
 
-#header-carousel h3  {
- width: 280px;
+#header-carousel h3 {
+  width: 280px;
 }
 
 #header-carousel .subheading {
-  width : 220px;
+  width: 220px;
   display: inline-block;
   /* position: absolute;
   left: 150px; */
@@ -640,9 +657,8 @@ opinions.container {
 } */
 
 .v-card h1 {
-  text-shadow : 0 0 4px black;
+  text-shadow: 0 0 4px black;
 }
-
 </style>
 
 <style scoped lang="stylus">

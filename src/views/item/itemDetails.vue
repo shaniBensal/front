@@ -1,56 +1,52 @@
 <template>
     <section v-if="itemForDisplay">
-        <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
+        <!-- :unAvailableDates="itemForDisplay.occupiedDates" -->
+        <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container d-inline-flex">
             <!-- <div > -->
-                <div class="item-details d-flex">
-                    <div>
-                        <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
-                        <span class="bold-font">{{itemForDisplay.price}}$ For day </span>
-                    </div>
-                    <div class="spacer-paragrph">
-                        <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
-                        <label v-if="owner">{{owner.name}} </label>
-                        <a class="bold-font">Contat seller</a>
-                    </div>
-                    <div class="spacer-paragrph">
-                        <i class="fas fa-map-marker-alt"></i> Pick up from: Tel Aviv (2Km from you)
-                    </div>
-                    <p>Description: {{itemForDisplay.description}}</p>
-                    <div class="d-flex flex-column" v-if="itemForDisplay.images">
-                        <img class="main-image" :src="mainImage">
-                        <div class="spacer-paragrph"></div>
-                        <div class="image-gallery d-flex">
+            <div class="item-details d-flex">
+                <div>
+                    <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
+                    <span class="bold-font">{{itemForDisplay.price}}$ For day </span>
+                </div>
+                <div class="spacer-paragrph">
+                    <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
+                    <label v-if="owner">{{owner.name}} </label>
+                    <a class="bold-font">Contat seller</a>
+                </div>
+                <div class="spacer-paragrph">
+                    <i class="fas fa-map-marker-alt"></i> Pick up from: Tel Aviv (2Km from you)
+                </div>
+                <p>Description: {{itemForDisplay.description}}</p>
+                <div class="d-flex flex-column" v-if="itemForDisplay.images">
+                    <img class="main-image" :src="mainImage">
+                    <div class="spacer-paragrph"></div>
+                    <div class="image-gallery d-flex">
                         <div v-if="(itemForDisplay.images).length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
                         </div>
-                        </div>
-                        <div class="spacer-paragrph">
-                            Pick up from:
-                            <div class="show-map">
-                                <GmapMap ref="mapRef" :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 300px; height: 200px">
-                                    <GmapMarker :key="index" v-for="(m, index) in markers" :position="google" :clickable="true" :draggable="true" @click="center=m.position"
-                                    />
-                                </GmapMap>
-                            </div>
+                    </div>
+                    <div class="spacer-paragrph">
+                        Pick up from:
+                        <div class="show-map">
+                            <GmapMap ref="mapRef" :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 300px; height: 200px">
+                                <GmapMarker :key="index" v-for="(m, index) in markers" :position="google" :clickable="true" :draggable="true" @click="center=m.position"
+                                />
+                            </GmapMap>
                         </div>
                     </div>
-                    <div>
-                        Rank our product:
-                        <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
-                    </div>
-                    reviews:
                 </div>
-                <!-- <div class="item-details d-flex"> -->
-                  <div class="date-book">
+                <div>
+                    Rank our product:
+                    <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
+                </div>
+                reviews:
+            </div>
+            <!-- <div class="item-details d-flex"> -->
+            <div class="date-book">
                 <div>
                     <i class="far fa-calendar-alt"></i> Availability:</div>
                 <date-picker class="spacer-right" @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
-                
-                
-                
-                
-                
                 <!-- <v-flex class="d-inline-flex">
             <div class="date-picker-schedual table-container">
                 <v-date-picker header-color="blue" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
@@ -59,14 +55,14 @@
                 <v-date-picker header-color="blue" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
             </div>
         </v-flex> -->
-                <sign-up-modal v-if="!user"></sign-up-modal>
+                <sign-up-modal v-if="!user" @signedUp="bookNow"></sign-up-modal>
                 <div v-else>
                     <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
                 </div>
             </div>
             <!-- </div> -->
         </div>
-        
+
     </section>
 </template>
 <script>

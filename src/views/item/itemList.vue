@@ -28,11 +28,11 @@
             </v-btn-toggle>
         </v-toolbar>
 
-        <ul class="items-list-random">
+        <!-- <ul class="items-list-random">
             <li v-for="item in itemsForDisplay" :key="item._id">
                 <item-random :item="item"></item-random>
             </li>
-        </ul>
+        </ul> -->
 
         <ul class="items-list">
             <li v-for="item in itemsForDisplay" :key="item._id">
@@ -145,6 +145,7 @@ ul {
   /* display: flex;
   flex-wrap: wrap; */
   padding: 0;
+  margin: 20px 0px;
   /* justify-content: center; */
 
   display: grid;

@@ -19,39 +19,11 @@
         <v-btn @click="clear">clear</v-btn>
         </div>
     </v-form>
-    <!-- <div class="edit-item">
-        <form @submit.prevent="updateItem">
-            <label>Item name:
-                <input type="text" v-model="itemToUpdate.title" placeholder="add item name..">
-            </label>
-            <label>Item price:
-                <input type="text" v-model="itemToUpdate.price">$
-            </label>
-            Short description
-            <textarea v-model="itemToUpdate.description"></textarea>
-            <label>Select item category:
-                <select v-model="itemToUpdate.category">
-                    <option v-for="(category,idx) in categories" :key="idx">{{categories[idx]}}</option>
-                </select>
-            </label>
-
-            <div class="upload">
-              <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
-              <img :src ="imgUrl" v-if="imgUrl">
-              <input type="file" @change="handleFileUpload($event)" >
-              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
-
-            </div>
-
-            
-            <button>Save</button>
-        </form>
-    </div> -->
 </template>
 <script>
 import cloudinaryService from "../../services/cloudinaryService.js";
 export default {
-  name: "itemEdit",
+  name: "userEdit",
 
   data() {
     return {

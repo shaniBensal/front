@@ -20,7 +20,7 @@
                                 <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <v-text-field v-model="user.adress" label="Adress" required></v-text-field>
+                                <v-text-field v-model="user.address" label="address" required></v-text-field>
                             </v-flex>
                             <!-- <v-flex xs12 sm6>
                                 <v-text-field v-model="user.image" label="image URL" required></v-text-field>
@@ -49,7 +49,7 @@ export default {
         name: "",
         email: "",
         password: "",
-        adress: ""
+        address: ""
         // image:''
       }
     };
@@ -57,9 +57,9 @@ export default {
 
   methods: {
     saveNewUser() {
-      this.$store
-        .dispatch({ type: "addUser", user: this.user })
-        .then(_ => (this.dialog = false));
+      this.$store.dispatch({ type: "updateUser", user: this.user });
+      this.$emit("signedUp");
+      this.dialog = false;
     }
   },
   computed: {}

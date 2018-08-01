@@ -433,7 +433,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .outer-container {
   margin: 0 auto;
   max-width: 1080px;

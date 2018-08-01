@@ -1,56 +1,72 @@
 <template>
     <section v-if="itemForDisplay">
-      <book-item v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
-      <div v-else>
-        <div class="main-container d-inline-flex">
-            <div class="carousel">
-                <v-carousel>
-                    <v-carousel-item v-for="(item,i) in itemForDisplay.images" :key="i" :src="itemForDisplay.images[i]">
-                    </v-carousel-item>
-                </v-carousel>
-            </div>
-            <div class="item-details d-inline-flex">
-                <h1> {{itemForDisplay.title}} ⭐({{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}})</h1>
-                <div class="owner-pic"></div>
-                <label v-if="owner">{{owner.name}}</label>
-                <span>Price: {{itemForDisplay.price}}$ per day </span>
-                <div>pick up from: Tel Aviv (2Km from you)</div>
-                Description:
-                <p>{{itemForDisplay.description}}</p>
-                <div class="text-xs-center">
+        <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
+        <div v-else class="main-container d-inline-flex">
+            <!-- <div > -->
+                <div class="item-details d-flex">
+                    <div>
+                        <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
+                        <span class="bold-font">{{itemForDisplay.price}}$ For day </span>
+                    </div>
+                    <div class="spacer-paragrph">
+                        <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
+                        <label v-if="owner">{{owner.name}} </label>
+                        <a class="bold-font">Contat seller</a>
+                    </div>
+                    <div class="spacer-paragrph">
+                        <i class="fas fa-map-marker-alt"></i> Pick up from: Tel Aviv (2Km from you)
+                    </div>
+                    <p>Description: {{itemForDisplay.description}}</p>
+                    <div class="d-flex flex-column" v-if="itemForDisplay.images">
+                        <img class="main-image" :src="mainImage">
+                        <div class="spacer-paragrph"></div>
+                        <div class="image-gallery d-flex">
+                        <div v-if="(itemForDisplay.images).length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
+                            <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
+                        </div>
+                        </div>
+                        <div class="spacer-paragrph">
+                            Pick up from:
+                            <div class="show-map">
+                                <GmapMap ref="mapRef" :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 300px; height: 200px">
+                                    <GmapMarker :key="index" v-for="(m, index) in markers" :position="google" :clickable="true" :draggable="true" @click="center=m.position"
+                                    />
+                                </GmapMap>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        Rank our product:
+                        <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
+                    </div>
+                    reviews:
                 </div>
-                <sign-up-modal v-if="!user"></sign-up-modal>
-                <div v-else><v-btn class="btn-book" @click="bookNow">Book Now</v-btn></div>
-                <!-- <book-item-modal v-else :selectedDate="selectedDate"></book-item-modal> -->
-                {{selectedDate}}
+                <!-- <div class="item-details d-flex"> -->
+                  <div class="date-book">
+                <div>
+                    <i class="far fa-calendar-alt"></i> Availability:</div>
+                <date-picker class="spacer-right" @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
+                
+                
+                
+                
+                
+                <!-- <v-flex class="d-inline-flex">
+            <div class="date-picker-schedual table-container">
+                <v-date-picker header-color="blue" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
             </div>
+            <div class="date-picker-schedual table-container">
+                <v-date-picker header-color="blue" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
+            </div>
+        </v-flex> -->
+                <sign-up-modal v-if="!user"></sign-up-modal>
+                <div v-else>
+                    <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
+                </div>
+            </div>
+            <!-- </div> -->
         </div>
-        Availability:
-        <date-picker @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
-        Pick up from:
-        <div class="show-map">
-   <GmapMap
-   ref="mapRef" 
-  :center="{lat:10, lng:10}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="width: 300px; height: 200px"
->
-
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="google"
-    :clickable="true"
-    :draggable="true"
-    @click="center=m.position"
-  />
-</GmapMap>
-</div>
-        Rank our product:
-        <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
-        reviews:
-</div>
+        
     </section>
 </template>
 <script>
@@ -69,6 +85,9 @@ export default {
       dialog: false,
       owner: {},
       selectedDate: "",
+      // selectedEndDate:"",
+      images: [],
+      mainImage: "",
       markers: []
     };
   },
@@ -87,28 +106,34 @@ export default {
     }
   },
   mounted() {
-          console.log('mappp', this.$refs)
-          setTimeout(() =>console.log('refs',this.$refs.mapRef), 2000)
-
+    // console.log('mappp', this.$refs)
+    // console.log('refs',this.$refs.mapRef)
     // this.$refs.mapRef.$mapPromise.then(map => {
     //   map.panTo({ lat: 1.66, lng: 103.8 });
     //   console.log('1111',map)
-
     // });
   },
 
   methods: {
     loadItem(itemId) {
       this.$store.dispatch({ type: "loadItemById", itemId }).then(item => {
+        this.images = item.images;
+        this.mainImage = item.images[0];
         this.loadOwner(item.ownerId);
       });
+    },
+    switchMainImg(idx) {
+      this.mainImage = this.images[idx];
     },
     goBackToList() {
       this.$router.push("/app");
       this.$store.commit({ type: "unSetItem" });
     },
-    selectDate(date) {
-      this.selectedDate = date;
+    cancelDeal() {
+      this.isBooked = false;
+    },
+    selectFirstDate(date) {
+      this.selectedStartDate = date;
     },
     setRating(rating) {
       this.$store.commit({ type: "updateItemRank", rating });
@@ -121,55 +146,91 @@ export default {
     },
     bookNow() {
       this.isBooked = true;
+    },
+    selectDate(date) {
+      this.selectedDate = date;
     }
   },
 
   components: {
     datePicker,
     signUpModal,
-    bookItem,
-    
+    bookItem
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
-h1{
-  color: black;
+// .bold-font{
+// font-family: 'Roboto Slab-bold', serif;
+// }
+.date-book {
+  width: 50%;
+  height: fit-content;
+  position: sticky;
+  top: 10px;
 }
+
 .main-container {
-  width: 100%;
+  min-width: 80vw;
+
   margin: 20px;
+  // padding: 10px;
   font-family: "Roboto Slab";
 }
 .carousel {
   margin: 0px 10px;
-  width: 50%;
+  width: 30%;
+}
+
+.main-image {
+  max-width: 200px;
+}
+
+.small-image {
+  width: max-content;
 }
 
 .item-details {
-  padding: 35px;
+  padding: 20px 0px 0px 20px;
   flex-direction: column;
-  width: 50%;
+  text-align: left;
+  width: 40%;
   align-items: end;
   color: black;
 }
+
+.spacer-paragrph {
+  margin: 18px 0px;
+}
 .owner-pic {
   width: 50px;
-  border-radius: 20px;
+  height: 50px;
+  border-radius: 30%;
   background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+.spacer-right {
+  margin: 0px 10px;
+}
+
+.thumb-photo {
+  width: 80px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .show-map {
   display: flex;
   justify-content: center;
-} 
+}
 
 .btn-book {
   background-color: #f56400;
+  // max-width: 200px;
+  margin-top: 15px;
 }
 </style>
 

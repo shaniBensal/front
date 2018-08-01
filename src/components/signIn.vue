@@ -19,7 +19,7 @@
                 <input type="text" placeholder="Name" v-model="signUp.name">
                 <input type="email" placeholder="Email" v-model="signUp.email">
                 <input type="password" placeholder="Password" v-model="signUp.password">
-                <input type="text" placeholder="Adress" v-model="signUp.adress">
+                <input type="text" placeholder="address" v-model="signUp.address">
                 <button class="btn" @click.prevent="submitSignUp">Submit</button>
                 <button class="btn" @click.prevent="close">Cancel</button>
             </div>
@@ -39,7 +39,7 @@ export default {
       signUp: {
         name: "",
         password: "",
-        adress: "",
+        address: "",
         email: ""
       }
     };
@@ -54,13 +54,13 @@ export default {
 
     submitSignUp() {
       this.$store
-        .dispatch({ type: "addUser", user: this.signUp })
+        .dispatch({ type: "updateUser", user: this.signUp })
         .then(res => {
           this.$emit("close");
           this.signUp = {
             name: "",
             password: "",
-            adress: "",
+            address: "",
             email: ""
           };
         })

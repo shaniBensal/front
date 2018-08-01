@@ -23,19 +23,24 @@ export default {
       var result = "";
       var month = "";
       var d = new Date();
+      var day = "";
       if (d.getMonth() + 1 < 10) {
         month = "0" + (d.getMonth() + 1);
       } else {
         month = d.getMonth() + 1;
       }
-      result += d.getFullYear() + "-" + month + "-" + d.getDate();
+      if (d.getDate() + 1 < 10) {
+        day = "0" + d.getDate();
+      } else {
+        day = d.getDate();
+      }
+      result += d.getFullYear() + "-" + month + "-" + day;
       this.date = result;
       this.today = result;
     },
 
     allowedDates(dateStr) {
       // console.log(this.unAvailableDates);
-
       return !this.unAvailableDates.includes(dateStr);
     },
 
@@ -56,6 +61,6 @@ export default {
 
 .v-btn--disabled {
   color: grey;
-  opacity: .2;
+  opacity: 0.2;
 }
 </style>

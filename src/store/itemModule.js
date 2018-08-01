@@ -18,7 +18,8 @@ export default {
       'kids',
       'events',
       'hardware'
-    ]
+    ],
+    filteredItems: []
   },
 
   mutations: {
@@ -29,10 +30,10 @@ export default {
       state.items = state.items.filter(item => item._id !== itemId);
     },
     setItems(state, { items }) {
-      console.log('mutations / setItems got items:', items);
+      // console.log('mutations / setItems got items:', items);
       state.items = items;
     },
-    updateItemO(state, { item }) {
+    updateItem(state, { item }) {
       var selectedItemIndex = state.items.findIndex(
         currItem => item._id === currItem._id
       );
@@ -43,6 +44,10 @@ export default {
     },
     unSetSelctedItem(state) {
       state.selectedItem = {};
+    },
+
+    setFilterItems(state, category) {
+      state.filteredItems = state.items.filter(item => item.category);
     },
 
     // setFilter(state, payload) {
@@ -56,7 +61,7 @@ export default {
         state.selectedItem.ranking.count;
     },
 
-    setFiltersByCategory(state,  {category}) {
+    setFiltersByCategory(state, { category }) {
       state.filters.byCategory = category;
       // var res1 = state.items.sfilter(item => {
       //   return item.title.toLowerCase().includes(state.filters.byTitle.toLowerCase()) ||
@@ -70,6 +75,8 @@ export default {
       // });
       // state.itemsToShow = res2;
     },
+
+
 
     setFiltersByTitle(state, { txt }) {
       state.filters.byTitle = txt;
@@ -111,14 +118,14 @@ export default {
     //     state.itemsToShow = res2;
     //   }
 
-  //     console.log(' %%%%  ff 333 STATE.FILTERS %%%% ', state.filters);
-  //     console.log(' %%%%  ff 333 STATE.ItemsToShow %%%% ', state.itemsToShow);
-  //   }
+    //     console.log(' %%%%  ff 333 STATE.FILTERS %%%% ', state.filters);
+    //     console.log(' %%%%  ff 333 STATE.ItemsToShow %%%% ', state.itemsToShow);
+    //   }
   },
 
   getters: {
     itemsForDisplay(state) {
-      
+
       var items = state.items;
       if (state.filters.byTitle) {
         items = items.filter(item => {
@@ -126,8 +133,8 @@ export default {
             .toLowerCase()
             .includes(state.filters.byTitle.toLowerCase()) ||
             item.description
-            .toLowerCase()
-            .includes(state.filters.byTitle.toLowerCase())
+              .toLowerCase()
+              .includes(state.filters.byTitle.toLowerCase())
         });
       }
 
@@ -140,9 +147,10 @@ export default {
           });
         });
       }
-      
+
       return items;
     },
+
 
     // filteredItems(state, getters) {
     //   return categoryIdx => {
@@ -187,12 +195,16 @@ export default {
 
     categories(state) {
       return state.categories;
+    },
+
+    filteredItems(state) {
+      return state.filteredItems;
     }
   },
   actions: {
     loadItems(context, payload) {
       return itemsService.getAllItems(context.state.filterBy).then(items => {
-        console.log(' ACTIONS got items:', items);
+        // console.log(' ACTIONS got items:', items);
         context.commit({ type: 'setItems', items });
         // context.commit({ type: 'filterItemsToShow' });
         return context.state.items;
@@ -219,9 +231,10 @@ export default {
     },
 
     updateItem(context, { item }) {
+      // console.log(item);
       if (!item) item = context.state.selectedItem;
       return itemsService.updateItem(item).then(item => {
-        return context.commit({ type: 'updateItemO', item });
+        return context.commit({ type: 'updateItem', item });
       });
     }
   }

@@ -68,7 +68,7 @@ export default {
       //     name: "",
       //     email: "",
       //     password: "",
-      //     adress: ""
+      //     address: ""
       //     // image:''
       //   }
     };

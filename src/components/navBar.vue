@@ -18,7 +18,9 @@
                 <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
                 <router-link to="/about">About</router-link> |
                 <router-link to="/item">items</router-link>
-
+                <router-link :to="'/user/'+user._id" v-if="user">
+                    <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
+                </router-link>
             </div>
         </div>
         <div>
@@ -26,7 +28,6 @@
         </div>
     </header>
 </template>
-
 <script>
 import signIn from "./signIn.vue";
 
@@ -81,7 +82,7 @@ export default {
       color: #00d8ae;
     }
   }
-  a:hover {
+  a:hover, .logo:hover {
     color: #ccc;
   }
   // background-color: #ccc;
@@ -96,6 +97,15 @@ export default {
     align-self: center;
     padding: 0 10px;
   }
+
+  .user-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 
   // .profile{
 

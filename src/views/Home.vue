@@ -1,3 +1,11 @@
+<!--
+ ***********  Cloudinary API Details  ***********
+ API key: 426892163833235
+ API secret: WRXQ4xqAJq2UPOdeHPbD0iduQ8o
+ Environment variable: CLOUDINARY_URL=cloudinary://426892163833235:WRXQ4xqAJq2UPOdeHPbD0iduQ8o@tomerberman
+-->
+
+
 <template>
 
 <div class="outer-container">
@@ -32,18 +40,16 @@
             </v-btn> -->
 
 <v-form @submit="onSearch" class="header-search-bar">
-  <v-card
+  <v-card 
     class="pa-3"
     color="transparent"
     flat
   >
-    <v-toolbar
+    <v-toolbar 
       dense
       floating
-      inverted-scroll
-      scroll-off-screen
     >
-      <v-text-field 
+      <v-text-field  
         v-model="searchStr"
         autofocus
         hide-details
@@ -71,87 +77,22 @@
         <v-layout
           column
           wrap
-          class="my-5"
+          class="my-5 site-description"
           align-center
         >
-          <v-flex xs12 sm4 class="my-3">
+          <v-flex class="my-3" xs12 sm4>
             <div class="text-xs-center">
-              <h2 class="headline">We Rent.</h2>
+              <h2 class="headline">Social Renting Has Never Been Easier</h2>
               <span class="subheading">
-                It's that simple
+                Rent Anything You Need & Rent-out Everything You Don't Need
               </span>
             </div>
-          </v-flex>
-          <v-flex xs12>
-            <v-container grid-list-xl>
-              <v-layout row wrap align-center>
-                <v-flex xs12 md4>
-                  <v-card class="card-test1 elevation-0 transparent">
-                    <v-card-text @click="$router.push('/item')" class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline text-xs-center v-float">1. Choose What</div>
-                      <br>
-                                  <img src="http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png" alt="Vuetify.js" height="200">
-                    <v-card-text>
-                      <!-- A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      Search the item you wish for. it can be anything
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="card-test2 elevation-0 transparent">
-                    <v-card-text class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline">2. Choose Where</div>
-                      <br>
-                                  <!-- <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200"> -->
-                                  <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200">
-
-                    <v-card-text>
-                      <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      It doesn't metter where you are, just choose the location of pick-up 
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="card-test3 elevation-0 transparent">
-                    <v-card-text class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">build</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline text-xs-center">3. Choose When</div>
-                      <br>
-                                  <!-- <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200"> -->
-                                   <img src="https://ohiovalley.nfty.org/wp-content/uploads/sites/43/2017/04/calendar.png" alt="Vuetify.js" height="200">
-
-                    <v-card-text>
-                      <!-- A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      Last step, choose date - we will show you the availability of each item.
-                      <!-- that's it , you are ready to ba a part of We Rent community. -->
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-              </v-layout>
-            </v-container>
           </v-flex>
         </v-layout>
       </section>
 
 
-  <v-container class="highlighted-products" fluid grid-list-lg>
+  <v-container class="highlighted-products" fluid grid-list-sm>
     <v-layout row wrap>
       <v-flex  d-flex xs12 order-xs5>
         <v-layout column>
@@ -225,27 +166,87 @@
   </v-container>
 
 
-<!-- Comment
-<div class="opinions-container">
-  <div class="top-left">George Orwell, 36, Tel Aviv: "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."</div>
-</div>
-  <v-carousel class="opinions" hide-controls hide-delimiters interval=2500 transition="fade">
-     <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade"
-      transition="fade"
-    ></v-carousel-item>
-  </v-carousel>
-Comment -->
+
+<router-link class="see-more" to="/item">
+  <v-btn class="all-items">
+    See 7,400+ More
+  </v-btn>
+</router-link>
+
+  
+          <v-flex xs12>
+            <v-container grid-list-xl>
+              <v-layout row wrap align-center>
+                <v-flex xs12 md4>
+                  <v-card class="card-test1 elevation-0 transparent">
+                    <v-card-text @click="$router.push('/item')" class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                    </v-card-title>
+                      <div class="headline text-xs-center v-float">1. Choose What</div>
+                      <br>
+                                  <img src="http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png" alt="Vuetify.js" height="200">
+                    <v-card-text>
+                      <!-- A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      Search the item you wish for. it can be anything
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="card-test2 elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                    </v-card-title>
+                      <div class="headline">2. Choose Where</div>
+                      <br>
+                                  <!-- <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200"> -->
+                                  <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200">
+
+                    <v-card-text>
+                      <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      It doesn't metter where you are, just choose the location of pick-up 
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="card-test3 elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">build</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                    </v-card-title>
+                      <div class="headline text-xs-center">3. Choose When</div>
+                      <br>
+                                  <!-- <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200"> -->
+                                   <img src="https://ohiovalley.nfty.org/wp-content/uploads/sites/43/2017/04/calendar.png" alt="Vuetify.js" height="200">
+
+                    <v-card-text>
+                      <!-- A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      Choose date, check availability and book!.
+                      <!-- that's it , you are ready to ba a part of We Rent community. -->
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
+
 
     <div class="opinions-container">
       <div>Customers Recommend:</div>
     </div>
 
    <div id="header-carousel">
-      <v-carousel class="opinions" hide-controls hide-delimiters interval=2500 transition="fade">
+      <v-carousel class="opinions" hide-controls hide-delimiters interval=3000 transition="fade">
         <v-carousel-item v-for="(slide, i) in slides"
          :src="slide.src" 
          :key="i"
@@ -254,7 +255,7 @@ Comment -->
       >
           <v-jumbotron dark>
             <v-container fill-height>
-              <v-layout align-center>
+              <v-layout align-top align-left>
                 <v-flex>
                   <h3 class="display-3">{{ slide.title }}</h3>
                   <span class="subheading">{{ slide.text }}</span>
@@ -266,172 +267,77 @@ Comment -->
       </v-carousel>
     </div>
 
-
 <br>
 <br>
 <br>
 
-
-
-
-
-      <section>
-        <v-container grid-list-xl>
-          <v-layout row wrap justify-center class="my-5">
-            <v-flex xs12 sm4>
-              <v-card class="elevation-0 transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Company info</div>
-                </v-card-title>
-                <v-card-text>
-                  A4 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 sm4 offset-sm1>
-              <v-card class="elevation-0 transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Contact us</div>
-                </v-card-title>
-                <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                </v-card-text>
-                <v-list class="transparent">
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">phone</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>777-867-5309</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">place</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>Chicago, US</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">email</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>john@vuetifyjs.com</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </section>
-
-      <v-footer class="blue darken-2">
-        <v-layout row wrap align-center>
-          <v-flex xs12>
-            <div class="white--text ml-3 headline-1">
-              <!-- Sponsered by Coding Academy&#8482 -->
-              <!-- <v-icon class="red--text">favorite</v-icon> -->
-              <!-- by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a> -->
-              <!-- and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a> -->
-            </div>
-          </v-flex>
-        </v-layout>
-      </v-footer>
     </v-content>
-  </v-app>
-
-
-
-
-
-
+   </v-app>
 </div>
 </template>
-
-
 
 
 
 <script>
 // <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   data: () => ({
-    searchStr : '',
+    searchStr: "",
     lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
-    
+
     slides: [
       {
         src:
-          'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title : 'Dana Loremovich, 28, New York City',
-        text : 'Amazing products, amazing price. great website by the way.'
+          "https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Dana Loremovich, 28, New York City",
+        text: "Amazing products, amazing price. great website by the way."
       },
       {
-        src: 'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800',
-        title: 'George Orwell, 36, Tel Aviv',
-        text: 'What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800",
+        title: "George Orwell, 36, Tel Aviv",
+        text:
+          "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       },
       {
-        src: 'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750',
-        title: 'Yonit Jhonson, 44, Monaco',
-        text: 'I thought it is a waste of time and money but I was surprised it was actually great!'
+        src:
+          "https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750",
+        title: "Yonit Jhonson, 44, Monaco",
+        text:
+          "I thought it is a waste of time and money but I was surprised it was actually great!"
       },
       {
-        src: 'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title: 'Ofir Yakito, 22, Bogota',
-        text: 'BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Ofir Yakito, 22, Bogota",
+        text:
+          "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
     ]
   }),
     
-    // items: [
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750'
-    //   },
-    //   {
-    //     src:
-    //       'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800'
-    //   }
-    // ]
-
   name: 'home',
   components: {
     HelloWorld
   },
 
-  methods : {
+  methods: {
     onSearch() {
-      console.log('query for search:',this.searchStr);
-      this.$router.push(`/item/?search=${this.searchStr}`)
+      // console.log('query for search:',this.searchStr);
+      this.$router.push(`/item/?search=${this.searchStr}`);
     },
 
-    onCategory(category){
-          this.$router.push(`/item/?category=${category}`);
-    },
+    onCategory(category) {
+      this.$router.push(`/item/?category=${category}`);
+    }
   }
-}
-
+};
 </script>
 
 <style scoped>
-
 * {
   box-sizing: border-box;
 }
@@ -462,7 +368,7 @@ export default {
 
 .testing {
   height: 100%;
-  background-image: url('https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg');
+  background-image: url("https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg");
 }
 
 /* .test1 {
@@ -481,23 +387,23 @@ h1 {
 .pic3 {
   min-height: 240px;
   /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
-  background-image: url('https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
   cursor: pointer;
 }
 
 .pic2 {
   height: 180px;
-  background-image: url('http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg');
+  background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg");
   background-size: cover;
   background-position-y: 82%;
-  margin-bottom: 150px;
+  /* margin-bottom: 150px; */
   cursor: pointer;
 }
 
 .pic1 {
   height: 220px;
-  background-image: url('http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg');
+  background-image: url("http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg");
   background-size: cover;
   background-position-x: 45%;
   cursor: pointer;
@@ -505,7 +411,7 @@ h1 {
 
 .pic1b {
   height: 220px;
-  background-image: url('https://vgsisrael-vgs.netdna-ssl.com/wp-content/uploads/2017/01/ps4-slim-500-glacier-white2.jpg');
+  background-image: url('http://www.want.nl/wp-content/uploads/2018/01/PlayStation-4.jpg');
   background-size: cover;
   background-position-x: 65%;
   cursor: pointer;
@@ -513,29 +419,23 @@ h1 {
 
 .pic0 {
   height: 200px;
-  background-image: url('https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570');
+  background-image: url("https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570");
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;
 }
 
 .highlighted-products {
-  margin-bottom: 100px;
+  padding: 0;
+  margin-bottom: 20px;
 }
+
 
 .card-test1,
 .card-test2,
 .card-test3 {
   cursor: pointer;
 }
-
-/* .card-test1:hover,
-.card-test2:hover,
-.card-test3:hover {
-  filter: brightness(1.12);
-  background-color: #cacaca !important;
-  transition: 0.2s;
-} */
 
 .pic2:hover,
 .pic1:hover,
@@ -544,15 +444,6 @@ h1 {
 .pic3:hover {
   filter: brightness(1.11);
   transition: 0.3s;
-}
-
-.opinions {
-  margin-bottom: 150px;
-}
-
-opinions.container {
-  width: 120px;
-  height: 60px;
 }
 
 .top-left {
@@ -565,34 +456,29 @@ opinions.container {
   height: 0px;
   position: relative;
   z-index: 10;
-  background-color: rgba(190, 240, 0, 0.6);
+  /* background-color: rgba(190, 240, 0, 0.6); */
 }
 
-
-/* .pic-cover {
-  margin: 0 auto;
-  padding: 0;
-  position: absolute;
-  z-index: 10;
-  top: 10%;
-  width: 100%;
-  height: 500px;
-  background: linear-gradient(#fff,#000);
-  opacity: 0.7;
-} */
-
 .opaque-background {
-    /* content: ''; */
-    background: linear-gradient( rgba(30,30,60,0) ,rgba(30,30,60,0.0), rgba(30,30,60,0), rgba(0,0,0,0.4), rgba(0,0,0,0.4),rgba(30,30,60,0.1));
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    /* opacity: 0.95; */
+  /* content: ''; */
+  background: linear-gradient(
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4),
+    rgba(30, 30, 60, 0.1)
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  /* opacity: 0.95; */
 }
 
 .header-search-bar {
   z-index: 1;
+
 }
 
 .layout-test1 {
@@ -601,49 +487,70 @@ opinions.container {
   bottom: 28%;
 }
 
-.opinions-container{
+.opinions-container {
   font-size: 2em;
-  margin-bottom: 50px;
+  margin: 80px 0 50px 0 !important;
 }
 
-/* .opinions v-jumbotron {
-  position: absolute;
-} */
-
 #header-carousel {
-  text-shadow : 0 0 2px grey;
+  /* text-shadow : 0 0 2px grey; */
   text-align : left;
 }
 
 .v-jumbotron {
-  /* position: absolute; */
-  /* z-index: 22; */
-  /* height: 150px; */
-  background: linear-gradient( 90deg, rgba(255,255,255,1), rgba(0,0,0,0.5), rgba(255,255,255,0), rgba(0,0,0,0), rgba(0,0,0,0));
+  background: linear-gradient( 90deg, rgba(255,255,255,1), rgba(255,255,255,1), rgba(255,255,255,0.2), rgba(255,255,255,0), rgba(0,0,0,0), rgba(0,0,0,0));
 }
 
 #header-carousel h3  {
- width: 280px;
+  align-self: top;
+  font-size: 2.5rem !important;
+  color: black;
+ width: 320px;
 }
 
 #header-carousel .subheading {
-  width : 220px;
-  display: inline-block;
-  /* position: absolute;
-  left: 150px; */
-}
+    color: black;
+  font-size: 1.3em !important;
 
-/* .v-jumbotron {
-  text-shadow : 0 0 2px grey;
-  text-align : left;
-  width: 100px;
-} */
+
+  width : 240px;
+  display: inline-block;
+}
 
 .v-card h1 {
-  text-shadow : 0 0 4px black;
+  text-shadow: 0 0 4px black;
 }
 
+.v-jumbotron .theme--dark {
+  height: 100% !important;
+}
+
+div .fill-height {
+  margin: 0;
+}
+
+.site-description {
+padding: 100px 0 100px 0 !important;
+
+}
+
+
+.v-footer.blue.darken-2 {
+  background-color :#162044 !important;
+}
+
+
+.all-items {
+  background-color: #e4e7f1 !important;
+  color: black !important;
+}
+
+.see-more {
+  /* text-decoration-style: none !important; */
+}
 </style>
+
+
 
 <style scoped lang="stylus">
 .fade {

@@ -1,6 +1,7 @@
 <template>
     <section v-if="itemForDisplay">
-        <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null" :unAvailableDates="itemForDisplay.occupiedDates"></book-item>
+        <!-- :unAvailableDates="itemForDisplay.occupiedDates" -->
+        <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container d-inline-flex">
             <!-- <div > -->
                 <div class="item-details d-flex">
@@ -36,22 +37,17 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        Rank our product:
-                        <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
-                    </div>
-                    reviews:
+                <div>
+                    Rank our product:
+                    <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
                 </div>
-                <!-- <div class="item-details d-flex"> -->
-                  <div class="date-book">
+                reviews:
+            </div>
+            <!-- <div class="item-details d-flex"> -->
+            <div class="date-book">
                 <div>
                     <i class="far fa-calendar-alt"></i> Availability:</div>
                 <date-picker class="spacer-right" @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
-                
-                
-                
-                
-                
                 <!-- <v-flex class="d-inline-flex">
             <div class="date-picker-schedual table-container">
                 <v-date-picker header-color="blue" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
@@ -60,14 +56,14 @@
                 <v-date-picker header-color="blue" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
             </div>
         </v-flex> -->
-                <sign-up-modal v-if="!user"></sign-up-modal>
+                <sign-up-modal v-if="!user" @signedUp="bookNow"></sign-up-modal>
                 <div v-else>
                     <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
                 </div>
             </div>
             <!-- </div> -->
         </div>
-        
+
     </section>
 </template>
 <script>

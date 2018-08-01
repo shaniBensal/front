@@ -1,10 +1,7 @@
 <template>
 <keep-alive>
     <section>
-      <div class="container">
-        <v-toolbar>
-            <template>
-            </template>
+        <v-toolbar class="toolbar">
   
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
@@ -18,6 +15,17 @@
             </v-form>
 
       <div class="spacer"></div>
+
+        <v-btn-toggle v-model="sortings" class="transparent">
+                <div v-for="(sorting, idx) in sortings" :key="idx">
+                    <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
+                        <div>{{sorting}}</div>
+                    </v-btn>
+                </div>
+            </v-btn-toggle>
+
+      <div class="spacer"></div>
+
 
             <v-btn-toggle v-model="toggle_exclusive" class="transparent">
                 <div v-for="(category, idx) in categories" :key="idx">
@@ -33,7 +41,6 @@
                 <item-preview :item="item"></item-preview>
             </li>
         </ul>
-    </div>
     </section>
 </keep-alive>
 </template>
@@ -42,7 +49,6 @@
 
 <script>
 import itemPreview from "../../components/item/itemPreview.vue";
-// import itemRandom from "./itemRandom.vue";
 
 export default {
   name: "ItemList",
@@ -52,6 +58,7 @@ export default {
       searchStr: null,
       categories: [],
       toggle_exclusive: [],
+      sortings: ['Name','Availiblity','Price','Distance','Rating'],
       toggle_multiple: null // [1, 2, 3]
     };
   },
@@ -76,14 +83,7 @@ export default {
         query += '&category=' + category;
       }
       this.$router.push(`${this.$route.path}?${query}`);
-
-      // this.$router.push(`/item/?search=${this.searchStr}`);
       var urlStr = window.location.href;
-      // var searchParamsIndex = urlStr.indexOf('=');
-      // var searchQuery = '';
-      // if (searchParamsIndex > -1) {
-      //   searchQuery = urlStr.slice(searchParamsIndex + 1);
-      // }
       this.setFiltersByTitle(this.searchStr);
     },
     loadItems() {
@@ -117,7 +117,6 @@ export default {
 
   components: {
     itemPreview,
-    // itemRandom
   }
 };
 </script>
@@ -126,7 +125,6 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 980px;
   padding: 0 20px;
 }
 
@@ -136,10 +134,7 @@ h3 {
 }
 ul {
   list-style-type: none;
-  /* display: flex;
-  flex-wrap: wrap; */
   padding: 0;
-  /* justify-content: center; */
 
   display: grid;
   grid-gap: 20px;
@@ -197,11 +192,11 @@ v-toolbar {
 
 .v-btn.v-btn--active::before {
   background-color: white;
-  /* color: rgb(10, 117, 73); */
   opacity: 1;
 }
 
-
-
+.toolbar {
+  margin-bottom: 50px;
+}
 
 </style>

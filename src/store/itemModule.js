@@ -47,6 +47,8 @@ export default {
     },
 
     setFilterItems(state, {category}) {
+      console.log(category);
+      
       state.filteredItems = state.items.filter(
         item => item.category.some(
         currCategory => category.includes(currCategory)));

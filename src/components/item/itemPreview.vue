@@ -120,6 +120,7 @@ export default {
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
       this.distance = distance.toFixed(2);
       // console.log("distance between coords:", coords, "is:", distance, "km");
+      this.$emit('getDistance' ,this.distance )
     }
   },
 

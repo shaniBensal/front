@@ -2,7 +2,7 @@
     <section>
         <ul class="items-list" v-if="itemsForDisplay">
             <li v-for="item in itemsForDisplay" :key="item._id">
-                <item-preview :item="item"></item-preview>
+                <item-preview @click.native="goToItemDetails(item._id)" :item="item"></item-preview>
             </li>
         </ul>
     </section>
@@ -26,6 +26,8 @@ export default {
   methods: {
     loadItems() {
       this.$store.commit({ type: "setFilterItems", category:this.category });
+    },
+    goToItemDetails(){      
     }
   },
 

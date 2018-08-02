@@ -11,16 +11,17 @@
                 <label v-if="user">{{user.name}} |</label>
                 <router-link :to="'/user/'+user._id" v-if="user">My profile</router-link>
             </div>
-            <div class="links">
-                <a v-if="user" @click="logOut">log Out</a>
-                |
-                <a v-if="!user" href="#register" @click.prevent="open">Sign in | </a>
-                <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
-                <router-link to="/about">About</router-link> |
-                <router-link to="/item">items</router-link>
-                <router-link :to="'/user/'+user._id" v-if="user">
-                    <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
-                </router-link>
+            <div class="d-flex">
+              <div class="links">
+                  <a v-if="user" @click="logOut">log Out</a> | 
+                  <a v-if="!user" href="#register" @click.prevent="open">Sign in | </a>
+                  <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
+                  <router-link to="/about">About</router-link> |
+                  <router-link to="/item">items</router-link>
+              </div>
+                  <router-link :to="'/user/'+user._id" v-if="user">
+                      <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
+                  </router-link>
             </div>
         </div>
         <div>
@@ -106,6 +107,8 @@ export default {
   background-size: cover;
   background-position: center center;
 }
+
+
 
   // .profile{
 

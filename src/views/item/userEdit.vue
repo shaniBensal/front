@@ -40,6 +40,7 @@ export default {
         dateCreated: "",
         keyWords: [],
         ownerId: "",
+        bookings: [],
         occupiedDates: [],
         images: []
       },
@@ -119,6 +120,7 @@ export default {
         dateCreated: "",
         keyWords: [],
         ownerId: "",
+        bookings: [],
         occupiedDates: [],
         images: []
       };

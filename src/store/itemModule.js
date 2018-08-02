@@ -46,8 +46,10 @@ export default {
       state.selectedItem = {};
     },
 
-    setFilterItems(state, category) {
-      state.filteredItems = state.items.filter(item => item.category);
+    setFilterItems(state, {category}) {
+      state.filteredItems = state.items.filter(
+        item => item.category.some(
+        currCategory => category.includes(currCategory)));
     },
 
     // setFilter(state, payload) {

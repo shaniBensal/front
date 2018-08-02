@@ -2,7 +2,7 @@
     <div class="book-page">
         <confirm-modal :open="open" @closeModal="closeModal"></confirm-modal>
         <div class="d-inline-flex">
-            <div>
+            <div class="close-deal">
                 <div>
                     <img class="main-image" :src="item.images[0]">
                 </div>
@@ -30,11 +30,11 @@
             </div>
         </v-flex> -->
                 </div>
+                <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
+                <button class="btn bold-font" @click.prevent="cancel">Back</button>
             </div>
-            <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
-            <button class="btn bold-font" @click.prevent="cancel">Back</button>
-            <div>
-              <things-you-might></things-you-might>
+            <div class="spacer">
+                <item-list-category :item="item._id" :category="item.category"></item-list-category>
             </div>
         </div>
     </div>
@@ -42,6 +42,7 @@
 <script>
 import datePicker from "./datePicker.vue";
 import confirmModal from "./confirmModal.vue";
+import itemListCategory from "../views/item/itemListCategory.vue";
 
 export default {
   name: "BookItem",
@@ -182,7 +183,8 @@ export default {
   },
   components: {
     // datePicker,
-    confirmModal
+    confirmModal,
+    itemListCategory
   }
 };
 </script>
@@ -190,8 +192,14 @@ export default {
 <style lang="scss" scoped>
 .book-page {
   text-align: left;
+  width: 100vw;
   // margin: 5px 20px;
   margin: 10px 35px;
+}
+
+.close-deal {
+  width: 100%;
+  font-size: 1em;
 }
 
 .main-image {
@@ -200,7 +208,7 @@ export default {
 }
 
 .btn {
-  width: 60%;
+  width: 90%;
   height: 3em;
   font-size: 1.2em;
   color: #f6f6f6;
@@ -212,6 +220,10 @@ export default {
 
 .btn-book {
   background-color: #f56400;
+}
+
+.spacer {
+  margin: 0px 10px;
 }
 
 .date-picker-schedual {

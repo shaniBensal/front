@@ -26,9 +26,13 @@
                     <h4>{{item.title}}</h4>
                     <p>{{shortDescription}}</p>
                     </div>
-                    <div class="flex location">
+                    <div class="flex location" v-if="owner.address">
                         <v-icon small light>fas fa-map-marker-alt</v-icon>
-                        <p>{{this.owner.address}} {{distance}} km from you</p>
+                        <p >{{owner.address}} {{distance}} km from you</p>
+                    </div>
+                    <div class="flex location" v-else>
+                        <v-icon small light>fas fa-map-marker-alt</v-icon>
+                        <p >No location found</p>
                     </div>
                     <br>
 

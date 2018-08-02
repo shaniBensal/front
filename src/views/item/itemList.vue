@@ -36,7 +36,7 @@
             </v-btn-toggle>
         </v-toolbar>
 
-        <ul class="items-list">
+        <ul class="items-list container">
             <li v-for="item in itemsForDisplay" :key="item._id">
                 <item-preview :item="item"></item-preview>
             </li>
@@ -126,6 +126,7 @@ export default {
 <style scoped>
 .container {
   padding: 0 20px;
+  max-width: 980px;
 }
 
 h3 {

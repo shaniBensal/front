@@ -49,6 +49,12 @@ export default {
       state.selectedItem = {};
     },
 
+    setFilterItems(state, {category}) {
+      state.filteredItems = state.items.filter(
+        item => item.category.some(
+        currCategory => category.includes(currCategory)));
+    },
+
     updateItemRank(state, { rating }) {
       state.selectedItem.ranking.count = state.selectedItem.ranking.count + 1;
       state.selectedItem.ranking.avg =
@@ -60,12 +66,11 @@ export default {
       state.filters.byCategory = category;
     },
 
-
-
     setFiltersByTitle(state, { txt }) {
       state.filters.byTitle = txt;
     }
   },
+  
   // ********************************
 
   getters: {

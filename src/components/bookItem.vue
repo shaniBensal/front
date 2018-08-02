@@ -1,17 +1,16 @@
 <template>
     <div class="book-page">
         <confirm-modal :open="open" @closeModal="closeModal"></confirm-modal>
-        <div class="d-inline-flex">
-            <div class="close-deal">
+        <div class="d-flex flex-column">
+            <div class="close-deal d-flex">
                 <div>
                     <img class="main-image" :src="item.images[0]">
                 </div>
-                <div>
+                <div class="details">
                     <h1>Hi {{userName}}!</h1>
                     <br /> You chose to rent {{itemName}}
                     <p>From {{owner.name}} </p>
                     <p> pickup address is {{owner.address}}</p>
-                    <!-- {{item}} -->
                     <p>
                         <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
@@ -29,12 +28,23 @@
                 <v-date-picker header-color="blue" @input="daysCount" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
             </div>
         </v-flex> -->
+                    <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
+                    <br />
+                    <button class="btn bold-font" @click.prevent="cancel">Back</button>
+                    <br />
                 </div>
-                <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
-                <button class="btn bold-font" @click.prevent="cancel">Back</button>
             </div>
-            <div class="spacer">
-                <item-list-category :item="item._id" :category="item.category"></item-list-category>
+            <hr />
+            <div>
+                <h2>Similar items you might be intrested:</h2>
+                <ul class="items-list" v-if="itemsForDisplay">
+                    <li v-for="item in itemsForDisplay" :key="item._id">
+                        <item-preview :item="item"></item-preview>
+                    </li>
+                </ul>
+                <!-- <item-list-category :item="item._id" :category="item.category"></item-list-category> -->
+                <!-- <div class="spacer"> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -42,8 +52,8 @@
 <script>
 import datePicker from "./datePicker.vue";
 import confirmModal from "./confirmModal.vue";
-import itemListCategory from "../views/item/itemListCategory.vue";
-
+// import itemListCategory from "../views/item/itemListCategory.vue";
+import itemPreview from "../components/item/itemPreview.vue";
 export default {
   name: "BookItem",
   props: ["selectedDate"],
@@ -80,7 +90,13 @@ export default {
             ownerId: item.ownerId
           });
         })
-        .then(() => this.loadFirstData());
+        .then(item => {
+          this.loadFirstData();
+          this.$store.commit({
+            type: "setFilterItems",
+            category: this.item.category
+          });
+        });
     },
     loadFirstData() {
       this.itemName = this.$store.getters.selectedItem.title;
@@ -90,6 +106,7 @@ export default {
       this.dealDetails.itemId = this.$store.getters.selectedItem._id;
       this.dealDetails.totalPrice = this.$store.getters.selectedItem.price;
     },
+    goToItemDetails() {},
     todayDate() {
       var result = "";
       var month = "";
@@ -174,6 +191,9 @@ export default {
     },
     selectedDateRent() {
       return this.selectedDate || this.today;
+    },
+    itemsForDisplay() {
+      return this.$store.getters.filteredItems;
     }
     // totalCost() {
     //   return (
@@ -183,8 +203,9 @@ export default {
   },
   components: {
     // datePicker,
-    confirmModal,
-    itemListCategory
+    itemPreview,
+    confirmModal
+    // itemListCategory
   }
 };
 </script>
@@ -192,13 +213,19 @@ export default {
 <style lang="scss" scoped>
 .book-page {
   text-align: left;
-  width: 100vw;
+  // width: 100vw;
   // margin: 5px 20px;
   margin: 10px 35px;
 }
 
+.details {
+  width: 50%;
+}
+
 .close-deal {
   width: 100%;
+  margin-bottom: 70px;
+  text-align: center;
   font-size: 1em;
 }
 
@@ -208,7 +235,7 @@ export default {
 }
 
 .btn {
-  width: 90%;
+  width: 50%;
   height: 3em;
   font-size: 1.2em;
   color: #f6f6f6;
@@ -243,5 +270,61 @@ export default {
 
 .table-container {
   margin: 10px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+.container {
+  padding: 0 20px;
+}
+
+h3 {
+  margin: 0;
+  padding: 5px;
+}
+
+ul {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-gap: 20px; */
+  /* grid-template-columns: repeat(auto-fill, 1fr); */
+}
+
+li {
+  margin: 20px 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #273e74;
+}
+
+a:visited {
+  color: none;
+}
+
+.v-btn.v-btn {
+  background-color: white;
+  color: rgb(4, 4, 73);
+  opacity: 1;
+  border: none;
+}
+
+.v-btn.v-btn--active {
+  background-color: white;
+  color: rgb(33, 111, 42);
+  text-shadow: 0 0 3px rgb(156, 247, 138);
+  opacity: 1;
+  border-bottom: 1px rgb(33, 111, 42) solid;
+}
+
+.v-btn.v-btn--active::before {
+  background-color: white;
+  opacity: 1;
 }
 </style>

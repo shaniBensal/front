@@ -40,7 +40,6 @@ export default {
     },
 
     allowedDates(dateStr) {
-      // console.log(this.unAvailableDates);
       return !this.unAvailableDates.includes(dateStr);
     },
 

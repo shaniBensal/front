@@ -1,9 +1,7 @@
 <template>
     <section v-if="itemForDisplay">
-        <!-- :unAvailableDates="itemForDisplay.occupiedDates" -->
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container d-inline-flex">
-            <!-- <div > -->
                 <div class="item-details d-flex">
                     <div>
                         <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
@@ -43,25 +41,15 @@
                 </div>
                 reviews:
             </div>
-            <!-- <div class="item-details d-flex"> -->
             <div class="date-book">
                 <div>
                     <i class="far fa-calendar-alt"></i> Availability:</div>
                 <date-picker class="spacer-right" @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
-                <!-- <v-flex class="d-inline-flex">
-            <div class="date-picker-schedual table-container">
-                <v-date-picker header-color="blue" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
-            </div>
-            <div class="date-picker-schedual table-container">
-                <v-date-picker header-color="blue" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
-            </div>
-        </v-flex> -->
                 <sign-up-modal v-if="!user" @signedUp="bookNow"></sign-up-modal>
                 <div v-else>
                     <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
                 </div>
             </div>
-            <!-- </div> -->
         </div>
 
     </section>
@@ -185,8 +173,6 @@ export default {
 
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
       this.distance = distance.toFixed(2)
-      console.log("distance between coords:", coords, "is:", distance, "km");
-
     }
   },
 
@@ -199,9 +185,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .bold-font{
-// font-family: 'Roboto Slab-bold', serif;
-// }
+
 .date-book {
   width: 50%;
   height: fit-content;
@@ -211,9 +195,7 @@ export default {
 
 .main-container {
   min-width: 80vw;
-
   margin: 20px;
-  // padding: 10px;
   font-family: "Roboto Slab";
 }
 .carousel {
@@ -267,7 +249,6 @@ export default {
 
 .btn-book {
   background-color: #f56400;
-  // max-width: 200px;
   margin-top: 15px;
 }
 </style>

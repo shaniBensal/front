@@ -1,7 +1,7 @@
 <template>
 <keep-alive>
     <section>
-        <v-toolbar class="toolbar">
+        <v-toolbar  class="toolbar item-list" >
   
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
@@ -16,29 +16,32 @@
 
       <div class="spacer"></div>
 
-        <v-btn-toggle v-model="sortings" class="transparent">
+        <v-btn-toggle v-model="toggle_exclusive_2" class="transparent">
                 <div v-for="(sorting, idx) in sortings" :key="idx">
-                    <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
+                    <v-btn :value="idx" flat @click="changeSort(sorting)">
                         <div>{{sorting}}</div>
                     </v-btn>
                 </div>
             </v-btn-toggle>
 
-      <div class="spacer"></div>
+
+      <div class="spacer">|</div>
 
 
             <v-btn-toggle v-model="toggle_exclusive" class="transparent">
                 <div v-for="(category, idx) in categories" :key="idx">
                     <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
                         <div>{{category}}</div>
+                        
                     </v-btn>
                 </div>
             </v-btn-toggle>
         </v-toolbar>
 
-        <ul class="items-list container">
-            <li v-for="item in itemsForDisplay" :key="item._id">
-                <item-preview :item="item"></item-preview>
+
+        <ul class="items-list">
+            <li v-for="item in sortedItems" :key="item._id">
+                <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
             </li>
         </ul>
     </section>
@@ -48,18 +51,20 @@
 
 
 <script>
-import itemPreview from "../../components/item/itemPreview.vue";
+import itemPreview from '../../components/item/itemPreview.vue';
 
 export default {
-  name: "ItemList",
+  name: 'ItemList',
 
   data() {
     return {
       searchStr: null,
       categories: [],
       toggle_exclusive: [],
-      sortings: ['Name','Availiblity','Price','Distance','Rating'],
-      toggle_multiple: null // [1, 2, 3]
+      toggle_exclusive_2: [],
+      sortings: ['Name', 'Availiblity', 'Price', 'Distance', 'Rating'],
+      toggle_multiple: null, // [1, 2, 3]
+      sortBy: ''
     };
   },
 
@@ -87,15 +92,21 @@ export default {
       this.setFiltersByTitle(this.searchStr);
     },
     loadItems() {
-      this.$store.dispatch({ type: "loadItems" });
+      this.$store.dispatch({ type: 'loadItems' });
     },
     loadCategories() {
       this.categories = this.$store.getters.categories;
     },
     setFiltersByCategory(category) {
-      this.$store.commit('setFiltersByCategory', {
-        category: category
-      });
+      if (category !== 'all') {
+        this.$store.commit('setFiltersByCategory', {
+          category: category
+        });
+      } else {
+        this.$store.commit('setFiltersByCategory', {
+          category: ''
+        });
+      }
       var query = 'category=' + category;
       var search = this.$route.query.search;
       if (search) {
@@ -105,18 +116,64 @@ export default {
     },
 
     setFiltersByTitle(txt) {
-      this.$store.commit("setFiltersByTitle", { txt: txt });
-    }
+      this.$store.commit('setFiltersByTitle', { txt: txt });
+    },
+
+    changeSort(criteria) {
+      this.sortBy = criteria;
+    },
+
+    getDistance(dist, itemId) {
+    var currItem = this.sortedItems.find(item => {
+      return item._id === itemId;
+    })  
+    currItem.distance = dist;
+    },
   },
 
   computed: {
     itemsForDisplay() {
       return this.$store.getters.itemsForDisplay;
+    },
+
+    sortedItems() {
+      var itemsCopy = this.itemsForDisplay.slice();
+      switch (this.sortBy) {
+        case 'Name':
+          itemsCopy.sort((a, b) => {
+            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+            else return -1;
+          });
+          break;
+
+        case 'Price':
+          itemsCopy.sort((a, b) => {
+            if (+a.price > +b.price) return 1;
+            else return -1;
+          });
+          break;
+
+        case 'Rating':
+          itemsCopy.sort((a, b) => {
+            if (+a.ranking.avg > +b.ranking.avg) return -1;
+            else if (+a.ranking.avg < +b.ranking.avg) return 1;
+            return 0;
+          });
+          break;
+
+          case 'Distance':
+          itemsCopy.sort((a,b) => {
+            if (+a.distance > +b.distance) return 1;
+            else return -1;
+          });
+          break;
+      }
+      return itemsCopy;
     }
   },
 
   components: {
-    itemPreview,
+    itemPreview
   }
 };
 </script>
@@ -172,6 +229,11 @@ input {
   padding: 5px;
 }
 
+.v-input {
+  min-width: 180px;
+}
+
+
 v-toolbar {
   margin-bottom: 100px;
 }
@@ -191,6 +253,14 @@ v-toolbar {
   border-bottom: 1px rgb(33, 111, 42) solid;
 }
 
+.v-btn.v-btn--flat:visited {
+  background-color: white;
+  color: rgb(33, 111, 42);
+  text-shadow: 0 0 3px rgb(156, 247, 138);
+  opacity: 1;
+  border-bottom: 1px rgb(33, 111, 42) solid;
+}
+
 .v-btn.v-btn--active::before {
   background-color: white;
   opacity: 1;
@@ -200,4 +270,18 @@ v-toolbar {
   margin-bottom: 50px;
 }
 
+ul.items-list {
+margin: 0 auto;
+justify-content: center;
+}
+</style>
+
+
+<!-- style not scoped:  -->
+<style>  
+.item-list .v-toolbar__content {
+  flex-wrap: wrap;
+  height: 120px !important;
+  padding-bottom: 20px;
+}
 </style>

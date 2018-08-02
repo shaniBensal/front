@@ -26,9 +26,13 @@
                     <h4>{{item.title}}</h4>
                     <p>{{shortDescription}}</p>
                     </div>
-                    <div class="flex location">
+                    <div class="flex location" v-if="owner.address">
                         <v-icon small light>fas fa-map-marker-alt</v-icon>
-                        <p>{{this.owner.address}} {{distance}} km from you</p>
+                        <p >{{owner.address}} <br> <span>{{distance}} km </span>from you</p>
+                    </div>
+                    <div class="flex location" v-else>
+                        <v-icon small light>fas fa-map-marker-alt</v-icon>
+                        <p >No location found</p>
                     </div>
                     <br>
 
@@ -118,9 +122,11 @@ export default {
       };
 
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
-      this.distance = distance.toFixed(2);
+      this.distance = distance.toFixed(1);
       // console.log("distance between coords:", coords, "is:", distance, "km");
-      this.$emit('getDistance' ,this.distance )
+      this.$emit('getDistance' ,this.distance );
+      console.log(' ITEM PREVIEW this.distance', this.distance);
+      
     }
   },
 
@@ -230,4 +236,11 @@ div.v-card__title {
   min-height: 126px !important;
 }
 
+.item-preview {
+  text-transform: capitalize;
+}
+
+.location span {
+  font-weight : bold;
+}
 </style>

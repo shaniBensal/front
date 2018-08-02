@@ -18,7 +18,8 @@ export default {
       'kids',
       'events',
       'hardware'
-    ]
+    ],
+    filteredItems: []
   },
 
   mutations: {
@@ -33,8 +34,7 @@ export default {
     setItems(state, { items }) {
       state.items = items;
     },
-
-    updateItemO(state, { item }) {
+    updateItem(state, { item }) {
       var selectedItemIndex = state.items.findIndex(
         currItem => item._id === currItem._id
       );
@@ -60,6 +60,8 @@ export default {
       state.filters.byCategory = category;
     },
 
+
+
     setFiltersByTitle(state, { txt }) {
       state.filters.byTitle = txt;
     }
@@ -68,6 +70,7 @@ export default {
 
   getters: {
     itemsForDisplay(state) {
+
       var items = state.items;
       if (state.filters.byTitle) {
         items = items.filter(item => {
@@ -113,6 +116,10 @@ export default {
 
     categories(state) {
       return state.categories;
+    },
+
+    filteredItems(state) {
+      return state.filteredItems;
     }
   },
 
@@ -148,7 +155,7 @@ export default {
     updateItem(context, { item }) {
       if (!item) item = context.state.selectedItem;
       return itemsService.updateItem(item).then(item => {
-        return context.commit({ type: 'updateItemO', item });
+        return context.commit({ type: 'updateItem', item });
       });
     }
   }

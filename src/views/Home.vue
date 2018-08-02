@@ -204,8 +204,8 @@
                     </v-card-title>
                       <div class="headline">2. Choose Where</div>
                       <br>
-                                  <!-- <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200"> -->
-                                  <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200">
+                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV6vY6TvS6Pob0jhjIyZGS-PFu8HY-3Yd2KqFsPxxtQsqPDBvJ" alt="Vuetify.js" height="200">
+                                  <!-- <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200"> -->
 
                     <v-card-text>
                       <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
@@ -281,34 +281,40 @@
 <script>
 // <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   data: () => ({
-    searchStr : '',
+    searchStr: "",
     lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
-    
+
     slides: [
       {
         src:
-          'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title : 'Dana Loremovich, 28, New York City',
-        text : 'Amazing products, amazing price. great website by the way.'
+          "https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Dana Loremovich, 28, New York City",
+        text: "Amazing products, amazing price. great website by the way."
       },
       {
-        src: 'https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800',
-        title: 'George Orwell, 36, Tel Aviv',
-        text: 'What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800",
+        title: "George Orwell, 36, Tel Aviv",
+        text:
+          "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       },
       {
-        src: 'https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750',
-        title: 'Yonit Jhonson, 44, Monaco',
-        text: 'I thought it is a waste of time and money but I was surprised it was actually great!'
+        src:
+          "https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750",
+        title: "Yonit Jhonson, 44, Monaco",
+        text:
+          "I thought it is a waste of time and money but I was surprised it was actually great!"
       },
       {
-        src: 'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800',
-        title: 'Ofir Yakito, 22, Bogota',
-        text: 'BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy.'
+        src:
+          "https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800",
+        title: "Ofir Yakito, 22, Bogota",
+        text:
+          "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
     ]
   }),
@@ -318,22 +324,20 @@ export default {
     HelloWorld
   },
 
-  methods : {
+  methods: {
     onSearch() {
-      console.log('query for search:',this.searchStr);
-      this.$router.push(`/item/?search=${this.searchStr}`)
+      // console.log('query for search:',this.searchStr);
+      this.$router.push(`/item/?search=${this.searchStr}`);
     },
 
-    onCategory(category){
-          this.$router.push(`/item/?category=${category}`);
-    },
+    onCategory(category) {
+      this.$router.push(`/item/?category=${category}`);
+    }
   }
-}
-
+};
 </script>
 
 <style scoped>
-
 * {
   box-sizing: border-box;
 }
@@ -364,7 +368,7 @@ export default {
 
 .testing {
   height: 100%;
-  background-image: url('https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg');
+  background-image: url("https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg");
 }
 
 /* .test1 {
@@ -383,15 +387,16 @@ h1 {
 .pic3 {
   min-height: 240px;
   /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
-  background-image: url('https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
   cursor: pointer;
 }
 
 .pic2 {
   height: 180px;
-  background-image: url('http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg');
-  background-size: cover;
+  /* background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg"); */
+background-image: url("https://previews.123rf.com/images/famveldman/famveldman1505/famveldman150500052/39757272-kids-playing-with-wooden-toys-two-children-cute-toddler-girl-and-funny-baby-boy-playing-with-toy-blo.jpg");
+background-size: cover;
   background-position-y: 82%;
   /* margin-bottom: 150px; */
   cursor: pointer;
@@ -399,7 +404,7 @@ h1 {
 
 .pic1 {
   height: 220px;
-  background-image: url('http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg');
+  background-image: url("http://www.rentacarvietnam.com/wp-content/uploads/2017/02/rent-a-car-1.jpg");
   background-size: cover;
   background-position-x: 45%;
   cursor: pointer;
@@ -415,7 +420,7 @@ h1 {
 
 .pic0 {
   height: 200px;
-  background-image: url('https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570');
+  background-image: url("http://www.summerinbansko.com/uploads/MainPhotos/hiking-bansko.jpg");
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;
@@ -456,13 +461,20 @@ h1 {
 }
 
 .opaque-background {
-    /* content: ''; */
-    background: linear-gradient( rgba(30,30,60,0) ,rgba(30,30,60,0.0), rgba(30,30,60,0), rgba(0,0,0,0.4), rgba(0,0,0,0.4),rgba(30,30,60,0.1));
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    /* opacity: 0.95; */
+  /* content: ''; */
+  background: linear-gradient(
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(30, 30, 60, 0),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4),
+    rgba(30, 30, 60, 0.1)
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  /* opacity: 0.95; */
 }
 
 .header-search-bar {
@@ -476,7 +488,7 @@ h1 {
   bottom: 28%;
 }
 
-.opinions-container{
+.opinions-container {
   font-size: 2em;
   margin: 80px 0 50px 0 !important;
 }
@@ -507,7 +519,7 @@ h1 {
 }
 
 .v-card h1 {
-  text-shadow : 0 0 4px black;
+  text-shadow: 0 0 4px black;
 }
 
 .v-jumbotron .theme--dark {

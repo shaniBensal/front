@@ -1,7 +1,7 @@
 <template>
 <keep-alive>
     <section>
-        <v-toolbar  class="toolbar" >
+        <v-toolbar  class="toolbar item-list" >
   
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
@@ -25,7 +25,7 @@
             </v-btn-toggle>
 
 
-      <!-- <div class="spacer">|</div> -->
+      <div class="spacer">|</div>
 
 
             <v-btn-toggle v-model="toggle_exclusive" class="transparent">
@@ -41,7 +41,7 @@
 
         <ul class="items-list">
             <li v-for="item in sortedItems" :key="item._id">
-                <item-preview :item="item"></item-preview>
+                <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
             </li>
         </ul>
     </section>
@@ -69,7 +69,6 @@ export default {
   },
 
   created() {
-    this.$on('getDistance');
     var queryString = window.location.href.replace(/.*\?/, '');
     var uParams = new URLSearchParams(queryString);
     var textParam = uParams.get('search');
@@ -124,9 +123,12 @@ export default {
       this.sortBy = criteria;
     },
 
-    ongetDistance(a,b) {
-      console.log(' GET DISTANCEEEE');
-    }
+    getDistance(dist, itemId) {
+    var currItem = this.sortedItems.find(item => {
+      return item._id === itemId;
+    })  
+    currItem.distance = dist;
+    },
   },
 
   computed: {
@@ -159,12 +161,12 @@ export default {
           });
           break;
 
-        // case 'Distance':
-        // itemsCopy.sort((a, b) => {
-        //   if (+a.price > +b.price) return 1;
-        //   else return -1;
-        // });
-        // break;
+          case 'Distance':
+          itemsCopy.sort((a,b) => {
+            if (+a.distance > +b.distance) return 1;
+            else return -1;
+          });
+          break;
       }
       return itemsCopy;
     }
@@ -181,6 +183,7 @@ export default {
 <style scoped>
 .container {
   padding: 0 20px;
+  max-width: 980px;
 }
 
 h3 {
@@ -268,36 +271,17 @@ v-toolbar {
 }
 
 ul.items-list {
-  padding: 0 40px 0 40px
+margin: 0 auto;
+justify-content: center;
 }
+</style>
 
-/* div .v-toolbar__content {
+
+<!-- style not scoped:  -->
+<style>  
+.item-list .v-toolbar__content {
   flex-wrap: wrap;
   height: 120px !important;
   padding-bottom: 20px;
-
 }
-
-.toolbar.v-toolbar {
-  flex-wrap: wrap;
-  height: 120px !important;
-  padding-bottom: 20px;
-
-} */
-
-/* v-toolbar .toolbar {
-  background-color: yellow !important;
-  flex-wrap: wrap !important;
-}
-
-div v-toolbar_content {
-  background-color: yellow !important;
-  flex-wrap: wrap !important;
-} */
-
-/* .abcde123.v-toolbar__content {
-    background-color: yellow !important;
-  flex-wrap: wrap !important;
-} */
-
 </style>

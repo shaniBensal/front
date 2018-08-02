@@ -24,6 +24,9 @@ export default {
 components:{
   navBar,
   appFooter
+ },
+ created() {
+   this.$store.dispatch({type: 'loadItems'})
  }
 }
 </script>

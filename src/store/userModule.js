@@ -30,7 +30,7 @@ export default {
 
         setUserWithItems(state, { user }) {
             state.userWithItems = user
-        }
+        },
     },
     actions: {
         loadUserById(context, { ownerId }) {
@@ -87,11 +87,18 @@ export default {
             return context.commit({ type: 'setUser', user: null })
         },
 
-        addUser(context, { user }) {
-            return userService.signup({ user })
-                .then((user) => {
-                    return context.commit({ type: 'setUser', user })
+        updateUser(context, { user }) {
+            if (!user._id) {
+                return userService.signup({ user })
+                    .then((user) => {
+                        return context.commit({ type: 'setUser', user })
+                    })
+            } else {
+                return userService.updateUser(user)
+                .then(user => {
+                    return context.commit({ type: 'setUser', user });
                 })
+            }
         },
         addItemToFavorites(context, payload) {
             // console.log(payload.item, payload.user)

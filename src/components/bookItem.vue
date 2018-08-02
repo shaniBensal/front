@@ -1,24 +1,27 @@
 <template>
     <div class="book-page">
-      <div class="d-inline-flex">
-        <div>
-          <img class="main-image" :src="item.images[0]">
-        </div>
-        <div>
-        <h1>Hi {{dealDetails.userName}}!</h1> <br />
-        You chose to rent {{dealDetails.itemName}}
-        <p>From {{owner.name}} </p>
-        <p> pickup adress is {{owner.address}}</p>
-        <!-- {{item}} -->
-        <p>
-            <!-- Start Date: {{dealDetails.firstDay}} <br />
+        <confirm-modal :open="open" @closeModal="closeModal"></confirm-modal>
+        <div class="d-inline-flex">
+            <div class="close-deal">
+                <div>
+                    <img class="main-image" :src="item.images[0]">
+                </div>
+                <div>
+                    <h1>Hi {{userName}}!</h1>
+                    <br /> You chose to rent {{itemName}}
+                    <p>From {{owner.name}} </p>
+                    <p> pickup address is {{owner.address}}</p>
+                    <!-- {{item}} -->
+                    <p>
+                        <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
-            <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
-            In date: {{selectedDateRent}} <br />
-            Price For Day: {{item.price}}$ <br />
-            <!-- Price: {{totalCost}}$ -->
-        </p>
-        <!-- <v-flex class="d-inline-flex">
+                        <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
+                        In date: {{selectedDateRent}}
+                        <br /> Price For Day: {{item.price}}$
+                        <br />
+                        <!-- Price: {{totalCost}}$ -->
+                    </p>
+                    <!-- <v-flex class="d-inline-flex">
             <div class="date-picker-schedual table-container">
                 <v-date-picker header-color="blue" @input="calculateFirstDate" v-model="dealDetails.firstDay" :allowed-dates="allowedDates" :min="today"></v-date-picker>
             </div>
@@ -26,15 +29,21 @@
                 <v-date-picker header-color="blue" @input="daysCount" v-model="dealDetails.lastDay" :allowed-dates="allowedDates" :min="dealDetails.firstDay||today"></v-date-picker>
             </div>
         </v-flex> -->
+                </div>
+                <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
+                <button class="btn bold-font" @click.prevent="cancel">Back</button>
+            </div>
+            <div class="spacer">
+                <item-list-category :item="item._id" :category="item.category"></item-list-category>
+            </div>
         </div>
-        </div>
-        <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
-        <button class="btn bold-font" @click.prevent="cancel">Back</button>
     </div>
-
 </template>
 <script>
 import datePicker from "./datePicker.vue";
+import confirmModal from "./confirmModal.vue";
+import itemListCategory from "../views/item/itemListCategory.vue";
+
 export default {
   name: "BookItem",
   props: ["selectedDate"],
@@ -42,14 +51,16 @@ export default {
     return {
       firstDateTimeStamp: null,
       secDateTimeStamp: null,
+      itemName: null,
       today: null,
+      userName: null,
+      open: false,
       dealDetails: {
-        userName: null,
-        itemName: null,
+        userId: null,
+        itemId: null,
         daysToRent: 1,
         firstDay: null,
         lastDay: null,
-        ownerName: null,
         totalPrice: null
       }
     };
@@ -71,19 +82,13 @@ export default {
         })
         .then(() => this.loadFirstData());
     },
-    approveDeal(){
-      console.log('hi');
-      
-    },
-    cancel(){
-      this.$emit("cancel-deal");
-    },
     loadFirstData() {
-      this.dealDetails.itemName = this.$store.getters.selectedItem.title;
+      this.itemName = this.$store.getters.selectedItem.title;
       this.dealDetails.firstDay = this.selectedDate;
-      this.date1 = this.selectedDate;
-      this.dealDetails.userName = this.$store.getters.loggedinUser.name;
-      this.dealDetails.ownerName = this.$store.getters.itemOwner.name;
+      this.userName = this.$store.getters.loggedinUser.name;
+      this.dealDetails.userId = this.$store.getters.loggedinUser._id;
+      this.dealDetails.itemId = this.$store.getters.selectedItem._id;
+      this.dealDetails.totalPrice = this.$store.getters.selectedItem.price;
     },
     todayDate() {
       var result = "";
@@ -96,6 +101,40 @@ export default {
       }
       result += d.getFullYear() + "-" + month + "-" + d.getDate();
       this.today = result;
+    },
+    approveDeal() {
+      var item = { ...this.$store.getters.selectedItem };
+      let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
+      datesArray.push(this.dealDetails.firstDay);
+      item.occupiedDates = datesArray;
+
+      var user = { ...this.$store.getters.loggedinUser };
+      let rentedItemsArray = JSON.parse(JSON.stringify(user.rentedItems));
+      rentedItemsArray.push(this.dealDetails.itemId);
+      user.rentedItems = rentedItemsArray;
+
+      this.$store
+        .dispatch({
+          type: "updateItem",
+          item: item
+        })
+        .then(() => {
+          this.$store
+            .dispatch({
+              type: "updateUser",
+              user: user
+            })
+            .then(() => {
+              this.open = true;
+              // console.log(this.open);
+            });
+        });
+    },
+    cancel() {
+      this.$emit("cancel-deal");
+    },
+    closeModal() {
+      this.open = false;
     }
     // exitFirst() {
     //   this.modal1 = false;
@@ -143,7 +182,9 @@ export default {
     // }
   },
   components: {
-    // datePicker
+    // datePicker,
+    confirmModal,
+    itemListCategory
   }
 };
 </script>
@@ -151,8 +192,14 @@ export default {
 <style lang="scss" scoped>
 .book-page {
   text-align: left;
+  width: 100vw;
   // margin: 5px 20px;
   margin: 10px 35px;
+}
+
+.close-deal {
+  width: 100%;
+  font-size: 1em;
 }
 
 .main-image {
@@ -160,8 +207,8 @@ export default {
   margin: 10px 0px;
 }
 
-.btn{
-  width: 60%;
+.btn {
+  width: 90%;
   height: 3em;
   font-size: 1.2em;
   color: #f6f6f6;
@@ -173,6 +220,10 @@ export default {
 
 .btn-book {
   background-color: #f56400;
+}
+
+.spacer {
+  margin: 0px 10px;
 }
 
 .date-picker-schedual {

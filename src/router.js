@@ -5,6 +5,7 @@ import About from './views/About.vue';
 
 import ItemList from './views/item/itemList.vue';
 import ItemEdit from './views/item/itemEdit.vue';
+import UserEdit from './views/item/userEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
 import UserProfile from './views/user/userProfile.vue';
 // import SignIn from './views/user/signIn.vue';
@@ -33,6 +34,11 @@ export default new Router({
       path: '/item/edit/:id?',
       name: 'itemEdit',
       component: ItemEdit,
+    },
+    {
+      path: '/user/edit/:id?',
+      name: 'userEdit',
+      component: UserEdit,
     },
     {
       path: '/item/:id',

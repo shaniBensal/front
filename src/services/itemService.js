@@ -26,7 +26,6 @@ function getItemByOwnerId(ownerId){
 
 function deleteItem(itemId) {
     return axios.delete(`${ITEM_URL}/${itemId}`)
-    
 }
 
 function addItem(item) {

@@ -7,7 +7,7 @@
             <v-card-media  height="10em" :src="item.images[0]">
 
                 <div class="text-xs-center">
-                    <v-btn @click.prevent="addToFavorites" flat icon color="pink" :disabled="dialog" :loading="dialog" class="white--text" @click.stop="dialog = true">
+                    <v-btn @click.prevent="addToFavorites" flat icon color="pink lighten-1" :disabled="dialog" :loading="dialog" class="white--text" @click.stop="dialog = true">
                         <v-icon>favorite</v-icon>
                     </v-btn>
                 </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="flex location">
                         <v-icon small light>fas fa-map-marker-alt</v-icon>
-                        <p>Tel Aviv, {{location}} km from you</p>
+                        <p>{{this.owner.address}} <br> <span>{{distance}} km </span>from you</p>
                     </div>
                     <br>
 
@@ -51,18 +51,22 @@
 </template>
 <script>
 import signIn from "../signIn.vue";
+import mapService from "../../services/mapService.js";
 export default {
   name: "ItemPreview",
   props: ["item"],
   data() {
     return {
       isUserLoggedIn: false,
-      dialog: false
+      dialog: false,
+      owner: {},
+      itemLocation: {},
+      userLocation: {},
+      distance: null
     };
   },
   methods: {
     addToFavorites() {
-      // console.log("added to favorites", this.item);
       var currUser = this.$store.getters.loggedinUser;
       if (currUser) {
         this.isUserLoggedIn = true;
@@ -80,15 +84,62 @@ export default {
     showSignIn() {
       this.isUserLoggedIn = false;
       alert("please sign in");
+    },
+    loadOwner(ownerId) {
+      return this.$store
+        .dispatch({ type: "loadUserById", ownerId })
+        .then(owner => {
+          this.owner = owner;
+        });
+    },
+    geolocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          resolve();
+        });
+      });
+    },
+    getItemLocation(ownerAddress) {
+      return mapService.getUserLatLng(ownerAddress).then(itemLocation => {
+        this.itemLocation = itemLocation;
+      });
+    },
+
+    calcDistance() {
+      var coords = {
+        lat1: this.itemLocation.lat,
+        lng1: this.itemLocation.lng,
+        lat2: this.userLocation.lat,
+        lng2: this.userLocation.lng
+      };
+
+      var distance = mapService.calcDistanceFromLatLngInKm(coords);
+      this.distance = distance.toFixed(1);
+      // console.log("distance between coords:", coords, "is:", distance, "km");
+      this.$emit('getDistance' ,this.distance );
+      console.log(' ITEM PREVIEW this.distance', this.distance);
+      
     }
   },
 
-  created() {},
+  created() {
+    this.loadOwner(this.item.ownerId)
+      .then(() => {
+        var userLocPrm = this.geolocation();
+        var itemLocPrm = this.getItemLocation(this.owner.address);
+        return Promise.all([userLocPrm, itemLocPrm]);
+      })
+      .then(this.calcDistance);
+  },
 
   computed: {
     shortDescription() {
       if (this.item.description.length > 25)
-        return this.item.description.substring(0, 25) + "...";
+        return this.item.description.substring(0, 20) + "...";
       else return this.item.description;
     },
     avgRank() {
@@ -170,10 +221,22 @@ a {
   color: black;
   text-align: left;
   padding: 10px 10px 0 10px;
+  transition: 0.3s;
+}
+
+.v-card__title:hover {
+  color: #42b983;
 }
 
 div.v-card__title {
   min-height: 126px !important;
 }
 
+.item-preview {
+  text-transform: capitalize;
+}
+
+.location span {
+  font-weight : bold;
+}
 </style>

@@ -39,7 +39,7 @@
 
         <ul v-if="isEdit">
           dates occupied:
-          <li  v-for="(date,idx) in item.occupiedDates" :key="idx" v-if="date">{{date}} ({{date | moment("from")}})
+          <li  v-for="(date,idx) in item.occupiedDates" :key="idx" v-if="isFutureDate(date)">{{date}} ({{date | moment("from")}})
             <p> </p>
              </li>
           
@@ -49,6 +49,7 @@
 </template>
 <script>
 import signIn from "../signIn.vue";
+
 export default {
   name: "ItemPreview",
   props: ["item", "isEdit"],
@@ -78,6 +79,13 @@ export default {
     showSignIn() {
       this.isUserLoggedIn = false;
       alert("please sign in");
+    },
+
+    isFutureDate(date){
+      var rentingDate = new Date(date)
+      var dayAheadTimeStamp = Date.now() + 24 * 60 * 60 * 1000; 
+      if(+rentingDate > dayAheadTimeStamp)  return true;
+      return false;
     }
   },
 
@@ -93,10 +101,6 @@ export default {
       return this.item.ranking.avg.toFixed(1);
     },
 
-    occupiedDates(){
-      return new Date(this.item.occupiedDates).getTime() / 1000;
-
-    }
   },
 
   watch: {
@@ -127,16 +131,16 @@ p {
   font-size: 12px;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-.v-btn__content{
+.v-btn__content {
   height: 0;
   color: #fff;
 }
 
-.v-btn .v-btn__content .v-icon{
+.v-btn .v-btn__content .v-icon {
   color: #fff;
 }
 .price {

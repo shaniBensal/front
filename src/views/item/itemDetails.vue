@@ -30,8 +30,8 @@
                         <div class="spacer-paragrph">
                             Pick up from:
                             <div class="show-map">
-                                <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="15" map-type-id="roadmap" style="width: 300px; height: 200px">
-                                    <GmapMarker  v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true" 
+                                <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="14" map-type-id="roadmap" style="width: 300px; height: 200px">
+                                    <GmapMarker  v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true" :icon="marker.icon"
                                     />
                                 </GmapMap>
                             </div>
@@ -88,7 +88,8 @@ export default {
       images: [],
       mainImage: "",
       currentLocation: { lat: 0, lng: 0 },
-      markers: [{ position: { lat: 0, lng: 0 } }]
+      markers: [{ position: { lat: 0, lng: 0 }, icon:"/img/marker.png" }]
+
     };
   },
   created() {

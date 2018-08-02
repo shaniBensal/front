@@ -218,6 +218,11 @@ a {
   color: black;
   text-align: left;
   padding: 10px 10px 0 10px;
+  transition: 0.3s;
+}
+
+.v-card__title:hover {
+  color: #42b983;
 }
 
 div.v-card__title {

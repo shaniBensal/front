@@ -204,8 +204,8 @@
                     </v-card-title>
                       <div class="headline">2. Choose Where</div>
                       <br>
-                                  <!-- <img src="http://cdn.shopify.com/s/files/1/2654/0420/products/TBS-6210-01_red_1_098808e0-c9da-4c09-945b-4c85a1de0b5c_1024x1024.png?v=1521605873" alt="Vuetify.js" height="200"> -->
-                                  <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200">
+                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV6vY6TvS6Pob0jhjIyZGS-PFu8HY-3Yd2KqFsPxxtQsqPDBvJ" alt="Vuetify.js" height="200">
+                                  <!-- <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200"> -->
 
                     <v-card-text>
                       <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
@@ -394,8 +394,9 @@ h1 {
 
 .pic2 {
   height: 180px;
-  background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg");
-  background-size: cover;
+  /* background-image: url("http://familypoolcleaning.com/wp-content/uploads/Plantation-Pool-Cleaning-Service.jpg"); */
+background-image: url("https://previews.123rf.com/images/famveldman/famveldman1505/famveldman150500052/39757272-kids-playing-with-wooden-toys-two-children-cute-toddler-girl-and-funny-baby-boy-playing-with-toy-blo.jpg");
+background-size: cover;
   background-position-y: 82%;
   /* margin-bottom: 150px; */
   cursor: pointer;
@@ -419,7 +420,7 @@ h1 {
 
 .pic0 {
   height: 200px;
-  background-image: url("https://www.burghotel-lech.com/portals/0/teaser/familien-urlaub-arlberg-220U0340.jpg?ver=2016-04-25-094050-570");
+  background-image: url("http://www.summerinbansko.com/uploads/MainPhotos/hiking-bansko.jpg");
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;

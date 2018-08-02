@@ -106,12 +106,16 @@ export default {
   max-width: 980px;
 }
 
+button a{
+  color: white;
+}
+
 .router-link :active {
-  color: #162044;
+  color: white;
 }
 
 a:active {
-  color: #162044;
+  color: white;
 }
 
 .tabs {
@@ -144,6 +148,9 @@ a:active {
 .tabs button:focus {
   border-bottom: 1px solid #00d8ae;
   outline: none;
+}
+.tabs button:hover {
+  background-color: rgba(211, 211, 211, 0.466);
 }
 .user-profile-items {
   width: 100%;
@@ -181,11 +188,11 @@ button a {
 
 .add-item {
   width: 50%;
-  background-color: #00d8ae;
+  background-color: #00d8ad75;
   margin: 20px 0;
 }
 
 .add-item:hover {
-  background-color: #00d8ad75;
+  background-color: #00d8ae;
 }
 </style>

@@ -61,17 +61,22 @@ export default {
   },
 
   methods: {
-    loadUser(userId) {
-      this.$store
-        .dispatch({ type: "getUserWithItems", userId: userId })
-        .then(currUser => {
-          // console.log(currUser);
-          this.user = currUser.user;
-          this.userAndItems = currUser;
-          this.itemsToShow = currUser.owendItems;
-        });
-    },
+    // loadUser(userId) {
+    //   this.$store
+    //     .dispatch({ type: "getUserWithItems", userId: userId })
+    //     .then(currUser => {
+    //       // console.log(currUser);
+    //       this.user = currUser.user;
+    //       this.userAndItems = currUser;
+    //       this.itemsToShow = currUser.owendItems;
+    //     });
+    // },
 
+  loadUser(userId){   
+    this.$store.dispatch({type: "getTransactionsByOwner", userId})
+    .then(res=>console.log('from profile:',res)
+    )   
+  },
     removeItem(itemId) {
       // console.log("removing...", itemId);
       this.$store

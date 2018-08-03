@@ -33,7 +33,7 @@ export default {
         },
     },
     actions: {
-        loadUserById(context, { ownerId }) {
+        loadOwnerById(context, { ownerId }) {
             return userService.getUserById(ownerId)
                 .then(user => {
                     context.commit({ type: 'setOwner', user })

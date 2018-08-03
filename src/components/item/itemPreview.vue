@@ -91,7 +91,7 @@ export default {
     },
     loadOwner(ownerId) {
       return this.$store
-        .dispatch({ type: "loadUserById", ownerId })
+        .dispatch({ type: "loadOwnerById", ownerId })
         .then(owner => {
           this.owner = owner;
         });

@@ -16,7 +16,9 @@
     <v-content>
         <!-- <div class="pic-cover"></div> -->
       <section>
-        <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg">
+        
+                <v-parallax class="top-pic" src="https://www.tourix.gr/wordpress/wp-content/uploads/2016/08/Internet-of-Things.png">
+              <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
           <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg"  height="500"> -->
           <v-layout 
             class="opaque-background" 
@@ -25,7 +27,7 @@
             justify-end
           >
             <!-- <img src="../../../front/best-price.png" alt="Vuetify.js" height="200"> -->
-            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime.</h1>
+            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere.</h1>
             <div class="subheading mb-3 text-xs-center"></div>
             <div class="subheading mb-3 text-xs-center"></div>
             <div class="subheading mb-3 text-xs-center"></div>
@@ -77,7 +79,7 @@
         <v-layout
           column
           wrap
-          class="my-5 site-description"
+          class= "site-description"
           align-center
         >
           <v-flex class="my-3" xs12 sm4>
@@ -90,6 +92,80 @@
           </v-flex>
         </v-layout>
       </section>
+
+        
+          <v-flex xs12>
+            <v-container grid-list-xl>
+              <v-layout row wrap align-center>
+                <v-flex xs12 md4>
+                  <v-card class="card-test1 elevation-0 transparent">
+                    <v-card-text @click="$router.push('/item')" class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                       <!-- <v-icon>fas fa-search</v-icon> -->
+                    </v-card-title>
+                      <div class="headline text-xs-center v-float">Search what you need</div>
+                      
+                      <br>
+
+                       
+                                  <!-- <img src="http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png" alt="Vuetify.js" height="200"> -->
+                    <v-card-text>
+                      <!-- A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      <!-- Search the item you wish for. it can be anything -->
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="card-test2 elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                           <!-- <v-icon>fas fa-shopping-cart</v-icon> -->
+                    </v-card-title>
+                      <div class="headline">Book it</div>
+                      <br>
+                                  <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV6vY6TvS6Pob0jhjIyZGS-PFu8HY-3Yd2KqFsPxxtQsqPDBvJ" alt="Vuetify.js" height="200"> -->
+                                  <!-- <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200"> -->
+
+                    <v-card-text>
+                      <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      <!-- It doesn't metter where you are, just choose the location of pick-up  -->
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="card-test3 elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <!-- <v-icon x-large class="blue--text text--lighten-2">build</v-icon> -->
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                        <!-- <v-icon>fas fa-shopping-cart</v-icon> -->
+                    </v-card-title>
+                      <div class="headline text-xs-center">Enjoy it</div>
+                      <br>
+                                  <!-- <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200"> -->
+                                   <!-- <img src="https://ohiovalley.nfty.org/wp-content/uploads/sites/43/2017/04/calendar.png" alt="Vuetify.js" height="200"> -->
+
+                    <v-card-text>
+                      <!-- A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
+                      <!-- Choose date, check availability and book!. -->
+                      <!-- that's it , you are ready to ba a part of We Rent community. -->
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
+
 
 
   <v-container class="highlighted-products" fluid grid-list-sm>
@@ -144,7 +220,7 @@
                   hover
                 >
                   <!-- <v-card-text>{{ lorem.slice(0, 40) }}</v-card-text> -->
-                  <h1>Electricity, home and kitchen</h1>
+                  <h1>Home Appliances And Electronics </h1>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -174,72 +250,6 @@
 </router-link>
 
   
-          <v-flex xs12>
-            <v-container grid-list-xl>
-              <v-layout row wrap align-center>
-                <v-flex xs12 md4>
-                  <v-card class="card-test1 elevation-0 transparent">
-                    <v-card-text @click="$router.push('/item')" class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline text-xs-center v-float">1. Choose What</div>
-                      <br>
-                                  <img src="http://greensimon.zippykid.netdna-cdn.com/wp-content/uploads/2011/09/osprey-aether-207x300.png" alt="Vuetify.js" height="200">
-                    <v-card-text>
-                      <!-- A1 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      Search the item you wish for. it can be anything
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="card-test2 elevation-0 transparent">
-                    <v-card-text class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline">2. Choose Where</div>
-                      <br>
-                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV6vY6TvS6Pob0jhjIyZGS-PFu8HY-3Yd2KqFsPxxtQsqPDBvJ" alt="Vuetify.js" height="200">
-                                  <!-- <img src="https://www.slideteam.net/media/catalog/product/cache/1/thumbnail/46f236fda059ac53be7e0eb63e725afa/s/m/smart_phone_with_map_and_multiple_locations_displayed_stock_photo_Slide01.jpg" alt="Vuetify.js" height="200"> -->
-
-                    <v-card-text>
-                      <!-- A2 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      It doesn't metter where you are, just choose the location of pick-up 
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="card-test3 elevation-0 transparent">
-                    <v-card-text class="text-xs-center">
-                      <!-- <v-icon x-large class="blue--text text--lighten-2">build</v-icon> -->
-                    </v-card-text>
-                    <v-card-title primary-title class="layout justify-center">
-                    </v-card-title>
-                      <div class="headline text-xs-center">3. Choose When</div>
-                      <br>
-                                  <!-- <img src="https://pics.clipartpng.com/Blender_PNG_Clip_Art-2447.png" alt="Vuetify.js" height="200"> -->
-                                   <img src="https://ohiovalley.nfty.org/wp-content/uploads/sites/43/2017/04/calendar.png" alt="Vuetify.js" height="200">
-
-                    <v-card-text>
-                      <!-- A3 facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.  -->
-                      Choose date, check availability and book!.
-                      <!-- that's it , you are ready to ba a part of We Rent community. -->
-                    </v-card-text>
-                  </v-card>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-flex>
-
 
     <div class="opinions-container">
       <div>Customers Recommend:</div>
@@ -387,7 +397,7 @@ h1 {
 .pic3 {
   min-height: 240px;
   /* background-image: url("https://www.dhresource.com/0x0s/f2-albu-g3-M00-61-8D-rBVaHVX35Y-AXKZDAAZsfqEcV8U465.jpg/night-club-lighting-24-patterns-rgb-laser.jpg"); */
-  background-image: url("https://images.pexels.com/photos/2143/lights-party-dancing-music.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-image: url("https://thumbs.dreamstime.com/b/festival-event-party-people-blurred-background-outdoor-65006620.jpg");
   background-size: cover;
   cursor: pointer;
 }
@@ -412,7 +422,7 @@ background-size: cover;
 
 .pic1b {
   height: 220px;
-  background-image: url('http://www.want.nl/wp-content/uploads/2018/01/PlayStation-4.jpg');
+  background-image: url('https://previews.123rf.com/images/alexutemov/alexutemov1604/alexutemov160401499/54904458-home-appliances-design-cooking-applications-and-home-appliances-equipment-kitchen-home-appliances-ho.jpg');
   background-size: cover;
   background-position-x: 65%;
   cursor: pointer;
@@ -420,7 +430,7 @@ background-size: cover;
 
 .pic0 {
   height: 200px;
-  background-image: url("http://www.summerinbansko.com/uploads/MainPhotos/hiking-bansko.jpg");
+  background-image: url("https://thumbs.dreamstime.com/z/hiking-equipment-backpack-boots-top-mountain-beautiful-view-to-ranges-fog-filled-valleys-89063285.jpg");
   background-size: cover;
   background-position-y: 50%;
   cursor: pointer;

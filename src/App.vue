@@ -33,7 +33,7 @@ components:{
 <style lang="scss">
 
 #app {
-font-family: 'Roboto Slab', serif;
+   font-family: 'Roboto-Bold', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-  @font-face {
+  /* @font-face {
     font-family: 'Roboto Slab';
     src: url('../../src/assets/fonts/roboto/RobotoSlab-Light.ttf');
     font-style: normal;
@@ -11,15 +11,33 @@
     font-family: 'Roboto Slab-bold';
     src: url('../../src/assets/fonts/roboto/RobotoSlab-Bold.ttf');
     font-style: normal;
+  } */
+
+  @font-face {
+    font-family: 'Roboto-Bold', sans-serif;
+    src: url('../../src/assets/fonts/roboto/Roboto-Bold.ttf');
+    font-style: normal;
   }
+
+  @font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url('../../src/assets/fonts/roboto/Roboto-Light.ttf');
+    font-style: normal;
+  }
+
+  
 
   .v-dialog.date-picker{
     width: min-content;
   }
 
-  .bold-font{
+  /* .bold-font{
     font-family: 'Roboto Slab-bold', serif;
-    }
+    } */
+
+    .bold-font{
+      font-family: 'Roboto-Bold', sans-serif;
+      }
 
     a{
       cursor: pointer;

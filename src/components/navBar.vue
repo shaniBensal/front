@@ -4,7 +4,10 @@
         <div id="nav">
             <div class="logo">
                 <router-link :to="'/'">
-                    <h1 class="logo">WeRent</h1>
+                    <!-- <h1 class="logo">WeRent</h1> -->
+                    <h1 class="logo">
+                      <img src="/img/logo.jpg">
+                    </h1>
                 </router-link>
             </div>
             <div class="profile">
@@ -13,11 +16,11 @@
             </div>
             <div class="d-flex">
               <div class="links">
-                  <a v-if="user" @click="logOut">log Out</a> | 
+                  <a v-if="user" @click="logOut">Log Out</a> | 
                   <a v-if="!user" href="#register" @click.prevent="open">Sign in | </a>
                   <!-- <router-link  v-if="!user" to="/signIn">Sign In</router-link> | -->
                   <router-link to="/about">About</router-link> |
-                  <router-link to="/item">items</router-link>
+                  <router-link to="/item">Items</router-link>
               </div>
                   <router-link :to="'/user/'+user._id" v-if="user">
                       <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
@@ -65,7 +68,7 @@ export default {
 
 <style scoped lang="scss">
 #nav {
-  padding: 20px;
+  padding: 0 20px;
   margin: 0;
   display: flex;
   color: #00d8ae;
@@ -87,11 +90,16 @@ export default {
     color: #ccc;
   }
   // background-color: #ccc;
-  background-color: #162044;
+  // background-color: #162044;
+    background-color: #EEEEEE;
 
   .logo {
     color: #00d8ae;
     padding: 0 10px;
+  }
+
+  .logo img{
+    width: 100px;
   }
 
   .links {

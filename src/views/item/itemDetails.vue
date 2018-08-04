@@ -296,3 +296,24 @@ h1 {
 }
 </style>
 
+<style>
+
+/* .items-list {
+  background-color: yellow;
+  width: 300px;
+} */
+
+/* @media (max-width: 450px) {
+
+
+  li {
+    width: 333px !important;
+  }
+
+  ul.items-list {
+    width: 400px;
+  background-color: red;
+}
+} */
+
+</style>

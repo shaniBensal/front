@@ -87,14 +87,10 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
-<style scoped lang="scss">
-=======
 <style scoped>
 body{
     text-transform: capitalize;
 }
->>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
 .flex {
   display: flex;
 }

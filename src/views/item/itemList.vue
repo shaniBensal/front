@@ -298,9 +298,6 @@ export default {
 
 
 
-<<<<<<< HEAD
-<style scoped lang="scss">
-=======
 <!--
 <script>
   export default {
@@ -322,7 +319,6 @@ export default {
 
 
 
->>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
 .container {
   padding: 0 20px;
   max-width: 980px;
@@ -376,8 +372,8 @@ input {
   margin-bottom: 100px;
 }
 
-.v-btn.v-btn {
-  // background-color: white;
+/* .v-btn.v-btn {
+//  background-color: white;
   color: rgb(4, 4, 73);
   opacity: 1;
   border: none;
@@ -402,7 +398,7 @@ input {
 .v-btn.v-btn--active::before {
   // background-color: white;
   opacity: 1;
-}
+} */
 
 .toolbar {
   margin-bottom: 50px;

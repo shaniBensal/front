@@ -9,8 +9,8 @@
     <v-content>
         <!-- <div class="pic-cover"></div> -->
       <section>
-        
-                <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg">
+        <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">
+                <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
               <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
           <v-layout 
             class="opaque-background" 
@@ -129,7 +129,7 @@
       </section>
 
          <v-btn
-              class="blue lighten-2 mt-5"
+              class="mt-5"
               dark
               large
               href="/pre-made-themes"
@@ -237,13 +237,14 @@ export default {
   box-sizing: border-box;
 }
 
+
 .first-section{
   background-color: #EEEEEE;
 }
 
 
 .top-pic {
-  /* height: 500px; */
+  height: 530px;
 }
 
 .categories{

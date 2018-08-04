@@ -41,7 +41,7 @@
                         <div v-if="item">
 
                              <v-icon small light color="yellow">fas fa-star</v-icon>
-                            {{avgRank}} ({{item.ranking.count}})
+                          <span class="rank"> {{avgRank}} ({{item.ranking.count}}) </span>
                         </div>
                     </div>
 
@@ -175,6 +175,10 @@ export default {
   padding: 10px 0;
 }
 
+.rank{
+  font-size: 12px;
+}
+
 .card-bottom {
   border-top: 1px solid rgba(0, 0, 0, 0.226);
   justify-content: space-between;
@@ -187,6 +191,8 @@ p {
 
 .price {
   color: #42b983;
+  font-weight: bold;
+  font-size: 15px;
 }
 .v-card {
   // margin: 20px 10px 10px 10px;

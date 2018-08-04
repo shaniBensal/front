@@ -15,7 +15,7 @@
                         <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
                         <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
-                        In date: {{selectedDateRent}}
+                        In date: {{selectedDateRent | moment('DD-MM-2018')}}
                         <br /> Price For Day: {{item.price}}$
                         <br />
                         <!-- Price: {{totalCost}}$ -->
@@ -54,6 +54,7 @@ import datePicker from "./datePicker.vue";
 import confirmModal from "./confirmModal.vue";
 // import itemListCategory from "../views/item/itemListCategory.vue";
 import itemPreview from "../components/item/itemPreview.vue";
+
 export default {
   name: "BookItem",
   props: ["selectedDate"],
@@ -104,6 +105,7 @@ export default {
       this.dealDetails.ownerId = this.$store.getters.itemOwner._id;
       this.dealDetails.renterId = this.$store.getters.loggedinUser._id;
       this.dealDetails.dates = [this.selectedDate];
+      this.dealDetails.price = this.item.price
     },
     todayDate() {
       var result = "";

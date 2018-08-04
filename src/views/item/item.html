@@ -1,0 +1,49 @@
+<template>
+    <div class="orders">
+        <h1>Items i orderd</h1>
+        <div class="activeTrasactions">
+
+            <ul>
+                <li v-for="transaction in transactions.activeTransactions" :key="transaction._id" class="flex">
+                    <div>
+                        <img :src="transaction.item.images[0]">
+                    </div>
+                    <div>
+
+                        <h3>{{transaction.item.title}}</h3>
+                        <p>{{transaction.item.description}}</p>
+                    </div>
+
+                    <div class="details">
+                        <p> orderd from: {{transaction.fromOwner.name}}</p>
+                        <p>day of picking-up: {{transaction.dates[0]}}</p>
+                        <p>from: {{transaction.fromOwner.address}}</p>
+                    </div>
+
+
+                </li>
+            </ul>
+
+        </div>
+        <div class="passiveTrasactions">
+            <h1>Items orderd from me</h1>
+            <ul>
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" v-if="isFutureDate(transaction.dates[0])">{{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})
+                    <div>
+                        <img :src="transaction.item.images[0]">
+                    </div>
+                    <div>
+
+                        <h3>{{transaction.item.title}}</h3>
+                    </div>
+
+                    <div>
+                        orderd from: {{transaction.rentedTo.name}} email:{{transaction.rentedTo.email}}
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</template>

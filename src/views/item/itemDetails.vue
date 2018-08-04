@@ -3,60 +3,56 @@
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container d-inline-flex">
                 <div class="item-details d-flex">
-                    <div>
-                        <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
-                        <span class="bold-font">{{itemForDisplay.price}}$ For day </span>
-                    </div>
-                    <div class="spacer-paragrph">
+                  <div class="header">
+                        <h1 class="bold-font"> {{itemForDisplay.title}}</h1>
+                        <span><v-icon color="yellow">fas fa-star</v-icon>{{itemForDisplay.ranking? itemForDisplay.ranking.avg : ''}} ({{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}) </span>
+                      <div class="seller-details">
                         <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
                         <label v-if="owner">{{owner.name}} </label>
-                        <a class="bold-font">Contat seller</a>
+                        <a class="bold-font">(Contact seller)</a>
+                      </div>
+                           
+                    
                     </div>
-                    <div class="spacer-paragrph" v-if="distance">
-                        <i class="fas fa-map-marker-alt"></i> Pick up from: <br>
-                        {{owner.address}} ( {{distance}} Km from you) 
-                    </div>
-                    <p>Description: {{itemForDisplay.description}}</p>
+
+                        <span class="bold-font">
+                          <v-icon>fas fa-dollar-sign</v-icon>
+                          {{itemForDisplay.price}}$ per day </span>
+                        <div class="spacer-paragrph"></div>
+                         <p>{{itemForDisplay.description}}</p>
+                
+                   
+                    <div class="spacer-paragrph"> </div>
+                    <div class="spacer-paragrph"> </div>
+
                     <div class="d-flex flex-column" v-if="itemForDisplay.images">
                         <img class="main-image" :src="mainImage">
                         <div class="spacer-paragrph"></div>
                         <div class="image-gallery d-flex">
                         <div v-if="(itemForDisplay.images).length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
-                            <span class="bold-font">{{itemForDisplay.price}}$ Per Day </span>
-                        </div>
-                        <hr>
-                        
-                        <div class="spacer-paragrph">
-                            <div>Item Owner:</div>
-                            <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
-                            <div v-if="owner">{{owner.name}} </div>
-                        </div>
-                        <v-btn class="btn-chat">Start Chat</v-btn>
-                        <div class="spacer-paragrph" v-if="distance">
-                            <br>
-                            <i class="fas fa-map-marker-alt"></i> Pick up from:
-                            <br> {{owner.address}}
-                            <br>( {{distance}} km from you)
-                        </div>
+                        </div> 
                     </div>
-                    
+                        <div class="spacer-paragrph" v-if="distance">
+                        <i class="fas fa-map-marker-alt"></i> Pick up from: <br>
+                        {{owner.address}} ( {{distance}} Km from you) 
+                    </div>
                     <div class="spacer-paragrph">
                         <div class="show-map">
-                            <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="14" map-type-id="roadmap" style="width: 300px; height: 200px">
+                            <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="14" map-type-id="roadmap" style="width: 400px; height: 300px">
                                 <GmapMarker v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true"
                                     :icon="marker.icon" />
                             </GmapMap>
                         </div>
                     </div>
-                <div class="rank-stars">
+                 <!-- <div class="rank-stars">
                   Rate product:
-                  <star-rating :rating="rating" star-size="25" @rating-selected="setRating"></star-rating>
+                 <star-rating :rating="rating" :star-size="25" @rating-selected="setRating"></star-rating> 
                   <br>
                   Reviews:
+                </div> -->
                 </div>
-                </div>
-            </div>
+            </div> 
             <div class="date-book">
                 <div>
                     <i class="far fa-calendar-alt"></i> Availability:</div>
@@ -83,7 +79,7 @@ export default {
   data() {
     return {
       isBooked: false,
-      rating: 4,
+      // rating: 4,
       dialog: false,
       owner: {},
       selectedDate: "",
@@ -92,8 +88,7 @@ export default {
       images: [],
       mainImage: "",
       currentLocation: { lat: 0, lng: 0 },
-      markers: [{ position: { lat: 0, lng: 0 }, icon:"/img/marker.png" }]
-
+      markers: [{ position: { lat: 0, lng: 0 }, icon: "/img/marker.png" }]
     };
   },
   created() {
@@ -101,7 +96,7 @@ export default {
       .then(() => {
         var userLocPrm = this.geolocation();
         var itemLocPrm = this.getItemLocation(this.owner.address);
-        return Promise.all([userLocPrm, itemLocPrm])
+        return Promise.all([userLocPrm, itemLocPrm]);
       })
       .then(this.calcDistance);
   },
@@ -114,9 +109,7 @@ export default {
     },
     google: gmapApi
   },
-  mounted() {
-
-  },
+  mounted() {},
 
   methods: {
     loadItem(itemId) {
@@ -149,7 +142,7 @@ export default {
       return this.$store
         .dispatch({ type: "loadOwnerById", ownerId })
         .then(owner => {
-          this.owner = owner
+          this.owner = owner;
         });
     },
     bookNow() {
@@ -188,7 +181,7 @@ export default {
       };
 
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
-      this.distance = distance.toFixed(2)
+      this.distance = distance.toFixed(2);
     }
   },
 
@@ -202,6 +195,16 @@ export default {
 
 <style lang="scss" scoped>
 
+.header{
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+  
+}
+
+.seller-details{
+
+}
 .date-book {
   width: 40%;
   height: fit-content;
@@ -213,10 +216,6 @@ export default {
   min-width: 80vw;
   margin: 20px;
   // font-family: "Roboto Slab";
-}
-.carousel {
-  margin: 0px 10px;
-  width: 30%;
 }
 
 .main-image {
@@ -232,17 +231,26 @@ export default {
   flex-direction: column;
   text-align: left;
   width: 40%;
-  align-items: center;
   color: black;
+  align-items: flex-start;
+}
+
+.image-gallery {
+  align-items: center;
+}
+
+.image-gallery img {
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .spacer-paragrph {
   margin: 18px 0px;
 }
 .owner-pic {
-  width: 90px;
-  height: 90px;
-  border-radius: 10%;
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
   background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -265,9 +273,10 @@ export default {
 
 .btn-book {
   background-color: #0fa086;
-  margin-top: 15px;
+  margin-top: 25px;
   box-shadow: none;
   color: #fff;
+  width: 290px;
 }
 
 .btn-chat {

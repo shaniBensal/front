@@ -24,7 +24,6 @@
         <div class="tabs bold-font">
             <ul>
                 <button class="tab1" @click="showItemsForRent">My items</button> |
-                <button class="tab2" @click="showItemsRented">Items rented by me</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
                 <button class="tab4" @click="showTrnsactions">My Orders</button>
             </ul>
@@ -235,7 +234,7 @@ button a {
 
 .add-item {
   width: 50%;
-  background-color: #00d8ad75;
+  background-color: #1da088;
   margin: 20px 0;
 }
 

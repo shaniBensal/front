@@ -15,9 +15,9 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
 
-                    <v-btn color="primary" flat @click="closeModal">
-                        <router-link :to="'/user/'+user._id">OK</router-link>
-                    </v-btn>
+                    <router-link :to="'/user/'+user._id"><v-btn color="primary" flat @click="closeModal">
+                        OK
+                    </v-btn></router-link>
                 </v-card-actions>
             </v-card>
         </v-dialog>

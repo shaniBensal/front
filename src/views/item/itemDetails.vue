@@ -28,17 +28,8 @@
                         <hr>
                         
                         <div class="spacer-paragrph">
-                            <div>Item Owner:</div>
-                            <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
-                            <div v-if="owner">{{owner.name}} </div>
                         </div>
-                        <v-btn class="btn-chat">Start Chat</v-btn>
-                        <div class="spacer-paragrph" v-if="distance">
-                            <br>
-                            <i class="fas fa-map-marker-alt"></i> Pick up from:
-                            <br> {{owner.address}}
-                            <br>( {{distance}} km from you)
-                        </div>
+                        <!-- <v-btn class="btn-chat">Start Chat</v-btn> -->
                     </div>
                     
                     <div class="spacer-paragrph">
@@ -51,7 +42,7 @@
                     </div>
                 <div class="rank-stars">
                   Rate product:
-                  <star-rating :rating="rating" star-size="25" @rating-selected="setRating"></star-rating>
+                  <star-rating :rating="rating" :star-size="25" @rating-selected="setRating"></star-rating>
                   <br>
                   Reviews:
                 </div>
@@ -214,10 +205,6 @@ export default {
   margin: 20px;
   // font-family: "Roboto Slab";
 }
-.carousel {
-  margin: 0px 10px;
-  width: 30%;
-}
 
 .main-image {
   max-width: 240px;
@@ -232,7 +219,6 @@ export default {
   flex-direction: column;
   text-align: left;
   width: 40%;
-  align-items: center;
   color: black;
 }
 
@@ -240,10 +226,9 @@ export default {
   margin: 18px 0px;
 }
 .owner-pic {
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
   border-radius: 10%;
-  background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -272,14 +257,6 @@ export default {
 
 .btn-chat {
   margin: 0;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-  text-transform: capitalize;
 }
 
 h1 {

@@ -232,7 +232,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 * {
   box-sizing: border-box;
 }
@@ -445,7 +445,7 @@ div .fill-height {
 }
 
 .v-footer.blue.darken-2 {
-  background-color: #162044 !important;
+  background-color: #162044;
 }
 
 .all-items {
@@ -456,9 +456,8 @@ div .fill-height {
 .see-more {
   /* text-decoration-style: none !important; */
 }
+
 </style>
-
-
 
 <style scoped lang="stylus">
 

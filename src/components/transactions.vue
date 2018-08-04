@@ -64,7 +64,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .flex {
   display: flex;
 }

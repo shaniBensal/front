@@ -72,7 +72,7 @@ export default {
         isNew: true,
         price: null,
         renterId: null,
-        dates: []
+        dates: null
       }
     };
   },
@@ -236,12 +236,17 @@ export default {
   color: #f6f6f6;
   border: 0;
   margin: 5px 0px;
-  background-color: #3fb67b;
+  background-color: #42b983;
   cursor: pointer;
 }
 
 .btn-book {
-  background-color: #f56400;
+  background-color: #42b983;
+  color: #fff;
+}
+
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat){
+      box-shadow: none;
 }
 
 .spacer {

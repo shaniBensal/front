@@ -26,19 +26,23 @@
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab2" @click="showItemsRented">Items rented by me</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
+                <button class="tab4" @click="showTrnsactions">My Orders</button>
             </ul>
 
         </div>
 
         <div class="user-profile-items">
-         <ul class="items-list" v-if="itemsToShow">
-            <li v-for="item in itemsToShow" :key="item._id">
-                <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
-            </li>
-        </ul>
-
-
+            <ul class="items-list" v-if="itemsToShow && !transactionsState">
+                <li v-for="item in itemsToShow" :key="item._id">
+                    <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
+                </li>
+            </ul>
         </div>
+
+        <div class="user-profile-transactions" v-if="transactionsState">
+            <transactions :transactions="transactions"></transactions>
+        </div>
+
     </div>
 
 </template>
@@ -46,13 +50,20 @@
 <script>
 import itemList from "../item/itemList.vue";
 import itemPreviewForUser from "../../components/item/itemPreviewForUser.vue";
+import transactions from "../../components/transactions.vue";
 export default {
   data() {
     return {
       user: null,
       userAndItems: null,
       itemsToShow: [],
-      isEditable: true
+      isEditable: true,
+      transactionsState:false,
+      transactions: {
+        passiveTransactions: [],
+        activeTransactions: []
+      },
+      favoriteItems: []
     };
   },
 
@@ -72,11 +83,30 @@ export default {
     //     });
     // },
 
-  loadUser(userId){   
-    this.$store.dispatch({type: "getTransactionsByOwner", userId})
-    .then(res=>console.log('from profile:',res)
-    )   
-  },
+    loadUser(userId) {
+      this.user = { ...this.$store.getters.loggedinUser };
+      this.$store
+        .dispatch({ type: "getTransactionsByOwner", userId })
+        .then(transactions => {
+          console.log("by owner", transactions);
+          this.transactions.passiveTransactions = transactions;
+          this.$store
+            .dispatch({ type: "getTransactionsByRenter", userId })
+            .then(transactions => {
+              console.log("by renter", transactions);
+              this.transactions.activeTransactions = transactions;
+              this.$store
+                .dispatch({ type: "getUserWithItems", userId: userId })
+                .then(currUser => {
+                  // console.log(currUser);
+                  this.user = currUser.user;
+                  this.userAndItems = currUser;
+                  this.itemsToShow = currUser.owendItems;
+                  console.log(currUser);
+                });
+            });
+        });
+    },
     removeItem(itemId) {
       // console.log("removing...", itemId);
       this.$store
@@ -86,21 +116,33 @@ export default {
     showItemsForRent() {
       this.itemsToShow = this.userAndItems.owendItems;
       this.isEditable = true;
+      this.transactionsState = false
     },
     showItemsRented() {
       this.itemsToShow = this.userAndItems.rentedItems;
       this.isEditable = false;
+       this.transactionsState = false
     },
     showFavorites() {
       this.itemsToShow = this.userAndItems.favoriteItems;
       this.isEditable = false;
+       this.transactionsState = false
+    },
+
+    showTrnsactions() {
+      this.transactionsState = true;
     }
   },
 
-  computed: {},
+  computed: {
+    // user(){
+    //   return this.$store.getters.loggedinUser
+    // }
+  },
   components: {
     itemList,
-    itemPreviewForUser
+    itemPreviewForUser,
+    transactions
   }
 };
 </script>
@@ -111,7 +153,7 @@ export default {
   max-width: 980px;
 }
 
-button a{
+button a {
   color: white;
 }
 

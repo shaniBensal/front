@@ -19,7 +19,14 @@ export default {
       return transactionsService.newTransaction(trans)
     },
     getTransactionsByOwner(context, {userId}){
+      console.log('from store', userId);
+      
       return transactionsService.getTransactionsByOwner(userId);
+    },
+
+    getTransactionsByRenter(context, {userId}){
+      return transactionsService.getTransactionsByRenter(userId);
     }
+    
   }
 };

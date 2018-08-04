@@ -40,7 +40,6 @@ export default {
     },
 
     allowedDates(dateStr) {
-      // console.log(this.unAvailableDates);
       return !this.unAvailableDates.includes(dateStr);
     },
 
@@ -50,14 +49,14 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 .v-btn.v-btn--active {
   background: teal;
 }
 
-.v-date-picker-table .v-btn {
+/* .v-date-picker-table .v-btn {
   font-family: "Roboto Slab-bold", serif;
-}
+} */
 
 .v-btn--disabled {
   color: grey;

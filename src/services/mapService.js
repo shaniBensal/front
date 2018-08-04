@@ -6,8 +6,6 @@ const GOOGLE_API_KEY = 'AIzaSyAT6kgeeG5OSYsEuffWJVuFeRPhnOa0Di0';
 
 
 function getUserLatLng(userAddress) {
-    // console.log('getUserLatLng userAddress is:', userAddress);
-
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=${GOOGLE_API_KEY}`,
         {
             withCredentials: false

@@ -7,8 +7,8 @@
                     <img class="main-image" :src="item.images[0]">
                 </div>
                 <div class="details">
-                    <h1>Hi {{userName}}!</h1>
-                    <br /> You chose to rent {{itemName}}
+                    <h1>Hi {{user.name}}!</h1>
+                    <br /> You chose to rent {{item.name}}
                     <p>From {{owner.name}} </p>
                     <p> pickup address is {{owner.address}}</p>
                     <p>
@@ -61,17 +61,18 @@ export default {
     return {
       firstDateTimeStamp: null,
       secDateTimeStamp: null,
-      itemName: null,
       today: null,
-      userName: null,
       open: false,
+      daysToRent: 1,
+      firstDay: null,
+      lastDay: null,
       dealDetails: {
-        userId: null,
         itemId: null,
-        daysToRent: 1,
-        firstDay: null,
-        lastDay: null,
-        totalPrice: null
+        ownerId: null,
+        isNew: true,
+        price: null,
+        renterId: null,
+        dates: null
       }
     };
   },
@@ -86,7 +87,7 @@ export default {
         .dispatch({ type: "loadItemById", itemId })
         .then(item => {
           return this.$store.dispatch({
-            type: "loadUserById",
+            type: "loadOwnerById",
             ownerId: item.ownerId
           });
         })
@@ -99,14 +100,11 @@ export default {
         });
     },
     loadFirstData() {
-      this.itemName = this.$store.getters.selectedItem.title;
-      this.dealDetails.firstDay = this.selectedDate;
-      this.userName = this.$store.getters.loggedinUser.name;
-      this.dealDetails.userId = this.$store.getters.loggedinUser._id;
-      this.dealDetails.itemId = this.$store.getters.selectedItem._id;
-      this.dealDetails.totalPrice = this.$store.getters.selectedItem.price;
+      this.dealDetails.itemId = this.$route.params.id;
+      this.dealDetails.ownerId = this.$store.getters.itemOwner._id;
+      this.dealDetails.renterId = this.$store.getters.loggedinUser._id;
+      this.dealDetails.dates = [this.selectedDate];
     },
-    goToItemDetails() {},
     todayDate() {
       var result = "";
       var month = "";
@@ -124,12 +122,6 @@ export default {
       let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
       datesArray.push(this.dealDetails.firstDay);
       item.occupiedDates = datesArray;
-
-      var user = { ...this.$store.getters.loggedinUser };
-      let rentedItemsArray = JSON.parse(JSON.stringify(user.rentedItems));
-      rentedItemsArray.push(this.dealDetails.itemId);
-      user.rentedItems = rentedItemsArray;
-
       this.$store
         .dispatch({
           type: "updateItem",
@@ -138,12 +130,11 @@ export default {
         .then(() => {
           this.$store
             .dispatch({
-              type: "updateUser",
-              user: user
+              type: "newTransaction",
+              trans: this.dealDetails
             })
             .then(() => {
               this.open = true;
-              // console.log(this.open);
             });
         });
     },
@@ -194,6 +185,9 @@ export default {
     },
     itemsForDisplay() {
       return this.$store.getters.filteredItems;
+    },
+    user() {
+      return this.$store.getters.loggedinUser;
     }
     // totalCost() {
     //   return (
@@ -241,12 +235,17 @@ export default {
   color: #f6f6f6;
   border: 0;
   margin: 5px 0px;
-  background-color: #3fb67b;
+  background-color: #42b983;
   cursor: pointer;
 }
 
 .btn-book {
-  background-color: #f56400;
+  background-color: #42b983;
+  color: #fff;
+}
+
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat){
+      box-shadow: none;
 }
 
 .spacer {

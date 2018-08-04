@@ -162,6 +162,6 @@ export default {
       return itemsService.updateItem(item).then(item => {
         return context.commit({ type: 'updateItem', item });
       });
-    }
+    },
   }
 };

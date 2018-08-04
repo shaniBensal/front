@@ -91,7 +91,7 @@ export default {
     },
     loadOwner(ownerId) {
       return this.$store
-        .dispatch({ type: "loadUserById", ownerId })
+        .dispatch({ type: "loadOwnerById", ownerId })
         .then(owner => {
           this.owner = owner;
         });
@@ -123,9 +123,7 @@ export default {
 
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
       this.distance = distance.toFixed(1);
-      // console.log("distance between coords:", coords, "is:", distance, "km");
       this.$emit('getDistance' ,this.distance );
-      console.log(' ITEM PREVIEW this.distance', this.distance);
       
     }
   },

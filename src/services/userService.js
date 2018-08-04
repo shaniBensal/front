@@ -43,9 +43,7 @@ function getLoggedInUser() {
     return loggedinUser
 }
 
-function getUserLatLng(userAddress) {
-    console.log('getUserLatLng userAddress is:', userAddress);
-    
+function getUserLatLng(userAddress) {   
     return axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=${GOOGLE_API_KEY}`,
         {
@@ -53,8 +51,6 @@ function getUserLatLng(userAddress) {
         }
     )
         .then(res => {
-            console.log('res.data is:', res.data)
-            console.log('res is', res.data.results[0].geometry.location)
             var itemLatLng = res.data.results[0].geometry.location
             return itemLatLng;
         })

@@ -13,26 +13,26 @@
 
                 <div class="flex card-bottom">
                     <p class="price bold-font">{{item.price}}$ per day</p>
-                    <div v-if="item">
+                    <!-- <div v-if="item">
 
                         <v-icon small light color="yellow">fas fa-star</v-icon>
                         {{avgRank}} ({{item.ranking.count}})
-                    </div>
+                    </div> -->
                 </div>
 
             </v-card-title>
             <v-card-actions v-if="isEdit" class="justify-center">
                 <div class="text-xs-center">
 
-                    <v-btn fab dark small color="teal lighten-3">
+                    <!-- <v-btn fab dark small color="teal lighten-3"> -->
                         <router-link :to="'/item/edit/'+item._id" title="Edit">
                             <v-icon dark>edit</v-icon>
                         </router-link>
-                    </v-btn>
+                    <!-- </v-btn> -->
 
-                    <v-btn color="red lighten-3" fab dark small @click="removeItem(item._id)">
-                        <v-icon dark>fas fa-trash-alt</v-icon>
-                    </v-btn>
+                    <!-- <v-btn color="red lighten-3" fab dark small > -->
+                        <v-icon dark @click="removeItem(item._id)">fas fa-trash-alt</v-icon>
+                    <!-- </v-btn> -->
                 </div>
             </v-card-actions>
         </v-card>
@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     addToFavorites() {
-      // console.log("added to favorites", this.item);
       var currUser = this.$store.getters.loggedinUser;
       if (currUser) {
         this.isUserLoggedIn = true;

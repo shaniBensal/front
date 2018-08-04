@@ -39,6 +39,114 @@
         </v-toolbar>
 
 
+
+
+
+
+        <div class="mobile-buttons">
+
+
+
+          <template>
+  <div class="text-xs-center">
+   
+      
+
+
+           <v-form @submit.prevent="onSearch">
+             <v-btn
+        slot="activator"
+        color="primary"
+        dark
+      >
+        Search
+      </v-btn>
+                <v-card class="pa-3" color="transparent" flat>
+                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
+                        <v-btn icon @click.stop="onSearch">
+                            <v-icon>search</v-icon>
+                        </v-btn>
+                      <v-icon>search</v-icon>
+                    </v-text-field>
+                </v-card>
+            </v-form>
+
+            <!--
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in items"
+          :key="i"
+          @click=""
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+      -->
+
+
+    <v-menu
+      transition="slide-x-transition"
+      bottom
+      right
+    >
+      <v-btn
+        slot="activator"
+        class="deep-orange"
+        color="primary"
+        dark
+      >
+        Sort
+      </v-btn>
+
+      <v-list>
+        <v-list-tile
+          v-for="(sorting, i) in sortings"
+          :key="i"
+          @click="changeSort(sorting)"
+        >
+          <v-list-tile-title>{{ sorting }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+
+    <v-menu
+      transition="slide-y-transition"
+      bottom
+    >
+      <v-btn
+        slot="activator"
+        class="purple"
+        color="primary"
+        dark
+      >
+        Categories
+      </v-btn>
+      <v-list>
+        <v-list-tile
+          v-for="(category, i) in categories"
+          :key="i"
+          @click="setFiltersByCategory(category)"
+        >
+          <v-list-tile-title>{{ category }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+  </div>
+</template>
+
+
+
+          <!-- <v-btn :round=false>Search</v-btn>
+          <v-btn>Sort</v-btn>
+          <v-btn>Categories</v-btn> -->
+        </div>
+
+
+
+
+
+
+
         <ul class="items-list">
             <li v-for="item in sortedItems" :key="item._id">
                 <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
@@ -64,7 +172,16 @@ export default {
       toggle_exclusive_2: [],
       sortings: ['Name', 'Availiblity', 'Price', 'Distance', 'Rating'],
       toggle_multiple: null, // [1, 2, 3]
-      sortBy: ''
+      sortBy: '',
+
+       items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' }
+      ]
+
+
     };
   },
 
@@ -81,6 +198,8 @@ export default {
 
   methods: {
     onSearch() {
+      console.log(' ON SEARCH');
+      
       var query = 'search=' + this.searchStr;
       var category = this.$route.query.category;
       if (category) {
@@ -179,7 +298,31 @@ export default {
 
 
 
+<<<<<<< HEAD
 <style scoped lang="scss">
+=======
+<!--
+<script>
+  export default {
+    data: () => ({
+      items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' }
+      ]
+    })
+  }
+</script>
+-->
+
+
+
+<style scoped>
+
+
+
+>>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
 .container {
   padding: 0 20px;
   max-width: 980px;
@@ -274,9 +417,67 @@ justify-content: center;
 
 <!-- style not scoped:  -->
 <style>  
+
+
+
 .item-list .v-toolbar__content {
   flex-wrap: wrap;
   height: 120px !important;
   padding-bottom: 20px;
 }
+
+
+  .mobile-buttons {
+    display : none;
+  }
+
+@media (max-width: 440px) {
+
+.mobile-buttons div {
+  padding : 0 !important;
+  margin: 0 !important;
+}
+
+
+.mobile-buttons form {
+  padding : 0 !important;
+  margin: 0 !important;
+}
+
+  ul {
+  grid-template-columns: 88vw !important; 
+  }
+
+  .toolbar.item-list {
+    display : none;
+  }
+
+  .mobile-buttons {
+    display : flex;
+    justify-content: space-around;
+    margin: 8px 0 12px 0;
+  }
+
+  .mobile-buttons button {
+    border-radius: 5% !important;
+    font-size : 0.8rem;
+  }
+
+  .v-list-tile {
+    background-color : rgba(222,177,0,1) !important;
+  }
+
+  
+  .v-list-tile-title {
+    background-color : rgba(222,177,0,1) !important;
+  }
+
+.v-menu__content {
+  background-color: rgba(222,222,222,.94) !important;
+  left: 0 !important;
+}
+
+}
+
+
 </style>

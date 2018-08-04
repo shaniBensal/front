@@ -50,13 +50,31 @@ export default {
 };
 </script>
 <style>
+.v-picker__title__btn:not(.active){
+  opacity: 1 !important;
+}
+
+.v-date-picker-title__year{
+  font-size: 30px !important;
+}
+
 .v-btn.v-btn--active {
   background: teal;
 }
+
+.v-date-picker-title{
+ flex-direction: row !important;
+}
+
+
+/* .v-date-picker-table .v-btn {
+  font-family: "Roboto Slab-bold", serif;
+} */
 
 .v-btn--disabled {
   color: grey;
   opacity: 0.2;
 }
+
 </style>
 

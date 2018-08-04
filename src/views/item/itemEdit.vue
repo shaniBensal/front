@@ -3,7 +3,7 @@
         <v-text-field v-model="itemToUpdate.title" label="item name"></v-text-field>
         <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
         <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
-        <div>
+        <div class="upload-img">
         <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
              </div>
               <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
@@ -19,34 +19,6 @@
         <v-btn @click="clear">clear</v-btn>
         </div>
     </v-form>
-    <!-- <div class="edit-item">
-        <form @submit.prevent="updateItem">
-            <label>Item name:
-                <input type="text" v-model="itemToUpdate.title" placeholder="add item name..">
-            </label>
-            <label>Item price:
-                <input type="text" v-model="itemToUpdate.price">$
-            </label>
-            Short description
-            <textarea v-model="itemToUpdate.description"></textarea>
-            <label>Select item category:
-                <select v-model="itemToUpdate.category">
-                    <option v-for="(category,idx) in categories" :key="idx">{{categories[idx]}}</option>
-                </select>
-            </label>
-
-            <div class="upload">
-              <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
-              <img :src ="imgUrl" v-if="imgUrl">
-              <input type="file" @change="handleFileUpload($event)" >
-              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
-
-            </div>
-
-            
-            <button>Save</button>
-        </form>
-    </div> -->
 </template>
 <script>
 import cloudinaryService from "../../services/cloudinaryService.js";
@@ -164,29 +136,20 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 form {
   margin: 20px 0;
 }
 
-.v-menu > .v-menu__content {
-  top: 0 !important;
-  left: 0 !important;
-  background-color: lightgray;
-}
-
 .v-label.v-label--active {
-  color: #00d8ae;
+  color: #1da088;
 }
 .v-input {
   width: 50vw;
-  outline: #00d8ae;
+  outline: #1da088;
   margin: 20px 0;
 }
-.v-menu__content {
-  top: 0;
-  left: 0;
-}
+
 
 .v-list {
   top: 0;
@@ -224,6 +187,12 @@ select {
   overflow: hidden;
 }
 
+.v-menu > .v-menu__content {
+  top: 10px !important;
+  left: 0 !important;
+  background-color: lightgray;
+}
+
 .file-input > * {
   pointer-events: none;
 }
@@ -241,7 +210,7 @@ select {
   width: 100%;
 }
 
-img {
+.upload-img img {
   width: 160px;
   height: 160px;
   margin: 10px 10px;
@@ -252,3 +221,5 @@ img {
   display: flex;
 }
 </style>
+
+

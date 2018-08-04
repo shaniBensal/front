@@ -54,10 +54,6 @@ export default {
   opacity: 1 !important;
 }
 
-.v-date-picker-title__year{
-  font-size: 30px !important;
-}
-
 .v-btn.v-btn--active {
   background: teal;
 }

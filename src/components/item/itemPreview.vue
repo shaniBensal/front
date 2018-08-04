@@ -4,7 +4,7 @@
         <!-- <sign-up-modal v-if="isUserLoggedIn"></sign-up-modal> -->
 
         <v-card :to="'/item/' + item._id">
-            <v-card-media  height="10em" :src="item.images[0]">
+            <v-card-media  :src="item.images[0]">
 
                 <div class="text-xs-center">
                     <v-btn @click.prevent="addToFavorites" flat icon color="pink lighten-1" :disabled="dialog" :loading="dialog" class="white--text" @click.stop="dialog = true">
@@ -190,7 +190,7 @@ p {
 }
 .v-card {
   // margin: 20px 10px 10px 10px;
-  max-width: 200px;
+  // max-width: 200px;
   transition: all 0.8s;
 }
 .v-card:hover {
@@ -210,7 +210,8 @@ a {
   color: #42b983;
 }
 .v-card__media {
-  height: 16em;
+  
+  height: 7em;
   margin: 0 auto;
   transition: all 0.3s;
 }
@@ -240,5 +241,20 @@ div.v-card__title {
 
 .location span {
   font-weight : bold;
+}
+
+
+// .v-card-media {
+//   height : 8em !important;
+// } 
+
+div .v-card__media {
+  height: 10em !important;
+} 
+
+@media (max-width: 440px) {
+  div .v-card__media {
+  height: 30vh !important;
+  } 
 }
 </style>

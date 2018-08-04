@@ -135,7 +135,6 @@ export default {
             })
             .then(() => {
               this.open = true;
-              // console.log(this.open);
             });
         });
     },

@@ -1,15 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <div class="logo">
-        <h1 class="logo">WeRent</h1>
-        </div>
-        <div class="links">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/item">items</router-link>
-     </div>
-    </div> -->
     <nav-bar></nav-bar>
     <router-view/>
     <app-footer></app-footer>
@@ -17,23 +7,22 @@
 </template>
 
 <script>
-
-import navBar from './components/navBar.vue'
-import appFooter from './components/footer.vue'
+import navBar from "./components/navBar.vue";
+import appFooter from "./components/footer.vue";
 export default {
-components:{
-  navBar,
-  appFooter
- },
- created() {
-   this.$store.dispatch({type: 'loadItems'})
- }
-}
+  components: {
+    navBar,
+    appFooter
+  },
+  created() {
+    this.$store.dispatch({ type: "loadItems" });
+  }
+};
 </script>
 <style lang="scss">
-
 #app {
-   font-family: 'Roboto-Bold', sans-serif;
+  font-family: "varela_Round";
+  font-size:1.2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -53,15 +42,14 @@ components:{
       color: #00d8ae;
     }
   }
-  a:hover{
-    color: #ccc
+  a:hover {
+    color: #ccc;
   }
   // background-color: #ccc;
   background-color: #162044;
 
-  .logo{
+  .logo {
     color: #00d8ae;
   }
-
 }
 </style>

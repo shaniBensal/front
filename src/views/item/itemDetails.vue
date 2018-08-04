@@ -196,7 +196,7 @@ export default {
 .main-container {
   min-width: 80vw;
   margin: 20px;
-  font-family: "Roboto Slab";
+  // font-family: "Roboto Slab";
 }
 .carousel {
   margin: 0px 10px;

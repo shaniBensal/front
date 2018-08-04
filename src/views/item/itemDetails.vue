@@ -31,21 +31,11 @@
                         <div class="image-gallery d-flex">
                         <div v-if="(itemForDisplay.images).length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
-<<<<<<< HEAD
-                            <span class="bold-font">{{itemForDisplay.price}}$ Per Day </span>
-                        </div>
-                        <hr>
-                        
-                        <div class="spacer-paragrph">
-                        </div>
-                        <!-- <v-btn class="btn-chat">Start Chat</v-btn> -->
-=======
                         </div> 
                     </div>
                         <div class="spacer-paragrph" v-if="distance">
                         <i class="fas fa-map-marker-alt"></i> Pick up from: <br>
                         {{owner.address}} ( {{distance}} Km from you) 
->>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
                     </div>
                     <div class="spacer-paragrph">
                         <div class="show-map">
@@ -57,11 +47,7 @@
                     </div>
                  <!-- <div class="rank-stars">
                   Rate product:
-<<<<<<< HEAD
-                  <star-rating :rating="rating" :star-size="25" @rating-selected="setRating"></star-rating>
-=======
                  <star-rating :rating="rating" :star-size="25" @rating-selected="setRating"></star-rating> 
->>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
                   <br>
                   Reviews:
                 </div> -->
@@ -264,12 +250,7 @@ export default {
 .owner-pic {
   width: 50px;
   height: 50px;
-<<<<<<< HEAD
-  border-radius: 10%;
-=======
   border-radius: 20%;
-  background-image: url("../../assets/img/logo.png");
->>>>>>> 3f0aec78e1198f776353db748cc0ec35fe4161bf
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

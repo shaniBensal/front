@@ -4,44 +4,52 @@
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container d-inline-flex">
             <!-- <div > -->
-                <div class="item-details d-flex">
-                    <div>
-                        <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
-                        <span class="bold-font">{{itemForDisplay.price}}$ For day </span>
-                    </div>
-                    <div class="spacer-paragrph">
-                        <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
-                        <label v-if="owner">{{owner.name}} </label>
-                        <a class="bold-font">Contat seller</a>
-                    </div>
-                    <div class="spacer-paragrph" v-if="distance">
-                        <i class="fas fa-map-marker-alt"></i> Pick up from: <br>
-                        {{owner.address}} ( {{distance}} Km from you) 
-                    </div>
-                    <p>Description: {{itemForDisplay.description}}</p>
-                    <div class="d-flex flex-column" v-if="itemForDisplay.images">
-                        <img class="main-image" :src="mainImage">
-                        <div class="spacer-paragrph"></div>
-                        <div class="image-gallery d-flex">
+            <div class="item-details d-flex">
+                <div>
+                    <h1 class="bold-font"> {{itemForDisplay.title}} ⭐{{itemForDisplay.ranking? itemForDisplay.ranking.count : ''}}</h1>
+                    <p>{{itemForDisplay.description}}</p>
+                    <br>
+                </div>
+
+                <div class="flex-column" v-if="itemForDisplay.images">
+                    <img class="main-image" :src="mainImage">
+                    <div class="spacer-paragrph"></div>
+                    <div class="image-gallery">
                         <div v-if="(itemForDisplay.images).length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
+                            <span class="bold-font">{{itemForDisplay.price}}$ Per Day </span>
                         </div>
-                        </div>
+                        <hr>
+                        
                         <div class="spacer-paragrph">
-                            Pick up from:
-                            <div class="show-map">
-                                <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="14" map-type-id="roadmap" style="width: 300px; height: 200px">
-                                    <GmapMarker  v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true" :icon="marker.icon"
-                                    />
-                                </GmapMap>
-                            </div>
+                            <div>Item Owner:</div>
+                            <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
+                            <div v-if="owner">{{owner.name}} </div>
+                        </div>
+                        <v-btn class="btn-chat">Start Chat</v-btn>
+                        <div class="spacer-paragrph" v-if="distance">
+                            <br>
+                            <i class="fas fa-map-marker-alt"></i> Pick up from:
+                            <br> {{owner.address}}
+                            <br>( {{distance}} km from you)
                         </div>
                     </div>
-                <div>
-                    Rank our product:
-                    <star-rating :rating="rating" @rating-selected="setRating"></star-rating>
+                    
+                    <div class="spacer-paragrph">
+                        <div class="show-map">
+                            <GmapMap ref="mapRef" :center="{lat:currentLocation.lat, lng:currentLocation.lng}" :zoom="14" map-type-id="roadmap" style="width: 300px; height: 200px">
+                                <GmapMarker v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true"
+                                    :icon="marker.icon" />
+                            </GmapMap>
+                        </div>
+                    </div>
+                <div class="rank-stars">
+                  Rate product:
+                  <star-rating :rating="rating" star-size="25" @rating-selected="setRating"></star-rating>
+                  <br>
+                  Reviews:
                 </div>
-                reviews:
+                </div>
             </div>
             <!-- <div class="item-details d-flex"> -->
             <div class="date-book">
@@ -203,7 +211,7 @@ export default {
 // font-family: 'Roboto Slab-bold', serif;
 // }
 .date-book {
-  width: 50%;
+  width: 40%;
   height: fit-content;
   position: sticky;
   top: 10px;
@@ -222,7 +230,7 @@ export default {
 }
 
 .main-image {
-  max-width: 200px;
+  max-width: 240px;
 }
 
 .small-image {
@@ -230,11 +238,11 @@ export default {
 }
 
 .item-details {
-  padding: 20px 0px 0px 20px;
+  padding: 0px 0px 0px 0px;
   flex-direction: column;
   text-align: left;
   width: 40%;
-  align-items: end;
+  align-items: center;
   color: black;
 }
 
@@ -242,9 +250,9 @@ export default {
   margin: 18px 0px;
 }
 .owner-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 30%;
+  width: 90px;
+  height: 90px;
+  border-radius: 10%;
   background-image: url("../../assets/img/logo.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -269,6 +277,22 @@ export default {
   background-color: #f56400;
   // max-width: 200px;
   margin-top: 15px;
+}
+
+.btn-chat {
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 1.8rem;
 }
 </style>
 

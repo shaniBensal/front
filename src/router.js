@@ -8,6 +8,8 @@ import ItemEdit from './views/item/itemEdit.vue';
 import UserEdit from './views/item/userEdit.vue';
 import ItemDetails from './views/item/itemDetails.vue';
 import UserProfile from './views/user/userProfile.vue';
+
+import chatSocket from './views/chatSocket.vue'
 // import SignIn from './views/user/signIn.vue';
 
 
@@ -50,6 +52,13 @@ export default new Router({
       path: '/user/:id',
       name: 'userProfile',
       component: UserProfile,
-    }
+    },
+
+    {
+      path: '/chat',
+      name: 'chat',
+      component: chatSocket,
+    },
+
   ],
 });

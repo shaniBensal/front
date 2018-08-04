@@ -75,7 +75,6 @@ export default {
     var categoryParam = uParams.get('category');
     if (textParam) this.setFiltersByTitle(textParam);
     if (categoryParam) this.setFiltersByCategory(categoryParam);
-
     this.loadCategories();
     this.loadItems();
   },

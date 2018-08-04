@@ -73,7 +73,7 @@ export default {
   padding: 0 20px;
   margin: 0;
   display: flex;
-  color: #00d8ae;
+  color: #1da088;
   justify-content: space-between;
   align-items: center;
   //   box-shadow: inset 0 -6px 0 #1e1e1e;
@@ -81,11 +81,11 @@ export default {
   a {
     font-weight: bold;
     color: #2c3e50;
-    color: #00d8ae;
+    color: #1da088;
     text-decoration: none;
     cursor: pointer;
     &.router-link-exact-active {
-      color: #00d8ae;
+      color: #1da088;
     }
   }
   a:hover,
@@ -97,7 +97,7 @@ export default {
   background-color: #eeeeee;
 
   .logo {
-    color: #00d8ae;
+    color: #1da088;
     padding: 0 10px;
   }
 

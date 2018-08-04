@@ -248,8 +248,10 @@ export default {
 }
 
 .btn-book {
-  background-color: #f56400;
+  background-color: #0fa086;
   margin-top: 15px;
+  box-shadow: none;
+  color: #fff;
 }
 </style>
 

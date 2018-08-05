@@ -460,7 +460,7 @@ background-size: cover;
 .top-left {
   left: 12px;
   top: 10px;
-  font-size: 1.3em;
+  font-size: 1rem;
   line-height: 1.6em;
   text-align: left;
   width: 250px;
@@ -521,9 +521,7 @@ background-size: cover;
 
 #header-carousel .subheading {
     color: black;
-  font-size: 1.3em !important;
-
-
+  font-size: 1rem !important;
   width : 240px;
   display: inline-block;
 }

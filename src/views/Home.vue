@@ -129,10 +129,9 @@
       </section>
 
          <v-btn
-              class="blue lighten-2 mt-5"
-              dark
+              class="see-all teal mt-5"
+              light
               large
-              href="/pre-made-themes"
             >
             <router-link class="see-more" to="/item">
               See All Items
@@ -187,27 +186,27 @@ export default {
       {
         src:
           "https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800",
-        title: "Dana Loremovich, 28, New York City",
+        title: "Dana Levi, 28, Tel Aviv",
         text: "Amazing products, amazing price. great website by the way."
       },
       {
         src:
           "https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800",
-        title: "George Orwell, 36, Tel Aviv",
+        title: "Henry Orwell, 36, New York City",
         text:
           "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       },
       {
         src:
           "https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750",
-        title: "Yonit Jhonson, 44, Monaco",
+        title: "Yonit Kaspi, 44, Netanya",
         text:
           "I thought it is a waste of time and money but I was surprised it was actually great!"
       },
       {
         src:
           "https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800",
-        title: "Ofir Yakito, 22, Bogota",
+        title: "Takashi Kurosawa, 22, Tokyo",
         text:
           "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
@@ -353,7 +352,7 @@ h1 {
 .top-left {
   left: 12px;
   top: 10px;
-  font-size: 1.3em;
+  /* font-size: 1.1rem; */
   line-height: 1.6em;
   text-align: left;
   width: 250px;
@@ -422,7 +421,7 @@ h1 {
 
 #header-carousel .subheading {
   color: black;
-  font-size: 1.3em !important;
+  font-size: 1.1rem !important;
 
   width: 240px;
   display: inline-block;
@@ -458,6 +457,15 @@ div .fill-height {
 }
 </style>
 
+
+
+<!-- not SCOPED -->
+<style>   
+a.see-more {
+  color: white !important;
+}
+
+</style>
 
 
 <style scoped lang="stylus">

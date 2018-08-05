@@ -16,14 +16,15 @@
 
 
 <!--
-// var io = require('../../node_modules/socket.io')(http);  //problem with uws module
 //src="https://code.jquery.com/jquery-1.11.1.js"
 -->
 
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+
     
 <script>
+import io from 'socket.io-client';  //problem with uws module
+console.log(' ** io **', io);
+
 export default {
   name: 'chatSocket',
 

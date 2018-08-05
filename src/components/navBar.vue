@@ -91,8 +91,9 @@ export default {
 }
 
 nav {
-  height: 100px;
-  background-color: #eeeeee;
+  height: 70px;
+  // background-color: #eeeeee;
+  background-color: #eeeeee61;
   justify-content: space-between;
 }
 .clean-list a {
@@ -112,11 +113,12 @@ nav {
 
 .logo {
   color: #1da088;
-  padding: 10px;
+  padding: 15px 20px;
+  align-self: center;
 }
 
 .logo img {
-  width: 90px;
+  width: 60px;
 }
 
 .space-around {
@@ -130,9 +132,9 @@ nav {
 }
 
 .user-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 30%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;

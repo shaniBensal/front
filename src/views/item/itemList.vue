@@ -1,42 +1,77 @@
 <template>
-    <keep-alive>
-        <section>
-            <v-toolbar class="toolbar item-list">
-
-                <v-form @submit="onSearch">
-                    <v-card class="pa-3" color="transparent" flat>
-                        <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
-                            <v-btn icon @click="onSearch">
-                                <v-icon>search</v-icon>
-                            </v-btn>
+<keep-alive>
+    <section>
+        <!-- <v-toolbar  class="toolbar item-list" > -->
+          <div class="toolbar-container">
+            <div class="search-container">
+            <v-form @submit="onSearch">
+                <v-card class="pa-3" color="transparent" flat>
+                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
+                        <v-btn icon @click="onSearch">
                             <v-icon>search</v-icon>
-                        </v-text-field>
-                    </v-card>
-                </v-form>
-
-                <div class="spacer"></div>
-
-                <v-btn-toggle v-model="toggle_exclusive_2" class="transparent">
-                    <div v-for="(sorting, idx) in sortings" :key="idx">
-                        <v-btn :value="idx" flat @click="changeSort(sorting)">
-                            <div>{{sorting}}</div>
                         </v-btn>
-                    </div>
-                </v-btn-toggle>
+                      <v-icon>search</v-icon>
+                    </v-text-field>
+                </v-card>
+            </v-form>
+          </div>
+      <!-- <div class="spacer"></div> -->
+
+      <div class="toolbar-buttons-container">
+        <v-btn-toggle v-model="toggle_exclusive_2"  class="transparent">
+                <div v-for="(sorting, idx) in sortings" :key="idx">
+                    <v-btn class="toolbar-buttons" :value="idx" flat @click="changeSort(sorting)">
+                        <div>{{sorting}}</div>
+                    </v-btn>
+                </div>
+            </v-btn-toggle>
 
 
-                <div class="spacer">|</div>
+      <!-- <div class="spacer">|</div> -->
 
 
-                <v-btn-toggle v-model="toggle_exclusive" class="transparent">
-                    <div v-for="(category, idx) in categories" :key="idx">
-                        <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
-                            <div>{{category}}</div>
+            <v-btn-toggle v-model="toggle_exclusive" class="transparent">
+                <div v-for="(category, idx) in categories" :key="idx">
+                    <v-btn class="toolbar-buttons" :value="idx" flat @click="setFiltersByCategory(category)">
+                        <div>{{category}}</div>
+                        
+                    </v-btn>
+                </div>
+            </v-btn-toggle>
+        <!-- </v-toolbar> -->
+        </div>
 
-                        </v-btn>
-                    </div>
-                </v-btn-toggle>
-            </v-toolbar>
+        </div>
+
+
+            <!--
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in items"
+          :key="i"
+          @click=""
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+      -->
+
+
+
+
+
+          <!-- <v-btn :round=false>Search</v-btn>
+</template>
+          <v-btn>Sort</v-btn>
+          <v-btn>Categories</v-btn> -->
+
+
+
+
+                <!-- <div class="spacer">|</div> -->
+
+
+              
             <div class="mobile-buttons">
                 <div>
                     <div class="text-xs-center">
@@ -65,7 +100,7 @@
           </v-list>
           -->
                         <v-menu transition="slide-x-transition" bottom right>
-                            <v-btn slot="activator" class="deep-orange" color="primary" dark>
+                            <v-btn slot="activator" class="teal" color="primary" dark>
                                 Sort
                             </v-btn>
 
@@ -76,7 +111,7 @@
                             </v-list>
                         </v-menu>
                         <v-menu transition="slide-y-transition" bottom>
-                            <v-btn slot="activator" class="purple" color="primary" dark>
+                            <v-btn slot="activator" class="teal" color="primary" dark>
                                 Categories
                             </v-btn>
                             <v-list>
@@ -91,6 +126,8 @@
               <v-btn>Sort</v-btn>
               <v-btn>Categories</v-btn> -->
             </div>
+
+            
             <ul class="items-list">
                 <li v-for="item in sortedItems" :key="item._id">
                     <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
@@ -107,7 +144,7 @@ export default {
 
   data() {
     return {
-      searchStr: null,
+      searchStr: '',
       categories: [],
       toggle_exclusive: [],
       toggle_exclusive_2: [],
@@ -127,6 +164,7 @@ export default {
   },
 
   created() {
+
     var queryString = window.location.href.replace(/.*\?/, '');
     var uParams = new URLSearchParams(queryString);
     var textParam = uParams.get('search');
@@ -135,12 +173,20 @@ export default {
     if (categoryParam) this.setFiltersByCategory(categoryParam);
     this.loadCategories();
     this.loadItems();
+    console.log('** item list created **')
+
+  },
+
+  mounted () {
+    console.log('mounted');
+    
+      this.searchStr = '';
+      this.onSearch();
   },
 
   methods: {
     onSearch() {
       console.log(' ON SEARCH');
-      
       var query = 'search=' + this.searchStr;
       var category = this.$route.query.category;
       if (category) {
@@ -292,7 +338,7 @@ button {
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 30px;
 }
 
@@ -305,7 +351,7 @@ input {
 }
 
 .v-input {
-  min-width: 180px;
+  width: 180px;
 }
 
 
@@ -313,15 +359,18 @@ input {
   margin-bottom: 100px;
 }
 
-.v-btn.v-btn {
-  /* background-color: white; */
+.v-btn {
+  font-size: 0.77rem ;
+
+  background-color: white;
   color: rgb(4, 4, 73);
   opacity: 1;
   border: none;
 }
 
 .v-btn.v-btn--active {
-  /* background-color: white; */
+  /* font-size: 0.5rem !important; */
+  background-color: white;
   color: rgb(33, 111, 42);
   text-shadow: 0 0 3px rgb(156, 247, 138);
   opacity: 1;
@@ -329,7 +378,9 @@ input {
 }
 
 .v-btn.v-btn--flat:visited {
-   /* background-color: white; */
+  /* font-size: 0.5rem !important; */
+
+  background-color: white;
   color: rgb(33, 111, 42);
   text-shadow: 0 0 3px rgb(156, 247, 138);
   opacity: 1;
@@ -337,7 +388,9 @@ input {
 }
 
 .v-btn.v-btn--active::before {
-   /* background-color: white; */
+  /* font-size: 0.5rem !important; */
+
+  background-color: white;
   opacity: 1;
 } */
 
@@ -349,12 +402,55 @@ ul.items-list {
 margin: 0 auto;
 justify-content: center;
 }
+
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  padding-bottom: 24px;
+}
+
+.search-container {
+  width: 220px;
+}
+
+.pa-3.v-card {
+  padding:  0 !important;
+}
+
+.toolbar-buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
 </style>
 
 
 <!-- style not scoped:  -->
 <style>  
 
+.v-btn-toggle .v-btn {
+opacity: .8 !important;
+color: rgb(22,55,11) !important;
+padding: 0 5px 0 5px !important;
+
+}
+.transparent.v-btn {
+box-shadow: none !important;
+
+}
+
+.v-btn-toggle--selected {
+box-shadow: none !important;
+justify-content: flex-end;
+
+}
+
+
+button.toolbar-buttons:hover {
+  color: rgba(22,11,80,1) !important;
+  background-color: rgb(0,255,200);
+}
 
 
 .item-list .v-toolbar__content {
@@ -368,26 +464,46 @@ justify-content: center;
     display : none;
   }
 
-@media (max-width: 440px) {
 
-.mobile-buttons div {
+/* @media (max-width: 640px) {
+
+
+} */
+
+div.v-menu {
+  display: none;
+}
+
+@media (max-width: 640px) {
+
+div.v-menu {
+  display: inline-block !important;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  color: white !important;
+  margin-bottom: 16px;
+}
+
+.toolbar-container {
+    display: none !important;
+  }
+
+.mobile-buttons  {
   padding : 0 !important;
   margin: 0 !important;
+  display: flex !important;
 }
 
 
 .mobile-buttons form {
   padding : 0 !important;
   margin: 0 !important;
+  display: flex !important;
+
 }
 
-  ul {
-  grid-template-columns: 88vw !important; 
-  }
 
-  .toolbar.item-list {
-    display : none;
-  }
 
   .mobile-buttons {
     display : flex;
@@ -400,19 +516,37 @@ justify-content: center;
     font-size : 0.8rem;
   }
 
+  .v-menu__content {
+  background-color: rgba(222,222,222,.94) !important;
+  left: 0 !important;
+  top: 50px !important;
+}
+
+}
+
+@media (max-width: 440px) {
+
+
+
+    ul {
+  grid-template-columns: 88vw !important; 
+  }
+
+  .toolbar.item-list {
+    display : none;
+    font-size: 0.5rem;
+  }
+
   .v-list-tile {
-    background-color : rgba(222,177,0,1) !important;
+    /* background-color : rgba(222,177,0,1) !important; */
   }
 
   
   .v-list-tile-title {
-    background-color : rgba(222,177,0,1) !important;
+    /* background-color : rgba(222,177,0,1) !important; */
   }
 
-.v-menu__content {
-  background-color: rgba(222,222,222,.94) !important;
-  left: 0 !important;
-}
+
 
 }
 

@@ -116,7 +116,7 @@
                 <v-flex xs12 md4>
                   <v-card class="elevation-0 transparent">
                      <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Home ,electronics and kitchen</div>
+                      <div class="headline text-xs-center">Home and kitchen</div>
                     </v-card-title>
                      <v-card-media height = "200px" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('kitchen')">     
                     </v-card-media>
@@ -128,16 +128,17 @@
         </v-layout>
       </section>
 
+      <div class="see-all-container">
          <v-btn
-              class="mt-5"
-              dark
+              class="see-all teal mt-5"
+              light
               large
-              href="/pre-made-themes"
             >
-            <router-link class="see-more" to="/item">
+            <router-link class="see-all" to="/item">
               See All Items
               </router-link>
             </v-btn>
+            </div>
   
 
     <div class="opinions-container">
@@ -187,27 +188,27 @@ export default {
       {
         src:
           "https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&h=800",
-        title: "Dana Loremovich, 28, New York City",
+        title: "Dana Levi, 28, Tel Aviv",
         text: "Amazing products, amazing price. great website by the way."
       },
       {
         src:
           "https://images.pexels.com/photos/1080243/pexels-photo-1080243.png?auto=compress&cs=tinysrgb&h=800",
-        title: "George Orwell, 36, Tel Aviv",
+        title: "Henry Orwell, 36, New York City",
         text:
           "What I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       },
       {
         src:
           "https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750",
-        title: "Yonit Jhonson, 44, Monaco",
+        title: "Yonit Kaspi, 44, Netanya",
         text:
           "I thought it is a waste of time and money but I was surprised it was actually great!"
       },
       {
         src:
           "https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?auto=compress&cs=tinysrgb&h=800",
-        title: "Ofir Yakito, 22, Bogota",
+        title: "Takashi Kurosawa, 22, Tokyo",
         text:
           "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
@@ -354,7 +355,7 @@ h1 {
 .top-left {
   left: 12px;
   top: 10px;
-  font-size: 1.3em;
+  /* font-size: 1.1rem; */
   line-height: 1.6em;
   text-align: left;
   width: 250px;
@@ -366,14 +367,14 @@ h1 {
 
 .opaque-background {
   /* content: ''; */
-  background: linear-gradient(
-    rgba(30, 30, 60, 0),
-    rgba(30, 30, 60, 0),
-    rgba(30, 30, 60, 0),
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.4),
-    rgba(30, 30, 60, 0.1)
-  );
+  // background: linear-gradient(
+  //   rgba(30, 30, 60, 0),
+  //   rgba(30, 30, 60, 0),
+  //   rgba(30, 30, 60, 0),
+  //   rgba(0, 0, 0, 0.4),
+  //   rgba(0, 0, 0, 0.4),
+  //   rgba(30, 30, 60, 0.1)
+  // );
   position: absolute;
   width: 100%;
   height: 100%;
@@ -392,7 +393,8 @@ h1 {
 }
 
 .opinions-container {
-  font-size: 2em;
+    padding-left: 16px;
+  font-size: 2rem;
   margin: 80px 0 10px 0 !important;
   background-color: #EEEEEE;
 }
@@ -423,7 +425,7 @@ h1 {
 
 #header-carousel .subheading {
   color: black;
-  font-size: 1.3em !important;
+  font-size: 1.1rem !important;
 
   width: 240px;
   display: inline-block;
@@ -454,11 +456,94 @@ div .fill-height {
   color: black !important;
 }
 
-.see-more {
-  /* text-decoration-style: none !important; */
+
+@media (max-width: 440px) {
+
+.v-card__media {
+  width: 85vw;
 }
 
+.opinions-container div {
+  font-size: 1.25rem;
+  margin: 0px 0 10px 0 !important;
+  padding-left: 16px;
+  background-color: #EEEEEE;
+}
+
+    /* margin-top: 350px; */
+div.flex {
+    justify-content:  center;
+    align-items:  flex-end;
+    align-content:  flex-end;
+    display:  flex;
+}
+
+
+.top-left {
+  left: 12px;
+  top: 300px;
+  /* font-size: 1.1rem; */
+  line-height: 1.6em;
+  text-align: left;
+  width: 250px;
+  height: 0px;
+  position: relative;
+  z-index: 10;
+  /* background-color: rgba(190, 240, 0, 0.6); */
+}
+
+.v-jumbotron {
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, .9),
+    rgba(255, 255, 255, .9),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+  #header-carousel h3 {
+  align-self: bottom;
+  font-size: 1.5rem !important;
+  color: black;
+  width: 240px;
+}
+
+#header-carousel .subheading {
+  color: black;
+  font-size: .8rem !important;
+
+  width: 280px;
+  display: inline-block;
+}
+}
+
+
 </style>
+
+<!-- not SCOPED -->
+<style>   
+a.see-all {
+  
+  color: white !important;
+}
+
+div.see-all-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
+  background-color: rgb(27, 131, 117) !important;
+}
+
+
+
+</style>
+
 
 <style scoped lang="stylus">
 

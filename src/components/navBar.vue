@@ -8,7 +8,7 @@
                     </h1>
                 </router-link>
             </div>
-            <ul class="d-flex align-center clean-list"> 
+            <ul class="d-flex align-center clean-list">
                 <li>
                     <a v-if="user" @click="logOut">Log Out </a>
                     <a v-else href="#register" @click.prevent="open" class="sign-in"></a>
@@ -21,14 +21,13 @@
                 </li>
                 <li>
                     <router-link :to="'/user/'+user._id" v-if="user">
-                        
                         <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
                         <v-icon class="notification" v-if="newNote">fas fa-bell</v-icon>
                     </router-link>
                 </li>
             </ul>
-                <div class="hamburger" @click="display = !display" :class="{ exit: display }"></div>
-                    <sign-in :class="{ active: isActive }" @close="closeModal" @connect="checkNewTransaction"></sign-in>
+            <div class="hamburger" @click="display = !display" :class="{ exit: display }"></div>
+            <sign-in :class="{ active: isActive }" @close="closeModal" @connect="checkNewTransaction"></sign-in>
         </nav>
     </header>
 </template>
@@ -69,8 +68,12 @@ export default {
           userId: this.$store.getters.loggedinUser._id
         })
         .then(transactions => {
+          console.log(transactions)
           transactions.forEach(transaction => {
-            if (transaction.isNew) this.newNote = true;
+            if (transaction.isNew) {
+              this.newNote = true;
+              this.$store.commit({ type: "setNewNotification", status: true });
+            }
           });
         });
     }

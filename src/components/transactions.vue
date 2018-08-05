@@ -33,7 +33,7 @@
         <div class="passiveTrasactions">
             <h1>Items ordered from me</h1>
             <ul>
-                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])">
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:transaction.isNew}" transaction.isNew>
                     <div>
                         <img :src="transaction.item.images[0]">
                     </div>
@@ -62,9 +62,7 @@ import StarRating from "vue-star-rating";
 export default {
   props: ["transactions"],
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     isFutureDate(date) {
@@ -80,23 +78,23 @@ export default {
     }
   },
   computed: {
-      rating(){
-          return Math.random() * (5 - 1 + 1) + 1;
-      }
+    rating() {
+      return Math.random() * (5 - 1 + 1) + 1;
+    }
   }
 };
 </script>
 
 <style scoped>
-body{
-    text-transform: capitalize;
+body {
+  text-transform: capitalize;
 }
 .flex {
   display: flex;
 }
-h1{
-    padding: 20px;
-    text-align: left
+h1 {
+  padding: 20px;
+  text-align: left;
 }
 
 li {
@@ -111,5 +109,9 @@ li:nth-child(odd) {
 
 .orders img {
   width: 80px;
+}
+
+.newTrans{
+    color: red;
 }
 </style>

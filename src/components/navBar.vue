@@ -21,12 +21,14 @@
                 </li>
                 <li>
                     <router-link :to="'/user/'+user._id" v-if="user">
+                        
                         <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
+                        <v-icon class="notification" v-if="newNote">fas fa-bell</v-icon>
                     </router-link>
                 </li>
             </ul>
                 <div class="hamburger" @click="display = !display" :class="{ exit: display }"></div>
-                    <sign-in :class="{ active: isActive }" @close="closeModal"></sign-in>
+                    <sign-in :class="{ active: isActive }" @close="closeModal" @connect="checkNewTransaction"></sign-in>
         </nav>
     </header>
 </template>
@@ -39,7 +41,8 @@ export default {
     return {
       isActive: false,
       isOpen: false,
-      display: false
+      display: false,
+      newNote: false
     };
   },
   computed: {
@@ -58,6 +61,18 @@ export default {
     closeModal() {
       if (this.isActive) this.isActive = false;
       else return;
+    },
+    checkNewTransaction() {
+      return this.$store
+        .dispatch({
+          type: "getTransactionsByOwner",
+          userId: this.$store.getters.loggedinUser._id
+        })
+        .then(transactions => {
+          transactions.forEach(transaction => {
+            if (transaction.isNew) this.newNote = true;
+          });
+        });
     }
   },
   components: {
@@ -115,41 +130,23 @@ nav {
   width: 50px;
   height: 50px;
   border-radius: 30%;
+  position: relative;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 }
 
+.notification {
+  color: red;
+  position: absolute;
+  top: 20px;
+  /* left: 24px; */
+  right: 52px;
+}
+
 .sign-in::after {
   content: "Sign in";
 }
-
-// #nav {
-//   padding: 0 20px;
-//   margin: 0;
-//   display: flex;
-//   color: #1da088;
-//   justify-content: space-between;
-//   align-items: center;
-//   //   box-shadow: inset 0 -6px 0 #1e1e1e;
-
-//   a {
-//     font-weight: bold;
-//     color: #2c3e50;
-//     color: #1da088;
-//     text-decoration: none;
-//     cursor: pointer;
-//     &.router-link-exact-active {
-//       color: #1da088;
-//     }
-//   }
-//   a:hover,
-//   .logo:hover {
-//     color: #ccc;
-//   }
-//   // background-color: #ccc;
-//   // background-color: #162044;
-//   background-color: #eeeeee;
 
 .nav-bar-main li {
   color: #1da088;
@@ -200,7 +197,7 @@ nav {
     background-color: #eeeeee;
     right: -140px;
     transition: all 0.8s;
-    padding-top:20px;
+    padding-top: 20px;
     // transform: rotateY(90deg);
     opacity: 0;
   }

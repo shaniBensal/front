@@ -37,13 +37,13 @@
             </v-card-actions>
         </v-card>
 
-        <ul v-if="isEdit">
+        <!-- <ul v-if="isEdit">
           dates occupied:
           <li  v-for="(date,idx) in item.occupiedDates" :key="idx" v-if="isFutureDate(date)">{{date}} ({{date | moment("from")}})
             <p> </p>
              </li>
           
-        </ul>
+        </ul> -->
     </div>
 
 </template>

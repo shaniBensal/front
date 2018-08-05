@@ -57,11 +57,12 @@ export default {
       userAndItems: null,
       itemsToShow: [],
       isEditable: true,
-      transactionsState:false,
+      transactionsState: false,
       transactions: {
         passiveTransactions: [],
         activeTransactions: []
       },
+      checkNewTrans: false,
       favoriteItems: []
     };
   },
@@ -87,21 +88,17 @@ export default {
       this.$store
         .dispatch({ type: "getTransactionsByOwner", userId })
         .then(transactions => {
-          console.log("by owner", transactions);
           this.transactions.passiveTransactions = transactions;
           this.$store
             .dispatch({ type: "getTransactionsByRenter", userId })
             .then(transactions => {
-              console.log("by renter", transactions);
               this.transactions.activeTransactions = transactions;
               this.$store
                 .dispatch({ type: "getUserWithItems", userId: userId })
                 .then(currUser => {
-                  // console.log(currUser);
                   this.user = currUser.user;
                   this.userAndItems = currUser;
                   this.itemsToShow = currUser.owendItems;
-                  console.log(currUser);
                 });
             });
         });
@@ -115,21 +112,22 @@ export default {
     showItemsForRent() {
       this.itemsToShow = this.userAndItems.owendItems;
       this.isEditable = true;
-      this.transactionsState = false
+      this.transactionsState = false;
     },
     showItemsRented() {
       this.itemsToShow = this.userAndItems.rentedItems;
       this.isEditable = false;
-       this.transactionsState = false
+      this.transactionsState = false;
     },
     showFavorites() {
       this.itemsToShow = this.userAndItems.favoriteItems;
       this.isEditable = false;
-       this.transactionsState = false
+      this.transactionsState = false;
     },
 
     showTrnsactions() {
       this.transactionsState = true;
+      this.checkNewTrans = false;
     }
   },
 
@@ -216,6 +214,7 @@ button a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .user-contact-profile {
@@ -233,9 +232,11 @@ button a {
 }
 
 .add-item {
-  width: 50%;
+  width: 30%;
   background-color: #1da088;
+  padding: 10px;
   margin: 20px 0;
+  text-align: center;
 }
 
 .add-item:hover {

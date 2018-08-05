@@ -78,6 +78,7 @@ export default {
               password: ""
             };
             this.log = true;
+            this.$emit("connect");
           } else return;
         })
         .catch(err => console.log(err));

@@ -25,7 +25,9 @@
             <ul>
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
-                <button class="tab4" @click="showTrnsactions">My Orders</button>
+                <button class="tab4" @click="showTrnsactions">My Orders
+                    <v-icon class="notification" v-if="isNewNote">fas fa-bell</v-icon>
+                </button>
             </ul>
 
         </div>
@@ -62,8 +64,9 @@ export default {
         passiveTransactions: [],
         activeTransactions: []
       },
+      favoriteItems: [],
       checkNewTrans: false,
-      favoriteItems: []
+      isNewNote: false
     };
   },
 
@@ -99,6 +102,7 @@ export default {
                   this.user = currUser.user;
                   this.userAndItems = currUser;
                   this.itemsToShow = currUser.owendItems;
+                  this.isNewNote = this.$store.getters.isNewNote;
                 });
             });
         });
@@ -127,7 +131,28 @@ export default {
 
     showTrnsactions() {
       this.transactionsState = true;
-      this.checkNewTrans = false;
+      this.checkNewTrans = true;
+      this.isNewNote = false;
+      if (!this.isNewNote && this.checkNewTrans) {
+        for (let i = 0; i < this.transactions.passiveTransactions.length; i++) {
+          var transaction = this.transactions.passiveTransactions;
+          if (transaction[i].isNew) {
+            transaction[i].isNew = false;
+            // console.log("from profile", transaction[i]);
+            this.$store
+              .dispatch({
+                type: "updateTransaction",
+                transaction: transaction[i]
+              })
+              .then(_ =>
+                this.$store.commit({
+                  type: "setNewNotification",
+                  status: false
+                })
+              );
+          }
+        }
+      }
     }
   },
 

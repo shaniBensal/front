@@ -17,7 +17,7 @@
 
                     <div class="details">
                         
-                        <p> <v-icon>far fa-handshake </v-icon>Rented from: {{transaction.fromOwner.name}}</p>
+                        <p> <v-icon>far fa-handshake </v-icon> Rented from: {{transaction.fromOwner.name}}</p>
                         <p>Email: {{transaction.fromOwner.email}}</p>
                         <p>Day of picking-up: {{transaction.dates[0] |moment("DD MM YYYY")}}</p>
                         <p>From: {{transaction.fromOwner.address}}</p>
@@ -33,7 +33,7 @@
         <div class="passiveTrasactions">
             <h1>Items ordered from me</h1>
             <ul>
-                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:transaction.isNew}" transaction.isNew>
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:transaction.isNew}">
                     <div>
                         <img :src="transaction.item.images[0]">
                     </div>
@@ -46,13 +46,11 @@
                     <div class="details">
                        
                         <p><v-icon>far fa-handshake </v-icon> Orderd from: {{transaction.rentedTo.name}}</p>
-                        <p>email:{{transaction.rentedTo.email}}</p> 
+                        <p>email: {{transaction.rentedTo.email}}</p> 
                         <p>Day of picking-up: {{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})</p>
                     </div>
                 </li>
             </ul>
-
-
         </div>
     </div>
 </template>
@@ -64,6 +62,7 @@ export default {
   data() {
     return {};
   },
+  created() {},
   methods: {
     isFutureDate(date) {
       var rentingDate = new Date(date);
@@ -80,7 +79,10 @@ export default {
   computed: {
     rating() {
       return Math.random() * (5 - 1 + 1) + 1;
-    }
+    },
+    // newNotification() {
+    //   return this.$store.getters.isNewNote;
+    // }
   }
 };
 </script>
@@ -111,7 +113,7 @@ li:nth-child(odd) {
   width: 80px;
 }
 
-.newTrans{
-    color: red;
+.newTrans {
+  color: red;
 }
 </style>

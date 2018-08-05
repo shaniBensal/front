@@ -10,8 +10,6 @@ function newTransaction(transaction){
 }
 
 function getTransactionsByOwner(ownerId){
-    console.log('service front owner', ownerId);
-
     return axios.get(`${TRANSACTION_URL}/${ownerId}`)
         .then(res => res.data)
 }
@@ -21,11 +19,16 @@ function getTransactionsByRenter(ownerId){
     .then(res => res.data)
 }
 
+function updateTransaction(transaction){
+    return axios.put(`${TRANSACTION_URL}/${transaction._id}`, transaction)
+        .then(res => res.data)
+}
 
 
 
 export default {
     newTransaction,
     getTransactionsByOwner,
-    getTransactionsByRenter
+    getTransactionsByRenter,
+    updateTransaction
 }

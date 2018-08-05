@@ -4,7 +4,7 @@
             <div class="logo">
                 <router-link :to="'/'">
                     <h1 class="logo">
-                        <img src="/img/logo.jpg">
+                        <img src="/img/werent_logo.png">
                     </h1>
                 </router-link>
             </div>
@@ -109,11 +109,11 @@ nav {
 
 .logo {
   color: #1da088;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .logo img {
-  width: 100px;
+  width: 90px;
 }
 
 .space-around {

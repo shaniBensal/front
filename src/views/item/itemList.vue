@@ -41,16 +41,6 @@
         <!-- </v-toolbar> -->
         </div>
 
-                <div class="spacer"></div>
-
-                <v-btn-toggle v-model="toggle_exclusive_2" class="transparent">
-                    <div v-for="(sorting, idx) in sortings" :key="idx">
-                        <v-btn :value="idx" flat @click="changeSort(sorting)">
-                            <div>{{sorting}}</div>
-                        </v-btn>
-                      <v-icon>search</v-icon>
-                    </div>
-            </v-btn-toggle>
         </div>
 
 
@@ -67,53 +57,6 @@
       -->
 
 
-    <v-menu
-      transition="slide-x-transition"
-      bottom
-      right
-    >
-      <v-btn
-        slot="activator"
-        class="teal"
-        color="primary"
-        dark
-      >
-        Sort
-      </v-btn>
-
-      <v-list>
-        <v-list-tile
-          v-for="(sorting, i) in sortings"
-          :key="i"
-          @click="changeSort(sorting)"
-        >
-          <v-list-tile-title>{{ sorting }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-
-    <v-menu
-      transition="slide-y-transition"
-      bottom
-    >
-      <v-btn
-        slot="activator"
-        class="teal"
-        color="primary"
-        dark
-      >
-        Categories
-      </v-btn>
-      <v-list>
-        <v-list-tile
-          v-for="(category, i) in categories"
-          :key="i"
-          @click="setFiltersByCategory(category)"
-        >
-          <v-list-tile-title>{{ category }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
 
 
 
@@ -125,17 +68,10 @@
 
 
 
-                <div class="spacer">|</div>
+                <!-- <div class="spacer">|</div> -->
 
 
-                <v-btn-toggle v-model="toggle_exclusive" class="transparent">
-                    <div v-for="(category, idx) in categories" :key="idx">
-                        <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
-                            <div>{{category}}</div>
-
-                        </v-btn>
-                    </div>
-                </v-btn-toggle>
+              
             <div class="mobile-buttons">
                 <div>
                     <div class="text-xs-center">
@@ -164,7 +100,7 @@
           </v-list>
           -->
                         <v-menu transition="slide-x-transition" bottom right>
-                            <v-btn slot="activator" class="deep-orange" color="primary" dark>
+                            <v-btn slot="activator" class="teal" color="primary" dark>
                                 Sort
                             </v-btn>
 
@@ -175,7 +111,7 @@
                             </v-list>
                         </v-menu>
                         <v-menu transition="slide-y-transition" bottom>
-                            <v-btn slot="activator" class="purple" color="primary" dark>
+                            <v-btn slot="activator" class="teal" color="primary" dark>
                                 Categories
                             </v-btn>
                             <v-list>
@@ -190,6 +126,8 @@
               <v-btn>Sort</v-btn>
               <v-btn>Categories</v-btn> -->
             </div>
+
+            
             <ul class="items-list">
                 <li v-for="item in sortedItems" :key="item._id">
                     <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
@@ -400,7 +338,7 @@ button {
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 30px;
 }
 
@@ -532,22 +470,37 @@ button.toolbar-buttons:hover {
 
 } */
 
+div.v-menu {
+  display: none;
+}
 
 @media (max-width: 640px) {
+
+div.v-menu {
+  display: inline-block !important;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  color: white !important;
+  margin-bottom: 16px;
+}
 
 .toolbar-container {
     display: none !important;
   }
 
-.mobile-buttons div {
+.mobile-buttons  {
   padding : 0 !important;
   margin: 0 !important;
+  display: flex !important;
 }
 
 
 .mobile-buttons form {
   padding : 0 !important;
   margin: 0 !important;
+  display: flex !important;
+
 }
 
 
@@ -572,6 +525,8 @@ button.toolbar-buttons:hover {
 }
 
 @media (max-width: 440px) {
+
+
 
     ul {
   grid-template-columns: 88vw !important; 

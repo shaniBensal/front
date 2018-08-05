@@ -1,5 +1,5 @@
 <template>
-    <div v-if="unAvailableDates">
+    <div v-if="unAvailableDates" class="date-picker">
         <v-date-picker header-color="teal accent-4" v-model="selectedDate" @input="sendDate" :allowed-dates="allowedDates" :min="today" class="mt-3"></v-date-picker>
     </div>
 </template>
@@ -58,6 +58,10 @@ export default {
   background: teal;
 }
 
+.date-picker .v-btn {
+  min-width: 0;
+}
+
 .v-date-picker-title {
   flex-direction: row !important;
 }
@@ -71,7 +75,7 @@ export default {
   opacity: 0.2;
 }
 
-.v-date-picker-table{
+.v-date-picker-table {
   background-color: #fff;
 }
 

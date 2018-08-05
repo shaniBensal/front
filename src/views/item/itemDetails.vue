@@ -328,9 +328,9 @@ i {
     color: #0fa086;
   }
   .date-book {
-    width: 50%;
+    width: 95%;
     position: absolute;
-    top: 245px;
+    top: 256px;
     display: none;
     background: lightgray;
   }
@@ -361,7 +361,7 @@ i {
   // }
   .date-book {
     width: 100%;
-     top: 280px;
+    top: 280px;
   }
 
   // .item-details {

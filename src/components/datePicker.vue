@@ -50,7 +50,7 @@ export default {
 };
 </script>
 <style>
-.v-picker__title__btn:not(.active){
+.v-picker__title__btn:not(.active) {
   opacity: 1 !important;
 }
 
@@ -58,10 +58,9 @@ export default {
   background: teal;
 }
 
-.v-date-picker-title{
- flex-direction: row !important;
+.v-date-picker-title {
+  flex-direction: row !important;
 }
-
 
 /* .v-date-picker-table .v-btn {
   font-family: "Roboto Slab-bold", serif;
@@ -72,5 +71,16 @@ export default {
   opacity: 0.2;
 }
 
+.v-date-picker-table{
+  background-color: #fff;
+}
+
+@media (max-width: 940px) {
+  .date-book {
+    width: 100%;
+    position: absolute;
+    top: 245px;
+  }
+}
 </style>
 

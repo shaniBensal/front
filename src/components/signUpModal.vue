@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .btn-book {
-  background-color: #f56400;
+  background-color: #00d8ae;
 }
 
 .v-card__text {

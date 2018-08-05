@@ -347,14 +347,8 @@ export default {
 };
 </script>
 
-<style scoped>
-* {
-  box-sizing: border-box;
-}
+<style scoped lang="scss">
 
-.top-pic {
-  /* height: 500px; */
-}
 
 .outer-container {
   margin: 0 auto;

@@ -3,30 +3,37 @@ import transactionsService from '../services/transactionsService.js';
 
 export default {
   state: {
-
+    newNotification: false
   },
 
   mutations: {
-
+    setNewNotification(state, {status}) {
+      return state.newNotification = status;
+    }
   },
 
   // ********************************
 
   getters: {
-  },  
+    isNewNote(state) {
+      return state.newNotification;
+    }
+  },
   actions: {
-    newTransaction(context, { trans }){
+    newTransaction(context, { trans }) {
       return transactionsService.newTransaction(trans)
     },
-    getTransactionsByOwner(context, {userId}){
-      console.log('from store', userId);
-      
+    getTransactionsByOwner(context, { userId }) {
       return transactionsService.getTransactionsByOwner(userId);
     },
 
-    getTransactionsByRenter(context, {userId}){
+    getTransactionsByRenter(context, { userId }) {
       return transactionsService.getTransactionsByRenter(userId);
+    },
+    updateTransaction(context, { transaction }) {
+      console.log('from store', transaction);
+      
+      return transactionsService.updateTransaction(transaction)
     }
-    
   }
 };

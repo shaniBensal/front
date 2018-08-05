@@ -15,7 +15,7 @@
                         <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
                         <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
-                        In date: {{selectedDateRent}}
+                        In date: {{selectedDateRent | moment('DD-MM-2018')}}
                         <br /> Price For Day: {{item.price}}$
                         <br />
                         <!-- Price: {{totalCost}}$ -->
@@ -54,6 +54,7 @@ import datePicker from "./datePicker.vue";
 import confirmModal from "./confirmModal.vue";
 // import itemListCategory from "../views/item/itemListCategory.vue";
 import itemPreview from "../components/item/itemPreview.vue";
+
 export default {
   name: "BookItem",
   props: ["selectedDate"],
@@ -104,6 +105,7 @@ export default {
       this.dealDetails.ownerId = this.$store.getters.itemOwner._id;
       this.dealDetails.renterId = this.$store.getters.loggedinUser._id;
       this.dealDetails.dates = [this.selectedDate];
+      this.dealDetails.price = this.item.price
     },
     todayDate() {
       var result = "";
@@ -232,7 +234,7 @@ export default {
   width: 50%;
   height: 3em;
   font-size: 1.2em;
-  color: #f6f6f6;
+  // color: #f6f6f6;
   border: 0;
   margin: 5px 0px;
   background-color: #42b983;
@@ -241,11 +243,11 @@ export default {
 
 .btn-book {
   background-color: #42b983;
-  color: #fff;
+  // color: #fff;
 }
 
-.v-btn:not(.v-btn--depressed):not(.v-btn--flat){
-      box-shadow: none;
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+  box-shadow: none;
 }
 
 .spacer {
@@ -253,7 +255,7 @@ export default {
 }
 
 .date-picker-schedual {
-  background-color: aliceblue;
+  // background-color: aliceblue;
   z-index: 2;
 }
 .table {
@@ -308,14 +310,14 @@ a:visited {
 }
 
 .v-btn.v-btn {
-  background-color: white;
-  color: rgb(4, 4, 73);
+  // background-color: white;
+  // color: rgb(4, 4, 73);
   opacity: 1;
   border: none;
 }
 
 .v-btn.v-btn--active {
-  background-color: white;
+  // background-color: white;
   color: rgb(33, 111, 42);
   text-shadow: 0 0 3px rgb(156, 247, 138);
   opacity: 1;
@@ -323,7 +325,23 @@ a:visited {
 }
 
 .v-btn.v-btn--active::before {
-  background-color: white;
+  // background-color: white;
   opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .close-deal {
+    flex-direction: column;
+  }
+  .details {
+    width: 90%;
+    text-align: center;
+  }
+  .btn {
+    width: 90%;
+  }
+  .main-image {
+    max-width: 200px;
+  }
 }
 </style>

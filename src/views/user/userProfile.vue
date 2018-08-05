@@ -24,9 +24,10 @@
         <div class="tabs bold-font">
             <ul>
                 <button class="tab1" @click="showItemsForRent">My items</button> |
-                <button class="tab2" @click="showItemsRented">Items rented by me</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
-                <button class="tab4" @click="showTrnsactions">My Orders</button>
+                <button class="tab4" @click="showTrnsactions">My Orders
+                    <v-icon class="notification" v-if="isNewNote">fas fa-bell</v-icon>
+                </button>
             </ul>
 
         </div>
@@ -58,12 +59,14 @@ export default {
       userAndItems: null,
       itemsToShow: [],
       isEditable: true,
-      transactionsState:false,
+      transactionsState: false,
       transactions: {
         passiveTransactions: [],
         activeTransactions: []
       },
-      favoriteItems: []
+      favoriteItems: [],
+      checkNewTrans: false,
+      isNewNote: false
     };
   },
 
@@ -88,21 +91,18 @@ export default {
       this.$store
         .dispatch({ type: "getTransactionsByOwner", userId })
         .then(transactions => {
-          console.log("by owner", transactions);
           this.transactions.passiveTransactions = transactions;
           this.$store
             .dispatch({ type: "getTransactionsByRenter", userId })
             .then(transactions => {
-              console.log("by renter", transactions);
               this.transactions.activeTransactions = transactions;
               this.$store
                 .dispatch({ type: "getUserWithItems", userId: userId })
                 .then(currUser => {
-                  // console.log(currUser);
                   this.user = currUser.user;
                   this.userAndItems = currUser;
                   this.itemsToShow = currUser.owendItems;
-                  console.log(currUser);
+                  this.isNewNote = this.$store.getters.isNewNote;
                 });
             });
         });
@@ -116,21 +116,43 @@ export default {
     showItemsForRent() {
       this.itemsToShow = this.userAndItems.owendItems;
       this.isEditable = true;
-      this.transactionsState = false
+      this.transactionsState = false;
     },
     showItemsRented() {
       this.itemsToShow = this.userAndItems.rentedItems;
       this.isEditable = false;
-       this.transactionsState = false
+      this.transactionsState = false;
     },
     showFavorites() {
       this.itemsToShow = this.userAndItems.favoriteItems;
       this.isEditable = false;
-       this.transactionsState = false
+      this.transactionsState = false;
     },
 
     showTrnsactions() {
       this.transactionsState = true;
+      this.checkNewTrans = true;
+      this.isNewNote = false;
+      if (!this.isNewNote && this.checkNewTrans) {
+        for (let i = 0; i < this.transactions.passiveTransactions.length; i++) {
+          var transaction = this.transactions.passiveTransactions;
+          if (transaction[i].isNew) {
+            transaction[i].isNew = false;
+            // console.log("from profile", transaction[i]);
+            this.$store
+              .dispatch({
+                type: "updateTransaction",
+                transaction: transaction[i]
+              })
+              .then(_ =>
+                this.$store.commit({
+                  type: "setNewNotification",
+                  status: false
+                })
+              );
+          }
+        }
+      }
     }
   },
 
@@ -217,6 +239,7 @@ button a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .user-contact-profile {
@@ -234,9 +257,11 @@ button a {
 }
 
 .add-item {
-  width: 50%;
-  background-color: #00d8ad75;
+  width: 30%;
+  background-color: #1da088;
+  padding: 10px;
   margin: 20px 0;
+  text-align: center;
 }
 
 .add-item:hover {

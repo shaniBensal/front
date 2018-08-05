@@ -25,31 +25,28 @@ export default {
   font-size:1.2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  // text-align: center;
+  // color: #2c3e50;
 }
-#nav {
-  padding: 20px;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  //  box-shadow: inset 0 -6px 0 #1e1e1e;
-  a {
-    font-weight: bold;
-    // color: #2c3e50;
-    color: #00d8ae;
-    &.router-link-exact-active {
-      color: #00d8ae;
-    }
-  }
-  a:hover {
-    color: #ccc;
-  }
-  // background-color: #ccc;
-  background-color: #162044;
+// #nav {
+//   padding: 20px;
+//   margin: 0;
+//   display: flex;
+//   justify-content: space-between;
+  
+//   a {
+//     font-weight: bold;
+//     color: #00d8ae;
+//     &.router-link-exact-active {
+//       color: #00d8ae;
+//     }
+//   }
+//   a:hover {
+//     color: #ccc;
+//   }
 
-  .logo {
-    color: #00d8ae;
-  }
-}
+//   .logo {
+//     color: #00d8ae;
+//   }
+// }
 </style>

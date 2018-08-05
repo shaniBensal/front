@@ -1,8 +1,8 @@
 <template>
     <div class="orders">
-           <h1>Items i orderd</h1>
+        <h1>Items I ordered</h1>
         <div class="activeTrasactions">
-         
+
             <ul>
                 <li v-for="transaction in transactions.activeTransactions" :key="transaction._id" class="flex">
                     <div>
@@ -10,70 +10,110 @@
                     </div>
                     <div>
 
-                         <h3>{{transaction.item.title}}</h3>
-                         <p>{{transaction.item.description}}</p>
+                        <h3>{{transaction.item.title}}</h3>
+                        <p> price: {{transaction.item.price}}$</p>
+
                     </div>
 
-                    <div>
-                        orderd from: {{transaction.fromOwner.name}}
-                        day of picking-up: {{transaction.dates[0]}}
-                        from: {{transaction.fromOwner.address}}
+                    <div class="details">
+                        
+                        <p> <v-icon>far fa-handshake </v-icon> Rented from: {{transaction.fromOwner.name}}</p>
+                        <p>Email: {{transaction.fromOwner.email}}</p>
+                        <p>Day of picking-up: {{transaction.dates[0] |moment("DD MM YYYY")}}</p>
+                        <p>From: {{transaction.fromOwner.address}}</p>
                     </div>
-                   
-                    
+
+                   <div class="rank">
+                   <star-rating :rating="rating" :star-size="20" @rating-selected="setRating"></star-rating>
+                  </div>
                 </li>
             </ul>
-
         </div>
-         <div class="passiveTrasactions">
-            <h1>Items orderd from me</h1>
-                     <ul>
-                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" v-if="isFutureDate(transaction.dates[0])">{{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})
+        <hr>
+        <div class="passiveTrasactions">
+            <h1>Items ordered from me</h1>
+            <ul>
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:transaction.isNew}">
                     <div>
                         <img :src="transaction.item.images[0]">
                     </div>
                     <div>
 
-                         <h3>{{transaction.item.title}}</h3>
+                        <h3>{{transaction.item.title}}</h3>
+                        <p> price: {{transaction.item.price}}$</p>
                     </div>
 
-                    <div>
-                        orderd from: {{transaction.rentedTo.name}}
-                        email:{{transaction.rentedTo.email}}
+                    <div class="details">
+                       
+                        <p><v-icon>far fa-handshake </v-icon> Orderd from: {{transaction.rentedTo.name}}</p>
+                        <p>email: {{transaction.rentedTo.email}}</p> 
+                        <p>Day of picking-up: {{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})</p>
                     </div>
                 </li>
             </ul>
-
-
         </div>
     </div>
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 export default {
   props: ["transactions"],
-
+  data() {
+    return {};
+  },
+  created() {},
   methods: {
     isFutureDate(date) {
       var rentingDate = new Date(date);
       var dayAheadTimeStamp = Date.now() + 24 * 60 * 60 * 1000;
       if (+rentingDate > dayAheadTimeStamp) return true;
       return false;
+    },
+
+    setRating(rating) {
+      this.$store.commit({ type: "updateItemRank", rating });
+      this.$store.dispatch({ type: "updateItem" });
     }
+  },
+  computed: {
+    rating() {
+      return Math.random() * (5 - 1 + 1) + 1;
+    },
+    // newNotification() {
+    //   return this.$store.getters.isNewNote;
+    // }
   }
 };
 </script>
 
 <style scoped>
+body {
+  text-transform: capitalize;
+}
 .flex {
   display: flex;
 }
+h1 {
+  padding: 20px;
+  text-align: left;
+}
 
-li:even {
+li {
+  width: 80vw;
+  padding: 20px;
+  justify-content: space-around;
+}
+
+li:nth-child(odd) {
   background-color: #eeeeee;
 }
 
 .orders img {
   width: 80px;
+}
+
+.newTrans {
+  color: red;
 }
 </style>

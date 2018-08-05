@@ -40,39 +40,19 @@
             </v-btn-toggle>
         <!-- </v-toolbar> -->
         </div>
-        </div>
 
+                <div class="spacer"></div>
 
-
-
-
-        <div class="mobile-buttons">
-
-
-
-          <template>
-  <div class="text-xs-center">
-   
-      
-
-
-           <v-form @submit.prevent="onSearch">
-             <v-btn
-        slot="activator"
-        color="primary"
-        dark
-      >
-        Search
-      </v-btn>
-                <v-card class="pa-3" color="transparent" flat>
-                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
-                        <v-btn icon @click.stop="onSearch">
-                            <v-icon>search</v-icon>
+                <v-btn-toggle v-model="toggle_exclusive_2" class="transparent">
+                    <div v-for="(sorting, idx) in sortings" :key="idx">
+                        <v-btn :value="idx" flat @click="changeSort(sorting)">
+                            <div>{{sorting}}</div>
                         </v-btn>
                       <v-icon>search</v-icon>
-                    </v-text-field>
-                </v-card>
-            </v-form>
+                    </div>
+            </v-btn-toggle>
+        </div>
+
 
             <!--
       <v-list>
@@ -134,33 +114,90 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-  </div>
-</template>
 
 
 
           <!-- <v-btn :round=false>Search</v-btn>
+</template>
           <v-btn>Sort</v-btn>
           <v-btn>Categories</v-btn> -->
-        </div>
 
 
 
 
+                <div class="spacer">|</div>
 
 
+                <v-btn-toggle v-model="toggle_exclusive" class="transparent">
+                    <div v-for="(category, idx) in categories" :key="idx">
+                        <v-btn :value="idx" flat @click="setFiltersByCategory(category)">
+                            <div>{{category}}</div>
 
-        <ul class="items-list">
-            <li v-for="item in sortedItems" :key="item._id">
-                <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
-            </li>
-        </ul>
-    </section>
-</keep-alive>
+                        </v-btn>
+                    </div>
+                </v-btn-toggle>
+            <div class="mobile-buttons">
+                <div>
+                    <div class="text-xs-center">
+                        <v-form @submit.prevent="onSearch">
+                            <v-btn slot="activator" color="primary" dark>
+                                Search
+                            </v-btn>
+                            <v-card class="pa-3" color="transparent" flat>
+                                <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
+                                    <v-btn icon @click.stop="onSearch">
+                                        <v-icon>search</v-icon>
+                                    </v-btn>
+                                    <v-icon>search</v-icon>
+                                </v-text-field>
+                            </v-card>
+                        </v-form>
+                        <!--
+          <v-list>
+            <v-list-tile
+              v-for="(item, i) in items"
+              :key="i"
+              @click=""
+            >
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+          -->
+                        <v-menu transition="slide-x-transition" bottom right>
+                            <v-btn slot="activator" class="deep-orange" color="primary" dark>
+                                Sort
+                            </v-btn>
+
+                            <v-list>
+                                <v-list-tile v-for="(sorting, i) in sortings" :key="i" @click="changeSort(sorting)">
+                                    <v-list-tile-title>{{ sorting }}</v-list-tile-title>
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                        <v-menu transition="slide-y-transition" bottom>
+                            <v-btn slot="activator" class="purple" color="primary" dark>
+                                Categories
+                            </v-btn>
+                            <v-list>
+                                <v-list-tile v-for="(category, i) in categories" :key="i" @click="setFiltersByCategory(category)">
+                                    <v-list-tile-title>{{ category }}</v-list-tile-title>
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </div>
+                </div>
+                <!-- <v-btn :round=false>Search</v-btn>
+              <v-btn>Sort</v-btn>
+              <v-btn>Categories</v-btn> -->
+            </div>
+            <ul class="items-list">
+                <li v-for="item in sortedItems" :key="item._id">
+                    <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
+                </li>
+            </ul>
+        </section>
+    </keep-alive>
 </template>
-
-
-
 <script>
 import itemPreview from '../../components/item/itemPreview.vue';
 
@@ -367,10 +404,6 @@ button {
   width: 30px;
 }
 
-button:hover {
-  background-color: #caa830;
-}
-
 .filter {
   margin: 10px;
 }
@@ -384,7 +417,7 @@ input {
 }
 
 
-v-toolbar {
+.v-toolbar {
   margin-bottom: 100px;
 }
 
@@ -421,7 +454,7 @@ v-toolbar {
 
   background-color: white;
   opacity: 1;
-}
+} */
 
 .toolbar {
   margin-bottom: 50px;

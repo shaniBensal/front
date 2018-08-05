@@ -49,9 +49,17 @@ export default {
   }
 };
 </script>
-<style scoped lang="scss">
+<style>
+.v-picker__title__btn:not(.active) {
+  opacity: 1 !important;
+}
+
 .v-btn.v-btn--active {
   background: teal;
+}
+
+.v-date-picker-title {
+  flex-direction: row !important;
 }
 
 /* .v-date-picker-table .v-btn {
@@ -62,4 +70,17 @@ export default {
   color: grey;
   opacity: 0.2;
 }
+
+.v-date-picker-table{
+  background-color: #fff;
+}
+
+@media (max-width: 940px) {
+  .date-book {
+    width: 100%;
+    position: absolute;
+    top: 245px;
+  }
+}
 </style>
+

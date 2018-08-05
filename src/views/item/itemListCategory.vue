@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .container {
   padding: 0 20px;
 }
@@ -85,19 +85,16 @@ button {
   width: 30px;
 }
 
-button:hover {
-  background-color: #caa830;
-}
 
 .v-btn.v-btn {
-  background-color: white;
-  color: rgb(4, 4, 73);
+  // background-color: white;
+  /* color: rgb(4, 4, 73); */
   opacity: 1;
   border: none;
 }
 
 .v-btn.v-btn--active {
-  background-color: white;
+  // background-color: white;
   color: rgb(33, 111, 42);
   text-shadow: 0 0 3px rgb(156, 247, 138);
   opacity: 1;
@@ -105,7 +102,7 @@ button:hover {
 }
 
 .v-btn.v-btn--active::before {
-  background-color: white;
+  // background-color: white;
   opacity: 1;
 }
 </style>

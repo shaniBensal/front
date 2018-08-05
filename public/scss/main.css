@@ -35,7 +35,7 @@
     
     .bold-font{
       font-family: 'Roboto-Bold', sans-serif;
-      } */
+      } 
 
       h1{
         text-transform: capitalize;
@@ -51,5 +51,17 @@
     .flex-column{
       flex-direction: column;
     }
+
+    .clean-list {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+  }
+  
+
+      .align-center {
+        align-items: center;
+    }
+    
 
   

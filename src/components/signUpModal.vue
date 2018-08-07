@@ -1,5 +1,5 @@
 <template>
-    <v-layout row justify-center>
+    <v-layout row>
         <v-dialog v-model="dialog" persistent max-width="500px">
             <v-btn class="btn-book bold-font" slot="activator">Book Now!</v-btn>
             <v-card>
@@ -68,7 +68,8 @@ export default {
 
 <style lang="scss" scoped>
 .btn-book {
-  background-color: #f56400;
+  background-color: #1da088;
+  min-width: 290px;
 }
 
 .v-card__text {

@@ -7,7 +7,7 @@
             <v-card-media  :src="item.images[0]">
 
                 <div class="text-xs-center">
-                    <v-btn @click.prevent="addToFavorites" flat icon color="pink lighten-1" :disabled="dialog" :loading="dialog" class="white--text" @click.stop="dialog = true">
+                    <v-btn @click.prevent="addToFavorites" flat icon color="pink lighten-1" :disabled="dialog" :loading="dialog" class="white--text like" @click.stop="dialog = true">
                         <v-icon>favorite</v-icon>
                     </v-btn>
                 </div>
@@ -200,14 +200,14 @@ p {
   transition: all 0.8s;
 }
 .v-card:hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .v-icon {
   padding-right: 5px;
 }
 
-.v-btn--icon {
+.like{
   right: 10px;
   transition: all 0.3s;
 }

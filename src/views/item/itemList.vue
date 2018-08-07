@@ -2,7 +2,7 @@
 <keep-alive>
     <section>
         <!-- <v-toolbar  class="toolbar item-list" > -->
-          <div class="toolbar-container">
+          <div class="toolbar-container container">
             <div class="search-container">
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
@@ -137,91 +137,87 @@
     </keep-alive>
 </template>
 <script>
-import itemPreview from '../../components/item/itemPreview.vue';
+import itemPreview from "../../components/item/itemPreview.vue";
 
 export default {
-  name: 'ItemList',
+  name: "ItemList",
 
   data() {
     return {
-      searchStr: '',
+      searchStr: "",
       categories: [],
       toggle_exclusive: [],
       toggle_exclusive_2: [],
-      sortings: ['Name', 'Availiblity', 'Price', 'Distance', 'Rating'],
+      sortings: ["Name", "Availiblity", "Price", "Distance", "Rating"],
       toggle_multiple: null, // [1, 2, 3]
-      sortBy: '',
+      sortBy: "",
 
-       items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' }
+      items: [
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" }
       ]
-
-
     };
   },
 
   created() {
-
-    var queryString = window.location.href.replace(/.*\?/, '');
+    var queryString = window.location.href.replace(/.*\?/, "");
     var uParams = new URLSearchParams(queryString);
-    var textParam = uParams.get('search');
-    var categoryParam = uParams.get('category');
+    var textParam = uParams.get("search");
+    var categoryParam = uParams.get("category");
     if (textParam) this.setFiltersByTitle(textParam);
     if (categoryParam) this.setFiltersByCategory(categoryParam);
     this.loadCategories();
     this.loadItems();
-    console.log('** item list created **')
-
+    console.log("** item list created **");
   },
 
-  mounted () {
-    console.log('mounted');
-    
-      this.searchStr = '';
-      this.onSearch();
+  mounted() {
+    console.log("mounted");
+
+    this.searchStr = "";
+    this.onSearch();
   },
 
   methods: {
     onSearch() {
-      console.log(' ON SEARCH');
-      var query = 'search=' + this.searchStr;
+      console.log(" ON SEARCH");
+      var query = "search=" + this.searchStr;
       var category = this.$route.query.category;
       if (category) {
-        query += '&category=' + category;
+        query += "&category=" + category;
       }
       this.$router.push(`${this.$route.path}?${query}`);
       var urlStr = window.location.href;
       this.setFiltersByTitle(this.searchStr);
     },
     loadItems() {
-      this.$store.dispatch({ type: 'loadItems' });
+      this.$store.dispatch({ type: "loadItems" });
     },
     loadCategories() {
       this.categories = this.$store.getters.categories;
     },
     setFiltersByCategory(category) {
-      if (category !== 'all') {
-        this.$store.commit('setFiltersByCategory', {
+      if (category !== "all") {
+        this.$store.commit("setFiltersByCategory", {
           category: category
         });
       } else {
-        this.$store.commit('setFiltersByCategory', {
-          category: ''
+        this.$store.commit("setFiltersByCategory", {
+          category: ""
         });
       }
-      var query = 'category=' + category;
+      var query = "category=" + category;
       var search = this.$route.query.search;
       if (search) {
-        query += '&search=' + search;
+        query += "&search=" + search;
       }
       this.$router.push(`${this.$route.path}?${query}`);
     },
 
     setFiltersByTitle(txt) {
-      this.$store.commit('setFiltersByTitle', { txt: txt });
+      this.$store.commit("setFiltersByTitle", { txt: txt });
     },
 
     changeSort(criteria) {
@@ -229,11 +225,11 @@ export default {
     },
 
     getDistance(dist, itemId) {
-    var currItem = this.sortedItems.find(item => {
-      return item._id === itemId;
-    })  
-    currItem.distance = dist;
-    },
+      var currItem = this.sortedItems.find(item => {
+        return item._id === itemId;
+      });
+      currItem.distance = dist;
+    }
   },
 
   computed: {
@@ -244,21 +240,21 @@ export default {
     sortedItems() {
       var itemsCopy = this.itemsForDisplay.slice();
       switch (this.sortBy) {
-        case 'Name':
+        case "Name":
           itemsCopy.sort((a, b) => {
             if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
             else return -1;
           });
           break;
 
-        case 'Price':
+        case "Price":
           itemsCopy.sort((a, b) => {
             if (+a.price > +b.price) return 1;
             else return -1;
           });
           break;
 
-        case 'Rating':
+        case "Rating":
           itemsCopy.sort((a, b) => {
             if (+a.ranking.avg > +b.ranking.avg) return -1;
             else if (+a.ranking.avg < +b.ranking.avg) return 1;
@@ -266,8 +262,8 @@ export default {
           });
           break;
 
-          case 'Distance':
-          itemsCopy.sort((a,b) => {
+        case "Distance":
+          itemsCopy.sort((a, b) => {
             if (+a.distance > +b.distance) return 1;
             else return -1;
           });
@@ -303,9 +299,6 @@ export default {
 
 
 <style scoped>
-
-
-
 .container {
   padding: 0 20px;
   max-width: 980px;
@@ -354,13 +347,12 @@ input {
   width: 180px;
 }
 
-
 .v-toolbar {
   margin-bottom: 100px;
 }
 
 .v-btn {
-  font-size: 0.77rem ;
+  font-size: 0.77rem;
 
   background-color: white;
   color: rgb(4, 4, 73);
@@ -392,15 +384,14 @@ input {
 
   background-color: white;
   opacity: 1;
-} */
-
-.toolbar {
+}
+*/ .toolbar {
   margin-bottom: 50px;
 }
 
 ul.items-list {
-margin: 0 auto;
-justify-content: center;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .toolbar-container {
@@ -408,6 +399,7 @@ justify-content: center;
   justify-content: space-between;
   padding: 12px;
   padding-bottom: 24px;
+  align-items: baseline;
 }
 
 .search-container {
@@ -415,43 +407,39 @@ justify-content: center;
 }
 
 .pa-3.v-card {
-  padding:  0 !important;
+  padding: 0 !important;
 }
 
 .toolbar-buttons-container {
   display: flex;
   flex-direction: column;
 }
-
 </style>
 
 
 <!-- style not scoped:  -->
-<style>  
-
+<style>
 .v-btn-toggle .v-btn {
-opacity: .8 !important;
-color: rgb(22,55,11) !important;
-padding: 0 5px 0 5px !important;
-
+  opacity: 0.8 !important;
+  color: rgb(22, 55, 11) !important;
+  padding: 0 5px 0 5px !important;
 }
 .transparent.v-btn {
-box-shadow: none !important;
-
+  box-shadow: none !important;
 }
 
 .v-btn-toggle--selected {
-box-shadow: none !important;
-justify-content: flex-end;
-
+  box-shadow: none !important;
+  justify-content: flex-end;
 }
-
 
 button.toolbar-buttons:hover {
-  color: rgba(22,11,80,1) !important;
-  background-color: rgb(0,255,200);
+  color: rgba(22, 11, 80, 1) !important;
+  background-color: #1da088;
+  
+  
+  
 }
-
 
 .item-list .v-toolbar__content {
   flex-wrap: wrap;
@@ -459,11 +447,9 @@ button.toolbar-buttons:hover {
   padding-bottom: 20px;
 }
 
-
-  .mobile-buttons {
-    display : none;
-  }
-
+.mobile-buttons {
+  display: none;
+}
 
 /* @media (max-width: 640px) {
 
@@ -475,65 +461,56 @@ div.v-menu {
 }
 
 @media (max-width: 640px) {
+  div.v-menu {
+    display: inline-block !important;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    color: white !important;
+    margin-bottom: 16px;
+  }
 
-div.v-menu {
-  display: inline-block !important;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  color: white !important;
-  margin-bottom: 16px;
-}
-
-.toolbar-container {
+  .toolbar-container {
     display: none !important;
   }
 
-.mobile-buttons  {
-  padding : 0 !important;
-  margin: 0 !important;
-  display: flex !important;
-}
+  .mobile-buttons {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+  }
 
-
-.mobile-buttons form {
-  padding : 0 !important;
-  margin: 0 !important;
-  display: flex !important;
-
-}
-
-
+  .mobile-buttons form {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+  }
 
   .mobile-buttons {
-    display : flex;
+    display: flex;
     justify-content: space-around;
     margin: 8px 0 12px 0;
   }
 
   .mobile-buttons button {
     border-radius: 5% !important;
-    font-size : 0.8rem;
+    font-size: 0.8rem;
   }
 
   .v-menu__content {
-  background-color: rgba(222,222,222,.94) !important;
-  left: 0 !important;
-  top: 50px !important;
-}
-
+    background-color: rgba(222, 222, 222, 0.94) !important;
+    left: 0 !important;
+    top: 50px !important;
+  }
 }
 
 @media (max-width: 440px) {
-
-
-
-    ul {
-  grid-template-columns: 88vw !important; 
+  ul {
+    grid-template-columns: 88vw !important;
   }
 
   .toolbar.item-list {
-    display : none;
+    display: none;
     font-size: 0.5rem;
   }
 
@@ -541,14 +518,8 @@ div.v-menu {
     /* background-color : rgba(222,177,0,1) !important; */
   }
 
-  
   .v-list-tile-title {
     /* background-color : rgba(222,177,0,1) !important; */
   }
-
-
-
 }
-
-
 </style>

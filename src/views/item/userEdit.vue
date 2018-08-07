@@ -33,8 +33,9 @@ export default {
         title: "",
         description: "",
         ranking: {
-          count: 1.0,
-          avg: 4.0
+          count: 0.0,
+          avg: 0.0,
+          totalRank: 0
         },
         price: "",
         dateCreated: "",
@@ -42,7 +43,8 @@ export default {
         ownerId: "",
         bookings: [],
         occupiedDates: [],
-        images: []
+        images: [],
+        reviews:[]
       },
       categories: [],
       imgUrl: "",

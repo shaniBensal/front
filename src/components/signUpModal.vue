@@ -1,5 +1,5 @@
 <template>
-    <v-layout row justify-center>
+    <v-layout row>
         <v-dialog v-model="dialog" persistent max-width="500px">
             <v-btn class="btn-book bold-font" slot="activator">Book Now!</v-btn>
             <v-card>

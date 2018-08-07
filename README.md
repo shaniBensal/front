@@ -1,4 +1,4 @@
-# sprint4
+# WeRent
 
 ## Project setup
 ```

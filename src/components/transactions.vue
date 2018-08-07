@@ -19,12 +19,12 @@
                         
                         <p> <v-icon>far fa-handshake </v-icon> Rented from: {{transaction.fromOwner.name}}</p>
                         <p>Email: {{transaction.fromOwner.email}}</p>
-                        <p>Day of picking-up: {{transaction.dates[0] |moment("DD MM YYYY")}}</p>
+                        <p>Day of picking-up: {{transaction.dates[0] |moment("DD/MM/YYYY")}}</p>
                         <p>From: {{transaction.fromOwner.address}}</p>
                     </div>
 
                    <div class="rank">
-                   <star-rating :rating="rating" :star-size="20" @rating-selected="setRating"></star-rating>
+                   <star-rating  :star-size="15" @rating-selected="setRating($event,transaction.item)"></star-rating>
                   </div>
                 </li>
             </ul>
@@ -71,15 +71,14 @@ export default {
       return false;
     },
 
-    setRating(rating) {
-      this.$store.commit({ type: "updateItemRank", rating });
-      this.$store.dispatch({ type: "updateItem" });
+    setRating(rating, item) {
+      item.ranking.totalRank += rating;
+      this.$store
+        .dispatch({ type: "updateItemWithRank", rating, item })
+        .then(item => console.log("item updated", item));
     }
   },
   computed: {
-    rating() {
-      return Math.random() * (5 - 1 + 1) + 1;
-    },
     // newNotification() {
     //   return this.$store.getters.isNewNote;
     // }

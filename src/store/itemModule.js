@@ -49,17 +49,10 @@ export default {
       state.selectedItem = {};
     },
 
-    setFilterItems(state, {category}) {
+    setFilterItems(state, { category }) {
       state.filteredItems = state.items.filter(
         item => item.category.some(
-        currCategory => category.includes(currCategory)));
-    },
-
-    updateItemRank(state, { rating }) {
-      state.selectedItem.ranking.count = state.selectedItem.ranking.count + 1;
-      state.selectedItem.ranking.avg =
-        (state.selectedItem.ranking.avg + rating) /
-        state.selectedItem.ranking.count;
+          currCategory => category.includes(currCategory)));
     },
 
     setFiltersByCategory(state, { category }) {
@@ -70,7 +63,7 @@ export default {
       state.filters.byTitle = txt;
     }
   },
-  
+
   // ********************************
 
   getters: {
@@ -109,15 +102,6 @@ export default {
       return state.selectedItem;
     },
 
-    getStarsByRank() {
-      return item => {
-        if (item.ranking === 1) return '⭐';
-        if (item.ranking === 2) return '⭐⭐';
-        if (item.ranking === 3) return '⭐⭐⭐';
-        if (item.ranking === 4) return '⭐⭐⭐⭐';
-        if (item.ranking === 5) return '⭐⭐⭐⭐⭐';
-      };
-    },
 
     categories(state) {
       return state.categories;
@@ -163,5 +147,13 @@ export default {
         return context.commit({ type: 'updateItem', item });
       });
     },
+    updateItemWithRank(context, { rating, item }) {
+      item.ranking.count += 1
+      item.ranking.avg = (item.ranking.totalRank + rating) / item.ranking.count
+      return itemsService.updateItem(item).then(item => {
+        return context.commit({ type: 'updateItem', item });
+
+      })
+    }
   }
 };

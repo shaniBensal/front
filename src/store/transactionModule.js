@@ -3,7 +3,7 @@ import transactionsService from '../services/transactionsService.js';
 
 export default {
   state: {
-    newNotification: false
+    newNotification: null
   },
 
   mutations: {
@@ -30,9 +30,7 @@ export default {
     getTransactionsByRenter(context, { userId }) {
       return transactionsService.getTransactionsByRenter(userId);
     },
-    updateTransaction(context, { transaction }) {
-      console.log('from store', transaction);
-      
+    updateTransaction(context, { transaction }) {           
       return transactionsService.updateTransaction(transaction)
     }
   }

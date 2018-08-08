@@ -25,7 +25,7 @@
             <ul>
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
-                <button class="tab4" @click="showTrnsactions">My Orders
+                <button class="tab4" @click="showUserTrnsactions">My Orders
                     <v-icon class="notification" v-if="isNewNote">fas fa-bell</v-icon>
                 </button>
             </ul>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="user-profile-transactions" v-if="transactionsState">
-            <transactions :transactions="transactions"></transactions>
+            <transactions :transactions="transactions" @orders-checked="ordersChecked"></transactions>
         </div>
 
     </div>
@@ -65,7 +65,7 @@ export default {
         activeTransactions: []
       },
       favoriteItems: [],
-      checkNewTrans: false,
+      checkOrders: false,
       isNewNote: false
     };
   },
@@ -128,34 +128,29 @@ export default {
       this.isEditable = false;
       this.transactionsState = false;
     },
-
-    showTrnsactions() {
+    showUserTrnsactions() {
       this.transactionsState = true;
-      this.checkNewTrans = true;
-      this.isNewNote = false;
-      if (!this.isNewNote && this.checkNewTrans) {
-        for (let i = 0; i < this.transactions.passiveTransactions.length; i++) {
-          var transaction = this.transactions.passiveTransactions;
-          if (transaction[i].isNew) {
-            transaction[i].isNew = false;
-            // console.log("from profile", transaction[i]);
-            this.$store
-              .dispatch({
-                type: "updateTransaction",
-                transaction: transaction[i]
-              })
-              .then(_ =>
-                this.$store.commit({
-                  type: "setNewNotification",
-                  status: false
-                })
-              );
+    },
+    ordersChecked() {
+      this.checkOrders = true;
+      if (this.isNewNote) {
+        this.transactions.passiveTransactions.forEach(transaction => {
+          if (transaction.isNew) {
+            this.$store.dispatch({
+              type: "updateTransaction",
+              transaction: transaction
+            });
           }
-        }
+        });
+        this.isNewNote = false;
+        this.loadUser(this.$route.params.id);
+        this.$store.commit({
+          type: "setNewNotification",
+          status: false
+        });
       }
     }
   },
-
   computed: {
     // user(){
     //   return this.$store.getters.loggedinUser

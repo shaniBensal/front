@@ -33,7 +33,7 @@
         <div class="passiveTrasactions">
             <h1>Items ordered from me</h1>
             <ul>
-                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:transaction.isNew}">
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])" :class="{newTrans:(transaction.isNew && newNotification)}">
                     <div>
                         <img :src="transaction.item.images[0]">
                     </div>
@@ -60,9 +60,14 @@ import StarRating from "vue-star-rating";
 export default {
   props: ["transactions"],
   data() {
-    return {};
+    return {
+      newNotification: null
+    };
   },
-  created() {},
+  created() {
+    this.newNotification = this.$store.getters.isNewNote;
+    this.$emit("orders-checked");
+  },
   methods: {
     isFutureDate(date) {
       var rentingDate = new Date(date);
@@ -79,10 +84,7 @@ export default {
   computed: {
     rating() {
       return Math.random() * (5 - 1 + 1) + 1;
-    },
-    // newNotification() {
-    //   return this.$store.getters.isNewNote;
-    // }
+    }
   }
 };
 </script>

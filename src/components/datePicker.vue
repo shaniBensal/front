@@ -50,6 +50,10 @@ export default {
 };
 </script>
 <style>
+
+.v-picker{
+  margin-bottom: 20px;
+}
 .v-picker__title__btn:not(.active) {
   opacity: 1 !important;
 }

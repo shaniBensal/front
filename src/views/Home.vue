@@ -9,7 +9,8 @@
     <v-content>
         <!-- <div class="pic-cover"></div> -->
       <section>
-        <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">
+        <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">    
+        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg"> -->
                 <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
               <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
           <v-layout 
@@ -54,7 +55,6 @@
           </v-layout>
         </v-parallax>
       </section>
-
       <section class="first-section">
         <v-layout
           column
@@ -122,6 +122,15 @@
                     </v-card-media>
                   </v-card>
                 </v-flex>
+                  <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                     <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Music</div>
+                    </v-card-title>
+                     <v-card-media height = "200px" src="   https://images.pexels.com/photos/6966/abstract-music-rock-bw.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('kitchen')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
               </v-layout>
             </v-container>
           </v-flex>
@@ -142,7 +151,7 @@
   
 
     <div class="opinions-container">
-      <div>Customers Recommend:</div>
+      <!-- <div>Customers Recommend:</div> -->
     </div>
 
    <div id="header-carousel">
@@ -433,6 +442,14 @@ h1 {
 
 .v-card h1 {
   text-shadow: 0 0 4px black;
+}
+
+.v-card__media{
+  transition: all 0.3s
+}
+
+.v-card__media:hover{
+  opacity: 0.8;
 }
 
 .v-jumbotron .theme--dark {

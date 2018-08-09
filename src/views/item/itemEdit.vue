@@ -7,21 +7,6 @@
         <span>pick available dates:</span>
         <date-picker v-model="itemToUpdate.occupiedDates"  @selected-date="selectDate" :unAvailableDates="itemToUpdate.occupiedDates"></date-picker>
         <div class="upload-img">
-<<<<<<< HEAD
-        <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
-             </div>
-              <img class="newImg" :src ="imgUrl" v-if="imgUrl">
-              <div class="file-input custom">
-                <span>Select image</span>
-              <input type="file" @change="handleFileUpload($event)" >
-              </div>
-              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
-    <div class="actions">
-        <v-btn @click="updateItem">
-            submit
-        </v-btn>
-        <v-btn @click="clear">clear</v-btn>
-=======
             <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
         </div>
         <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
@@ -35,7 +20,6 @@
                 submit
             </v-btn>
             <v-btn @click="clear">clear</v-btn>
->>>>>>> 40184e788be321c0fa7bc06cde1e3c3bc0444121
         </div>
     </v-form>
 </template>

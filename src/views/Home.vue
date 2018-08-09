@@ -243,31 +243,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 * {
   box-sizing: border-box;
 }
 
-.display-1, .display-2, .display-3 , .headline{
-  font-family: 'varela_Round' !important;
+.display-1,
+.display-2,
+.display-3,
+.headline {
+  font-family: "varela_Round" !important;
 }
 
-
-.first-section{
+.first-section {
   // background-color: #EEEEEE;
 }
 
-.v-carousel{
+.v-carousel {
   height: 330px;
 }
 
-
 .top-pic {
   height: 530px;
-  opacity: 0.8
+  opacity: 0.8;
 }
 
-.categories{
+.categories {
   cursor: pointer;
 }
 
@@ -412,10 +412,10 @@ h1 {
 }
 
 .opinions-container {
-    padding-left: 16px;
+  padding-left: 16px;
   font-size: 2rem;
   margin: 80px 0 10px 0 !important;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 #header-carousel {
@@ -454,12 +454,12 @@ h1 {
   text-shadow: 0 0 4px black;
 }
 
-.v-card__media{
+.v-card__media {
   border-radius: 3px;
-  transition: all 0.3s
+  transition: all 0.3s;
 }
 
-.v-card__media:hover{
+.v-card__media:hover {
   opacity: 0.8;
 }
 
@@ -486,95 +486,86 @@ div .fill-height {
 
 
 @media (max-width: 440px) {
+  .v-card__media {
+    width: 85vw;
+  }
 
-.v-card__media {
-  width: 85vw;
-}
+  .v-carousel {
+    display: none;
+  }
 
-.v-carousel{
-  display: none;
-}
+  .opinions-container div {
+    font-size: 1.25rem;
+    margin: 0px 0 10px 0 !important;
+    padding-left: 16px;
+    background-color: #eeeeee;
+  }
 
-.opinions-container div {
-  font-size: 1.25rem;
-  margin: 0px 0 10px 0 !important;
-  padding-left: 16px;
-  background-color: #EEEEEE;
-}
+  /* margin-top: 350px; */
+  div.flex {
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    display: flex;
+  }
 
-    /* margin-top: 350px; */
-div.flex {
-    justify-content:  center;
-    align-items:  flex-end;
-    align-content:  flex-end;
-    display:  flex;
-}
+  .top-left {
+    left: 12px;
+    top: 300px;
+    /* font-size: 1.1rem; */
+    line-height: 1.6em;
+    text-align: left;
+    width: 250px;
+    height: 0px;
+    position: relative;
+    z-index: 10;
+    /* background-color: rgba(190, 240, 0, 0.6); */
+  }
 
-
-.top-left {
-  left: 12px;
-  top: 300px;
-  /* font-size: 1.1rem; */
-  line-height: 1.6em;
-  text-align: left;
-  width: 250px;
-  height: 0px;
-  position: relative;
-  z-index: 10;
-  /* background-color: rgba(190, 240, 0, 0.6); */
-}
-
-.v-jumbotron {
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, .9),
-    rgba(255, 255, 255, .9),
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0)
-  );
-}
+  .v-jumbotron {
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0)
+    );
+  }
 
   #header-carousel h3 {
-  align-self: bottom;
-  font-size: 1.5rem !important;
-  color: black;
-  width: 240px;
+    align-self: bottom;
+    font-size: 1.5rem !important;
+    color: black;
+    width: 240px;
+  }
+
+  #header-carousel .subheading {
+    color: black;
+    font-size: 0.8rem !important;
+
+    width: 280px;
+    display: inline-block;
+  }
 }
-
-#header-carousel .subheading {
-  color: black;
-  font-size: .8rem !important;
-
-  width: 280px;
-  display: inline-block;
-}
-}
-
-
 </style>
 
 <!-- not SCOPED -->
-<style>   
+<style>
 a.see-all {
-  
   color: white !important;
   text-decoration: none;
 }
 
 div.see-all-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 
 button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
   background-color: rgb(27, 131, 117) !important;
 }
-
-
-
 </style>
 
 

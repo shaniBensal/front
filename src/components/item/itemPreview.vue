@@ -168,6 +168,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.flex {
+  display: flex;
+}
 .bottom-card {
   width: 100%;
 }
@@ -272,11 +275,14 @@ div .v-card__media {
 @media (max-width: 440px) {
   div .v-card__media {
     height: 30vh !important;
-    width: 100%;
-    height: 40%;
-    }
+    // width: 100%;
+  }
 
-  .container.fill-height{
+  .v-card__media__background {
+    height: 80% !important;
+  }
+
+  .container.fill-height {
     padding: 0px;
   }
   // .v-card__media__content{

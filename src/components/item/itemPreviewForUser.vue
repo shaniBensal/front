@@ -148,7 +148,7 @@ ul {
 }
 .v-card {
   margin: auto;
-  width: 180px;
+  // width: 180px;
   background-color: white;
   transition: all 0.8s;
 }
@@ -200,14 +200,10 @@ a {
   padding: 10px;
 }
 
-h4 {
-  min-width: 103px;
-}
-
 @media (max-width: 500px) {
   .item-preview,
   .v-card {
-    width: 80%;
+    width: 100%;
   }
 }
 </style>

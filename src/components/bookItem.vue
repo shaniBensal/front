@@ -293,7 +293,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   /* grid-gap: 20px; */
-  /* grid-template-columns: repeat(auto-fill, 1fr); */
+  //  grid-template-columns: repeat(auto-fill, 1fr); 
 }
 
 li {

@@ -85,12 +85,5 @@ export default {
   background-color: #fff;
 }
 
-@media (max-width: 940px) {
-  .date-book {
-    width: 100%;
-    position: absolute;
-    top: 245px;
-  }
-}
 </style>
 

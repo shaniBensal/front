@@ -22,10 +22,13 @@
                 </v-container>
             </v-card-media>
             <v-card-title>
+
               <div>
                     <h5>{{item.title}}</h5>
                     <p>{{shortDescription}}</p>
                     </div>
+                    <br>
+                  
                     <div class="flex location" v-if="owner.address">
                         <v-icon  class="marker" small light>fas fa-map-marker-alt</v-icon>
                         <p >{{owner.address}} <br> <span>{{distance}} km </span>from you</p>
@@ -35,7 +38,7 @@
                         <p >No location found</p>
                     </div>
                     <br>
-
+            
                     <div class="flex card-bottom">
                         <p class="price bold-font">{{item.price}}$ per day</p>
                         <div v-if="item">
@@ -240,9 +243,9 @@ a {
   color: #42b983;
 }
 
-div.v-card__title {
-  min-height: 126px !important;
-}
+// div.v-card__title {
+//   min-height: 126px !important;
+// }
 
 .item-preview {
   text-transform: capitalize;

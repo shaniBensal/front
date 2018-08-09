@@ -400,9 +400,9 @@ ul.items-list {
   align-items: center;
 }
 
- div.v-menu {
+ /* div.v-menu {
   display: none;
-} 
+}  */
 
 </style>
 
@@ -426,9 +426,7 @@ ul.items-list {
 button.toolbar-buttons:hover {
   /* color: green !important; */
   border-bottom: 1px solid green;
-  
-  
-  
+
 }
 
 .item-list .v-toolbar__content {

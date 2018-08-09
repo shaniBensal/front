@@ -414,6 +414,11 @@ ul.items-list {
   display: flex;
   flex-direction: column;
 }
+
+ div.v-menu {
+  display: none;
+} 
+
 </style>
 
 
@@ -456,9 +461,6 @@ button.toolbar-buttons:hover {
 
 } */
 
-div.v-menu {
-  display: none;
-}
 
 @media (max-width: 640px) {
   div.v-menu {

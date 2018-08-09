@@ -4,19 +4,19 @@
         <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
         <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
         <div class="upload-img">
-        <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
-             </div>
-              <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
-              <div class="file-input custom">
-                <span>Select image</span>
-              <input type="file" @change="handleFileUpload($event)" >
-              </div>
-              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
-    <div class="actions">
-        <v-btn @click="updateItem">
-            submit
-        </v-btn>
-        <v-btn @click="clear">clear</v-btn>
+            <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
+        </div>
+        <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
+        <div class="file-input custom">
+            <span>Select image</span>
+            <input type="file" @change="handleFileUpload($event)">
+        </div>
+        <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button>
+        <div class="actions">
+            <v-btn @click="updateItem">
+                submit
+            </v-btn>
+            <v-btn @click="clear">clear</v-btn>
         </div>
     </v-form>
 </template>

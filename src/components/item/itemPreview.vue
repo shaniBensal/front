@@ -169,6 +169,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.flex{
+  display: flex;
+}
 .bottom-card {
   width: 100%;
 }

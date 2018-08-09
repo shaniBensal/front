@@ -19,7 +19,7 @@
             align-center
             justify-end
           >
-            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere. anytime</h1>
+            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime</h1>
             <div class="subheading mb-3 text-xs-center"></div>
             <div class="subheading mb-3 text-xs-center"></div>
             <div class="subheading mb-3 text-xs-center"></div>
@@ -41,7 +41,7 @@
         autofocus
         hide-details
         single-line
-        placeholder="I'm looking for a"
+        placeholder="I'm looking for"
       ></v-text-field>
 
       <v-btn icon @click="onSearch">
@@ -127,7 +127,7 @@
                      <v-card-title primary-title class="layout justify-center">
                       <div class="headline text-xs-center">Music</div>
                     </v-card-title>
-                     <v-card-media height = "200px" src="   https://images.pexels.com/photos/6966/abstract-music-rock-bw.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('kitchen')">     
+                     <v-card-media height = "200px" src="https://images.pexels.com/photos/860707/pexels-photo-860707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('music')">     
                     </v-card-media>
                   </v-card>
                 </v-flex>
@@ -243,18 +243,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 * {
   box-sizing: border-box;
 }
 
+.display-1, .display-2, .display-3 , .headline{
+  font-family: 'varela_Round' !important;
+}
+
 
 .first-section{
-  background-color: #EEEEEE;
+  // background-color: #EEEEEE;
+}
+
+.v-carousel{
+  height: 330px;
 }
 
 
 .top-pic {
   height: 530px;
+  opacity: 0.8
 }
 
 .categories{
@@ -445,6 +455,7 @@ h1 {
 }
 
 .v-card__media{
+  border-radius: 3px;
   transition: all 0.3s
 }
 
@@ -478,6 +489,10 @@ div .fill-height {
 
 .v-card__media {
   width: 85vw;
+}
+
+.v-carousel{
+  display: none;
 }
 
 .opinions-container div {
@@ -545,6 +560,7 @@ div.flex {
 a.see-all {
   
   color: white !important;
+  text-decoration: none;
 }
 
 div.see-all-container {

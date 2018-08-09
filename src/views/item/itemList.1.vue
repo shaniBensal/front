@@ -15,15 +15,20 @@
                 </v-card>
             </v-form>
           </div>
+      <!-- <div class="spacer"></div> -->
 
       <div class="toolbar-buttons-container">
-        <!-- <v-btn-toggle v-model="toggle_exclusive_2"  class="transparent">
+        <v-btn-toggle v-model="toggle_exclusive_2"  class="transparent">
                 <div v-for="(sorting, idx) in sortings" :key="idx">
                     <v-btn class="toolbar-buttons" :value="idx" flat @click="changeSort(sorting)">
                         <div>{{sorting}}</div>
                     </v-btn>
                 </div>
-            </v-btn-toggle> -->
+            </v-btn-toggle>
+
+
+      <!-- <div class="spacer">|</div> -->
+
 
             <v-btn-toggle v-model="toggle_exclusive" class="transparent">
                 <div v-for="(category, idx) in categories" :key="idx">
@@ -33,22 +38,39 @@
                     </v-btn>
                 </div>
             </v-btn-toggle>
-
-            <v-menu transition="slide-x-transition" class="show-sort" bottom right>
-                            <v-btn slot="activator" class="teal" color="primary" dark>
-                                Sort
-                            </v-btn>
-
-                            <v-list>
-                                <v-list-tile v-for="(sorting, i) in sortings" :key="i" @click="changeSort(sorting)">
-                                    <v-list-tile-title>{{ sorting }}</v-list-tile-title>
-                                </v-list-tile>
-                            </v-list>
-                        </v-menu>
-
+        <!-- </v-toolbar> -->
         </div>
 
         </div>
+
+
+            <!--
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in items"
+          :key="i"
+          @click=""
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+      -->
+
+
+
+
+
+          <!-- <v-btn :round=false>Search</v-btn>
+</template>
+          <v-btn>Sort</v-btn>
+          <v-btn>Categories</v-btn> -->
+
+
+
+
+                <!-- <div class="spacer">|</div> -->
+
+
               
             <div class="mobile-buttons">
                 <div>
@@ -66,7 +88,17 @@
                                 </v-text-field>
                             </v-card>
                         </v-form>
-  
+                        <!--
+          <v-list>
+            <v-list-tile
+              v-for="(item, i) in items"
+              :key="i"
+              @click=""
+            >
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+          -->
                         <v-menu transition="slide-x-transition" bottom right>
                             <v-btn slot="activator" class="teal" color="primary" dark>
                                 Sort
@@ -90,7 +122,9 @@
                         </v-menu>
                     </div>
                 </div>
-
+                <!-- <v-btn :round=false>Search</v-btn>
+              <v-btn>Sort</v-btn>
+              <v-btn>Categories</v-btn> -->
             </div>
 
             
@@ -287,10 +321,6 @@ ul {
   width: 180px;
 } */
 
-.show-sort{
-  display: flex;
-}
-
 a {
   text-decoration: none;
   color: #273e74;
@@ -327,18 +357,11 @@ input {
 
 .v-btn {
   font-size: 0.77rem;
+
   background-color: white;
-  /* color: rgb(4, 4, 73); */
-  color: black;
+  color: rgb(4, 4, 73);
   opacity: 1;
   border: none;
-}
-
-.show-sort .v-btn{
- 
- min-width: 60px;
- height: 30px;
-
 }
 
 .v-btn.v-btn--active {
@@ -377,7 +400,7 @@ ul.items-list {
 
 .toolbar-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 12px;
   padding-bottom: 24px;
   align-items: baseline;
@@ -387,17 +410,13 @@ ul.items-list {
   width: 220px;
 }
 
-.v-btn__content{
-  height: 0;
-}
-
 .pa-3.v-card {
   padding: 0 !important;
 }
 
 .toolbar-buttons-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 </style>
 
@@ -405,8 +424,8 @@ ul.items-list {
 <!-- style not scoped:  -->
 <style>
 .v-btn-toggle .v-btn {
-  /* opacity: 0.8 !important;
-  color: rgb(22, 55, 11) !important; */
+  opacity: 0.8 !important;
+  color: rgb(22, 55, 11) !important;
   padding: 0 5px 0 5px !important;
 }
 .transparent.v-btn {
@@ -419,8 +438,8 @@ ul.items-list {
 }
 
 button.toolbar-buttons:hover {
-  /* color: green !important; */
-  border-bottom: 1px solid green;
+  color: rgba(22, 11, 80, 1) !important;
+  background-color: #1da088;
   
   
   

@@ -23,11 +23,11 @@
             </v-card-media>
             <v-card-title>
               <div>
-                    <h4>{{item.title}}</h4>
+                    <h5>{{item.title}}</h5>
                     <p>{{shortDescription}}</p>
                     </div>
                     <div class="flex location" v-if="owner.address">
-                        <v-icon small light>fas fa-map-marker-alt</v-icon>
+                        <v-icon  class="marker" small light>fas fa-map-marker-alt</v-icon>
                         <p >{{owner.address}} <br> <span>{{distance}} km </span>from you</p>
                     </div>
                     <div class="flex location" v-else>
@@ -123,8 +123,7 @@ export default {
 
       var distance = mapService.calcDistanceFromLatLngInKm(coords);
       this.distance = distance.toFixed(1);
-      this.$emit('getDistance' ,this.distance );
-      
+      this.$emit("getDistance", this.distance);
     }
   },
 
@@ -175,7 +174,7 @@ export default {
   padding: 10px 0;
 }
 
-.rank{
+.rank {
   font-size: 12px;
 }
 
@@ -183,6 +182,7 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.226);
   justify-content: space-between;
   padding: 5px 0;
+  align-items: center;
 }
 p {
   margin: 0;
@@ -192,7 +192,7 @@ p {
 .price {
   color: #42b983;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
 }
 .v-card {
   // margin: 20px 10px 10px 10px;
@@ -204,10 +204,14 @@ p {
 }
 
 .v-icon {
+  // padding-right: 5px;
+}
+
+.marker{
   padding-right: 5px;
 }
 
-.like{
+.like {
   right: 10px;
   transition: all 0.3s;
 }
@@ -216,7 +220,6 @@ a {
   color: #42b983;
 }
 .v-card__media {
-  
   height: 7em;
   margin: 0 auto;
   transition: all 0.3s;
@@ -246,21 +249,20 @@ div.v-card__title {
 }
 
 .location span {
-  font-weight : bold;
+  font-weight: bold;
 }
-
 
 // .v-card-media {
 //   height : 8em !important;
-// } 
+// }
 
 div .v-card__media {
   height: 10em !important;
-} 
+}
 
 @media (max-width: 440px) {
   div .v-card__media {
-  height: 30vh !important;
-  } 
+    height: 30vh !important;
+  }
 }
 </style>

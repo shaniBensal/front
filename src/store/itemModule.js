@@ -17,6 +17,7 @@ export default {
       'transportation',
       'kids',
       'events',
+      'music',
       'hardware'
     ],
     filteredItems: []
@@ -136,6 +137,7 @@ export default {
     },
 
     addNewItem(context, { item }) {
+      console.log('item adding: ' , item)
       return itemsService.addItem(item).then(item => {
         context.commit({ type: 'addNewItem', item });
       });

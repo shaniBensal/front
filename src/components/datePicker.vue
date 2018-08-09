@@ -29,7 +29,7 @@ export default {
       } else {
         month = d.getMonth() + 1;
       }
-      if (d.getDate() + 1 < 10) {
+      if (d.getDate() < 10) {
         day = "0" + d.getDate();
       } else {
         day = d.getDate();
@@ -37,6 +37,8 @@ export default {
       result += d.getFullYear() + "-" + month + "-" + day;
       this.date = result;
       this.today = result;
+      console.log(this.today);
+      
     },
 
     allowedDates(dateStr) {

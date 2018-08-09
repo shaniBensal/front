@@ -2,11 +2,14 @@
     <v-form ref="form">
         <v-text-field v-model="itemToUpdate.title" label="item name"></v-text-field>
         <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
+         <v-text-field v-model="itemToUpdate.description" label="Short description"></v-text-field>
         <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
+        <span>pick available dates:</span>
+        <date-picker v-model="itemToUpdate.occupiedDates"  @selected-date="selectDate" :unAvailableDates="itemToUpdate.occupiedDates"></date-picker>
         <div class="upload-img">
         <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
              </div>
-              <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
+              <img class="newImg" :src ="imgUrl" v-if="imgUrl">
               <div class="file-input custom">
                 <span>Select image</span>
               <input type="file" @change="handleFileUpload($event)" >
@@ -22,19 +25,20 @@
 </template>
 <script>
 import cloudinaryService from "../../services/cloudinaryService.js";
+import datePicker from "../../components/datePicker.vue";
 export default {
   name: "itemEdit",
 
   data() {
     return {
       itemToUpdate: {
-        _id: null,
         category: [],
         title: "",
         description: "",
         ranking: {
-          count: 1.0,
-          avg: 4.0
+          count: 0.0,
+          avg: 0.0,
+          totalRank: 0
         },
         price: "",
         dateCreated: "",
@@ -63,35 +67,36 @@ export default {
     updateItem() {
       const itemId = this.$route.params.id;
       if (itemId) {
-        // console.log("updating item", this.itemToUpdate);
-        this.$store.dispatch({ type: "updateItem", item: this.itemToUpdate });
-        // .then(item => {
-        //   this.itemToUpdate = this.getEmptyItem;
-        //   // this.$router.push("/user/" + this.user._id);
-        // });
+        console.log("updating item", this.itemToUpdate);
+        this.$store
+          .dispatch({ type: "updateItem", item: this.itemToUpdate })
+          .then(item => {
+            this.itemToUpdate = this.getEmptyItem;
+            this.$router.push("/user/" + this.user._id);
+          });
       } else {
-        this.$store.dispatch({ type: "addNewItem", item: this.itemToUpdate });
-        // .then(item => {
-        //   this.itemToUpdate = this.getEmptyItem();
-        //   // this.$router.push("/user/" + this.user._id);
-        // });
+        console.log("adding...");
+        this.$store
+          .dispatch({ type: "addNewItem", item: this.itemToUpdate })
+          .then(item => {
+            this.itemToUpdate = this.getEmptyItem();
+            this.$router.push("/user/" + this.user._id);
+          });
+        // }.then(item =>{
+        // this.itemToUpdate = this.getEmptyItem;
+        // this.imgUrl = "";
+        // this.$router.push("/user/" + this.user._id);
+        // })
       }
-      this.itemToUpdate = this.getEmptyItem;
-      this.imgUrl = "";
-      this.$router.push("/user/" + this.user._id);
     },
 
     handleFileUpload(ev) {
       // console.log("event", ev);
       this.fileUpload = ev.target.files[0];
-      // console.log(this.fileUpload);
-
+      console.log(this.fileUpload);
       cloudinaryService.doUploadImg(this.fileUpload).then(img => {
         this.imgUrl = img.url;
-        // console.log("img url is", this.imgUrl);
-        let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.images));
-        newArr.push(this.imgUrl);
-        this.itemToUpdate.images = newArr;
+        console.log("img url is", this.imgUrl);
       });
     },
 
@@ -112,8 +117,9 @@ export default {
         title: "",
         description: "",
         ranking: {
-          count: 1.0,
-          avg: 4.0
+          count: 0.0,
+          avg: 0.0,
+          totalRank: 0
         },
         price: "",
         dateCreated: "",
@@ -125,12 +131,26 @@ export default {
     },
     getCategories() {
       this.categories = this.$store.getters.categories;
+    },
+
+    selectDate(date) {
+      console.log(date);
+      this.itemToUpdate.occupiedDates.push(date);
+    },
+    saveImg() {
+      let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.images));
+      newArr.push(this.imgUrl);
+      this.itemToUpdate.images = newArr;
+      console.log(this.itemToUpdate.images);
     }
   },
   computed: {
     user() {
       return this.$store.getters.loggedinUser;
     }
+  },
+  components: {
+    datePicker
   }
 };
 </script>
@@ -149,7 +169,6 @@ form {
   outline: #1da088;
   margin: 20px 0;
 }
-
 
 .v-list {
   top: 0;
@@ -171,6 +190,12 @@ select {
   border-bottom: 1px solid black;
   width: 50%;
   padding: 5px;
+}
+
+.newImg {
+  width: 260px;
+  margin: 20px;
+  padding: 10px;
 }
 
 .file-input.custom {

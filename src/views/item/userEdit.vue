@@ -3,6 +3,7 @@
         <v-text-field v-model="itemToUpdate.title" label="item name"></v-text-field>
         <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
         <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
+         <date-picker v-model="itemToUpdate.occupiedDates"  @selected-date="selectDate" :unAvailableDates="itemToUpdate.occupiedDates"></date-picker>
         <div>
         <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
              </div>
@@ -22,6 +23,7 @@
 </template>
 <script>
 import cloudinaryService from "../../services/cloudinaryService.js";
+import datePicker from "../../components/datePicker.vue";
 export default {
   name: "userEdit",
 
@@ -41,7 +43,6 @@ export default {
         dateCreated: "",
         keyWords: [],
         ownerId: "",
-        bookings: [],
         occupiedDates: [],
         images: [],
         reviews:[]
@@ -115,26 +116,33 @@ export default {
         title: "",
         description: "",
         ranking: {
-          count: 1.0,
-          avg: 4.0
+          count: 0.0,
+          avg: 0.0,
+          totalRank: 0
         },
         price: "",
         dateCreated: "",
         keyWords: [],
         ownerId: "",
-        bookings: [],
         occupiedDates: [],
         images: []
       };
     },
     getCategories() {
       this.categories = this.$store.getters.categories;
-    }
+    },
+
+      selectDate(date) {
+      this.itemToUpdate.occupiedDates.push(date);
+    },
   },
   computed: {
     user() {
       return this.$store.getters.loggedinUser;
     }
+  },
+  compnents:{
+      datePicker,
   }
 };
 </script>

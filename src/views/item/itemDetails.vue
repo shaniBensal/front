@@ -280,7 +280,7 @@ export default {
 }
 
 .main-container {
-  max-width: 90vw;
+  max-width: 100vw;
   margin: 20px;
   padding: 10px;
   padding-top: 20px;
@@ -320,6 +320,7 @@ export default {
   color: black;
   align-items: flex-start;
   border: 1px solid #00000017;
+  margin-left: 10px;
 }
 
 .image-gallery {

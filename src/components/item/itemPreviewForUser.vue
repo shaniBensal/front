@@ -132,7 +132,9 @@ body {
 ul {
   list-style: none;
 }
-
+.item-preview {
+  width: 100%;
+}
 .v-btn__content {
   height: 0;
   color: #fff;
@@ -145,11 +147,12 @@ ul {
   color: #42b983;
 }
 .v-card {
-  margin: 20px;
-  max-width: 180px;
+  margin: auto;
+  width: 180px;
   background-color: white;
   transition: all 0.8s;
 }
+
 .v-card:hover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -158,7 +161,7 @@ ul {
   font-size: 20px;
 }
 
-h4{
+h4 {
   max-width: 160px;
   overflow: hidden;
 }
@@ -193,18 +196,18 @@ a {
   color: black;
   text-align: left;
   width: 180px;
-  height: 53px;
-  padding: 10px 10px 0 10px;
+  // height: 53px;
+  padding: 10px;
 }
 
 h4 {
   min-width: 103px;
 }
 
-@media (min-width: 440px) {
-  .v-card{
-    width: 100%;
+@media (max-width: 500px) {
+  .item-preview,
+  .v-card {
+    width: 80%;
   }
-  
 }
 </style>

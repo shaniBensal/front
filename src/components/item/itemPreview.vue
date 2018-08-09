@@ -24,11 +24,10 @@
             <v-card-title>
 
               <div>
-                    <h5>{{item.title}}</h5>
-                    <p>{{shortDescription}}</p>
+                   <div> <h5 class="overflow">{{item.title}}</h5></div>
+                    <p class="overflow">{{item.description}}</p>
                     </div>
-                    <br>
-                  
+                    <div class="bottom-card d-flex flex-column">
                     <div class="flex location" v-if="owner.address">
                         <v-icon  class="marker" small light>fas fa-map-marker-alt</v-icon>
                         <p >{{owner.address}} <br> <span>{{distance}} km </span>from you</p>
@@ -46,6 +45,7 @@
                              <v-icon small light color="yellow">fas fa-star</v-icon>
                           <span class="rank"> {{avgRank}} ({{item.ranking.count}}) </span>
                         </div>
+                    </div>
                     </div>
 
             </v-card-title>
@@ -141,11 +141,11 @@ export default {
   },
 
   computed: {
-    shortDescription() {
-      if (this.item.description.length > 25)
-        return this.item.description.substring(0, 20) + "...";
-      else return this.item.description;
-    },
+    // shortDescription() {
+    //   if (this.item.description.length > 25)
+    //     return this.item.description.substring(0, 20) + "...";
+    //   else return this.item.description;
+    // },
     avgRank() {
       return this.item.ranking.avg.toFixed(1);
     },
@@ -169,8 +169,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.flex {
-  display: flex;
+.bottom-card {
+  width: 100%;
 }
 
 .location {
@@ -199,7 +199,7 @@ p {
 }
 .v-card {
   // margin: 20px 10px 10px 10px;
-  // max-width: 200px;
+  max-height: 294px;
   transition: all 0.8s;
 }
 .v-card:hover {
@@ -210,13 +210,20 @@ p {
   // padding-right: 5px;
 }
 
-.marker{
+.marker {
   padding-right: 5px;
 }
 
 .like {
   right: 10px;
   transition: all 0.3s;
+}
+
+p.overflow {
+  margin: 0;
+  font-size: 12px;
+  overflow: hidden;
+  height: 16px;
 }
 
 a {
@@ -266,6 +273,15 @@ div .v-card__media {
 @media (max-width: 440px) {
   div .v-card__media {
     height: 30vh !important;
+    width: 100%;
+    height: 40%;
+    }
+
+  .container.fill-height{
+    padding: 0px;
   }
+  // .v-card__media__content{
+  //   width: 100%;
+  // }
 }
 </style>

@@ -148,13 +148,13 @@ export default {
     },
     switchDisplay(value) {
       switch (value) {
-        case 'All':
+        case "All":
           this.showItemsForRent();
           break;
-        case 'Favorites':
+        case "Favorites":
           this.showFavorites();
           break;
-        case 'Orders':
+        case "Orders":
           this.showUserTrnsactions();
           break;
       }
@@ -192,7 +192,7 @@ a:active {
 }
 
 .tabs {
-  width: 60%;
+  width: 100%;
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
@@ -203,7 +203,7 @@ a:active {
   list-style: none;
 }
 
-.tabs-switch{
+.tabs-switch {
   display: none;
   border: 1px black solid;
 }
@@ -213,13 +213,17 @@ a:active {
 
 .user-profile-items ul {
   list-style-type: none;
-  padding: 0;
+  padding: 20px;
   display: grid;
   justify-content: space-evenly;
-  /* grid-gap: 20px; */
-  justify-items: center;
+  grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, 200px);
 }
+
+/* .user-profile-items li{
+  justify-items: center;
+
+} */
 
 .tabs button {
   margin: 0 10px;
@@ -289,10 +293,14 @@ select {
   padding: 5px;
 }
 @media (max-width: 440px) {
+  .user-profile-items {
+  grid-template-columns: repeat(auto-fill, 80%);
+  padding: 20px 0px;
+  }
   .tabs-buttons {
     display: none;
   }
-  .tabs-switch{
+  .tabs-switch {
     display: inline;
   }
 }

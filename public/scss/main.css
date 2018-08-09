@@ -37,6 +37,10 @@
       cursor: pointer;
     }
 
+    .flex {
+      display: flex;
+    }
+
     .bold-font{
       font-family: 'Roboto-Bold', sans-serif;
       } 

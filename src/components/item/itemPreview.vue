@@ -22,6 +22,7 @@
                 </v-container>
             </v-card-media>
             <v-card-title>
+
               <div>
                    <div> <h5 class="overflow">{{item.title}}</h5></div>
                     <p class="overflow">{{item.description}}</p>
@@ -36,7 +37,7 @@
                         <p >No location found</p>
                     </div>
                     <br>
-
+            
                     <div class="flex card-bottom">
                         <p class="price bold-font">{{item.price}}$ per day</p>
                         <div v-if="item">
@@ -252,9 +253,9 @@ a {
   color: #42b983;
 }
 
-div.v-card__title {
-  min-height: 126px !important;
-}
+// div.v-card__title {
+//   min-height: 126px !important;
+// }
 
 .item-preview {
   text-transform: capitalize;

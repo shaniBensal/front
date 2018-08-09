@@ -137,8 +137,8 @@
         </v-layout>
       </section>
 
-      <div class="see-all-container">
-         <v-btn
+      <div class="see-all-container" @click="showLoading">
+         <v-btn 
               class="see-all teal mt-5"
               light
               large
@@ -148,6 +148,8 @@
               </router-link>
             </v-btn>
             </div>
+
+            <div class="loader" v-if="showLoader"></div>
   
 
     <div class="opinions-container">
@@ -221,12 +223,17 @@ export default {
         text:
           "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
-    ]
+    ],
+    showLoader: false
   }),
 
   name: "home",
   components: {
     HelloWorld
+  },
+
+  created(){
+    this.showLoader = false
   },
 
   methods: {
@@ -237,6 +244,11 @@ export default {
 
     onCategory(category) {
       this.$router.push(`/item/?category=${category}`);
+    },
+    showLoading() {
+      console.log(this.showLoader)
+      this.showLoader = true;
+      console.log(this.showLoader)
     }
   }
 };
@@ -252,6 +264,20 @@ export default {
 .display-3,
 .headline {
   font-family: "varela_Round" !important;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .first-section {
@@ -483,7 +509,6 @@ div .fill-height {
   background-color: #e4e7f1 !important;
   color: black !important;
 }
-
 
 @media (max-width: 440px) {
   .v-card__media {

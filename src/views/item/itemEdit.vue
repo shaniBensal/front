@@ -3,36 +3,23 @@
         <v-text-field v-model="itemToUpdate.title" label="item name"></v-text-field>
         <v-text-field v-model="itemToUpdate.price" label="Price per day($)"></v-text-field>
          <v-text-field v-model="itemToUpdate.description" label="Short description"></v-text-field>
-        <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category"></v-select>
+        <v-select v-model="itemToUpdate.category" :items="categories" label="Choose category" @change="setCategory"></v-select>
         <span>pick available dates:</span>
         <date-picker v-model="itemToUpdate.occupiedDates"  @selected-date="selectDate" :unAvailableDates="itemToUpdate.occupiedDates"></date-picker>
         <div class="upload-img">
-        <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
+        <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0] && showAllImages">
              </div>
               <img class="newImg" :src ="imgUrl" v-if="imgUrl">
               <div class="file-input custom">
                 <span>Select image</span>
               <input type="file" @change="handleFileUpload($event)" >
               </div>
-              <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button> 
+              <!-- <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button>  -->
     <div class="actions">
         <v-btn @click="updateItem">
             submit
         </v-btn>
         <v-btn @click="clear">clear</v-btn>
-            <img v-for="(img,i) in itemToUpdate.images" :key="itemToUpdate.images[i]" :src="itemToUpdate.images[i]" v-if="itemToUpdate.images[0]">
-        </div>
-        <!-- <img class="newImg" :src ="imgUrl" v-if="imgUrl"> -->
-        <div class="file-input custom">
-            <span>Select image</span>
-            <input type="file" @change="handleFileUpload($event)">
-        </div>
-        <button class="saveImg" v-if="imgUrl" @click.stop="saveImg">Save new image</button>
-        <div class="actions">
-            <v-btn @click="updateItem">
-                submit
-            </v-btn>
-            <v-btn @click="clear">clear</v-btn>
         </div>
     </v-form>
 </template>
@@ -62,11 +49,13 @@ export default {
       },
       categories: [],
       imgUrl: "",
-      fileUpload: ""
+      fileUpload: "",
+      showAllImages: true
     };
   },
 
   created() {
+    this.showAllImages = true;
     const itemId = this.$route.params.id;
     this.getCategories();
     if (itemId) {
@@ -105,11 +94,16 @@ export default {
 
     handleFileUpload(ev) {
       // console.log("event", ev);
+      this.showAllImages = false;
       this.fileUpload = ev.target.files[0];
       console.log(this.fileUpload);
       cloudinaryService.doUploadImg(this.fileUpload).then(img => {
         this.imgUrl = img.url;
         console.log("img url is", this.imgUrl);
+        let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.images));
+        newArr.push(this.imgUrl);
+        this.itemToUpdate.images = newArr;
+        console.log(this.itemToUpdate.images);
       });
     },
 
@@ -155,6 +149,14 @@ export default {
       newArr.push(this.imgUrl);
       this.itemToUpdate.images = newArr;
       console.log(this.itemToUpdate.images);
+    },
+    setCategory(category){
+      console.log(category)
+      // let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.category));
+      // console.log('new is:' , newArr)
+      // newArr.push(category);
+      // console.log('new is:' , newArr)
+      // this.itemToUpdate.category = newArr;
     }
   },
   computed: {

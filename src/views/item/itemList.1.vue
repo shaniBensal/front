@@ -482,9 +482,9 @@ button.toolbar-buttons:hover {
 
 } */
 
-div.v-menu {
+/* div.v-menu {
   display: none;
-}
+} */
 
 @media (max-width: 640px) {
   div.v-menu {

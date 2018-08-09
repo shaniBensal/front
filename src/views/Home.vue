@@ -149,7 +149,7 @@
             </v-btn>
             </div>
 
-            <div class="loader" v-if="showLoader"></div>
+            <!-- <div class="loader" v-if="showLoader"></div> -->
   
 
     <div class="opinions-container">

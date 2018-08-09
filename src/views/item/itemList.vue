@@ -423,11 +423,7 @@ ul.items-list {
 
 button.toolbar-buttons:hover {
   /* color: green !important; */
-  border-bottom: 1px solid green;
-<<<<<<< HEAD
-
-=======
->>>>>>> ff4bb6e55532bc5eecc512e7531ec776cfebd837
+  /* border-bottom: 1px solid green; */
 }
 
 .item-list .v-toolbar__content {

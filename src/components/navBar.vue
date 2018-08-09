@@ -9,20 +9,27 @@
                 </router-link>
             </div>
             <ul class="d-flex align-center clean-list">
-                <li>
+                <li @click="display = !display">
                     <a v-if="user" @click="logOut">Log Out </a>
                     <a v-else href="#register" @click.prevent="open" class="sign-in"></a>
                 </li>
-                <li>
+                <li @click="display = !display">
                     <router-link to="/about">About</router-link>
                 </li>
-                <li>
+                <li @click="display = !display">
                     <router-link to="/item">Check our store</router-link>
                 </li>
-                <li>
+                <li class="envelope" @click="display = !display">
+                    <router-link :to="'/user/'+user._id" v-if="user">
+                        <v-badge overlap color="red" v-if="user" v-model="newNote">
+                            <v-icon slot="badge" dark small>notifications</v-icon>
+                            <v-icon medium color="grey">mail</v-icon>
+                        </v-badge>
+                    </router-link>
+                </li>
+                <li @click="display = !display">
                     <router-link :to="'/user/'+user._id" v-if="user">
                         <div class="user-pic" :style="{backgroundImage: `url(${user.image})`}"></div>
-                        <v-icon class="notification" v-if="newNote">fas fa-bell</v-icon>
                     </router-link>
                 </li>
             </ul>
@@ -33,6 +40,7 @@
 </template>
 <script>
 import signIn from "./signIn.vue";
+import eventBus, { MESSAGES_READ } from "../services/EventBusService.js";
 
 export default {
   name: "navBar",
@@ -43,6 +51,9 @@ export default {
       display: false,
       newNote: false
     };
+  },
+  created() {
+    eventBus.$on(MESSAGES_READ, _ => (this.newNote = false));
   },
   computed: {
     user() {
@@ -68,7 +79,6 @@ export default {
           userId: this.$store.getters.loggedinUser._id
         })
         .then(transactions => {
-          console.log(transactions)
           transactions.forEach(transaction => {
             if (transaction.isNew) {
               this.newNote = true;
@@ -152,10 +162,14 @@ nav {
 .sign-in::after {
   content: "Sign in";
 }
+.envelope li {
+  width: max-content;
+}
 
 .nav-bar-main li {
   color: #1da088;
 }
+
 
 @media (max-width: 540px) {
   // .clean-list li:first-child {
@@ -220,3 +234,14 @@ nav {
   }
 }
 </style>
+
+<style>
+.v-badge__badge {
+  top: -6px;
+  right: -10px;
+  height: 18px;
+  width: 18px;
+}
+
+</style>
+

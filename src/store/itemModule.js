@@ -150,8 +150,8 @@ export default {
       });
     },
     updateItemWithRank(context, { rating, item }) {
-      item.ranking.count += 1
-      item.ranking.avg = (item.ranking.totalRank + rating) / item.ranking.count
+      item.ranking.count += 1;
+      item.ranking.avg = (item.ranking.totalRank + rating) / item.ranking.count;
       return itemsService.updateItem(item).then(item => {
         return context.commit({ type: 'updateItem', item });
 

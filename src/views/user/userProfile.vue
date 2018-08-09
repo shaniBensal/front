@@ -5,31 +5,25 @@
             <v-avatar size="120px" color="grey lighten-4">
                 <img :src="user.image" alt="avatar">
             </v-avatar>
-
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
-
         </div>
-
-
-        <div class="add-item">
-            <button class="add">
-                <router-link to="/item/edit" title="Add">
-                    Add item
-                    <v-icon dark>add</v-icon>
-                </router-link>
-            </button>
-        </div>
-
+        <button class="add-item">
+            <router-link to="/item/edit" title="Add">
+                <v-icon dark>add</v-icon>
+            </router-link>
+        </button>
         <div class="tabs bold-font">
-            <ul>
+            <ul class="tabs-buttons">
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
-                <button class="tab4" @click="showTrnsactions">My Orders
-                    <v-icon class="notification" v-if="isNewNote">fas fa-bell</v-icon>
+                <button class="tab4" @click="showUserTrnsactions">My Orders
+                    <v-badge overlap color="red" v-if="isNewNote">
+                        <v-icon slot="badge" dark small>notifications</v-icon>
+                    </v-badge>
                 </button>
             </ul>
-
+            <v-select class="tabs-switch" @change="switchDisplay" :items="itemsForDisplay" outline></v-select>
         </div>
 
         <div class="user-profile-items">
@@ -41,9 +35,8 @@
         </div>
 
         <div class="user-profile-transactions" v-if="transactionsState">
-            <transactions :transactions="transactions"></transactions>
+            <transactions :transactions="transactions" @orders-checked="ordersChecked"></transactions>
         </div>
-
     </div>
 
 </template>
@@ -52,6 +45,7 @@
 import itemList from "../item/itemList.vue";
 import itemPreviewForUser from "../../components/item/itemPreviewForUser.vue";
 import transactions from "../../components/transactions.vue";
+import eventBus, { MESSAGES_READ } from "../../services/EventBusService.js";
 export default {
   data() {
     return {
@@ -65,8 +59,9 @@ export default {
         activeTransactions: []
       },
       favoriteItems: [],
-      checkNewTrans: false,
-      isNewNote: false
+      checkOrders: false,
+      isNewNote: false,
+      itemsForDisplay: ["All", "Favorites", "Orders"]
     };
   },
 
@@ -128,34 +123,43 @@ export default {
       this.isEditable = false;
       this.transactionsState = false;
     },
-
-    showTrnsactions() {
+    showUserTrnsactions() {
       this.transactionsState = true;
-      this.checkNewTrans = true;
-      this.isNewNote = false;
-      if (!this.isNewNote && this.checkNewTrans) {
-        for (let i = 0; i < this.transactions.passiveTransactions.length; i++) {
-          var transaction = this.transactions.passiveTransactions;
-          if (transaction[i].isNew) {
-            transaction[i].isNew = false;
-            // console.log("from profile", transaction[i]);
-            this.$store
-              .dispatch({
-                type: "updateTransaction",
-                transaction: transaction[i]
-              })
-              .then(_ =>
-                this.$store.commit({
-                  type: "setNewNotification",
-                  status: false
-                })
-              );
+    },
+    ordersChecked() {
+      this.checkOrders = true;
+      if (this.isNewNote) {
+        this.transactions.passiveTransactions.forEach(transaction => {
+          if (transaction.isNew) {
+            this.$store.dispatch({
+              type: "updateTransaction",
+              transaction: transaction
+            });
           }
-        }
+        });
+        this.isNewNote = false;
+        this.loadUser(this.$route.params.id);
+        this.$store.commit({
+          type: "setNewNotification",
+          status: false
+        });
+        eventBus.$emit(MESSAGES_READ);
+      }
+    },
+    switchDisplay(value) {
+      switch (value) {
+        case 'All':
+          this.showItemsForRent();
+          break;
+        case 'Favorites':
+          this.showFavorites();
+          break;
+        case 'Orders':
+          this.showUserTrnsactions();
+          break;
       }
     }
   },
-
   computed: {
     // user(){
     //   return this.$store.getters.loggedinUser
@@ -198,6 +202,11 @@ a:active {
   color: #162044;
   list-style: none;
 }
+
+.tabs-switch{
+  display: none;
+  border: 1px black solid;
+}
 .user-profile-items {
   background-color: rgba(211, 211, 211, 0.692);
 }
@@ -206,7 +215,9 @@ a:active {
   list-style-type: none;
   padding: 0;
   display: grid;
-  grid-gap: 20px;
+  justify-content: space-evenly;
+  /* grid-gap: 20px; */
+  justify-items: center;
   grid-template-columns: repeat(auto-fill, 200px);
 }
 
@@ -257,14 +268,36 @@ button a {
 }
 
 .add-item {
-  width: 30%;
   background-color: #1da088;
   padding: 10px;
   margin: 20px 0;
   text-align: center;
+  border-radius: 20px;
 }
 
 .add-item:hover {
   background-color: #00d8ae;
 }
+
+.v-badge {
+  top: -22px;
+}
+input,
+select {
+  border-bottom: 1px solid black;
+  width: 50%;
+  padding: 5px;
+}
+@media (max-width: 440px) {
+  .tabs-buttons {
+    display: none;
+  }
+  .tabs-switch{
+    display: inline;
+  }
+}
 </style>
+
+
+
+

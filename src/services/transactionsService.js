@@ -24,8 +24,6 @@ function updateTransaction(transaction){
         .then(res => res.data)
 }
 
-
-
 export default {
     newTransaction,
     getTransactionsByOwner,

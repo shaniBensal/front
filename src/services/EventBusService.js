@@ -1,8 +1,7 @@
 import Vue from 'vue';
 
+export const MESSAGES_READ = 'messages'
 
-export const EVENT_LOGIN_USER = 'login-user'
+var bus = new Vue();
 
-
-export const eventBus = new Vue();
-export default eventBus;
+export default bus;

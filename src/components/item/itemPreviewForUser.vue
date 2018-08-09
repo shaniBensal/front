@@ -6,23 +6,24 @@
             <v-card-media height="10em" :src="item.images[0]">
             </v-card-media>
             <v-card-title>
+              <div class="d-flex flex-column">
                 <div>
                     <h4>{{item.title}}</h4>
-                    <p>{{shortDescription}}</p>
                 </div>
 
-                <div class="flex card-bottom">
-                    <p class="price bold-font">{{item.price}}$ per day</p>
+                <div class="d-flex card-bottom">
+                    <p class="price bold-font"><br/>{{item.price}}$ per day</p>
                     <!-- <div v-if="item">
 
                         <v-icon small light color="yellow">fas fa-star</v-icon>
                         {{avgRank}} ({{item.ranking.count}})
                     </div> -->
+                    </div>
                 </div>
 
             </v-card-title>
-            <v-card-actions v-if="isEdit" class="justify-center">
-                <div class="text-xs-center">
+            <v-card-actions v-if="isEdit" class="d-flex">
+                <div class="text-xs-center d-flex">
 
                     <!-- <v-btn fab dark small color="teal lighten-3"> -->
                         <router-link :to="'/item/edit/'+item._id" title="Edit">
@@ -80,10 +81,10 @@ export default {
       alert("please sign in");
     },
 
-    isFutureDate(date){
-      var rentingDate = new Date(date)
-      var dayAheadTimeStamp = Date.now() + 24 * 60 * 60 * 1000; 
-      if(+rentingDate > dayAheadTimeStamp)  return true;
+    isFutureDate(date) {
+      var rentingDate = new Date(date);
+      var dayAheadTimeStamp = Date.now() + 24 * 60 * 60 * 1000;
+      if (+rentingDate > dayAheadTimeStamp) return true;
       return false;
     }
   },
@@ -91,15 +92,14 @@ export default {
   created() {},
 
   computed: {
-    shortDescription() {
-      if (this.item.description.length > 25)
-        return this.item.description.substring(0, 25) + "...";
-      else return this.item.description;
-    },
+    // title() {
+    //   if (this.item.title.length > 15)
+    //     return this.item.title.substring(0, 15) + "...";
+    //   else return this.item.title;
+    // },
     avgRank() {
       return this.item.ranking.avg.toFixed(1);
-    },
-
+    }
   },
 
   watch: {
@@ -116,10 +116,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.flex {
-  display: flex;
-}
-
 .card-bottom {
   border-top: 1px solid rgba(0, 0, 0, 0.226);
   justify-content: space-between;
@@ -128,6 +124,9 @@ export default {
 p {
   margin: 0;
   font-size: 12px;
+}
+body {
+  text-transform: capitalize;
 }
 
 ul {
@@ -147,7 +146,7 @@ ul {
 }
 .v-card {
   margin: 20px;
-  max-width: 200px;
+  max-width: 180px;
   background-color: white;
   transition: all 0.8s;
 }
@@ -156,12 +155,25 @@ ul {
 }
 
 .v-icon {
-  padding-right: 5px;
+  font-size: 20px;
 }
 
-.v-btn--icon {
-  right: 10px;
-  transition: all 0.3s;
+h4{
+  max-width: 160px;
+  overflow: hidden;
+}
+
+// .v-btn--icon {
+//   right: 10px;
+//   transition: all 0.3s;
+// }
+
+.v-card__actions {
+  padding: 10px 0px;
+}
+
+.v-icon.v-icon.v-icon--link {
+  width: max-content;
 }
 
 a {
@@ -180,6 +192,19 @@ a {
 .v-card__title {
   color: black;
   text-align: left;
+  width: 180px;
+  height: 53px;
   padding: 10px 10px 0 10px;
+}
+
+h4 {
+  min-width: 103px;
+}
+
+@media (min-width: 440px) {
+  .v-card{
+    width: 100%;
+  }
+  
 }
 </style>

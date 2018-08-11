@@ -148,7 +148,7 @@ ul {
 }
 .v-card {
   margin: auto;
-  // width: 180px;
+  width: 180px;
   background-color: white;
   transition: all 0.8s;
 }
@@ -162,10 +162,18 @@ ul {
 }
 
 h4 {
-  max-width: 160px;
+  max-width: 140px;
+  margin: 0;
   overflow: hidden;
+  height: 16px;
 }
 
+p.overflow {
+  margin: 0;
+  font-size: 12px;
+  overflow: hidden;
+  height: 16px;
+}
 // .v-btn--icon {
 //   right: 10px;
 //   transition: all 0.3s;

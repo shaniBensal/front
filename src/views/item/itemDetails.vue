@@ -2,11 +2,7 @@
     <section v-if="itemForDisplay">
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container flex space-between">
-
-
                   <chat-socket v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
-
-
             <div class="item-details">
                 <div class="header">
                     <div>
@@ -71,7 +67,7 @@
             </div>
         </div>
         <!-- reviews -->
-        <div class="reviews-container">
+        <div class="reviews-container" v-if="!isBooked">
             <h2>Customer reviews</h2>
             <ul class="reviews">
                 <li v-for="review in itemForDisplay.reviews" :key="review.id" v-if="review">

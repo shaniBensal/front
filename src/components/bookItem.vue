@@ -281,7 +281,7 @@ export default {
 }
 
 h2 {
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .container {
@@ -294,18 +294,17 @@ h3 {
 }
 
 ul {
-  width: 100%;
   list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  //  grid-gap: 20px; 
-  //  grid-template-columns: repeat(auto-fill, 1fr); 
+  padding: 20px;
+  display: grid;
+  justify-content: space-evenly;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 200px);
 }
 
 li {
-  margin: 20px 20px;
-  width: 20%;
+  // margin: 20px 20px;
+  // width: 20%;
 }
 
 a {

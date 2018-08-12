@@ -30,7 +30,7 @@
 export default {
   name: 'chatSocket',
 
-  props: ["owner"],
+  props: ["owner","user"],
 
   data() {
     return {
@@ -41,7 +41,7 @@ export default {
   },
 
   mounted() {
-    this.myNickname = prompt('Your name?');
+    this.myNickname = user; // prompt('Your name?');
     // var str = "Hey all, I'm " + nickname + ', nice to meet you';
     this.$socket.emit('chat join', {name: this.myNickname, content: ''});
     console.log('ownerName',this.owner);
@@ -112,6 +112,8 @@ body {
 }
 
 .chat-container {
+  /* position: fixed; */
+  /* bottom: 0px; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -122,9 +124,8 @@ body {
   font-size: 1.16rem;
   color: #222;
   border-radius: 8px;
-  border: 1px #888 solid;
+  border: 2px #9dc solid;
   padding-top: 8px;
-
 }
 
 ul {

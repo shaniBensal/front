@@ -4,8 +4,6 @@
         <div v-else class="main-container flex space-between">
 
 
-                  <chat-socket v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
-
 
             <div class="item-details">
                 <div class="header">
@@ -47,6 +45,13 @@
                     </div>
                 </div>
             </div>
+
+
+
+                  <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
+
+
+
             <div class="more-details">
                 <div class="show-map">
                     <div class="location" v-if="distance">
@@ -111,6 +116,7 @@ export default {
       // rating: 4,
       dialog: false,
       owner: {},
+      user: {},
       selectedDate: "",
       showDates: false,
       // selectedEndDate:"",
@@ -410,6 +416,13 @@ i {
 
 .chat-opener label {
   cursor: unset;
+}
+
+.chat-box {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 10;
 }
 
 @media (max-width: 940px) {

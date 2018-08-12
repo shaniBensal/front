@@ -401,8 +401,10 @@ ul.items-list {
 @media (max-width: 440px) {
   ul {
     grid-template-columns: 80vw;
-    max-width: 98vw;
-    grid-template-rows: repeat(auto-fill, 250px);;
+    max-width: 100vw;
+    padding: 10px;
+    // grid-template-rows: repeat(auto-fill, 250px);
+    // grid-gap: 70px;
   }
 
   .toolbar.item-list {

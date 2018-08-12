@@ -36,7 +36,7 @@
                         <v-icon small light>fas fa-map-marker-alt</v-icon>
                         <p >No location found</p>
                     </div>
-                    <br>
+                 
             
                     <div class="flex card-bottom">
                         <p class="price bold-font">{{item.price}}$ per day</p>
@@ -202,7 +202,7 @@ p {
 }
 .v-card {
   // margin: 20px 10px 10px 10px;
-  max-height: 294px;
+  // max-height: 294px;
   transition: all 0.8s;
 }
 .v-card:hover {

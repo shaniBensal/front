@@ -115,6 +115,7 @@ export default {
 
     clear() {
       this.$refs.form.reset();
+      this.imgUrl = "";
     },
 
     getEmptyItem() {
@@ -150,8 +151,8 @@ export default {
       this.itemToUpdate.images = newArr;
       console.log(this.itemToUpdate.images);
     },
-    setCategory(category){
-      console.log(category)
+    setCategory(category) {
+      console.log(category);
       // let newArr = JSON.parse(JSON.stringify(this.itemToUpdate.category));
       // console.log('new is:' , newArr)
       // newArr.push(category);

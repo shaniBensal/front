@@ -409,11 +409,11 @@ i {
     color: #0fa086;
   }
   .date-book {
-    width: 95%;
+    width: 60%;
     position: absolute;
-    top: 256px;
+    top: 295px;
     display: none;
-    background: lightgray;
+    background: #FAF6F6;
   }
 
   .show-map {
@@ -426,7 +426,9 @@ i {
   }
 
   .show {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .more-details {
@@ -457,8 +459,8 @@ i {
   //   display: block;
   // }
   .date-book {
-    width: 100%;
-    top: 280px;
+    width: 90%;
+    top: 250px;
   }
 
   // .item-details {

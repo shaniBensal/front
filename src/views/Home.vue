@@ -36,7 +36,7 @@
       dense
       floating
     >
-      <v-text-field  
+      <v-text-field class="search-input-text" 
         v-model="searchStr"
         autofocus
         hide-details
@@ -44,7 +44,7 @@
         placeholder="I'm looking for"
       ></v-text-field>
 
-      <v-btn icon @click="onSearch">
+      <v-btn class="search-input-icon" icon @click="onSearch">
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
@@ -515,7 +515,11 @@ div .fill-height {
     width: 85vw;
   }
 
-  .v-carousel {
+  .v-card__media {
+    width: 85vw;
+  }
+
+  .v-carousel{
     display: none;
   }
 
@@ -523,7 +527,15 @@ div .fill-height {
     font-size: 1.25rem;
     margin: 0px 0 10px 0 !important;
     padding-left: 16px;
-    background-color: #eeeeee;
+    background-color: #EEEEEE;
+  }
+
+    /* margin-top: 350px; */
+  div.flex {
+      justify-content:  center;
+      align-items:  flex-end;
+      align-content:  flex-end;
+      display:  flex;
   }
 
   /* margin-top: 350px; */
@@ -568,12 +580,15 @@ div .fill-height {
 
   #header-carousel .subheading {
     color: black;
-    font-size: 0.8rem !important;
+    font-size: .8rem !important;
 
     width: 280px;
     display: inline-block;
   }
+
+
 }
+
 </style>
 
 <!-- not SCOPED -->
@@ -591,6 +606,18 @@ div.see-all-container {
 button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
   background-color: rgb(27, 131, 117) !important;
 }
+
+  .search-input-icon {
+    justify-content: flex-end !important;
+  }
+
+  .search-input-text {
+  width: auto !important;
+}
+
+
+
+
 </style>
 
 

@@ -76,7 +76,7 @@
             </div>
         </div>
         <!-- reviews -->
-        <div class="reviews-container">
+        <div class="reviews-container" v-if="!isBooked">
             <h2>Customer reviews</h2>
             <ul class="reviews">
                 <li v-for="review in itemForDisplay.reviews" :key="review.id" v-if="review">

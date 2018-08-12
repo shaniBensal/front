@@ -2,6 +2,11 @@
     <section v-if="itemForDisplay">
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container flex space-between">
+
+
+                  <chat-socket v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
+
+
             <div class="item-details">
                 <div class="header">
                     <div>
@@ -12,10 +17,12 @@
                     </div>
                     <div class="seller-details">
                         <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
-                        <label v-if="owner">{{owner.name}} </label>
-                        <a class="bold-font">
-                            <i class="far fa-comments"></i>
-                        </a>
+                        <div class="chat-opener" @click="chatOpener">
+                          <label v-if="owner">{{owner.name}} </label>
+                          <a class="bold-font">
+                              <i class="far fa-comments"></i>
+                          </a>
+                        </div>
                     </div>
 
 
@@ -104,12 +111,14 @@ import StarRating from "vue-star-rating";
 import signUpModal from "../../components/signUpModal.vue";
 import { gmapApi } from "vue2-google-maps";
 import mapService from "../../services/mapService.js";
+import chatSocket from "../chatSocket.vue";
 
 export default {
   name: "itemDetails",
   data() {
     return {
       isBooked: false,
+      isChat : false,
       // rating: 4,
       dialog: false,
       owner: {},
@@ -146,6 +155,9 @@ export default {
   mounted() {},
 
   methods: {
+    chatOpener(){
+      this.isChat = !this.isChat;
+    },
     loadItem(itemId) {
       return this.$store
         .dispatch({ type: "loadItemById", itemId })
@@ -227,7 +239,8 @@ export default {
   components: {
     datePicker,
     signUpModal,
-    bookItem
+    bookItem,
+    chatSocket
   }
 };
 </script>
@@ -391,6 +404,23 @@ h1 {
 i {
   padding-right: 10px;
   cursor: pointer;
+}
+
+.chat-opener {
+  cursor: pointer !important;
+}
+
+.chat-opener:hover {
+  cursor: pointer !important;
+  font-weight: bold;
+}
+
+.chat-opener .far:hover {
+  font-weight: bold;
+}
+
+.chat-opener label {
+  cursor: unset;
 }
 
 @media (max-width: 940px) {

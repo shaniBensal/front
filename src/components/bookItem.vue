@@ -33,7 +33,7 @@
                     <button class="btn bold-font" @click.prevent="cancel">Back</button>
                     <br />
                 </div>
-            <chat-socket v-bind:owner="owner"></chat-socket>
+            <!-- <chat-socket v-bind:owner="owner"></chat-socket> -->
             </div>
 
             <br>
@@ -59,7 +59,7 @@ import datePicker from "./datePicker.vue";
 import confirmModal from "./confirmModal.vue";
 // import itemListCategory from "../views/item/itemListCategory.vue";
 import itemPreview from "../components/item/itemPreview.vue";
-import chatSocket from "../views/chatSocket.vue";
+// import chatSocket from "../views/chatSocket.vue";
 
 export default {
   name: "BookItem",
@@ -207,7 +207,7 @@ export default {
     // datePicker,
     itemPreview,
     confirmModal,
-    chatSocket
+    // chatSocket
     // itemListCategory
   }
 };

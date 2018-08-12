@@ -292,12 +292,13 @@ ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  /* grid-gap: 20px; */
+  //  grid-gap: 20px; 
   //  grid-template-columns: repeat(auto-fill, 1fr); 
 }
 
 li {
   margin: 20px 20px;
+  width: 20%;
 }
 
 a {

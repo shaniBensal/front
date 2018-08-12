@@ -1,5 +1,4 @@
 <template>
-
     <div class="user-profile container" v-if="user">
         <div class="user-contact-profile">
             <v-avatar size="120px" color="grey lighten-4">
@@ -23,10 +22,9 @@
                     </v-badge>
                 </button>
             </ul>
-            <v-select class="tabs-switch" @change="switchDisplay" :items="itemsForDisplay" outline></v-select>
+            <v-select class="tabs-switch" :items="itemsForDisplay" label="Choose category" @change="switchDisplay"></v-select>
         </div>
-
-        <div class="user-profile-items">
+        <div class="user-profile-items" v-if="!transactionsState">
             <ul class="items-list" v-if="itemsToShow && !transactionsState">
                 <li v-for="item in itemsToShow" :key="item._id">
                     <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
@@ -34,9 +32,9 @@
             </ul>
         </div>
 
-        <div class="user-profile-transactions" v-if="transactionsState">
-            <transactions :transactions="transactions" @orders-checked="ordersChecked"></transactions>
-        </div>
+        <!-- <div v-if="transactionsState"> -->
+            <transactions v-if="transactionsState" :transactions="transactions" @orders-checked="ordersChecked"></transactions>
+        <!-- </div> -->
     </div>
 
 </template>
@@ -138,7 +136,7 @@ export default {
           }
         });
         this.isNewNote = false;
-        this.loadUser(this.$route.params.id);
+        // this.loadUser(this.$route.params.id);
         this.$store.commit({
           type: "setNewNotification",
           status: false
@@ -205,7 +203,6 @@ a:active {
 
 .tabs-switch {
   display: none;
-  border: 1px black solid;
 }
 .user-profile-items {
   background-color: rgba(211, 211, 211, 0.692);
@@ -288,14 +285,19 @@ button a {
 }
 input,
 select {
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
   width: 50%;
+  color: #162044;
   padding: 5px;
 }
+
 @media (max-width: 440px) {
   .user-profile-items {
-  grid-template-columns: repeat(auto-fill, 80%);
-  padding: 20px 0px;
+    grid-template-columns: repeat(auto-fill, 80%);
+    padding: 20px 0px;
+  }
+  .tabs{
+    margin: 0px;
   }
   .tabs-buttons {
     display: none;
@@ -306,6 +308,12 @@ select {
 }
 </style>
 
+<style>
+.v-list__tile,
+.v-select__selection--comma {
+  color: black;
+}
+</style>
 
 
 

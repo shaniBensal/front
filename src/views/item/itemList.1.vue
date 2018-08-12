@@ -170,19 +170,15 @@ export default {
     if (categoryParam) this.setFiltersByCategory(categoryParam);
     this.loadCategories();
     this.loadItems();
-    console.log("** item list created **");
   },
 
   mounted() {
-    console.log("mounted");
-
-    this.searchStr = "";
+   this.searchStr = "";
     this.onSearch();
   },
 
   methods: {
     onSearch() {
-      console.log(" ON SEARCH");
       var query = "search=" + this.searchStr;
       var category = this.$route.query.category;
       if (category) {

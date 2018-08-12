@@ -48,9 +48,9 @@
       cursor: pointer;
     }
 
-    .v-btn{
+    /* .v-btn{
       min-width: 200px;
-    }
+    } */
 
     .flex-column{
       flex-direction: column;

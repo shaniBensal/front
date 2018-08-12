@@ -137,8 +137,8 @@
         </v-layout>
       </section>
 
-      <div class="see-all-container">
-         <v-btn
+      <div class="see-all-container" @click="showLoading">
+         <v-btn 
               class="see-all teal mt-5"
               light
               large
@@ -148,6 +148,8 @@
               </router-link>
             </v-btn>
             </div>
+
+            <!-- <div class="loader" v-if="showLoader"></div> -->
   
 
     <div class="opinions-container">
@@ -221,12 +223,17 @@ export default {
         text:
           "BEST SERVICE EVER. period. I like about WeRent, is the ease of use they offer. The whole process starting with choosing the right product and the right owner, picking up the stuff and all the way to returning it and paying- was silky smooth and super easy."
       }
-    ]
+    ],
+    showLoader: false
   }),
 
   name: "home",
   components: {
     HelloWorld
+  },
+
+  created(){
+    this.showLoader = false
   },
 
   methods: {
@@ -237,37 +244,56 @@ export default {
 
     onCategory(category) {
       this.$router.push(`/item/?category=${category}`);
+    },
+    showLoading() {
+      console.log(this.showLoader)
+      this.showLoader = true;
+      console.log(this.showLoader)
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-
 * {
   box-sizing: border-box;
 }
 
-.display-1, .display-2, .display-3 , .headline{
-  font-family: 'varela_Round' !important;
+.display-1,
+.display-2,
+.display-3,
+.headline {
+  font-family: "varela_Round" !important;
 }
 
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
 
-.first-section{
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.first-section {
   // background-color: #EEEEEE;
 }
 
-.v-carousel{
+.v-carousel {
   height: 330px;
 }
 
-
 .top-pic {
   height: 530px;
-  opacity: 0.8
+  opacity: 0.8;
 }
 
-.categories{
+.categories {
   cursor: pointer;
 }
 
@@ -412,10 +438,10 @@ h1 {
 }
 
 .opinions-container {
-    padding-left: 16px;
+  padding-left: 16px;
   font-size: 2rem;
   margin: 80px 0 10px 0 !important;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 #header-carousel {
@@ -454,12 +480,12 @@ h1 {
   text-shadow: 0 0 4px black;
 }
 
-.v-card__media{
+.v-card__media {
   border-radius: 3px;
-  transition: all 0.3s
+  transition: all 0.3s;
 }
 
-.v-card__media:hover{
+.v-card__media:hover {
   opacity: 0.8;
 }
 
@@ -484,8 +510,10 @@ div .fill-height {
   color: black !important;
 }
 
-
 @media (max-width: 440px) {
+  .v-card__media {
+    width: 85vw;
+  }
 
   .v-card__media {
     width: 85vw;
@@ -510,38 +538,45 @@ div .fill-height {
       display:  flex;
   }
 
+  /* margin-top: 350px; */
+  div.flex {
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    display: flex;
+  }
 
-.top-left {
-  left: 12px;
-  top: 300px;
-  /* font-size: 1.1rem; */
-  line-height: 1.6em;
-  text-align: left;
-  width: 250px;
-  height: 0px;
-  position: relative;
-  z-index: 10;
-  /* background-color: rgba(190, 240, 0, 0.6); */
-}
+  .top-left {
+    left: 12px;
+    top: 300px;
+    /* font-size: 1.1rem; */
+    line-height: 1.6em;
+    text-align: left;
+    width: 250px;
+    height: 0px;
+    position: relative;
+    z-index: 10;
+    /* background-color: rgba(190, 240, 0, 0.6); */
+  }
 
-.v-jumbotron {
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, .9),
-    rgba(255, 255, 255, .9),
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0)
-  );
-}
+  .v-jumbotron {
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0)
+    );
+  }
 
   #header-carousel h3 {
-  align-self: bottom;
-  font-size: 1.5rem !important;
-  color: black;
-  width: 240px;
-}
+    align-self: bottom;
+    font-size: 1.5rem !important;
+    color: black;
+    width: 240px;
+  }
 
   #header-carousel .subheading {
     color: black;
@@ -557,18 +592,16 @@ div .fill-height {
 </style>
 
 <!-- not SCOPED -->
-<style>   
+<style>
 a.see-all {
-  
   color: white !important;
   text-decoration: none;
 }
 
 div.see-all-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 
 button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
   background-color: rgb(27, 131, 117) !important;

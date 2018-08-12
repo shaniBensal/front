@@ -48,9 +48,9 @@
       cursor: pointer;
     }
 
-    .v-btn{
+    /* .v-btn{
       min-width: 200px;
-    }
+    } */
 
     .flex-column{
       flex-direction: column;
@@ -69,6 +69,10 @@
 
     .align-flex-start {
       align-items: flex-start;
+  }
+
+  .v-menu__activator *{
+    color: black;
   }
     
 

@@ -1,5 +1,4 @@
 <template>
-
     <div class="user-profile container" v-if="user">
         <div class="user-contact-profile">
             <v-avatar size="120px" color="grey lighten-4">
@@ -23,10 +22,9 @@
                     </v-badge>
                 </button>
             </ul>
-            <v-select class="tabs-switch" @change="switchDisplay" :items="itemsForDisplay" outline></v-select>
+            <v-select class="tabs-switch" :items="itemsForDisplay" label="Choose category" @change="switchDisplay"></v-select>
         </div>
-
-        <div class="user-profile-items">
+        <div class="user-profile-items" v-if="!transactionsState">
             <ul class="items-list" v-if="itemsToShow && !transactionsState">
                 <li v-for="item in itemsToShow" :key="item._id">
                     <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
@@ -34,9 +32,9 @@
             </ul>
         </div>
 
-        <div class="user-profile-transactions" v-if="transactionsState">
-            <transactions :transactions="transactions" @orders-checked="ordersChecked"></transactions>
-        </div>
+        <!-- <div v-if="transactionsState"> -->
+            <transactions v-if="transactionsState" :transactions="transactions" @orders-checked="ordersChecked"></transactions>
+        <!-- </div> -->
     </div>
 
 </template>
@@ -138,7 +136,7 @@ export default {
           }
         });
         this.isNewNote = false;
-        this.loadUser(this.$route.params.id);
+        // this.loadUser(this.$route.params.id);
         this.$store.commit({
           type: "setNewNotification",
           status: false
@@ -148,13 +146,13 @@ export default {
     },
     switchDisplay(value) {
       switch (value) {
-        case 'All':
+        case "All":
           this.showItemsForRent();
           break;
-        case 'Favorites':
+        case "Favorites":
           this.showFavorites();
           break;
-        case 'Orders':
+        case "Orders":
           this.showUserTrnsactions();
           break;
       }
@@ -174,7 +172,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .container {
   max-width: 980px;
 }
@@ -192,7 +190,7 @@ a:active {
 }
 
 .tabs {
-  width: 60%;
+  width: 100%;
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
@@ -203,9 +201,8 @@ a:active {
   list-style: none;
 }
 
-.tabs-switch{
+.tabs-switch {
   display: none;
-  border: 1px black solid;
 }
 .user-profile-items {
   background-color: rgba(211, 211, 211, 0.692);
@@ -213,13 +210,17 @@ a:active {
 
 .user-profile-items ul {
   list-style-type: none;
-  padding: 0;
+  padding: 20px;
   display: grid;
   justify-content: space-evenly;
-  /* grid-gap: 20px; */
-  justify-items: center;
+  grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, 200px);
 }
+
+/* .user-profile-items li{
+  justify-items: center;
+
+} */
 
 .tabs button {
   margin: 0 10px;
@@ -284,20 +285,35 @@ button a {
 }
 input,
 select {
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
   width: 50%;
+  color: #162044;
   padding: 5px;
 }
+
 @media (max-width: 440px) {
+  .user-profile-items {
+    grid-template-columns: repeat(auto-fill, 80%);
+    padding: 20px 0px;
+  }
+  .tabs{
+    margin: 0px;
+  }
   .tabs-buttons {
     display: none;
   }
-  .tabs-switch{
+  .tabs-switch {
     display: inline;
   }
 }
 </style>
 
+<style>
+.v-list__tile,
+.v-select__selection--comma {
+  color: black;
+}
+</style>
 
 
 

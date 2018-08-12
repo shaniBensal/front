@@ -18,9 +18,9 @@
                         <p>email: {{transaction.rentedTo.email}}</p>
                         <p>Day of picking-up: {{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})</p>
                     </div>
-                    <div class= "img-new" v-if="transaction.isNew && newNotification">
+                    <!-- <div class= "img-new" v-if="transaction.isNew && newNotification">
                       <img src="https://www.getgeared.co.uk/shopflow/img/badges/newItemBadge.png">
-                        </div>
+                        </div> -->
                 </li>
             </ul>
         </div>
@@ -123,12 +123,30 @@ li:nth-child(odd) {
 .img-new {
   position: relative;
   bottom: 21px;
-  left: 22px;
-  height: max-content;
+  height: 10%;
+  left: 3.8em;
+  /* height: max-content; */
 }
 
-.img-item{
+.img-item {
   padding-right: 20px;
 }
 
+.newTrans{
+  border: 2px solid black;
+}
+
+@media (max-width: 700px) {
+  li {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 448px){
+  h1{
+    padding:10px 15px;
+    font-size: x-large;
+  }
+}
 </style>

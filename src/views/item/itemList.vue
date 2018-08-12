@@ -264,7 +264,8 @@ export default {
 
 
 
-<style scoped>
+<style scoped lang="scss">
+
 .container {
   padding: 0 20px;
   max-width: 980px;
@@ -277,17 +278,11 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
-
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, 180px);
 }
-
-/* .items{
-  width: 180px;
-} */
-
-.show-sort{
+.show-sort {
   display: flex;
 }
 
@@ -334,11 +329,9 @@ input {
   border: none;
 }
 
-.show-sort .v-btn{
- 
- min-width: 60px;
- height: 30px;
-
+.show-sort .v-btn {
+  min-width: 60px;
+  height: 30px;
 }
 
 .v-btn.v-btn--active {
@@ -366,7 +359,7 @@ input {
   background-color: white;
   opacity: 1;
 }
-*/ .toolbar {
+ .toolbar {
   margin-bottom: 50px;
 }
 
@@ -387,7 +380,7 @@ ul.items-list {
   width: 220px;
 }
 
-.v-btn__content{
+.v-btn__content {
   height: 0;
 }
 
@@ -400,10 +393,33 @@ ul.items-list {
   align-items: center;
 }
 
- div.v-menu {
-  display: none;
-} 
+// div.v-menu {
+//   display: none;
+// }
 
+
+@media (max-width: 440px) {
+  ul {
+    grid-template-columns: 80vw;
+    max-width: 100vw;
+    padding: 10px;
+    // grid-template-rows: repeat(auto-fill, 250px);
+    // grid-gap: 70px;
+  }
+
+  .toolbar.item-list {
+    display: none;
+    font-size: 0.5rem;
+  }
+
+  .v-list-tile {
+    /* background-color : rgba(222,177,0,1) !important; */
+  }
+
+  .v-list-tile-title {
+    /* background-color : rgba(222,177,0,1) !important; */
+  }
+}
 </style>
 
 
@@ -426,9 +442,6 @@ ul.items-list {
 button.toolbar-buttons:hover {
   /* color: green !important; */
   border-bottom: 1px solid green;
-  
-  
-  
 }
 
 .item-list .v-toolbar__content {
@@ -445,7 +458,6 @@ button.toolbar-buttons:hover {
 
 
 } */
-
 
 @media (max-width: 640px) {
   div.v-menu {
@@ -491,26 +503,4 @@ button.toolbar-buttons:hover {
   }
 }
 
-@media (max-width: 440px) {
-
-  .container{
-    max-width: 90vw;
-  }
-  ul {
-    grid-template-columns: 88vw !important;
-  }
-
-  .toolbar.item-list {
-    display: none;
-    font-size: 0.5rem;
-  }
-
-  .v-list-tile {
-    /* background-color : rgba(222,177,0,1) !important; */
-  }
-
-  .v-list-tile-title {
-    /* background-color : rgba(222,177,0,1) !important; */
-  }
-}
 </style>

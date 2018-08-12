@@ -23,7 +23,7 @@
                     <router-link :to="'/user/'+user._id" v-if="user">
                         <v-badge overlap color="red" v-if="user" v-model="newNote">
                             <v-icon slot="badge" dark small>notifications</v-icon>
-                            <v-icon medium color="grey">mail</v-icon>
+                            <v-icon class="envlope" color="grey">mail</v-icon>
                         </v-badge>
                     </router-link>
                 </li>
@@ -241,6 +241,10 @@ nav {
   right: -10px;
   height: 18px;
   width: 18px;
+}
+
+.envlope{
+  font-size: 24px;
 }
 
 </style>

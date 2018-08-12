@@ -24,19 +24,14 @@
                           </a>
                         </div>
                     </div>
-
-
                 </div>
-
                 <p class="bold-font">
                     <i class="fas fa-dollar-sign"></i>
                     {{itemForDisplay.price}}$ per day </p>
                 <p class="show-calender" @click="showCalender">
                     <i class="fas fa-calendar-alt"></i>Check Availability</p>
-         
                 <p>
                     <i class="fas fa-info"></i>{{itemForDisplay.description}}</p>
-
                 <div class="d-flex flex-column" v-if="itemForDisplay.images">
                     <img class="main-image" :src="mainImage">
                     <div class="spacer-paragrph"></div>
@@ -51,11 +46,10 @@
                         <!-- <v-btn class="btn-chat">Start Chat</v-btn> -->
                     </div>
                 </div>
-
             </div>
-           <div class="more-details">
+            <div class="more-details">
                 <div class="show-map">
-                    <div class="location"  v-if="distance">
+                    <div class="location" v-if="distance">
                         <i class="fas fa-map-marker-alt"></i> Pick up from:
                         <br> {{owner.address}} ( {{distance}} Km from you)
                     </div>
@@ -63,24 +57,22 @@
                         <GmapMarker v-for="(marker, index) in markers" :key="index" :position="marker.position" :clickable="true" :draggable="true"
                             :icon="marker.icon" />
                     </GmapMap>
-            </div>
-            <div class="date-book" :class="{show: showDates}">
-                <i class="far fa-calendar-alt"></i> Availability:
-                <div class="calender">
-                    <date-picker @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
                 </div>
-                <sign-up-modal v-if="!user" @signedUp="bookNow"></sign-up-modal>
-                <div v-else>
-                    <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
+                <div class="date-book" :class="{show: showDates}">
+                    <i class="far fa-calendar-alt"></i> Availability:
+                    <div class="calender">
+                        <date-picker @selected-date="selectDate" v-if="itemForDisplay" :unAvailableDates="itemForDisplay.occupiedDates"></date-picker>
+                    </div>
+                    <sign-up-modal v-if="!user" @signedUp="bookNow"></sign-up-modal>
+                    <div v-if="user && (owner.name !==user.name)">
+                        <v-btn class="btn-book bold-font" @click="bookNow">Book Now</v-btn>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-
         <!-- reviews -->
         <div class="reviews-container">
             <h2>Customer reviews</h2>
-
             <ul class="reviews">
                 <li v-for="review in itemForDisplay.reviews" :key="review.id" v-if="review">
                     <div class="review-user-details">
@@ -97,11 +89,8 @@
                         <p>{{review.content}}</p>
                     </div>
                 </li>
-
             </ul>
         </div>
-
-
     </section>
 </template>
 <script>
@@ -439,11 +428,11 @@ i {
     color: #0fa086;
   }
   .date-book {
-    width: 95%;
+    width: 60%;
     position: absolute;
-    top: 256px;
+    top: 295px;
     display: none;
-    background: lightgray;
+    background: #FAF6F6;
   }
 
   .show-map {
@@ -456,7 +445,9 @@ i {
   }
 
   .show {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .more-details {
@@ -487,8 +478,8 @@ i {
   //   display: block;
   // }
   .date-book {
-    width: 100%;
-    top: 280px;
+    width: 90%;
+    top: 250px;
   }
 
   // .item-details {

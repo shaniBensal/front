@@ -44,7 +44,7 @@ export default {
     this.myNickname = user; // prompt('Your name?');
     // var str = "Hey all, I'm " + nickname + ', nice to meet you';
     this.$socket.emit('chat join', {name: this.myNickname, content: ''});
-    console.log('ownerName',this.owner);
+    // console.log('ownerName',this.owner);
     
   },
 
@@ -54,14 +54,14 @@ export default {
     // },
 
     ['chat message'](msg) {
-      console.log('sockets, chat message, got msg:', msg);
+      // console.log('sockets, chat message, got msg:', msg);
       this.msgs.unshift(msg);
     }
   },
 
   methods: {
     sendMsg(ev) {
-      console.log(ev.target.chatInput.value);
+      // console.log(ev.target.chatInput.value);
       this.$socket.emit('chat send-message', {name: this.myNickname , content: ev.target.chatInput.value});
       ev.target.chatInput.value = '';
       // this.$socket.emit('chat send-message', this.currMsg);

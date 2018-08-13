@@ -21,7 +21,7 @@
                 </li>
                 <li class="envelope" @click="display = !display">
                     <router-link :to="'/user/'+user._id" v-if="user">
-                        <v-badge overlap color="red" v-if="user" v-model="newNote">
+                        <v-badge overlap color="red" v-if="user && newNote">
                             <v-icon slot="badge" dark small>notifications</v-icon>
                             <v-icon class="envlope" color="grey">mail</v-icon>
                         </v-badge>
@@ -54,6 +54,13 @@ export default {
   },
   created() {
     eventBus.$on(MESSAGES_READ, _ => (this.newNote = false));
+  },
+  sockets: {
+    renderTransactions(ownerId) {
+      console.log("OwnerId in NavBar", ownerId);
+      if (ownerId === this.$store.getters.loggedinUser._id)
+        this.checkNewTransaction();
+    }
   },
   computed: {
     user() {
@@ -170,7 +177,6 @@ nav {
   color: #1da088;
 }
 
-
 @media (max-width: 540px) {
   // .clean-list li:first-child {
   //   margin: 80px 20px 20px 20px;
@@ -243,9 +249,8 @@ nav {
   width: 18px;
 }
 
-.envlope{
+.envlope {
   font-size: 24px;
 }
-
 </style>
 

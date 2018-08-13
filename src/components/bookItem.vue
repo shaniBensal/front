@@ -126,8 +126,11 @@ export default {
     approveDeal() {
       var item = { ...this.$store.getters.selectedItem };
       let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
+      console.log(datesArray);
       datesArray.push(this.dealDetails.dates);
       item.occupiedDates = datesArray;
+      console.log(datesArray);
+
       this.$store
         .dispatch({
           type: "updateItem",

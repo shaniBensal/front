@@ -57,7 +57,6 @@ export default {
   },
   sockets: {
     renderTransactions(ownerId) {
-      console.log("OwnerId in NavBar", ownerId);
       if (ownerId === this.$store.getters.loggedinUser._id)
         this.checkNewTransaction();
     }

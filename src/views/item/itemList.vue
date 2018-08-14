@@ -322,7 +322,7 @@ input {
 .v-btn {
   font-size: 0.77rem;
   background-color: white;
-  min-width: 80px;
+  // min-width: 80px;
   height: 28px;
   color: black;
   opacity: 1;

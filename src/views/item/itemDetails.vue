@@ -289,7 +289,7 @@ export default {
 .reviews-container {
   max-width: 980px;
   margin: 20px;
-  padding: 10px;
+  padding: 20px;
 }
 
 .main-image {

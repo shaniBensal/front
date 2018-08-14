@@ -2,9 +2,6 @@
     <section v-if="itemForDisplay">
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container flex space-between">
-
-
-
             <div class="item-details">
                 <div class="header">
                     <div>
@@ -45,13 +42,7 @@
                     </div>
                 </div>
             </div>
-
-
-
                   <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
-
-
-
             <div class="more-details">
                 <div class="show-map">
                     <div class="location" v-if="distance">
@@ -116,7 +107,7 @@ export default {
       // rating: 4,
       dialog: false,
       owner: {},
-      user: {},
+      // user: {},
       selectedDate: "",
       showDates: false,
       // selectedEndDate:"",

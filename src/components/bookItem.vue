@@ -12,7 +12,7 @@
                     <p>From {{owner.name}} </p>
                     <p> Pickup address is: {{owner.address}}</p>
                     <p>
-                        <!-- Start Date: {{dealDetails.firstDay}} <br />
+                      <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
                         <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
                         In date: {{selectedDateRent | moment('DD-MM-2018')}}
@@ -128,6 +128,8 @@ export default {
       let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
       datesArray.push(this.dealDetails.dates);
       item.occupiedDates = datesArray;
+      console.log(datesArray);
+
       this.$store
         .dispatch({
           type: "updateItem",
@@ -141,6 +143,7 @@ export default {
             })
             .then(() => {
               this.open = true;
+              this.$socket.emit("new-order", this.dealDetails.ownerId);
             });
         });
     },
@@ -310,10 +313,10 @@ ul {
   grid-template-columns: repeat(auto-fill, 200px);
 }
 
-li {
-  // margin: 20px 20px;
-  // width: 20%;
-}
+// li {
+// margin: 20px 20px;
+// width: 20%;
+// }
 
 a {
   text-decoration: none;

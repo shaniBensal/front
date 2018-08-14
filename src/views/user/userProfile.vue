@@ -7,11 +7,11 @@
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
         </div>
-        <button class="add-item">
+        <!-- <button class="add-item">
             <router-link to="/item/edit" title="Add">
                 <v-icon dark>add</v-icon>
             </router-link>
-        </button>
+        </button> -->
         <div class="tabs bold-font">
             <ul class="tabs-buttons">
                 <button class="tab1" @click="showItemsForRent">My items</button> |
@@ -25,6 +25,11 @@
             <v-select class="tabs-switch" :items="itemsForDisplay" label="Choose category" @change="switchDisplay"></v-select>
         </div>
         <div class="user-profile-items" v-if="!transactionsState">
+          <button class="add-item" v-if="isEditable">
+            <router-link to="/item/edit" title="Add">
+                <v-icon dark>add</v-icon>
+            </router-link>
+        </button>
             <ul class="items-list" v-if="itemsToShow && !transactionsState">
                 <li v-for="item in itemsToShow" :key="item._id">
                     <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
@@ -191,7 +196,7 @@ a:active {
 
 .tabs {
   width: 100%;
-  margin-bottom: 30px;
+  margin: 30px 0;
   display: flex;
   justify-content: center;
 }

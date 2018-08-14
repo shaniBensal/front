@@ -10,7 +10,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import socketio from 'socket.io-client';
 import VueSocketio from 'vue-socket.io';
 // Vue.use(VueSocketio, 'http://socketserver.com:1923');
-Vue.use(VueSocketio, socketio('http://localhost:3000'));  
+Vue.use(VueSocketio, socketio('https://rentapp-sts.herokuapp.com'));  
 
 import './registerServiceWorker';
 import '../public/scss/main.css'

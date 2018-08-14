@@ -25,7 +25,7 @@
 
               <div>
                    <div> <h5 class="overflow">{{item.title}}</h5></div>
-                    <p class="overflow">{{item.description}}</p>
+                    <p class="overflow description">{{item.description}}</p>
                     </div>
                     <div class="bottom-card d-flex flex-column">
                     <div class="flex location" v-if="owner.address">
@@ -39,7 +39,7 @@
                  
             
                     <div class="flex card-bottom">
-                        <p class="price bold-font">{{item.price}}$ per day</p>
+                        <p class="price">{{item.price}}$ per day</p>
                         <div v-if="item">
 
                              <v-icon small light color="yellow">fas fa-star</v-icon>
@@ -178,6 +178,10 @@ export default {
 
 .location {
   padding: 10px 0;
+  color: #616161;
+}
+.description{
+ color: #616161;
 }
 
 .rank {
@@ -197,16 +201,18 @@ p {
 
 .price {
   color: #42b983;
-  font-weight: bold;
-  font-size: 14px;
+  // font-weight: bold;
+  font-size: 13px;
 }
 .v-card {
-  // margin: 20px 10px 10px 10px;
-  // max-height: 294px;
   transition: all 0.8s;
 }
 .v-card:hover {
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.v-card__media__background{
+  top: 3px;
 }
 
 .v-icon {
@@ -253,9 +259,6 @@ a {
   color: #42b983;
 }
 
-// div.v-card__title {
-//   min-height: 126px !important;
-// }
 
 .item-preview {
   text-transform: capitalize;
@@ -264,10 +267,6 @@ a {
 .location span {
   font-weight: bold;
 }
-
-// .v-card-media {
-//   height : 8em !important;
-// }
 
 div .v-card__media {
   height: 10em !important;

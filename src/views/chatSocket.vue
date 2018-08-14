@@ -54,14 +54,14 @@ export default {
     // },
 
     ['chat message'](msg) {
-      console.log('sockets, chat message, got msg:', msg);
+      // console.log('sockets, chat message, got msg:', msg);
       this.msgs.unshift(msg);
     }
   },
 
   methods: {
     sendMsg(ev) {
-      console.log(ev.target.chatInput.value);
+      // console.log(ev.target.chatInput.value);
       this.$socket.emit('chat send-message', {name: this.myNickname , content: ev.target.chatInput.value});
       ev.target.chatInput.value = '';
       // this.$socket.emit('chat send-message', this.currMsg);

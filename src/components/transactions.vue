@@ -3,7 +3,7 @@
       <div class="passiveTrasactions">
             <h1>Items ordered from me</h1>
             <ul>
-                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates[0])"
+                <li v-for="transaction in transactions.passiveTransactions" :key="transaction._id" class="flex" v-if="isFutureDate(transaction.dates)"
                     :class="{newTrans:(transaction.isNew && newNotification)}">
                     <div class="img-item">
                         <img :src="transaction.item.images[0]">
@@ -16,7 +16,7 @@
                         <p>
                             <v-icon>far fa-handshake </v-icon> Orderd from: {{transaction.rentedTo.name}}</p>
                         <p>email: {{transaction.rentedTo.email}}</p>
-                        <p>Day of picking-up: {{transaction.dates[0]}} ({{transaction.dates[0] | moment("from")}})</p>
+                        <p>Day of picking-up: {{transaction.dates}} ({{transaction.dates | moment("from")}})</p>
                     </div>
                     <!-- <div class= "img-new" v-if="transaction.isNew && newNotification">
                       <img src="https://www.getgeared.co.uk/shopflow/img/badges/newItemBadge.png">
@@ -40,7 +40,7 @@
                         <p>
                             <v-icon>far fa-handshake </v-icon> Rented from: {{transaction.fromOwner.name}}</p>
                         <p>Email: {{transaction.fromOwner.email}}</p>
-                        <p>Day of picking-up: {{transaction.dates[0] |moment("DD/MM/YYYY")}}</p>
+                        <p>Day of picking-up: {{transaction.dates |moment("DD/MM/YYYY")}}</p>
                         <p>From: {{transaction.fromOwner.address}}</p>
                     </div>
 
@@ -65,6 +65,8 @@ export default {
   created() {
     this.newNotification = this.$store.getters.isNewNote;
     this.$emit("orders-checked");
+    console.log();
+    
   },
   methods: {
     isFutureDate(date) {

@@ -2,9 +2,6 @@
     <section v-if="itemForDisplay">
         <book-item @cancel-deal="cancelDeal" v-if="isBooked" :selectedDate="selectedDate||null"></book-item>
         <div v-else class="main-container flex space-between">
-
-
-
             <div class="item-details">
                 <div class="header">
                     <div>
@@ -37,7 +34,7 @@
                         <div v-if="itemForDisplay.images.length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
                         </div>
-                        <hr>
+                       
 
                         <div class="spacer-paragrph">
                         </div>
@@ -45,13 +42,7 @@
                     </div>
                 </div>
             </div>
-
-
-
-                  <chat-socket class="chat-box" v-if="isChat" v-bind:myNickname="currUser" v-bind:owner="owner"></chat-socket>
-
-
-
+                  <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
             <div class="more-details">
                 <div class="show-map">
                     <div class="location" v-if="distance">
@@ -341,8 +332,7 @@ export default {
 }
 
 .image-gallery img {
-  border: 1px solid black;
-  border-radius: 10px;
+  border: 1px solid #61616138;
 }
 
 .spacer-paragrph {

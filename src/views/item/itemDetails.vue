@@ -48,7 +48,7 @@
 
 
 
-                  <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
+                  <chat-socket class="chat-box" v-if="isChat" v-bind:myNickname="currUser" v-bind:owner="owner"></chat-socket>
 
 
 
@@ -116,7 +116,8 @@ export default {
       // rating: 4,
       dialog: false,
       owner: {},
-      user: {},
+      currUser: {},
+      // user: {},
       selectedDate: "",
       showDates: false,
       // selectedEndDate:"",
@@ -135,14 +136,13 @@ export default {
         return Promise.all([userLocPrm, itemLocPrm]);
       })
       .then(this.calcDistance);
+    this.user();
   },
   computed: {
     itemForDisplay() {
       return this.$store.getters.selectedItem;
     },
-    user() {
-      return this.$store.getters.loggedinUser;
-    },
+  
     google: gmapApi,
 
     ranking() {}
@@ -150,6 +150,11 @@ export default {
   mounted() {},
 
   methods: {
+      user() {
+      this.currUser = this.$store.getters.loggedinUser;
+      console.log('currUser = ',this.$store.getters.loggedinUser);
+      // return this.currUser;
+    },
     chatOpener(){
       this.isChat = !this.isChat;
     },

@@ -5,15 +5,15 @@
         <div class="chat-container">
           <ul class="messages">
 
-             <li v-for="(msg,idx) in msgs" :key="idx">
-                <div class="outgoing-message" v-if="msg.name === myNickname">
-                  {{msg.content}}
+             <li v-if="myNickname" v-for="(msg,idx) in msgs" :key="idx">
+                <div class="outgoing-message" v-if="msg.name === myNickname.name">
+                  {{myNickname.name}} : &nbsp; {{msg.content}}
                 </div>
                 <div class="server-message" v-else-if="msg.name === 'server'">
                   {{msg.content}}
                 </div>
-                 <div class="incoming-message" v-else>
-                  {{owner.name}}: &nbsp; {{msg.content}}
+                 <div  class="incoming-message" v-else>
+                   {{owner.name}}:  &nbsp; {{msg.content}}
                 </div>
               </li>
           </ul>
@@ -30,21 +30,21 @@
 export default {
   name: 'chatSocket',
 
-  props: ["owner","user"],
+  props: ["owner","myNickname"],
 
   data() {
     return {
       currMsg: '',
       msgs: [],
-      myNickname: ''
+      // myNickname: ''
     };
   },
 
   mounted() {
-    this.myNickname = user; // prompt('Your name?');
+    // this.myNickname = user; // prompt('Your name?');
     // var str = "Hey all, I'm " + nickname + ', nice to meet you';
     this.$socket.emit('chat join', {name: this.myNickname, content: ''});
-    console.log('ownerName',this.owner);
+    console.log('this.owner:',this.owner);
     
   },
 

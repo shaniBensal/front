@@ -7,7 +7,7 @@
                 </v-card-title>
 
                 <v-card-text>
-                    Thank you for using rentApp!
+                    Thank you for using WeRent!
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -15,7 +15,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
 
-                    <router-link :to="'/user/'+user._id"><v-btn color="primary" flat @click="closeModal">
+                    <router-link :to="'/user/'+user._id"><v-btn flat @click="closeModal">
                         OK
                     </v-btn></router-link>
                 </v-card-actions>
@@ -49,11 +49,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+a{
+  color: #1da088;
+  text-decoration-line: none;
+}
+.router-link:active{
+  color: black;
+}
 .v-card__text {
-  background-color: azure;
+  background-color:#fff;
+  color: #1da088;
+  text-align: center;
 }
 
 .v-card__actions {
-  background-color: azure;
+  background-color: #fff;
+   color: #1da088;
+}
+
+.v-card__title{
+  color: #1da088;
+  text-align: center;
 }
 </style>

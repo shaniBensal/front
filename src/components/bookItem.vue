@@ -8,15 +8,15 @@
                 </div>
                 <div class="details">
                     <h1>Hi {{user.name}}!</h1>
-                    <br /> You chose to rent {{item.name}}
+                    <br /> You chose to rent {{item.title}}
                     <p>From {{owner.name}} </p>
-                    <p> pickup address is {{owner.address}}</p>
+                    <p> Pickup address is: {{owner.address}}</p>
                     <p>
                         <!-- Start Date: {{dealDetails.firstDay}} <br />
             Last Date: {{dealDetails.lastDay}} <br /> -->
                         <!-- Days Count: {{dealDetails.daysToRent}} <br /> -->
                         In date: {{selectedDateRent | moment('DD-MM-2018')}}
-                        <br /> Price For Day: {{item.price}}$
+                        <br /> Price Per Day: {{item.price}}$
                         <br />
                         <!-- Price: {{totalCost}}$ -->
                     </p>
@@ -30,7 +30,7 @@
         </v-flex> -->
                     <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
                     <br />
-                    <button class="btn bold-font" @click.prevent="cancel">Back</button>
+                    <button class="btn cancel bold-font" @click.prevent="Cancel">Cancel</button>
                     <br />
                 </div>
             </div>
@@ -108,8 +108,8 @@ export default {
       this.dealDetails.itemId = this.$route.params.id;
       this.dealDetails.ownerId = this.$store.getters.itemOwner._id;
       this.dealDetails.renterId = this.$store.getters.loggedinUser._id;
-      this.dealDetails.dates = [this.selectedDate];
-      this.dealDetails.price = this.item.price
+      this.dealDetails.dates = this.selectedDate;
+      this.dealDetails.price = this.item.price;
     },
     todayDate() {
       var result = "";
@@ -126,7 +126,7 @@ export default {
     approveDeal() {
       var item = { ...this.$store.getters.selectedItem };
       let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
-      datesArray.push(this.dealDetails.firstDay);
+      datesArray.push(this.dealDetails.dates);
       item.occupiedDates = datesArray;
       this.$store
         .dispatch({
@@ -204,7 +204,7 @@ export default {
   components: {
     // datePicker,
     itemPreview,
-    confirmModal,
+    confirmModal
     // itemListCategory
   }
 };
@@ -219,14 +219,17 @@ export default {
 }
 
 .details {
-  width: 50%;
+  // width: 50%;
+  width: 20%;
+  text-align: left;
 }
 
 .close-deal {
   width: 100%;
-  margin-bottom: 70px;
+  margin-top: 20px;
   text-align: center;
   font-size: 1em;
+  align-items: center;
 }
 
 .main-image {
@@ -235,18 +238,26 @@ export default {
 }
 
 .btn {
-  width: 50%;
-  height: 3em;
+  width: 40%;
+  height: 2em;
   font-size: 1.2em;
-  // color: #f6f6f6;
+  color: #f6f6f6;
   border: 0;
   margin: 5px 0px;
-  background-color: #42b983;
+  background-color: #1da088;
   cursor: pointer;
 }
 
+.cancel {
+  background-color: lightgray;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
 .btn-book {
-  background-color: #42b983;
+  background-color: #1da088;
   // color: #fff;
 }
 

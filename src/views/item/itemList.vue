@@ -6,7 +6,7 @@
             <div class="search-container">
             <v-form @submit="onSearch">
                 <v-card class="pa-3" color="transparent" flat>
-                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch" autofocus hide-details single-line>
+                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch"  hide-details single-line>
                         <v-btn icon @click="onSearch">
                             <v-icon>search</v-icon>
                         </v-btn>
@@ -35,8 +35,8 @@
             </v-btn-toggle>
 
             <v-menu transition="slide-x-transition" class="show-sort" bottom right>
-                            <v-btn slot="activator" class="teal" color="primary" dark>
-                                Sort
+                            <v-btn slot="activator" class="activator" dark>
+                                Sort By <v-icon class="arrow">fas fa-chevron-circle-down</v-icon>
                             </v-btn>
 
                             <v-list>
@@ -68,7 +68,7 @@
                         </v-form>
   
                         <v-menu transition="slide-x-transition" bottom right>
-                            <v-btn slot="activator" class="teal" color="primary" dark>
+                            <v-btn slot="activator" class="teal" dark>
                                 Sort
                             </v-btn>
 
@@ -79,7 +79,7 @@
                             </v-list>
                         </v-menu>
                         <v-menu transition="slide-y-transition" bottom>
-                            <v-btn slot="activator" class="teal" color="primary" dark>
+                            <v-btn slot="activator" class="teal" dark>
                                 Categories
                             </v-btn>
                             <v-list>
@@ -265,7 +265,6 @@ export default {
 
 
 <style scoped lang="scss">
-
 .container {
   padding: 0 20px;
   max-width: 980px;
@@ -323,15 +322,18 @@ input {
 .v-btn {
   font-size: 0.77rem;
   background-color: white;
-  /* color: rgb(4, 4, 73); */
+  min-width: 80px;
+  height: 28px;
   color: black;
   opacity: 1;
   border: none;
 }
 
 .show-sort .v-btn {
-  min-width: 60px;
-  height: 30px;
+  // min-width: 60px;
+  // height: 30px;
+  background-color: #1da088;
+  color: white;
 }
 
 .v-btn.v-btn--active {
@@ -359,7 +361,7 @@ input {
   background-color: white;
   opacity: 1;
 }
- .toolbar {
+.toolbar {
   margin-bottom: 50px;
 }
 
@@ -374,6 +376,11 @@ ul.items-list {
   padding: 12px;
   padding-bottom: 24px;
   align-items: baseline;
+  width: 90%;
+}
+
+.arrow {
+  font-size: 10px;
 }
 
 .search-container {
@@ -396,7 +403,6 @@ ul.items-list {
 // div.v-menu {
 //   display: none;
 // }
-
 
 @media (max-width: 440px) {
   ul {
@@ -454,11 +460,6 @@ button.toolbar-buttons:hover {
   display: none;
 }
 
-/* @media (max-width: 640px) {
-
-
-} */
-
 @media (max-width: 640px) {
   div.v-menu {
     display: inline-block !important;
@@ -502,5 +503,11 @@ button.toolbar-buttons:hover {
     top: 50px !important;
   }
 }
+</style>
 
+<style>
+.activator .v-btn__content {
+  justify-content: space-around !important;
+  height: 20px !important;
+}
 </style>

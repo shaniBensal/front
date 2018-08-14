@@ -9,7 +9,8 @@
     <v-content>
         <!-- <div class="pic-cover"></div> -->
       <section>
-        <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">    
+       <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg">
+        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">     -->
         <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg"> -->
                 <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
               <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
@@ -28,7 +29,7 @@
 
 <v-form @submit="onSearch" class="header-search-bar">
   <v-card 
-    class="pa-3"
+    class="pa-3 search-bar"
     color="transparent"
     flat
   >
@@ -38,7 +39,7 @@
     >
       <v-text-field class="search-input-text" 
         v-model="searchStr"
-        autofocus
+        
         hide-details
         single-line
         placeholder="I'm looking for"
@@ -64,7 +65,7 @@
         >
           <v-flex class="my-3" xs12 sm4>
             <div class="text-xs-center">
-              <h2 class="headline"> Search for anything you need , Book it , Enjoy it</h2>
+              <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
               <span class="subheading">
               
               </span>
@@ -232,8 +233,8 @@ export default {
     HelloWorld
   },
 
-  created(){
-    this.showLoader = false
+  created() {
+    this.showLoader = false;
   },
 
   methods: {
@@ -246,9 +247,9 @@ export default {
       this.$router.push(`/item/?category=${category}`);
     },
     showLoading() {
-      console.log(this.showLoader)
+      console.log(this.showLoader);
       this.showLoader = true;
-      console.log(this.showLoader)
+      console.log(this.showLoader);
     }
   }
 };
@@ -267,17 +268,25 @@ export default {
 }
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+.v-parallax img{
+  opacity: 1;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .first-section {
@@ -290,11 +299,16 @@ export default {
 
 .top-pic {
   height: 530px;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .categories {
   cursor: pointer;
+}
+
+.first-headline {
+  font-size: 30px;
+  font-weight: lighter;
 }
 
 .outer-container {
@@ -303,7 +317,15 @@ export default {
 
 .v-toolbar__content,
 .v-toolbar__extension {
-  width: 70vw;
+  width: 100% !important;
+}
+
+// .primary--text input{
+//   caret-color: black !important;
+// }
+
+.v-toolbar {
+  width: 100%;
 }
 
 .main-title {
@@ -429,12 +451,17 @@ h1 {
 
 .header-search-bar {
   z-index: 1;
+  width: 60%;
+}
+
+.search-bar {
+  width: 100%;
 }
 
 .layout-test1 {
   text-shadow: 0 0 2px black;
   position: absolute;
-  bottom: 28%;
+  bottom: 23%;
 }
 
 .opinions-container {
@@ -476,6 +503,10 @@ h1 {
   display: inline-block;
 }
 
+// .v-card{
+//   width: 500px;
+// }
+
 .v-card h1 {
   text-shadow: 0 0 4px black;
 }
@@ -498,7 +529,7 @@ div .fill-height {
 }
 
 .site-description {
-  padding: 100px 0 100px 0 !important;
+  padding: 60px 0 60px 0 !important;
 }
 
 .v-footer.blue.darken-2 {
@@ -519,7 +550,7 @@ div .fill-height {
     width: 85vw;
   }
 
-  .v-carousel{
+  .v-carousel {
     display: none;
   }
 
@@ -527,15 +558,15 @@ div .fill-height {
     font-size: 1.25rem;
     margin: 0px 0 10px 0 !important;
     padding-left: 16px;
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
   }
 
-    /* margin-top: 350px; */
+  /* margin-top: 350px; */
   div.flex {
-      justify-content:  center;
-      align-items:  flex-end;
-      align-content:  flex-end;
-      display:  flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    display: flex;
   }
 
   /* margin-top: 350px; */
@@ -580,15 +611,12 @@ div .fill-height {
 
   #header-carousel .subheading {
     color: black;
-    font-size: .8rem !important;
+    font-size: 0.8rem !important;
 
     width: 280px;
     display: inline-block;
   }
-
-
 }
-
 </style>
 
 <!-- not SCOPED -->
@@ -597,6 +625,9 @@ a.see-all {
   color: white !important;
   text-decoration: none;
 }
+.v-parallax img{
+  opacity: 1 !important;
+} 
 
 div.see-all-container {
   display: flex;
@@ -604,19 +635,30 @@ div.see-all-container {
 }
 
 button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
-  background-color: rgb(27, 131, 117) !important;
+  background-color: #1da088c7 !important;
 }
 
-  .search-input-icon {
-    justify-content: flex-end !important;
-  }
 
-  .search-input-text {
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+  box-shadow: 0px;
+}
+
+.search-input-icon {
+  justify-content: center !important;
+}
+
+.search-input-text {
   width: auto !important;
 }
 
-
-
+.v-toolbar__content,
+.v-toolbar__extension {
+  width: 100% !important;
+}
+.application .theme--light.v-text-field .v-input__slot:before,
+.theme--light .v-text-field .v-input__slot:before {
+  border-color: #1da088;
+}
 
 </style>
 

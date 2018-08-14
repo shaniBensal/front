@@ -37,7 +37,7 @@
                         <div v-if="itemForDisplay.images.length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
                         </div>
-                        <hr>
+                       
 
                         <div class="spacer-paragrph">
                         </div>
@@ -336,8 +336,7 @@ export default {
 }
 
 .image-gallery img {
-  border: 1px solid black;
-  border-radius: 10px;
+  border: 1px solid #61616138;
 }
 
 .spacer-paragrph {

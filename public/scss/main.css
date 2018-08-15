@@ -78,14 +78,7 @@
       align-items: flex-start;
   }
 
-  /* .v-text-field .v-input__slot:before{
-    display: none !important;
-  }
-
-   .v-text-field .v-input__slot:after{
-    border-color: #1da088 !important;
-  }
-   */
+   /* the border-bottom of search input */
 
    .search-input-text .v-input__slot:before{
     display: none !important;
@@ -97,6 +90,11 @@
 
   .search-item .v-input__slot::after{
     border-color: #1da088 !important;
+  }
+/* 
+  date-picker text (august 2018) */
+  .accent--text{
+    color:#1da088 !important;
   }
 
 

@@ -28,7 +28,7 @@
                     <v-layout column wrap class="site-description" align-center>
                         <v-flex class="my-3" xs12 sm4>
                             <div class="text-xs-center">
-                                <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
+                                
                                 <span class="subheading">
 
                                 </span>

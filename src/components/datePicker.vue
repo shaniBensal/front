@@ -85,9 +85,6 @@ export default {
   background-color: #fff;
 }
 
-.accent--text{
-  color: black;
-}
 
 </style>
 

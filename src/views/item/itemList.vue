@@ -1,55 +1,40 @@
 <template>
-<keep-alive>
-    <section>
-        <!-- <v-toolbar  class="toolbar item-list" > -->
-          <div class="toolbar-container container">
-            <div class="search-container">
-            <v-form @submit="onSearch">
-                <v-card class="pa-3" color="transparent" flat>
-                    <v-text-field placeholder="Search" v-model="searchStr" @input="onSearch"  hide-details single-line>
-                        <v-btn icon @click="onSearch">
-                            <v-icon>search</v-icon>
-                        </v-btn>
-                      <v-icon>search</v-icon>
-                    </v-text-field>
-                </v-card>
-            </v-form>
-          </div>
-
-      <div class="toolbar-buttons-container">
-        <!-- <v-btn-toggle v-model="toggle_exclusive_2"  class="transparent">
-                <div v-for="(sorting, idx) in sortings" :key="idx">
-                    <v-btn class="toolbar-buttons" :value="idx" flat @click="changeSort(sorting)">
-                        <div>{{sorting}}</div>
-                    </v-btn>
+    <keep-alive>
+        <section>
+            <div class="toolbar-container container">
+                <div class="search-container">
+                    <v-form @submit="onSearch">
+                        <v-card class="pa-3" color="transparent" flat>
+                            <v-text-field class="search-item" placeholder="Search" v-model="searchStr" @input="onSearch" hide-details single-line>
+                                <v-btn icon @click="onSearch">
+                                    <v-icon>search</v-icon>
+                                </v-btn>
+                                <v-icon>search</v-icon>
+                            </v-text-field>
+                        </v-card>
+                    </v-form>
                 </div>
-            </v-btn-toggle> -->
-
-            <v-btn-toggle v-model="toggle_exclusive" class="transparent">
-                <div v-for="(category, idx) in categories" :key="idx">
-                    <v-btn class="toolbar-buttons" :value="idx" flat @click="setFiltersByCategory(category)">
-                        <div>{{category}}</div>
-                        
-                    </v-btn>
-                </div>
-            </v-btn-toggle>
-
-            <v-menu transition="slide-x-transition" class="show-sort" bottom right>
-                            <v-btn slot="activator" class="activator" dark>
-                                Sort By <v-icon class="arrow">fas fa-chevron-circle-down</v-icon>
+                <div class="toolbar-buttons-container">
+                    <v-btn-toggle v-model="toggle_exclusive" class="transparent">
+                        <div v-for="(category, idx) in categories" :key="idx">
+                            <v-btn class="toolbar-buttons" :value="idx" flat @click="setFiltersByCategory(category)">
+                                <div>{{category}}</div>
                             </v-btn>
-
-                            <v-list>
-                                <v-list-tile v-for="(sorting, i) in sortings" :key="i" @click="changeSort(sorting)">
-                                    <v-list-tile-title>{{ sorting }}</v-list-tile-title>
-                                </v-list-tile>
-                            </v-list>
-                        </v-menu>
-
-        </div>
-
-        </div>
-              
+                        </div>
+                    </v-btn-toggle>
+                    <v-menu transition="slide-x-transition" class="show-sort" bottom right>
+                        <v-btn slot="activator" class="activator" dark>
+                            Sort By
+                            <v-icon class="arrow">fas fa-chevron-circle-down</v-icon>
+                        </v-btn>
+                        <v-list>
+                            <v-list-tile v-for="(sorting, i) in sortings" :key="i" @click="changeSort(sorting)">
+                                <v-list-tile-title>{{ sorting }}</v-list-tile-title>
+                            </v-list-tile>
+                        </v-list>
+                    </v-menu>
+                </div>
+            </div>
             <div class="mobile-buttons">
                 <div>
                     <div class="text-xs-center">
@@ -66,20 +51,18 @@
                                 </v-text-field>
                             </v-card>
                         </v-form>
-  
-                        <v-menu transition="slide-x-transition" bottom right>
-                            <v-btn slot="activator" class="teal" dark>
+                        <v-menu transition="slide-x-transition" class="show-sort" bottom right>
+                            <v-btn slot="activator" class="activator teal" dark>
                                 Sort
                             </v-btn>
-
                             <v-list>
                                 <v-list-tile v-for="(sorting, i) in sortings" :key="i" @click="changeSort(sorting)">
                                     <v-list-tile-title>{{ sorting }}</v-list-tile-title>
                                 </v-list-tile>
                             </v-list>
                         </v-menu>
-                        <v-menu transition="slide-y-transition" bottom>
-                            <v-btn slot="activator" class="teal" dark>
+                        <v-menu transition="slide-y-transition" class="show-sort" bottom>
+                            <v-btn slot="activator" class="teal activator" dark>
                                 Categories
                             </v-btn>
                             <v-list>
@@ -90,10 +73,7 @@
                         </v-menu>
                     </div>
                 </div>
-
             </div>
-
-            
             <ul class="items-list container">
                 <li class="items" v-for="item in sortedItems" :key="item._id">
                     <item-preview @getDistance="getDistance($event ,item._id)" :item="item"></item-preview>
@@ -128,6 +108,8 @@ export default {
   },
 
   created() {
+    var header = document.querySelector("html");
+    header.scrollIntoView();
     var queryString = window.location.href.replace(/.*\?/, "");
     var uParams = new URLSearchParams(queryString);
     var textParam = uParams.get("search");
@@ -322,7 +304,7 @@ input {
 .v-btn {
   font-size: 0.77rem;
   background-color: white;
-  min-width: 80px;
+  // min-width: 80px;
   height: 28px;
   color: black;
   opacity: 1;
@@ -372,9 +354,7 @@ ul.items-list {
 
 .toolbar-container {
   display: flex;
-  justify-content: space-evenly;
-  padding: 12px;
-  padding-bottom: 24px;
+  justify-content: center;
   align-items: baseline;
   width: 90%;
 }

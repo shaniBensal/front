@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="d-flex nav-bar-main" :class="{ open: display }">
+        <nav class="flex nav-bar-main" :class="{ open: display }">
             <div class="logo">
                 <router-link :to="'/'">
                     <h1 class="logo">
@@ -8,7 +8,7 @@
                     </h1>
                 </router-link>
             </div>
-            <ul class="d-flex align-center clean-list">
+            <ul class="flex align-center clean-list nav-bar-actions">
                 <li @click="display = !display">
                     <a v-if="user" @click="logOut">Log Out </a>
                     <a v-else href="#register" @click.prevent="open" class="sign-in"></a>
@@ -101,21 +101,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.flex {
+  display: flex;
+}
 .hamburger {
   display: none;
   color: #1da088;
 }
 
 nav {
-  height: 70px;
+  height: 55px;
   // background-color: #eeeeee;
   background-color: #eeeeee61;
   justify-content: space-between;
 }
 .clean-list a {
-  margin: 0px 20px;
+  margin: 0px 10px;
   text-decoration: none;
-  color: #2c3e50;
+  color: #eeeeee61;
   color: #1da088;
 }
 
@@ -127,14 +130,19 @@ nav {
   color: #2c3e50;
 }
 
+.nav-bar-actions {
+  justify-content: flex-end;
+}
+
 .logo {
   color: #1da088;
-  padding: 15px 20px;
+  margin-top: 5px;
+  padding: 15px;
   align-self: center;
 }
 
 .logo img {
-  width: 60px;
+  width: 50px;
 }
 
 .space-around {
@@ -155,6 +163,7 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  margin-right: 20px;
 }
 
 .notification {

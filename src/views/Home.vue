@@ -9,7 +9,12 @@
     <v-content>
         <!-- <div class="pic-cover"></div> -->
       <section>
-       <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg">
+       <div class="mobile-screen">
+         <img class="mobile-screen" src="https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png" alt="">
+       </div>
+       <v-parallax class="wide-screen top-pic" src="https://res.cloudinary.com/tomerberman/image/upload/v1534269238/rentapp/homescreen_wide-3.png">
+       <!-- <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg"> -->
+
         <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">     -->
         <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg"> -->
                 <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
@@ -541,7 +546,26 @@ div .fill-height {
   color: black !important;
 }
 
+
+.mobile-screen {
+  display: none;
+ //background-image: url("https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png");
+}
+
 @media (max-width: 440px) {
+
+.v-parallax.top-pic {
+  z-index: -5;
+}
+
+.mobile-screen {
+  position: absolute;
+  z-index: 12;
+  width: 100%;
+  display: block;
+ background-image: url("https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png");
+}
+
   .v-card__media {
     width: 85vw;
   }
@@ -617,6 +641,8 @@ div .fill-height {
     display: inline-block;
   }
 }
+
+
 </style>
 
 <!-- not SCOPED -->

@@ -490,7 +490,7 @@ div .fill-height {
 }
 
 .site-description {
-  padding: 60px 0 60px 0 !important;
+  padding: 40px 0 40px 0 !important;
 }
 
 .v-footer.blue.darken-2 {

@@ -30,7 +30,7 @@
         </v-flex> -->
                     <button class="btn bold-font" @click.prevent="approveDeal">Submit</button>
                     <br />
-                    <button class="btn cancel bold-font" @click.prevent="Cancel">Cancel</button>
+                    <button class="btn cancel bold-font" @click.prevent="cancel">Cancel</button>
                     <br />
                 </div>
             </div>
@@ -77,14 +77,16 @@ export default {
         isNew: true,
         price: null,
         renterId: null,
-        dates: null
+        dates: null,
+        transactionTimeStamp: Date.now()
       }
     };
   },
   created() {
     this.loadItem(this.$route.params.id);
     this.todayDate();
-    // this.allowedDates();
+    var header = document.querySelector("html");
+    header.scrollIntoView();
   },
   methods: {
     loadItem(itemId) {
@@ -128,8 +130,6 @@ export default {
       let datesArray = JSON.parse(JSON.stringify(item.occupiedDates));
       datesArray.push(this.dealDetails.dates);
       item.occupiedDates = datesArray;
-      console.log(datesArray);
-
       this.$store
         .dispatch({
           type: "updateItem",

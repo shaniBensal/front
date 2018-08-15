@@ -7,16 +7,12 @@
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
         </div>
-        <!-- <button class="add-item">
-            <router-link to="/item/edit" title="Add">
-                <v-icon dark>add</v-icon>
-            </router-link>
-        </button> -->
         <div class="tabs bold-font">
             <ul class="tabs-buttons">
                 <button class="tab1" @click="showItemsForRent">My items</button> |
                 <button class="tab3" @click="showFavorites">My favorites</button> |
-                <button class="tab4" @click="showUserTrnsactions">My Orders
+                <button class="tab4" @click="showMyRents">My Rents</button> |
+                <button class="tab5" @click="showUserTrnsactions">My Rent Out
                     <v-badge overlap color="red" v-if="isNewNote">
                         <v-icon slot="badge" dark small>notifications</v-icon>
                     </v-badge>
@@ -24,30 +20,28 @@
             </ul>
             <v-select class="tabs-switch" :items="itemsForDisplay" label="Choose category" @change="switchDisplay"></v-select>
         </div>
-        <div class="user-profile-items" v-if="!transactionsState">
-          <button class="add-item" v-if="isEditable">
-            <router-link to="/item/edit" title="Add">
-                <v-icon dark>add</v-icon>
-            </router-link>
-        </button>
-            <ul class="items-list" v-if="itemsToShow && !transactionsState">
+        <div class="user-profile-items" v-if="!transactionsState && !myOrders">
+            <button class="add-item" v-if="isEditable">
+                <router-link to="/item/edit" title="Add">
+                    <v-icon dark>add</v-icon>
+                </router-link>
+            </button>
+            <ul class="items-list" v-if="itemsToShow && !transactionsState && !myOrders">
                 <li v-for="item in itemsToShow" :key="item._id">
                     <item-preview-for-user :item="item" :isEdit="isEditable"></item-preview-for-user>
                 </li>
             </ul>
         </div>
-
-        <!-- <div v-if="transactionsState"> -->
-            <transactions v-if="transactionsState" :transactions="transactions" @orders-checked="ordersChecked"></transactions>
-        <!-- </div> -->
+        <my-orders v-if="myOrders" :transactions="transactions.activeTransactions"></my-orders>
+        <transactions v-if="transactionsState" :transactions="transactions.passiveTransactions" @orders-checked="ordersChecked"></transactions>
     </div>
 
 </template>
-
 <script>
 import itemList from "../item/itemList.vue";
 import itemPreviewForUser from "../../components/item/itemPreviewForUser.vue";
 import transactions from "../../components/transactions.vue";
+import myOrders from "../../components/myOrders.vue";
 import eventBus, { MESSAGES_READ } from "../../services/EventBusService.js";
 export default {
   data() {
@@ -57,6 +51,7 @@ export default {
       itemsToShow: [],
       isEditable: true,
       transactionsState: false,
+      myOrders: false,
       transactions: {
         passiveTransactions: [],
         activeTransactions: []
@@ -64,12 +59,14 @@ export default {
       favoriteItems: [],
       checkOrders: false,
       isNewNote: false,
-      itemsForDisplay: ["All", "Favorites", "Orders"]
+      itemsForDisplay: ["My Items", "Favorites", "Rent Out","My Rents"]
     };
   },
 
   created() {
     this.loadUser(this.$route.params.id);
+    var header = document.querySelector("html");
+    header.scrollIntoView();    
   },
 
   methods: {
@@ -115,19 +112,31 @@ export default {
       this.itemsToShow = this.userAndItems.owendItems;
       this.isEditable = true;
       this.transactionsState = false;
+      this.myOrders = false;
     },
     showItemsRented() {
       this.itemsToShow = this.userAndItems.rentedItems;
       this.isEditable = false;
       this.transactionsState = false;
+      this.myOrders = false;
     },
     showFavorites() {
       this.itemsToShow = this.userAndItems.favoriteItems;
       this.isEditable = false;
       this.transactionsState = false;
+      this.myOrders = false;
     },
     showUserTrnsactions() {
       this.transactionsState = true;
+      this.myOrders = false;
+      this.itemsToShow = [];
+      // this.isEditable = false;
+    },
+    showMyRents() {
+      this.transactionsState = false;
+      this.myOrders = true;
+      this.itemsToShow = [];
+      // this.isEditable = false;
     },
     ordersChecked() {
       this.checkOrders = true;
@@ -151,15 +160,18 @@ export default {
     },
     switchDisplay(value) {
       switch (value) {
-        case "All":
+        case "My Items":
           this.showItemsForRent();
           break;
         case "Favorites":
           this.showFavorites();
           break;
-        case "Orders":
+        case "Rent Out":
           this.showUserTrnsactions();
           break;
+        case "My Rents":
+        this.showMyRents();
+        break;
       }
     }
   },
@@ -171,7 +183,8 @@ export default {
   components: {
     itemList,
     itemPreviewForUser,
-    transactions
+    transactions,
+    myOrders
   }
 };
 </script>
@@ -295,13 +308,8 @@ select {
   color: #162044;
   padding: 5px;
 }
-
-@media (max-width: 440px) {
-  .user-profile-items {
-    grid-template-columns: repeat(auto-fill, 80%);
-    padding: 20px 0px;
-  }
-  .tabs{
+@media (max-width: 520px){
+  .tabs {
     margin: 0px;
   }
   .tabs-buttons {
@@ -309,6 +317,13 @@ select {
   }
   .tabs-switch {
     display: inline;
+  }
+}
+
+@media (max-width: 440px) {
+  .user-profile-items {
+    grid-template-columns: repeat(auto-fill, 80%);
+    padding: 20px 0px;
   }
 }
 </style>

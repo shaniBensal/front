@@ -128,6 +128,8 @@ export default {
       })
       .then(this.calcDistance);
     this.user();
+    var header = document.querySelector("html");
+    header.scrollIntoView();
   },
   computed: {
     itemForDisplay() {

@@ -1,196 +1,140 @@
-
 <template>
 
-<div class="outer-container">
-   <v-app light>
-    <!-- <v-toolbar class="white">
-      <v-toolbar-title></v-toolbar-title>
-    </v-toolbar> -->
-    <v-content>
-        <!-- <div class="pic-cover"></div> -->
-      <section>
-       <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg">
-        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">     -->
-        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg"> -->
-                <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
-              <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
-          <v-layout 
-            class="opaque-background" 
-            column
-            align-center
-            justify-end
-          >
-            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime</h1>
-            <div class="subheading mb-3 text-xs-center"></div>
-            <div class="subheading mb-3 text-xs-center"></div>
-            <div class="subheading mb-3 text-xs-center"></div>
-            <div class="subheading mb-3 text-xs-center"></div>
-   
+    <div class="outer-container">
+        <v-app light>
+            <v-content>
+                <section>
+                    <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg">
+                        <v-layout class="opaque-background" column align-center justify-end>
+                            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime</h1>
+                            <div class="subheading mb-3 text-xs-center"></div>
+                            <div class="subheading mb-3 text-xs-center"></div>
+                            <div class="subheading mb-3 text-xs-center"></div>
+                            <div class="subheading mb-3 text-xs-center"></div>
+                            <v-form @submit="onSearch" class="header-search-bar">
+                                <v-card class="pa-3 search-bar" color="transparent" flat>
+                                    <v-toolbar dense floating>
+                                        <v-text-field class="search-input-text" v-model="searchStr" hide-details single-line placeholder="I'm looking for"></v-text-field>
+                                        <v-btn class="search-input-icon" icon @click="onSearch">
+                                            <v-icon>search</v-icon>
+                                        </v-btn>
+                                    </v-toolbar>
+                                </v-card>
+                            </v-form>
+                        </v-layout>
+                    </v-parallax>
+                </section>
+                <section class="first-section">
+                    <v-layout column wrap class="site-description" align-center>
+                        <v-flex class="my-3" xs12 sm4>
+                            <div class="text-xs-center">
+                                <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
+                                <span class="subheading">
 
-<v-form @submit="onSearch" class="header-search-bar">
-  <v-card 
-    class="pa-3 search-bar"
-    color="transparent"
-    flat
-  >
-    <v-toolbar 
-      dense
-      floating
-    >
-      <v-text-field class="search-input-text" 
-        v-model="searchStr"
-        
-        hide-details
-        single-line
-        placeholder="I'm looking for"
-      ></v-text-field>
-
-      <v-btn class="search-input-icon" icon @click="onSearch">
-        <v-icon>search</v-icon>
-      </v-btn>
-    </v-toolbar>
-  </v-card>
-  </v-form>
-
-
-          </v-layout>
-        </v-parallax>
-      </section>
-      <section class="first-section">
-        <v-layout
-          column
-          wrap
-          class= "site-description"
-          align-center
-        >
-          <v-flex class="my-3" xs12 sm4>
-            <div class="text-xs-center">
-              <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
-              <span class="subheading">
-              
-              </span>
-            </div>
-          </v-flex>
-        </v-layout>
-      </section>
-<section class="categories"> 
-<v-layout>
- <v-flex xs12>
-            <v-container grid-list-xl>
-              <v-layout row wrap align-center>
-                <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent" >
-                    <v-card-title primary-title class="layout justify-center">
-                      <div class="headline">Events And Weddings</div>
-                    </v-card-title>
-                    <v-card-media height = "200px" src="https://thumbs.dreamstime.com/b/festival-event-party-people-blurred-background-outdoor-65006620.jpg" @click="onCategory('events')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent" >
-                     <v-card-title primary-title class="layout justify-center" > 
-                      <div class="headline">Transportation</div>
-                    </v-card-title>
-                    <v-card-media height = "200px" src="https://images.pexels.com/photos/310983/pexels-photo-310983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('transportation')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent" >
-                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Travel And Sports</div>
-                    </v-card-title>
-                     <v-card-media height = "200px" src="https://thumbs.dreamstime.com/z/hiking-equipment-backpack-boots-top-mountain-beautiful-view-to-ranges-fog-filled-valleys-89063285.jpg"  @click="onCategory('travel')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-                  <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent">
-                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Kids and Games</div>
-                    </v-card-title>
-                     <v-card-media height = "200px" src="https://images.pexels.com/photos/61129/pexels-photo-61129.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350" @click="onCategory('kids')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent">
-                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Home and kitchen</div>
-                    </v-card-title>
-                     <v-card-media height = "200px" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('kitchen')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-                  <v-flex xs12 md4>
-                  <v-card class="elevation-0 transparent">
-                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Music</div>
-                    </v-card-title>
-                     <v-card-media height = "200px" src="https://images.pexels.com/photos/860707/pexels-photo-860707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('music')">     
-                    </v-card-media>
-                  </v-card>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-flex>
-        </v-layout>
-      </section>
-
-      <div class="see-all-container" @click="showLoading">
-         <v-btn 
-              class="see-all teal mt-5"
-              light
-              large
-            >
-            <router-link class="see-all" to="/item">
-              See All Items
-              </router-link>
-            </v-btn>
-            </div>
-
-            <!-- <div class="loader" v-if="showLoader"></div> -->
-  
-
-    <div class="opinions-container">
-      <!-- <div>Customers Recommend:</div> -->
+                                </span>
+                            </div>
+                        </v-flex>
+                    </v-layout>
+                </section>
+                <section class="categories">
+                    <v-layout>
+                        <v-flex xs12>
+                            <v-container grid-list-xl>
+                                <v-layout row wrap align-center>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline">Events And Weddings</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://thumbs.dreamstime.com/b/festival-event-party-people-blurred-background-outdoor-65006620.jpg"
+                                                @click="onCategory('events')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline">Transportation</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://images.pexels.com/photos/310983/pexels-photo-310983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                                @click="onCategory('transportation')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline text-xs-center">Travel And Sports</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://thumbs.dreamstime.com/z/hiking-equipment-backpack-boots-top-mountain-beautiful-view-to-ranges-fog-filled-valleys-89063285.jpg"
+                                                @click="onCategory('travel')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline text-xs-center">Kids and Games</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://images.pexels.com/photos/61129/pexels-photo-61129.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"
+                                                @click="onCategory('kids')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline text-xs-center">Home and kitchen</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                                @click="onCategory('kitchen')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs12 md4>
+                                        <v-card class="elevation-0 transparent">
+                                            <v-card-title primary-title class="layout justify-center">
+                                                <div class="headline text-xs-center">Music</div>
+                                            </v-card-title>
+                                            <v-card-media height="200px" src="https://images.pexels.com/photos/860707/pexels-photo-860707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                                @click="onCategory('music')">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-flex>
+                    </v-layout>
+                </section>
+                <div class="see-all-container" @click="showLoading">
+                    <v-btn class="see-all teal mt-5" light large>
+                        <router-link class="see-all" to="/item">
+                            See All Items
+                        </router-link>
+                    </v-btn>
+                </div>
+                <div class="opinions-container"> </div>
+                <div id="header-carousel">
+                    <v-carousel class="opinions" hide-controls hide-delimiters interval=3000 transition="fade">
+                        <v-carousel-item v-for="(slide, i) in slides" :src="slide.src" :key="i" reverse-transition="fade" transition="fade">
+                            <v-jumbotron dark>
+                                <v-container fill-height>
+                                    <v-layout align-top align-left>
+                                        <v-flex>
+                                            <h3 class="display-3">{{ slide.title }}</h3>
+                                            <span class="subheading">{{ slide.text }}</span>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-jumbotron>
+                        </v-carousel-item>
+                    </v-carousel>
+                </div>
+            </v-content>
+        </v-app>
     </div>
-
-   <div id="header-carousel">
-      <v-carousel class="opinions" hide-controls hide-delimiters interval=3000 transition="fade">
-        <v-carousel-item v-for="(slide, i) in slides"
-         :src="slide.src" 
-         :key="i"
-         reverse-transition="fade"
-         transition="fade"
-      >
-          <v-jumbotron dark>
-            <v-container fill-height>
-              <v-layout align-top align-left>
-                <v-flex>
-                  <h3 class="display-3">{{ slide.title }}</h3>
-                  <span class="subheading">{{ slide.text }}</span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-jumbotron>
-        </v-carousel-item>
-      </v-carousel>
-    </div>
-
-    </v-content>
-   </v-app>
-</div>
 </template>
-
-
-
 <script>
-// <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   data: () => ({
     searchStr: "",
@@ -229,9 +173,7 @@ export default {
   }),
 
   name: "home",
-  components: {
-    HelloWorld
-  },
+  components: {},
 
   created() {
     this.showLoader = false;
@@ -239,7 +181,6 @@ export default {
 
   methods: {
     onSearch() {
-      // console.log('query for search:',this.searchStr);
       this.$router.push(`/item/?search=${this.searchStr}`);
     },
 
@@ -247,9 +188,7 @@ export default {
       this.$router.push(`/item/?category=${category}`);
     },
     showLoading() {
-      console.log(this.showLoader);
       this.showLoader = true;
-      console.log(this.showLoader);
     }
   }
 };
@@ -276,7 +215,7 @@ export default {
   animation: spin 2s linear infinite;
 }
 
-.v-parallax img{
+.v-parallax img {
   opacity: 1;
 }
 
@@ -459,7 +398,7 @@ h1 {
 }
 
 .layout-test1 {
-  text-shadow: 0 0 2px black;
+  text-shadow: 1px 1px 40px rgba(22, 23, 31, 0.4);
   position: absolute;
   bottom: 23%;
 }
@@ -625,9 +564,9 @@ a.see-all {
   color: white !important;
   text-decoration: none;
 }
-.v-parallax img{
+.v-parallax img {
   opacity: 1 !important;
-} 
+}
 
 div.see-all-container {
   display: flex;
@@ -637,7 +576,6 @@ div.see-all-container {
 button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
   background-color: #1da088c7 !important;
 }
-
 
 .v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
   box-shadow: 0px;
@@ -659,12 +597,10 @@ button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
 .theme--light .v-text-field .v-input__slot:before {
   border-color: #1da088;
 }
-
 </style>
 
 
 <style scoped lang="stylus">
-
 .fade {
   &-enter-active, &-leave-active, &-leave-to {
     transition: 1.1s linear;

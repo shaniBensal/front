@@ -128,6 +128,8 @@ export default {
   },
 
   created() {
+    var header = document.querySelector("html");
+    header.scrollIntoView();
     var queryString = window.location.href.replace(/.*\?/, "");
     var uParams = new URLSearchParams(queryString);
     var textParam = uParams.get("search");

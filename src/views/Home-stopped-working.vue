@@ -1,155 +1,196 @@
 
 <template>
 
-    <div class="outer-container">
-        <v-app light>
-            <v-content>
-                <section>
-                    <div class="mobile-screen">
-                        <img class="mobile-screen" src="https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png"
-                            alt="">
-                    </div>
-                    <v-parallax class="wide-screen top-pic" src="https://res.cloudinary.com/tomerberman/image/upload/v1534269238/rentapp/homescreen_wide-3.png">
-                        <v-layout class="opaque-background" column align-center justify-end>
-                            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime</h1>
-                            <div class="subheading mb-3 text-xs-center"></div>
-                            <div class="subheading mb-3 text-xs-center"></div>
-                            <div class="subheading mb-3 text-xs-center"></div>
-                            <div class="subheading mb-3 text-xs-center"></div>
+<div class="outer-container">
+   <v-app light>
+    <!-- <v-toolbar class="white">
+      <v-toolbar-title></v-toolbar-title>
+    </v-toolbar> -->
+    <v-content>
+        <!-- <div class="pic-cover"></div> -->
+      <section>
+       <v-parallax class="wide-screen top-pic" src="https://res.cloudinary.com/tomerberman/image/upload/v1534265907/rentapp/homescreen_wide.png">
+       <!-- <v-parallax class="top-pic" src="https://res.cloudinary.com/cloudsts/image/upload/v1534230484/home.jpg"> -->
+
+        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg">     -->
+        <!-- <v-parallax class="top-pic" src="https://st2.depositphotos.com/2931363/10483/i/950/depositphotos_104838936-stock-photo-young-people-drinking-beer.jpg"> -->
+                <!-- <v-parallax class="top-pic" src="https://thumbs.dreamstime.com/z/tourist-girl-back-sack-tracking-sticks-staying-lawn-bushes-pink-rhododendrons-tourist-girl-119439266.jpg"> -->
+              <!-- <v-parallax class="top-pic" src="https://previews.123rf.com/images/deagreez/deagreez1509/deagreez150900714/45603428-couple-in-love-together-to-ride-a-bicycle-with-ballons.jpg"> -->
+          <v-layout 
+            class="opaque-background" 
+            column
+            align-center
+            justify-end
+          >
+            <h1 class="layout-test1 display-3 text-xs-center color:#162044 ">Rent anything, anywhere, anytime</h1>
+            <div class="subheading mb-3 text-xs-center"></div>
+            <div class="subheading mb-3 text-xs-center"></div>
+            <div class="subheading mb-3 text-xs-center"></div>
+            <div class="subheading mb-3 text-xs-center"></div>
+   
+
+<v-form @submit="onSearch" class="header-search-bar">
+  <v-card 
+    class="pa-3 search-bar"
+    color="transparent"
+    flat
+  >
+    <v-toolbar 
+      dense
+      floating
+    >
+      <v-text-field class="search-input-text" 
+        v-model="searchStr"
+        
+        hide-details
+        single-line
+        placeholder="I'm looking for"
+      ></v-text-field>
+
+      <v-btn class="search-input-icon" icon @click="onSearch">
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-toolbar>
+  </v-card>
+  </v-form>
 
 
-                            <v-form @submit="onSearch" class="header-search-bar">
-                                <v-card class="pa-3 search-bar" color="transparent" flat>
-                                    <v-toolbar dense floating>
-                                        <v-text-field class="search-input-text" v-model="searchStr" hide-details single-line placeholder="I'm looking for"></v-text-field>
+          </v-layout>
+        </v-parallax>
+      </section>
+      <section class="first-section">
+        <v-layout
+          column
+          wrap
+          class= "site-description"
+          align-center
+        >
+          <v-flex class="my-3" xs12 sm4>
+            <div class="text-xs-center">
+              <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
+              <span class="subheading">
+              
+              </span>
+            </div>
+          </v-flex>
+        </v-layout>
+      </section>
+<section class="categories"> 
+<v-layout>
+ <v-flex xs12>
+            <v-container grid-list-xl>
+              <v-layout row wrap align-center>
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent" >
+                    <v-card-title primary-title class="layout justify-center">
+                      <div class="headline">Events And Weddings</div>
+                    </v-card-title>
+                    <v-card-media height = "200px" src="https://thumbs.dreamstime.com/b/festival-event-party-people-blurred-background-outdoor-65006620.jpg" @click="onCategory('events')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent" >
+                     <v-card-title primary-title class="layout justify-center" > 
+                      <div class="headline">Transportation</div>
+                    </v-card-title>
+                    <v-card-media height = "200px" src="https://images.pexels.com/photos/310983/pexels-photo-310983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('transportation')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent" >
+                     <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Travel And Sports</div>
+                    </v-card-title>
+                     <v-card-media height = "200px" src="https://thumbs.dreamstime.com/z/hiking-equipment-backpack-boots-top-mountain-beautiful-view-to-ranges-fog-filled-valleys-89063285.jpg"  @click="onCategory('travel')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+                  <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                     <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Kids and Games</div>
+                    </v-card-title>
+                     <v-card-media height = "200px" src="https://images.pexels.com/photos/61129/pexels-photo-61129.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350" @click="onCategory('kids')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                     <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Home and kitchen</div>
+                    </v-card-title>
+                     <v-card-media height = "200px" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('kitchen')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+                  <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                     <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Music</div>
+                    </v-card-title>
+                     <v-card-media height = "200px" src="https://images.pexels.com/photos/860707/pexels-photo-860707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" @click="onCategory('music')">     
+                    </v-card-media>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
+        </v-layout>
+      </section>
 
-                                        <v-btn class="search-input-icon" icon @click="onSearch">
-                                            <v-icon>search</v-icon>
-                                        </v-btn>
-                                    </v-toolbar>
-                                </v-card>
-                            </v-form>
+      <div class="see-all-container" @click="showLoading">
+         <v-btn 
+              class="see-all teal mt-5"
+              light
+              large
+            >
+            <router-link class="see-all" to="/item">
+              See All Items
+              </router-link>
+            </v-btn>
+            </div>
 
+            <!-- <div class="loader" v-if="showLoader"></div> -->
+  
 
-                        </v-layout>
-                    </v-parallax>
-                </section>
-                <section class="first-section">
-                    <v-layout column wrap class="site-description" align-center>
-                        <v-flex class="my-3" xs12 sm4>
-                            <div class="text-xs-center">
-                                <span class="subheading">
-
-                                </span>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </section>
-                <section class="categories">
-                    <v-layout>
-                        <v-flex xs12>
-                            <v-container grid-list-xl>
-                                <v-layout row wrap align-center>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline">Events And Weddings</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://thumbs.dreamstime.com/b/festival-event-party-people-blurred-background-outdoor-65006620.jpg"
-                                                @click="onCategory('events')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline">Transportation</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://images.pexels.com/photos/310983/pexels-photo-310983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                                @click="onCategory('transportation')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline text-xs-center">Travel And Sports</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://thumbs.dreamstime.com/z/hiking-equipment-backpack-boots-top-mountain-beautiful-view-to-ranges-fog-filled-valleys-89063285.jpg"
-                                                @click="onCategory('travel')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline text-xs-center">Kids and Games</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://images.pexels.com/photos/61129/pexels-photo-61129.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"
-                                                @click="onCategory('kids')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline text-xs-center">Home and kitchen</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                                @click="onCategory('kitchen')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                    <v-flex xs12 md4>
-                                        <v-card class="elevation-0 transparent">
-                                            <v-card-title primary-title class="layout justify-center">
-                                                <div class="headline text-xs-center">Music</div>
-                                            </v-card-title>
-                                            <v-card-media height="200px" src="https://images.pexels.com/photos/860707/pexels-photo-860707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                                @click="onCategory('music')">
-                                            </v-card-media>
-                                        </v-card>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-flex>
-                    </v-layout>
-                </section>
-
-                <div class="see-all-container" @click="showLoading">
-                    <v-btn class="see-all teal mt-5" light large>
-                        <router-link class="see-all" to="/item">
-                            See All Items
-                        </router-link>
-                    </v-btn>
-                </div>
-                <div class="opinions-container">
-                </div>
-
-                <div id="header-carousel">
-                    <v-carousel class="opinions" hide-controls hide-delimiters interval=3000 transition="fade">
-                        <v-carousel-item v-for="(slide, i) in slides" :src="slide.src" :key="i" reverse-transition="fade" transition="fade">
-                            <v-jumbotron dark>
-                                <v-container fill-height>
-                                    <v-layout align-top align-left>
-                                        <v-flex>
-                                            <h3 class="display-3">{{ slide.title }}</h3>
-                                            <span class="subheading">{{ slide.text }}</span>
-                                        </v-flex>
-                                    </v-layout>
-                                </v-container>
-                            </v-jumbotron>
-                        </v-carousel-item>
-                    </v-carousel>
-                </div>
-
-            </v-content>
-        </v-app>
+    <div class="opinions-container">
+      <!-- <div>Customers Recommend:</div> -->
     </div>
+
+   <div id="header-carousel">
+      <v-carousel class="opinions" hide-controls hide-delimiters interval=3000 transition="fade">
+        <v-carousel-item v-for="(slide, i) in slides"
+         :src="slide.src" 
+         :key="i"
+         reverse-transition="fade"
+         transition="fade"
+      >
+          <v-jumbotron dark>
+            <v-container fill-height>
+              <v-layout align-top align-left>
+                <v-flex>
+                  <h3 class="display-3">{{ slide.title }}</h3>
+                  <span class="subheading">{{ slide.text }}</span>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-jumbotron>
+        </v-carousel-item>
+      </v-carousel>
+    </div>
+
+    </v-content>
+   </v-app>
+</div>
 </template>
 
 
+
 <script>
+// <img class="main-pic" src="https://st2.depositphotos.com/1010613/11931/i/950/depositphotos_119313002-stock-photo-the-happy-couple-cycling-in.jpg">
+// @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
@@ -504,21 +545,12 @@ div .fill-height {
 
 
 .mobile-screen {
-  display: none;
- //background-image: url("https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png");
+ background-image: url("https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png");
 }
 
 @media (max-width: 440px) {
 
-.v-parallax.top-pic {
-  z-index: -5;
-}
-
 .mobile-screen {
-  position: absolute;
-  z-index: 12;
-  width: 100%;
-  display: block;
  background-image: url("https://res.cloudinary.com/tomerberman/image/upload/v1534265904/rentapp/homescreen_mobile_-_narrow.png");
 }
 
@@ -598,7 +630,9 @@ div .fill-height {
   }
 }
 
-
+// img.mobile-screen {
+//   visibility: hidden !important;
+// }
 </style>
 
 <!-- not SCOPED -->

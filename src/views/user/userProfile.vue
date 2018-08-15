@@ -7,11 +7,6 @@
             <h2>{{user.name}}</h2>
             <h4>{{user.email}}</h4>
         </div>
-        <!-- <button class="add-item">
-            <router-link to="/item/edit" title="Add">
-                <v-icon dark>add</v-icon>
-            </router-link>
-        </button> -->
         <div class="tabs bold-font">
             <ul class="tabs-buttons">
                 <button class="tab1" @click="showItemsForRent">My items</button> |

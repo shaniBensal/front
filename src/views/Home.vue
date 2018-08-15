@@ -65,7 +65,7 @@
         >
           <v-flex class="my-3" xs12 sm4>
             <div class="text-xs-center">
-              <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2>
+              <!-- <h2 class="first-headline"> Search for anything you need , Book it , Enjoy it</h2> -->
               <span class="subheading">
               
               </span>
@@ -503,10 +503,6 @@ h1 {
   display: inline-block;
 }
 
-// .v-card{
-//   width: 500px;
-// }
-
 .v-card h1 {
   text-shadow: 0 0 4px black;
 }
@@ -529,7 +525,7 @@ div .fill-height {
 }
 
 .site-description {
-  padding: 60px 0 60px 0 !important;
+  padding: 40px 0 40px 0 !important;
 }
 
 .v-footer.blue.darken-2 {
@@ -655,10 +651,7 @@ button.see-all.teal.mt-5.v-btn.v-btn--large.theme--light {
 .v-toolbar__extension {
   width: 100% !important;
 }
-.application .theme--light.v-text-field .v-input__slot:before,
-.theme--light .v-text-field .v-input__slot:before {
-  border-color: #1da088;
-}
+
 
 </style>
 

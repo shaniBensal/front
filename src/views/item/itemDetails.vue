@@ -13,10 +13,10 @@
                     <div class="seller-details">
                         <div class="owner-pic" :style="{backgroundImage: `url(${owner.image})`}"></div>
                         <div class="chat-opener" @click="chatOpener">
-                          <label v-if="owner">{{owner.name}} </label>
-                          <a class="bold-font">
-                              <i class="far fa-comments"></i>
-                          </a>
+                            <label v-if="owner">{{owner.name}} </label>
+                            <a class="bold-font">
+                                <i class="far fa-comments"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <div v-if="itemForDisplay.images.length > 1" v-for="(image,idx) in itemForDisplay.images" :key="idx" class="small-image">
                             <img class="thumb-photo" :src="image" @click="switchMainImg(idx)">
                         </div>
-                       
+
 
                         <div class="spacer-paragrph">
                         </div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-                  <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
+            <chat-socket class="chat-box" v-if="isChat" :user="user" v-bind:owner="owner"></chat-socket>
             <div class="more-details">
                 <div class="show-map">
                     <div class="location" v-if="distance">
